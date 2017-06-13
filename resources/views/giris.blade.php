@@ -16,7 +16,7 @@
     body {
       padding-top: 150px;
       padding-bottom: 50px;
-      background: url('../src/assets/bg.png') no-repeat center center fixed;
+      background: url('../assets/img/bg.png') no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -86,7 +86,7 @@
   <body>
     <div class="container">
       <div class="form-header">
-        <img src="../src/assets/logo.png" class="form-logo">
+        <img src="../assets/img/logo.png" class="form-logo">
       </div>
       <form class="form-signin">
         <h2 class="form-signin-heading">Hoş geldiniz!</h2>

@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Emlak Konut - Parseller</title>
+    <title>Emlak Konut Yönetim Paneli</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
           crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
@@ -129,12 +129,12 @@
 
   <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-left hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
               aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img src="../src/assets/logo.png" class="logo">
+        <img src="../../assets/img/logo.png">
       </a>
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -152,11 +152,11 @@
       <div class="row">
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <a class="navbar-brand" href="#">
-            <img src="../src/assets/logo.png">
+            <img src="../../assets/img/logo.png">
           </a>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="projeler.html">Projeler</a>
+              <a class="nav-link active" href="projeler.html">Projeler <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="vaziyet-plani.html">Vaziyet Planı</a>
@@ -168,7 +168,7 @@
               <a class="nav-link" href="kat-plani.html">Kat Planı</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="daireler.html">Daireler <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="daireler.html">Daireler</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="konum.html">Konum</a>
