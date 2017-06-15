@@ -157,22 +157,22 @@
                 </a>
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="projeler.html">Projeler <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" href="projeler">Projeler <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="vaziyet-plani.html">Vaziyet Planı</a>
+                        <a class="nav-link" href="vaziyet-plani">Vaziyet Planı</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="parseller.html">Parseller</a>
+                        <a class="nav-link" href="parseller">Parseller</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="kat-plani.html">Kat Planı</a>
+                        <a class="nav-link" href="kat-plani">Kat Planı</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="daireler.html">Daireler</a>
+                        <a class="nav-link" href="daireler">Daireler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="konum.html">Konum</a>
+                        <a class="nav-link" href="konum">Konum</a>
                     </li>
                 </ul>
             </nav>
