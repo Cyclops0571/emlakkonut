@@ -16,6 +16,7 @@
     body {
         padding-top: 200px;
         background-color: #f6f7fa;
+        font-family: 'Roboto', sans-serif;
     }
 
     h1 {
@@ -125,6 +126,15 @@
     .navbar-inverse .navbar-nav .nav-link:focus,
     .navbar-inverse .navbar-nav .nav-link:hover {
         color: #0e1a35;
+    }
+
+    .sidebar .nav-item .active {
+        border-left: 5px solid #00A65E;
+    }
+
+    .nav-link>[class^="icon-"],
+    [class*=" icon-"] {
+        margin-right: 8px;
     }
 </style>
 
