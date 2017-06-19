@@ -25,4 +25,8 @@ class HomeController extends Controller
     {
         return view($view);
     }
+
+    public function giris() {
+        return view('giris');
+    }
 }

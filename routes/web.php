@@ -13,4 +13,5 @@
 
 Auth::routes();
 
+Route::get('/giris', 'HomeController@giris')->name('giris');
 Route::get('/home/{view}', 'HomeController@index')->name('home');
