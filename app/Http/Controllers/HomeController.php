@@ -50,4 +50,9 @@ class HomeController extends Controller
     {
         return view('location');
     }
+
+    public function designer()
+    {
+        return view('designer');
+    }
 }

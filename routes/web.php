@@ -23,3 +23,4 @@ Route::get('/parcels', 'HomeController@parcels')->name('parcels');
 Route::get('/floors', 'HomeController@floors')->name('floors');
 Route::get('/apartments', 'HomeController@apartments')->name('apartments');
 Route::get('/location', 'HomeController@location')->name('location');
+Route::get('/designer', 'HomeController@designer')->name('designer');

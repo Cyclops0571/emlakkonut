@@ -341,3 +341,74 @@ main>h2 {
 [class*=" icon-"] {
     margin-right: 8px;
 }
+#wcp-editor {
+    background: none;
+}
+#wcp-editor-button-preview,
+#wcp-editor-button-load,
+#wcp-editor-extra-main-buttons,
+#wcp-editor-main-tab-buttons,
+.wcp-editor-main-tab-content-title,
+.wcp-editor-main-button-text {
+    display: none !important;
+}
+#wcp-editor-main-buttons {
+    background-color: #fff;
+    border-right: 1px solid #dadada;
+}
+.wcp-editor-main-button {
+    border-color: #dadada !important;
+    border-top: 1px solid #dadada;
+}
+.wcp-editor-form-tab-button {
+    border-right: none !important;
+    border-color: #034c8e !important;
+    border-width: 2px !important;
+}
+#wcp-editor-left {
+    background: none;
+    width: 300px;
+    margin-top: 100px;
+    border-right: none;
+}
+#wcp-editor-right {
+    background: none;
+    margin-top: 100px;
+    border-left: none;
+}
+#wcp-editor-toolbar-wrap {
+    transform: rotate(-90deg);
+    transform-origin: right top;
+    z-index: 1000;
+    top: 0;
+    left: 20%;
+}
+#wcp-editor-toolbar {
+    border-right: none;
+}
+.wcp-editor-toolbar-button-icon {
+    transform: rotate(90deg);
+}
+.wcp-editor-form-tab-button,
+#wcp-editor-list-title {
+    background-color: #005aab !important;
+}
+#wcp-editor-main-buttons {
+    margin-bottom: 15px;
+}
+#wcp-editor-main-tab-contents {
+    border: 1px solid #dadada;
+    background-color: #fff;
+}
+.editor-title {
+    position: absolute;
+    top: 50px;
+}
+.wcp-editor-form-tab-button-icon,
+.wcp-editor-form-tab-button-text {
+    color: #fff;
+}
+.wcp-editor-main-button,
+.wcp-editor-toolbar-button-icon {
+    color: #005aab !important;
+}

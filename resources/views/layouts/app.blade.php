@@ -44,23 +44,23 @@
                         <img src="img/logo.png">
                     </a>
                     <ul class="nav nav-pills flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="projects"><i class="icon-Projects_Icon"></i> Projeler</a>
+                        <li class="nav-item" id="projects">
+                            <a class="nav-link active" href="projects" onclick="onClickActiveNav('projects')"><i class="icon-Projects_Icon"></i> Projeler</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="postures"><i class="icon-General"></i> Vaziyet Planı</a>
+                        <li class="nav-item" id="postures">
+                            <a class="nav-link" href="postures" onclick="onClickActiveNav('postures')"><i class="icon-General"></i> Vaziyet Planı</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="parcels"><i class="icon-Plots"></i> Parseller</a>
+                        <li class="nav-item" id="parcels">
+                            <a class="nav-link" href="parcels" onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i> Parseller</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="floors"><i class="icon-Kat_Plani"></i> Kat Planı</a>
+                        <li class="nav-item" id="floors">
+                            <a class="nav-link" href="floors" onclick="onClickActiveNav('floors')"><i class="icon-Kat_Plani"></i> Kat Planı</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="apartments"><i class="icon-Houses"></i> Daireler</a>
+                        <li class="nav-item" id="apartments">
+                            <a class="nav-link" href="apartments" onclick="onClickActiveNav('apartments')"><i class="icon-Houses"></i> Daireler</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="location"><i class="icon-Map"></i> Konum</a>
+                        <li class="nav-item" id="location">
+                            <a class="nav-link" href="location" onclick="onClickActiveNav('location')"><i class="icon-Map"></i> Konum</a>
                         </li>
                     </ul>
                 </nav>
@@ -74,5 +74,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        function onClickActiveNav(p) {
+            $(".nav li").removeClass("active");
+            $('#' + p).addClass('active');
+        }
+    </script>
 </body>
 </html>
