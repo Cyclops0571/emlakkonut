@@ -1,0 +1,343 @@
+@font-face {
+  font-family: 'emlakkonut';
+  src: url('../fonts/emlakkonut.eot?rhs6u5');
+  src: url('../fonts/emlakkonut.eot?rhs6u5#iefix') format('embedded-opentype'),
+    url('../fonts/emlakkonut.ttf?rhs6u5') format('truetype'),
+    url('../fonts/emlakkonut.woff?rhs6u5') format('woff'),
+    url('../fonts/emlakkonut.svg?rhs6u5#emlakkonut') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'emlakkonut' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1.5;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\e900";
+}
+.icon-lock:before {
+  content: "\e901";
+}
+.icon-user:before {
+  content: "\e902";
+}
+.icon-plus:before {
+  content: "\e903";
+  color: #fff;
+}
+.icon-Accept:before {
+  content: "\e904";
+  color: #00a65e;
+}
+.icon-Asset-2:before {
+  content: "\e905";
+  color: #fff;
+}
+.icon-Cancel:before {
+  content: "\e906";
+  color: #d20000;
+}
+.icon-Cancell:before {
+  content: "\e907";
+  color: #005aab;
+}
+.icon-Clean:before {
+  content: "\e908";
+  color: #005aab;
+}
+.icon-Closex:before {
+  content: "\e909";
+  color: #fff;
+}
+.icon-delete:before {
+  content: "\e90a";
+  color: #fff;
+}
+.icon-designer:before {
+  content: "\e90b";
+  color: #fff;
+}
+.icon-General:before {
+  content: "\e90c";
+  color: #00a65e;
+}
+.icon-Header:before {
+  content: "\e90d";
+}
+.icon-Houses:before {
+  content: "\e90e";
+  color: #00a65e;
+}
+.icon-Image_photo:before {
+  content: "\e90f";
+}
+.icon-Kat_Plani:before {
+  content: "\e910";
+  color: #00a65e;
+}
+.icon-kroki:before {
+  content: "\e911";
+  color: #fff;
+}
+.icon-Link:before {
+  content: "\e912";
+}
+.icon-Map:before {
+  content: "\e913";
+  color: #00a65e;
+}
+.icon-Paragraph:before {
+  content: "\e914";
+}
+.icon-Plots:before {
+  content: "\e915";
+  color: #00a65e;
+}
+.icon-Pointer:before {
+  content: "\e916";
+  color: #f2f2f2;
+}
+.icon-Polygon-1-kopia:before {
+  content: "\e917";
+}
+.icon-proje_gorseli_ekle:before {
+  content: "\e918";
+  color: #fff;
+}
+.icon-Projects_Icon:before {
+  content: "\e919";
+  color: #00a65e;
+}
+.icon-Quantity:before {
+  content: "\e91a";
+  color: #005aab;
+}
+.icon-Questionmark-copy:before {
+  content: "\e91b";
+  color: #005aab;
+}
+.icon-redoAsset-3:before {
+  content: "\e91c";
+  color: #fff;
+}
+.icon-Save:before {
+  content: "\e91d";
+  color: #005aab;
+}
+.icon-Search:before {
+  content: "\e91e";
+  color: #fff;
+}
+.icon-Select_Icon:before {
+  content: "\e91f";
+  color: #f6f7fa;
+}
+.icon-settings:before {
+  content: "\e920";
+  color: #fff;
+}
+.icon-tools_cricle:before {
+  content: "\e921";
+  color: #000;
+}
+.icon-tools_map:before {
+  content: "\e922";
+  color: #005aab;
+}
+.icon-tools_rectangels:before {
+  content: "\e923";
+  color: #005aab;
+}
+.icon-tools_shape:before {
+  content: "\e924";
+  color: #005aab;
+}
+.icon-undoAsset-2:before {
+  content: "\e925";
+  color: #fff;
+}
+.icon-update:before {
+  content: "\e926";
+  color: #fff;
+}
+.icon-Video:before {
+  content: "\e927";
+}
+.icon-Youtube:before {
+  content: "\e928";
+}
+
+.form-header {
+    max-width: 600px;
+    padding: 15px 0;
+    margin: 0 auto;
+    background-color: #005aab;
+    text-align: center;
+}
+.form-logo {
+    width: 150px;
+}
+.form-signin {
+    max-width: 600px;
+    padding: 50px 100px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+.form-signin-heading {
+    font-size: 28px;
+    text-align: center;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 20px;
+    color: #666;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    border-radius: 0;
+}
+.form-signin input[type="password"] {
+    border-radius: 0;
+}
+.form-control {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 0;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group-addon {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 0;
+}
+.pass {
+    margin-bottom: 50px;
+}
+.btn {
+    border-radius: 1.25rem;
+}
+#navbarsExampleDefault {
+    margin-left: 8.33%;
+}
+body {
+    padding-top: 200px;
+    background-color: #f6f7fa;
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    margin-bottom: 20px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #eee;
+}
+a,
+a:hover,
+a:focus {
+    color: #fff;
+}
+.navbar-brand>img {
+    width: 104px;
+    margin-left: 80px;
+    margin-bottom: 20px;
+}
+.nav-link {
+    padding: 1rem;
+}
+.nav-pills .nav-item.show .nav-link,
+.nav-pills .nav-link:hover,
+.nav-pills .nav-link:focus,
+.nav-pills .nav-link.active {
+    background-color: #044a89;
+}
+.sidebar {
+    position: fixed;
+    top: -4px;
+    bottom: 0;
+    left: 0;
+    z-index: 2000;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+    background-color: #005aab;
+}
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+}
+.sidebar .nav {
+    margin-bottom: 20px;
+}
+.sidebar .nav-item {
+    width: 100%;
+}
+.sidebar .nav-item+.nav-item {
+    margin-left: 0;
+}
+.sidebar .nav-link {
+    border-radius: 0;
+}
+.placeholders {
+    padding-bottom: 3rem;
+}
+.placeholder img {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+main>h2 {
+    font-size: 24px;
+    text-align: center;
+}
+.list-group {
+    max-width: 750px;
+    margin: 0 auto;
+}
+.navbar {
+    border-bottom: 1px solid #d3e2f0;
+}
+.btn {
+    border-radius: 1.25rem;
+}
+.bg-inverse {
+    background-color: #fff !important;
+}
+.navbar-inverse .navbar-nav .nav-link,
+.navbar-inverse .navbar-nav .nav-link:focus,
+.navbar-inverse .navbar-nav .nav-link:hover {
+    color: #0e1a35;
+}
+.sidebar .nav-item .active {
+    border-left: 5px solid #00A65E;
+}
+.nav-link>[class^="icon-"],
+[class*=" icon-"] {
+    margin-right: 8px;
+}
