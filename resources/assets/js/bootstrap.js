@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fb47b68a1fc55429bab6b28de8682134345b148
 window._ = require('lodash');
 
 /**
@@ -9,8 +13,13 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
+<<<<<<< HEAD
     require('bootstrap');
 } catch (e) { }
+=======
+    require('bootstrap-sass');
+} catch (e) {}
+>>>>>>> 5fb47b68a1fc55429bab6b28de8682134345b148
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -49,4 +58,8 @@ if (token) {
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
+<<<<<<< HEAD
 // });
+=======
+// });
+>>>>>>> 5fb47b68a1fc55429bab6b28de8682134345b148

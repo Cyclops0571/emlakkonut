@@ -55,4 +55,9 @@ class HomeController extends Controller
     {
         return view('designer');
     }
+
+    public function index($view)
+    {
+        return view($view);
+    }
 }

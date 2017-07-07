@@ -27,7 +27,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
+<<<<<<< HEAD
     protected $redirectTo = '/projects';
+=======
+    protected $redirectTo = '/home';
+>>>>>>> 5fb47b68a1fc55429bab6b28de8682134345b148
 
     /**
      * Create a new controller instance.
@@ -68,4 +72,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5fb47b68a1fc55429bab6b28de8682134345b148
