@@ -108,17 +108,26 @@
             drawingManager.setMap(map);
         }
 
-        function filterProjects() {
-            // Declare variables
-            var input, filter, ul, li, a, i;
-            input = document.getElementById("inputProject");
+        function filter(p) {
+            var input, filter, ul, li, id = p.getAttribute("id");
+            input = document.getElementById(id);
             filter = input.value.toUpperCase();
-            ul = document.getElementById("listProjects");
+
+            if (id.indexOf("Project") > -1) {
+                ul = document.getElementById("listProjects");
+            } else if (id.indexOf("Apartment") > -1) {
+                ul = document.getElementById("listApartments");
+            } else if (id.indexOf("Floor") > -1) {
+                ul = document.getElementById("listFloors");
+            } else if (id.indexOf("Parcel") > -1) {
+                ul = document.getElementById("listParcels");
+            } else if (id.indexOf("Posture") > -1) {
+                ul = document.getElementById("listPostures");
+            }
+
             li = ul.getElementsByTagName('li');
 
-            // Loop through all list items, and hide those who don't match the search query
-            for (i = 0; i < li.length; i++) {
-                // a = li[i].getElementsByTagName("a")[0];
+            for (var i in li) {
                 if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
                 } else {

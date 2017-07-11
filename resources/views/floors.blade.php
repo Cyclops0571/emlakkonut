@@ -10,7 +10,7 @@
                 <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
             </span>
         </div>
-        <input id="inputFloor" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1">
+        <input id="inputFloor" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
         <ul id="listFloors" class="list-group list-group-flush">
             <li class="list-group-item justify-content-between">
                 A1

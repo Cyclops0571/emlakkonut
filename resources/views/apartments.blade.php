@@ -10,8 +10,8 @@
                 <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
             </span>
         </div>
-        <input type="text" class="form-control" placeholder="Daire tipini giriniz..." aria-describedby="basic-addon1">
-        <ul id="listProjects" class="list-group list-group-flush">
+        <input id="inputApartment" type="text" class="form-control" placeholder="Daire tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+        <ul id="listApartments" class="list-group list-group-flush">
             <li class="list-group-item justify-content-between">
                 Tip 1
                 <span>

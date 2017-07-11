@@ -8,7 +8,7 @@
             <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
         </div>
         <div class="input-group">
-            <input id="inputPosture" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" autofocus>
+            <input id="inputPosture" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
             <span class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></span>
             <span class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></span>
         </div>

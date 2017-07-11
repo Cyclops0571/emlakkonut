@@ -7,7 +7,7 @@
             Projeler
             <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
         </div>
-        <input id="inputProject" type="text" class="form-control" placeholder="Proje adı giriniz..." onkeyup="filterProjects()">
+        <input id="inputProject" type="text" class="form-control" placeholder="Proje adı giriniz..." onkeyup="filter(this)" autofocus>
         <ul id="listProjects" class="list-group list-group-flush">
             <li class="list-group-item list-group-item-action">
                 My World Ataşehir
