@@ -230,20 +230,21 @@
     border-radius: 0;
     padding: 1rem;
 }
-.input-group {
+/*.input-group {
     margin-bottom: 15px;
-}
+}*/
 .input-group-addon {
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
+    font-size: 1.4rem;
 }
 .pass {
     margin-bottom: 50px;
 }
 .btn {
-    border-radius: 1.25rem;
+    border-radius: 1.3rem;
 }
 #navbarsExampleDefault {
     margin-left: 8.33%;

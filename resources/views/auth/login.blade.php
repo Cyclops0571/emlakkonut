@@ -33,21 +33,21 @@
             <div class="input-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <span class="input-group-addon" id="basic-addon1"><i class="icon-user icon-color"></i></span>
                 <input type="email" id="email" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1" name="email" value="{{ old('email') }}" required autofocus>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
             </div>
+            @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
             <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }} pass">
                 <span class="input-group-addon" id="basic-addon1"><i class="icon-lock icon-color"></i></span>
                 <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1" name="password" required>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
             </div>
+            @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
             <button class="btn btn-lg btn-primary btn-block" type="submit">Giriş</button>
         </form>
     </div>
