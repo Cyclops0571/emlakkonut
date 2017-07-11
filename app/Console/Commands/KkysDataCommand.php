@@ -1,40 +1,44 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Console\Commands;
 
-use App\Model\EstateProject;
 use App\Model\ServiceResponse;
 use App\Model\User;
-use Illuminate\Http\Request;
+use Illuminate\Console\Command;
 
-class HomeController extends Controller
+class KkysDataCommand extends Command
 {
     /**
-     * Create a new controller instance.
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'kkys-data';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Get Kkys Data';
+
+    /**
+     * Create a new command instance.
      *
      * @return void
      */
     public function __construct()
     {
-//        $this->middleware('auth');
+        parent::__construct();
     }
 
     /**
-     * Show the application dashboard.
+     * Execute the console command.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function index($view)
+    public function handle()
     {
-        return view($view);
-    }
-
-
-
-
-    public function home()
-    {
-        set_time_limit(0);
         $username = 'm_y';
         $password = '23we';
 
@@ -44,7 +48,5 @@ class HomeController extends Controller
         foreach ($projectList as $project) {
             $user->setProjectPartsFromService($project->ProjeID);
         }
-
-
     }
 }
