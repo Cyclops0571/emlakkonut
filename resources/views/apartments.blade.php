@@ -5,7 +5,7 @@
     <div class="card card-size">
         <div class="card-header">
             Daireler
-            <span>
+            <span class="float-right">
                 <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-Asset-2"></i></button>
                 <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
             </span>

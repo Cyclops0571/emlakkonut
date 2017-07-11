@@ -5,7 +5,7 @@
     <div class="card card-size">
         <div class="card-header">
             Parseller
-            <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
+            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
         </div>
         <div class="input-group">
             <input id="inputParcel" type="text" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>

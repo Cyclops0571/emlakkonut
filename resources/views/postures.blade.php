@@ -5,7 +5,7 @@
     <div class="card card-size">
         <div class="card-header">
             Genel Vaziyet Planı
-            <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
+            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
         </div>
         <div class="input-group">
             <input id="inputPosture" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>

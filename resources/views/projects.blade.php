@@ -5,7 +5,7 @@
     <div class="card card-size">
         <div class="card-header">
             Projeler
-            <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
+            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
         </div>
         <input id="inputProject" type="text" class="form-control" placeholder="Proje adı giriniz..." onkeyup="filter(this)" autofocus>
         <ul id="listProjects" class="list-group list-group-flush">
