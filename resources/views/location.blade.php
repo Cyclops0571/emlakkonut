@@ -8,7 +8,7 @@
 
     #map {
         width: 50rem;
-        height: 400px;
+        height: 500px;
     }
 
     .mapnav {
@@ -41,42 +41,4 @@
         </div>
     </div>
 </main>
-<script>
-    function initMap() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: position.coords.latitude, lng: position.coords.longitude },
-                    zoom: 10,
-                    zoomControl: false,
-                    scaleControl: false,
-                    streetViewControl: false
-                });
-                var drawingManager = new google.maps.drawing.DrawingManager({
-                    drawingMode: google.maps.drawing.OverlayType.MARKER,
-                    drawingControl: true,
-                    drawingControlOptions: {
-                        style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-                        position: google.maps.ControlPosition.RIGHT_CENTER,
-                        drawingModes: ['marker']
-                    },
-                    markerOptions: { icon: 'http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg' },
-                    circleOptions: {
-                        fillColor: '#ffff00',
-                        fillOpacity: 1,
-                        strokeWeight: 5,
-                        clickable: false,
-                        editable: true,
-                        zIndex: 1
-                    }
-                });
-                drawingManager.setMap(map);
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-    }
-</script>
 @endsection

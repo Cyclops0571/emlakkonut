@@ -72,10 +72,40 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI8qNnWc7vcryJwCLs3Q5DWymgNyO3UTM&libraries=drawing&callback=initMap" async defer></script>
     <script>
         function onClickActiveNav(p) {
             $(".nav li").removeClass("active");
             $('#' + p).addClass('active');
+        }
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 41.0082, lng: 28.9784 },
+                zoom: 10,
+                zoomControl: false,
+                scaleControl: false,
+                streetViewControl: false
+            });
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingMode: google.maps.drawing.OverlayType.MARKER,
+                drawingControl: true,
+                drawingControlOptions: {
+                    style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+                    position: google.maps.ControlPosition.RIGHT_CENTER,
+                    drawingModes: ['marker']
+                },
+                markerOptions: { icon: 'http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg' },
+                circleOptions: {
+                    fillColor: '#ffff00',
+                    fillOpacity: 1,
+                    strokeWeight: 5,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 1
+                }
+            });
+            drawingManager.setMap(map);
         }
     </script>
 </body>
