@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('/projects', 'HomeController@projects')->name('projects');
-    Route::get('/postures', 'HomeController@postures')->name('postures');
+    Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels', 'HomeController@parcels')->name('parcels');
     Route::get('/floors', 'HomeController@floors')->name('floors');
     Route::get('/apartments', 'HomeController@apartments')->name('apartments');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Model\EstateProject;
 use App\Model\ServiceResponse;
-use App\Model\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,12 +16,15 @@ class HomeController extends Controller
      */
     public function projects()
     {
-        return view('projects');
+        $projects = \Auth::user()->estateProject;
+        return view('projects', compact('projects'));
     }
 
-    public function postures()
+    public function postures(Request $request, EstateProject $project)
     {
-        return view('postures');
+
+        $request->session()->put('projectID', $project->id);
+        return view('postures', compact('project'));
     }
 
     public function parcels()
@@ -53,24 +55,5 @@ class HomeController extends Controller
     public function index($view)
     {
         return view($view);
-    }
-
-
-
-
-    public function home()
-    {
-        set_time_limit(0);
-        $username = 'm_y';
-        $password = '23we';
-
-        $serviceResponse = ServiceResponse::setUserAttributesFromService($username, $password);
-        $user = User::setAttributesFromService($serviceResponse->Sonuc);
-        $projectList = $user->setProjectListFromService();
-        foreach ($projectList as $project) {
-            $user->setProjectPartsFromService($project->ProjeID);
-        }
-
-
     }
 }
