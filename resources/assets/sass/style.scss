@@ -316,10 +316,10 @@ main>h2 {
     font-size: 24px;
     text-align: center;
 }
-.list-group {
+/*.list-group {
     max-width: 750px;
     margin: 0 auto;
-}
+}*/
 .navbar {
     border-bottom: 1px solid #d3e2f0;
 }
@@ -340,6 +340,10 @@ main>h2 {
 .nav-link>[class^="icon-"],
 [class*=" icon-"] {
     margin-right: 8px;
+}
+.card-size {
+    width: 60rem;
+    margin: 0 auto;
 }
 #wcp-editor {
     background: none;

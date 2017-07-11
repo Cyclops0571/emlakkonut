@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 <style>
-    .card-size {
-        width: 60rem;
-        margin: 0 auto;
-    }
-
     #map {
         width: 50rem;
         height: 500px;
