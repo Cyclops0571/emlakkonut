@@ -11,8 +11,22 @@
 |
 */
 
+
+
 Auth::routes();
 
-Route::get('/', 'HomeController@home')->name('home');
-Route::get('/home/{view}', 'HomeController@index')->name('views');
-Route::get('test', 'TTestController@index');
+
+Route::get('/', function () {
+    return view('auth/login');
+});
+Route::group(['middleware' => 'auth'], function ()
+{
+    Route::get('/projects', 'HomeController@projects')->name('projects');
+    Route::get('/postures', 'HomeController@postures')->name('postures');
+    Route::get('/parcels', 'HomeController@parcels')->name('parcels');
+    Route::get('/floors', 'HomeController@floors')->name('floors');
+    Route::get('/apartments', 'HomeController@apartments')->name('apartments');
+    Route::get('/location', 'HomeController@location')->name('location');
+    Route::get('/designer', 'HomeController@designer')->name('designer');
+    Route::get('/home', 'HomeController@index')->name('home');
+});

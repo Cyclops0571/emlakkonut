@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Model\ServiceResponse;
-use App\Model\User;
+use App\User;
 use Illuminate\Console\Command;
 
 class KkysDataCommand extends Command

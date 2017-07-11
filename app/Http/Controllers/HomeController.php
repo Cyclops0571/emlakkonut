@@ -24,9 +24,45 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function projects()
+    {
+        return view('projects');
+    }
+
+    public function postures()
+    {
+        return view('postures');
+    }
+
+    public function parcels()
+    {
+        return view('parcels');
+    }
+
+    public function floors()
+    {
+        return view('floors');
+    }
+
+    public function apartments()
+    {
+        return view('apartments');
+    }
+
+    public function location()
+    {
+        return view('location');
+    }
+
+    public function designer()
+    {
+        return view('designer');
+    }
+
     public function index($view)
     {
         return view($view);
+        //
     }
 
 
