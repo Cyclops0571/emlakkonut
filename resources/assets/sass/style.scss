@@ -228,21 +228,23 @@
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
+    padding: 1rem;
 }
-.input-group {
+/*.input-group {
     margin-bottom: 15px;
-}
+}*/
 .input-group-addon {
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
+    font-size: 1.4rem;
 }
 .pass {
     margin-bottom: 50px;
 }
 .btn {
-    border-radius: 1.25rem;
+    border-radius: 1.3rem;
 }
 #navbarsExampleDefault {
     margin-left: 8.33%;
@@ -316,15 +318,12 @@ main>h2 {
     font-size: 24px;
     text-align: center;
 }
-.list-group {
+/*.list-group {
     max-width: 750px;
     margin: 0 auto;
-}
+}*/
 .navbar {
     border-bottom: 1px solid #d3e2f0;
-}
-.btn {
-    border-radius: 1.25rem;
 }
 .bg-inverse {
     background-color: #fff !important;
@@ -340,6 +339,10 @@ main>h2 {
 .nav-link>[class^="icon-"],
 [class*=" icon-"] {
     margin-right: 8px;
+}
+.card-size {
+    width: 60rem;
+    margin: 0 auto;
 }
 #wcp-editor {
     background: none;

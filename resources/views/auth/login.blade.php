@@ -32,22 +32,22 @@
             <h2 class="form-signin-heading">Hoş geldiniz!</h2>
             <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <span class="input-group-addon" id="basic-addon1"><i class="icon-user icon-color"></i></span>
-                <input id="name" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1" name="name" value="{{ old('name') ? old('name') : 'm_y' }}" required autofocus>
-                @if ($errors->has('name'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                @endif
+                <input type="name" id="name" class="forsm-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1" name="name" value="{{ old('name') }}" required autofocus>
             </div>
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('name') }}</strong>
+                </span>
+            @endif
             <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }} pass">
                 <span class="input-group-addon" id="basic-addon1"><i class="icon-lock icon-color"></i></span>
-                <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1" name="password" value="23we" required>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
+                <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1" name="password" required>
             </div>
+            @if ($errors->has('password'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
             <button class="btn btn-lg btn-primary btn-block" type="submit">Giriş</button>
         </form>
     </div>

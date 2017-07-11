@@ -10204,7 +10204,7 @@ a.text-gray-dark:hover {
 @font-face {
   font-family: 'emlakkonut';
   src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861);
-  src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861) format("embedded-opentype"), url(/fonts/emlakkonut.ttf?1eb456647d424a13300c0a5624104a98) format("truetype"), url(/fonts/emlakkonut.woff?cb7e4c92e6b3105b2d46b317ffc4aa89) format("woff"), url(/fonts/emlakkonut.svg?44d383bca69a727d01a1cc530069566d) format("svg");
+  src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861) format("embedded-opentype"), url(/fonts/emlakkonut.ttf?1eb456647d424a13300c0a5624104a98) format("truetype"), url(/fonts/emlakkonut.woff?cb7e4c92e6b3105b2d46b317ffc4aa89) format("woff"), url(/fonts/emlakkonut.svg?46a8bd3bc3fd08e8c3177cea17160b4f) format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -10478,17 +10478,19 @@ a.text-gray-dark:hover {
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
+  padding: 1rem;
 }
 
-.input-group {
-  margin-bottom: 15px;
-}
+/*.input-group {
+    margin-bottom: 15px;
+}*/
 
 .input-group-addon {
   background-color: transparent;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
+  font-size: 1.4rem;
 }
 
 .pass {
@@ -10496,7 +10498,7 @@ a.text-gray-dark:hover {
 }
 
 .btn {
-  border-radius: 1.25rem;
+  border-radius: 1.3rem;
 }
 
 #navbarsExampleDefault {
@@ -10587,17 +10589,13 @@ main > h2 {
   text-align: center;
 }
 
-.list-group {
-  max-width: 750px;
-  margin: 0 auto;
-}
+/*.list-group {
+    max-width: 750px;
+    margin: 0 auto;
+}*/
 
 .navbar {
   border-bottom: 1px solid #d3e2f0;
-}
-
-.btn {
-  border-radius: 1.25rem;
 }
 
 .bg-inverse {
@@ -10617,6 +10615,11 @@ main > h2 {
 .nav-link > [class^="icon-"],
 [class*=" icon-"] {
   margin-right: 8px;
+}
+
+.card-size {
+  width: 60rem;
+  margin: 0 auto;
 }
 
 #wcp-editor {
