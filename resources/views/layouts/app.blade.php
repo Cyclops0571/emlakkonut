@@ -85,7 +85,8 @@
                 zoom: 10,
                 zoomControl: false,
                 scaleControl: false,
-                streetViewControl: false
+                streetViewControl: false,
+                disableDefaultUI: true
             });
             var drawingManager = new google.maps.drawing.DrawingManager({
                 drawingMode: google.maps.drawing.OverlayType.MARKER,
