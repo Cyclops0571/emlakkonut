@@ -80,13 +80,13 @@
         }
 
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
+            var map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.0082, lng: 28.9784 },
                 zoom: 10,
                 zoomControl: false,
                 scaleControl: false,
                 streetViewControl: false,
-                disableDefaultUI: true
+                mapTypeControl: false
             });
             var drawingManager = new google.maps.drawing.DrawingManager({
                 drawingMode: google.maps.drawing.OverlayType.MARKER,
@@ -94,7 +94,7 @@
                 drawingControlOptions: {
                     style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
                     position: google.maps.ControlPosition.RIGHT_CENTER,
-                    drawingModes: ['marker']
+                    drawingModes: ["marker"]
                 },
                 markerOptions: { icon: 'http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg' },
                 circleOptions: {
@@ -126,7 +126,7 @@
                 ul = document.getElementById("listPostures");
             }
 
-            li = ul.getElementsByTagName('li');
+            li = ul.getElementsByTagName("li");
 
             for (var i in li) {
                 if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
