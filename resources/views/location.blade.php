@@ -14,6 +14,7 @@
 
     .mapnav .nav-item {
         border-bottom: 1px solid #0e1a35;
+        text-align: center;
     }
 </style>
 
@@ -26,10 +27,16 @@
         <div class="row">
             <ul class="mapnav nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-kroki" style="color: #fff;"></i> <p>Proje Görseli</p></a>
+                    <a class="nav-link" href="#">
+                        <i class="icon-kroki" style="color: #fff;"></i>
+                        <p>Proje Görseli</p>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-kroki" style="color: #fff;"></i> <p>Kroki</p></a>
+                    <a class="nav-link" href="#">
+                        <i class="icon-kroki" style="color: #fff;"></i>
+                        <p>Kroki</p>
+                    </a>
                 </li>
             </ul>
             <div id="map"></div>

@@ -39,6 +39,8 @@
 </style>
 
 @section('content')
-<h4 class="editor-title">Tasarlayıcı / Daireler</h4>
-<div id="wcp-editor"></div>
+<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+    <h4 class="editor-title">Tasarlayıcı / Daireler</h4>
+    <div id="wcp-editor"></div>
+</main>
 @endsection
