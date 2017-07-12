@@ -1,19 +1,47 @@
 @extends('layouts.app')
 
+<style>
+input[type="file"] {
+    display: none !important;
+}
+.custom-file {
+    margin: 1rem;
+}
+</style>
+
 @section('content')
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
         <div class="card-header">
             Genel Vaziyet Planı
-            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
+            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-designer"></i></button>
         </div>
-        <div class="input-group">
-            <input id="inputPosture" type="file" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" autofocus>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
-        </div>
-        <ul id="listPostures" class="list-group list-group-flush">
-        </ul>
+        <label class="custom-file">
+            <i class="icon-Quantity"></i>
+            <input type="file" id="inputPosture" onchange="fileUpload(this)">
+            <span id="spanPosture">Plan resmini yükleyiniz...</span>
+        </label>
+        <img id="imgPosture" src="#">
     </div>
 </main>
+@endsection
+
+@section('javascript')
+  @parent
+  <script>
+    function fileUpload(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgPosture')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+            document.getElementById("spanPosture").innerHTML = input.files[0].name;
+        }
+    }
+  </script>
 @endsection
