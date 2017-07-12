@@ -5,7 +5,12 @@ input[type="file"] {
     display: none !important;
 }
 .custom-file {
-    margin: 1rem;
+    margin-left: 1rem;
+    margin-top: .5rem;
+    width: 100%;
+}
+.icon-size {
+    font-size: 1.4rem;
 }
 </style>
 
@@ -14,13 +19,17 @@ input[type="file"] {
     <div class="card card-size">
         <div class="card-header">
             Genel Vaziyet Planı
-            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-designer"></i></button>
+            <button class="btn btn-success btn-sm rounded-circle float-right" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
         </div>
-        <label class="custom-file">
-            <i class="icon-Quantity"></i>
-            <input type="file" id="inputPosture" onchange="fileUpload(this)">
-            <span id="spanPosture">Plan resmini yükleyiniz...</span>
-        </label>
+        <div class="input-group">
+            <label class="custom-file">
+                <i class="icon-Quantity icon-size"></i>
+                <input type="file" id="inputPosture" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+                <span id="spanPosture">Plan resmini yükleyiniz...</span>
+            </label>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
+        </div>
         <img id="imgPosture" src="#">
     </div>
 </main>

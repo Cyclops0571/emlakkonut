@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+<style>
+input[type="file"] {
+    display: none !important;
+}
+.custom-file {
+    margin-left: 1rem;
+    margin-top: .5rem;
+    width: 100%;
+}
+.icon-size {
+    font-size: 1.4rem;
+}
+</style>
+
 @section('content')
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
@@ -8,9 +22,13 @@
             <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
         </div>
         <div class="input-group">
-            <input id="inputParcel" type="text" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
-            <span class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></span>
-            <span class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></span>
+            <label class="custom-file">
+                <i class="icon-Quantity icon-size"></i>
+                <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+                <span id="spanParcel">Plan resmini yükleyiniz...</span>
+            </label>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
         </div>
         <ul id="listParcels" class="list-group list-group-flush">
             <li class="list-group-item justify-content-between">
