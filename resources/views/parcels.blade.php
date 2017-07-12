@@ -29,7 +29,7 @@ input[type="file"] {
                 <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
             </label>
             <input type="text" id="inputTParcel" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" autofocus>
-            <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Accept"></i></button>
+            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
             <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <ul id="listParcels" class="list-group list-group-flush">
@@ -78,8 +78,12 @@ input[type="file"] {
 
             reader.readAsDataURL(input.files[0]);
 
-            document.getElementById("spanPosture").innerHTML = input.files[0].name;
+            // document.getElementById("spanPosture").innerHTML = input.files[0].name;
         }
+    }
+
+    function addItem() {
+        
     }
   </script>
 @endsection
