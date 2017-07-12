@@ -14,19 +14,19 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        body {
-            padding-top: 150px;
-            padding-bottom: 50px;
-            background: url('/img/bg.png') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
+      body {
+        padding-top: 150px;
+        padding-bottom: 50px;
+        background: url('/img/bg.png') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
 
-        .icon-color {
-            color: #005aab;
-        }
+      .icon-color {
+        color: #005aab;
+      }
     </style>
   </head>
 
@@ -35,12 +35,13 @@
       <div class="form-header">
         <img src="/img/logo.png" class="form-logo">
       </div>
-      <form class="form-signin"role="form" method="POST" action="{{ route('login') }}">
+      <form class="form-signin" role="form" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
         <h2 class="form-signin-heading">Hoş geldiniz!</h2>
         <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-user icon-color"></i></span>
-          <input type="text" id="name" class="forsm-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1" name="name" value="{{ old('name') }}" required autofocus>
+          <input type="text" id="name" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1"
+                 name="name" value="{{ app()->isLocal() ? 'm_y' : old('name')  }}" required autofocus>
         </div>
         @if ($errors->has('name'))
           <span class="help-block">
@@ -49,7 +50,8 @@
         @endif
         <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }} pass">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-lock icon-color"></i></span>
-          <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1" name="password" required>
+          <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1"
+                 name="password" value="{{app()->isLocal() ? 'm_y' : '' }}" required>
         </div>
         @if ($errors->has('password'))
           <span class="help-block">
