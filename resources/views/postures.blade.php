@@ -8,9 +8,9 @@
             <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
         </div>
         <div class="input-group">
-            <input id="inputPosture" type="text" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
-            <span class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></span>
-            <span class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></span>
+            <input id="inputPosture" type="file" class="form-control" placeholder="Plan tipini giriniz..." aria-describedby="basic-addon1" autofocus>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
         </div>
         <ul id="listPostures" class="list-group list-group-flush">
         </ul>
