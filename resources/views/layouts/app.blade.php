@@ -23,7 +23,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="{{ url('/') }}">
-          <img src="img/logo.png">
+          <img src="{{ url('img/logo.png') }}">
         </a>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
