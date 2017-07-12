@@ -11,6 +11,9 @@ input[type="file"] {
 .icon-size {
     font-size: 1.4rem;
 }
+.justify-content-between .btn {
+    margin-left: 8px;
+}
 </style>
 
 @section('content')
@@ -26,19 +29,25 @@ input[type="file"] {
                 <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
             </label>
             <input type="text" id="inputTParcel" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" autofocus>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
+            <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Accept"></i></button>
+            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <ul id="listParcels" class="list-group list-group-flush">
             <li class="list-group-item justify-content-between">
                 Parsel 1
                 <span>
+                    <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
+                    <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
+                    <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
                     <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
                 </span>
             </li>
             <li class="list-group-item justify-content-between">
                 Parsel 2
                 <span>
+                    <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
+                    <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
+                    <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
                     <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
                 </span>
             </li>
@@ -54,4 +63,23 @@ input[type="file"] {
         </ul>
     </div>
 </main>
+@endsection
+
+@section('javascript')
+  @parent
+  <script>
+    function fileUpload(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // $('#imgPosture').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+            document.getElementById("spanPosture").innerHTML = input.files[0].name;
+        }
+    }
+  </script>
 @endsection
