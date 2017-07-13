@@ -51,7 +51,7 @@
         <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }} pass">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-lock icon-color"></i></span>
           <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1"
-                 name="password" value="{{app()->isLocal() ? 'm_y' : '' }}" required>
+                 name="password" value="{{app()->isLocal() ? '23we' : '' }}" required>
         </div>
         @if ($errors->has('password'))
           <span class="help-block">
