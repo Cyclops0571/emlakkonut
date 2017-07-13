@@ -30,7 +30,7 @@ input[type="file"] {
             <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
             <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
         </div>
-        <img id="imgPosture" src="#">
+        <img id="imgPosture" src="http://www.kentplus.com/CmsFiles/Project/13/SitePlan/Vaziyet_Plani.jpg">
     </div>
 </main>
 @endsection
