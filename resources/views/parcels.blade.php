@@ -4,9 +4,9 @@
 input[type="file"] {
     display: none !important;
 }
-.custom-file {
-    margin-left: 1rem;
-    margin-top: .5rem;
+.input-group {
+    padding-left: .5rem;
+    padding-right: .5rem;
 }
 .icon-size {
     font-size: 1.4rem;
@@ -21,10 +21,10 @@ input[type="file"] {
     <div class="card card-size">
         <div class="card-header">
             Parseller
-            <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button>
+            <!-- <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button> -->
         </div>
         <div class="input-group">
-            <label class="custom-file">
+            <label class="input-group-addon">
                 <i class="icon-Quantity icon-size"></i>
                 <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
             </label>
@@ -33,33 +33,20 @@ input[type="file"] {
             <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <ul id="listParcels" class="list-group list-group-flush">
-            <li class="list-group-item justify-content-between">
-                Parsel 1
-                <span>
-                    <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
-                    <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
-                </span>
-            </li>
-            <li class="list-group-item justify-content-between">
-                Parsel 2
-                <span>
-                    <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
-                    <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
-                </span>
-            </li>
-            <li class="list-group-item justify-content-between">
-                Parsel 3
-                <span>
-                    <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
-                    <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
-                    <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
-                </span>
-            </li>
+
+                <li class="list-group-item justify-content-between">
+                    <span>
+                        <i class="icon-Quantity icon-size"></i>
+                        Parsel 1
+                    </span>
+                    <span>
+                        <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
+                        <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
+                        <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
+                        <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
+                    </span>
+                </li>
+
         </ul>
     </div>
 </main>
