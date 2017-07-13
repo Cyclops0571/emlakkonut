@@ -22,6 +22,7 @@
       </div>
     </main>
 @endsection
+
 @section('javascript')
   @parent
   <script>
@@ -38,8 +39,6 @@
               ul = document.getElementById("listFloors");
           } else if (id.indexOf("Parcel") > -1) {
               ul = document.getElementById("listParcels");
-          } else if (id.indexOf("Posture") > -1) {
-              ul = document.getElementById("listPostures");
           }
 
           li = ul.getElementsByTagName("li");

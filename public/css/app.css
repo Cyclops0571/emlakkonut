@@ -10419,6 +10419,8 @@ a.text-gray-dark:hover {
   content: "\E928";
 }
 
+/********************************************************************/
+
 .form-header {
   max-width: 600px;
   padding: 15px 0;
@@ -10480,10 +10482,6 @@ a.text-gray-dark:hover {
   border-radius: 0;
   padding: 1rem;
 }
-
-/*.input-group {
-    margin-bottom: 15px;
-}*/
 
 .input-group-addon {
   background-color: transparent;
@@ -10589,11 +10587,6 @@ main > h2 {
   text-align: center;
 }
 
-/*.list-group {
-    max-width: 750px;
-    margin: 0 auto;
-}*/
-
 .navbar {
   border-bottom: 1px solid #d3e2f0;
 }
@@ -10621,6 +10614,25 @@ main > h2 {
   width: 60rem;
   margin: 0 auto;
 }
+
+input[type="file"] {
+  display: none !important;
+}
+
+.input-group {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.icon-size {
+  font-size: 1.4rem;
+}
+
+.justify-content-between span .btn {
+  margin-left: 8px;
+}
+
+/********************************************************************/
 
 #wcp-editor {
   background: none;

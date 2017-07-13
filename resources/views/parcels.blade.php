@@ -1,21 +1,5 @@
 @extends('layouts.app')
 
-<style>
-input[type="file"] {
-    display: none !important;
-}
-.input-group {
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
-.icon-size {
-    font-size: 1.4rem;
-}
-.justify-content-between .btn {
-    margin-left: 8px;
-}
-</style>
-
 @section('content')
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
