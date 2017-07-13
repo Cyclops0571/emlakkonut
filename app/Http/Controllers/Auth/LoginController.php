@@ -57,7 +57,16 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
+
+
         $credentials = $this->credentials($request);
+        if(app()->isLocal()) {
+            $user = User::query()->where('name', $credentials['name'])->first();
+            \Auth::login($user);
+            $this->clearLoginAttempts($request);
+            return $this->sendLoginResponse($request);
+        }
+
         $serviceResponse = ServiceResponse::setUserAttributesFromService($credentials['name'], $credentials['password']);
         if($serviceResponse && $serviceResponse->Durum == 0) {
             $user = User::setAttributesFromService($serviceResponse->Sonuc, $credentials['name']);

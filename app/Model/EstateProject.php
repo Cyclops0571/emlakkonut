@@ -20,7 +20,7 @@ use Illuminate\Pagination\Paginator;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProject whereProjeID($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProject whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto[] $projectPhoto
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto $projectPhoto
  */
 class EstateProject extends Model {
 
@@ -77,5 +77,9 @@ class EstateProject extends Model {
 
     private function getPhotoRealPath($filename = '') {
         return public_path('uploads/project/' . $filename);
+    }
+
+    public function getPhotoPath() {
+        return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->name : '';
     }
 }
