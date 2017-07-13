@@ -10,20 +10,15 @@
                 <!-- <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button> -->
             </span>
         </div>
-        <div class="input-group">
-            <label class="input-group-addon">
-                <i class="icon-Quantity icon-size"></i>
-                <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
-            </label>
-            <input id="inputApartment" type="text" class="form-control" placeholder="Daire tipini giriniz..." aria-describedby="basic-addon1" autofocus>
-            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
-            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
-        </div>
+        <input id="inputApartment" type="text" class="form-control" placeholder="Daire tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
         <ul id="listApartments" class="list-group list-group-flush">
 
                 <li class="list-group-item justify-content-between">
                     <span>
-                        <i class="icon-Quantity icon-size"></i>
+                        <label class="custom-file">
+                            <i class="icon-Quantity icon-size"></i>
+                            <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+                        </label>
                         Tip 1
                     </span>
                     <span>

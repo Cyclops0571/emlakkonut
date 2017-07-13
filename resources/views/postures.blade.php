@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+<style>
+#spanPosture {
+  width: 100%;
+  margin: auto;
+}
+</style>
+
 @section('content')
   <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <form id="photoForm" method="post" action="{{URL::route('photo.store')}}" enctype="multipart/form-data">
@@ -8,18 +15,17 @@
       <div class="card card-size">
         <div class="card-header">
           Genel Vaziyet Planı
-          <button class="btn btn-success btn-sm rounded-circle float-right"
+          <button type="button" class="btn btn-success btn-sm rounded-circle float-right"
                   onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
         </div>
         <div class="input-group">
-          <label class="custom-file">
-            <i class="icon-Quantity icon-size"></i>
-            <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1"
-                   onchange="fileUpload(this)">
+            <label class="input-group-addon">
+                <i class="icon-Quantity icon-size"></i>
+                <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+            </label>
             <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
-          </label>
-          <button type="submit" class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
-          <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
+            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
+            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <img id="imgPosture" src="{{$project->getPhotoPath()}}">
       </div>
@@ -35,8 +41,7 @@
               var reader = new FileReader();
 
               reader.onload = function (e) {
-                  $('#imgPosture')
-                      .attr('src', e.target.result);
+                  $('#imgPosture').attr('src', e.target.result);
               };
 
               reader.readAsDataURL(input.files[0]);
