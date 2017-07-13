@@ -27,9 +27,9 @@ class HomeController extends Controller
         return view('postures', compact('project'));
     }
 
-    public function parcels()
+    public function parcels(pphphoEstateProject $project)
     {
-        return view('parcels');
+        return view('parcels', compact($project));
     }
 
     public function floors()

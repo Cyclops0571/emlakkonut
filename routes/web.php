@@ -30,3 +30,6 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/designer', 'HomeController@designer')->name('designer');
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
+Route::resource('photo', 'PhotoController');
+Route::get('test', 'TTestController@index');

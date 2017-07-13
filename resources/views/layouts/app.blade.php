@@ -42,6 +42,18 @@
         <div class="row">
           @include('layouts.sidebar')
           @yield('content')
+          @if($errors->any())
+            <ul class="alert alert-danger">
+              @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+              @endforeach
+            </ul>
+          @endif
+          @if(Session::has('success'))
+            <ul class="alert alert-success">
+              <li>{{Session::get('success')}}</li>
+            </ul>
+          @endif;
         </div>
       </div>
     </div>
