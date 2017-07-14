@@ -1,21 +1,5 @@
 @extends('layouts.app')
 
-<style>
-input[type="file"] {
-    display: none !important;
-}
-.input-group {
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
-.icon-size {
-    font-size: 1.4rem;
-}
-.justify-content-between .btn {
-    margin-left: 8px;
-}
-</style>
-
 @section('content')
 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
@@ -23,20 +7,15 @@ input[type="file"] {
             Parseller
             <!-- <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button> -->
         </div>
-        <div class="input-group">
-            <label class="input-group-addon">
-                <i class="icon-Quantity icon-size"></i>
-                <input type="file" id="inputParcel" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
-            </label>
-            <input type="text" id="inputTParcel" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" autofocus>
-            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
-            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
-        </div>
+        <input type="text" id="inputParcel" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
         <ul id="listParcels" class="list-group list-group-flush">
 
                 <li class="list-group-item justify-content-between">
                     <span>
-                        <i class="icon-Quantity icon-size"></i>
+                        <label class="custom-file">
+                            <i class="icon-Quantity icon-size"></i>
+                            <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+                        </label>
                         Parsel 1
                     </span>
                     <span>
@@ -67,10 +46,6 @@ input[type="file"] {
 
             // document.getElementById("spanPosture").innerHTML = input.files[0].name;
         }
-    }
-
-    function addItem() {
-        
     }
   </script>
 @endsection

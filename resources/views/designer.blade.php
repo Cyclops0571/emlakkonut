@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="/css/image-map-pro.css">
 
 <style>
-  body {
-    padding-top: 76px !important;
-  }
+    body {
+        padding-top: 60px !important;
+    }
 </style>
 
 @section('content')

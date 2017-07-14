@@ -1,19 +1,13 @@
 @extends('layouts.app')
 
 <style>
-  input[type="file"] {
-    display: none !important;
-  }
-
-  .custom-file {
-    margin-left: 1rem;
-    margin-top: .5rem;
-    width: 100%;
-  }
-
-  .icon-size {
-    font-size: 1.4rem;
-  }
+#spanPosture {
+  width: 100%;
+  margin: auto;
+}
+#imgPosture {
+  width: 100%;
+}
 </style>
 
 @section('content')
@@ -28,15 +22,14 @@
                   onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
         </div>
         <div class="input-group">
-          <label class="custom-file">
-            <i class="icon-Quantity icon-size"></i>
-            <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1"
-                   onchange="fileUpload(this)">
+            <label class="input-group-addon">
+                <i class="icon-Quantity icon-size"></i>
+                <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
+            </label>
             <span
                 id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
-          </label>
-          <button type="submit" class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
-          <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>
+            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
+            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <img id="imgPosture" src="{{$project->getPhotoPath()}}">
       </div>
@@ -52,8 +45,7 @@
               var reader = new FileReader();
 
               reader.onload = function (e) {
-                  $('#imgPosture')
-                      .attr('src', e.target.result);
+                  $('#imgPosture').attr('src', e.target.result);
               };
 
               reader.readAsDataURL(input.files[0]);

@@ -41,19 +41,21 @@
       <div class="container-fluid">
         <div class="row">
           @include('layouts.sidebar')
+          <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            @if($errors->any())
+              <ul class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                  <li style="list-style: none">{{$error}}</li>
+                @endforeach
+              </ul>
+            @endif
+            @if(Session::has('success'))
+              <ul class="alert alert-success">
+                <li style="list-style: none">{{Session::get('success')}}</li>
+              </ul>
+            @endif
+          </div>
           @yield('content')
-          @if($errors->any())
-            <ul class="alert alert-danger">
-              @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-              @endforeach
-            </ul>
-          @endif
-          @if(Session::has('success'))
-            <ul class="alert alert-success">
-              <li>{{Session::get('success')}}</li>
-            </ul>
-          @endif;
         </div>
       </div>
     </div>
@@ -66,6 +68,34 @@
           function onClickActiveNav(p) {
               $(".nav li").removeClass("active");
               $('#' + p).addClass('active');
+          }
+
+          function filter(p) {
+            var input, filter, ul, li, id = p.getAttribute("id");
+            input = document.getElementById(id);
+            filter = input.value.toUpperCase();
+
+            if (id.indexOf("Project") > -1) {
+                ul = document.getElementById("listProjects");
+            } else if (id.indexOf("Apartment") > -1) {
+                ul = document.getElementById("listApartments");
+            } else if (id.indexOf("Floor") > -1) {
+                ul = document.getElementById("listFloors");
+            } else if (id.indexOf("Parcel") > -1) {
+                ul = document.getElementById("listParcels");
+            }
+
+            li = ul.getElementsByTagName("li");
+
+            for (var i in li) {
+                if (li[i].innerHTML) {
+                    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
           }
       </script>
     @show
