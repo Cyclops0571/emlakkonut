@@ -24,15 +24,16 @@
       <div class="card card-size">
         <div class="card-header">
           Genel Vaziyet Planı
-          <button class="btn btn-success btn-sm rounded-circle float-right"
-                  onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
+          <button type="button" class="btn btn-success btn-sm rounded-circle float-right"
+                  onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
         </div>
         <div class="input-group">
           <label class="custom-file">
             <i class="icon-Quantity icon-size"></i>
             <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1"
                    onchange="fileUpload(this)">
-            <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
+            <span
+                id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
           </label>
           <button type="submit" class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
           <button class="input-group-addon" id="basic-addon1"><i class="icon-Cancel"></i></button>

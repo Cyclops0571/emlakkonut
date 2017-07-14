@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Batışehir</a>
+              <a class="nav-link" href="#">{{isset($project) ? $project->ProjeAdi : ''}}</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0" id="logout-form" action="{{ route('logout') }}" method="POST">

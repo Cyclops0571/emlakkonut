@@ -47,9 +47,9 @@ class HomeController extends Controller
         return view('location');
     }
 
-    public function designer()
+    public function projectDesigner(EstateProject $project)
     {
-        return view('designer');
+        return view('project.designer', compact('project'));
     }
 
     public function index($view)
