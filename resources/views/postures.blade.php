@@ -5,6 +5,9 @@
   width: 100%;
   margin: auto;
 }
+#imgPosture {
+  width: 100%;
+}
 </style>
 
 @section('content')
