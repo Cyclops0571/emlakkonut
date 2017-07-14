@@ -45,13 +45,13 @@
             @if($errors->any())
               <ul class="alert alert-danger">
                 @foreach($errors->all() as $error)
-                  <li>{{$error}}</li>
+                  <li style="list-style: none">{{$error}}</li>
                 @endforeach
               </ul>
             @endif
             @if(Session::has('success'))
               <ul class="alert alert-success">
-                <li>{{Session::get('success')}}</li>
+                <li style="list-style: none">{{Session::get('success')}}</li>
               </ul>
             @endif
           </div>

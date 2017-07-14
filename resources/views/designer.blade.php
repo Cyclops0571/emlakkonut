@@ -34,7 +34,7 @@
 
 <style>
     body {
-        padding-top: 76px !important;
+        padding-top: 60px !important;
     }
 </style>
 
