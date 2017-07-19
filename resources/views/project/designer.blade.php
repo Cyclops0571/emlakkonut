@@ -1,13 +1,26 @@
 @extends('layouts.app')
+
 <style>
   body {
-    padding-top: 76px !important;
+    padding-top: 60px !important;
   }
 </style>
 
+<!-- Submodules -->
+<link rel="stylesheet" href="/submodules/squares/css/squares.css">
+<link rel="stylesheet" href="/submodules/squares/css/squares-editor.css">
+<link rel="stylesheet" href="/submodules/squares/css/squares-controls.css">
+<link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor.css">
+<link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor-controls.css">
+<link rel="stylesheet" href="/submodules/wcp-tour/css/wcp-tour.css">
+<!-- Image Map Pro Editor -->
+<link rel="stylesheet" href="/css/image-map-pro-editor.css">
+<!-- Image Map Pro Plugin -->
+<link rel="stylesheet" href="/css/image-map-pro.css">
+
 @section('content')
   <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-    <h4 class="editor-title">Tasarlayıcı / Daireler</h4>
+    <h4 class="editor-title">Tasarlayıcı / Vaziyet Planı</h4>
     <div id="wcp-editor"></div>
   </main>
 @endsection
@@ -173,7 +186,6 @@
               }, spots: []
           };
       })(jQuery, window, document);
-
   </script>
   <script src="/js/image-map-pro-editor.js"></script>
   <script src="/js/image-map-pro-editor-content.js"></script>
@@ -181,15 +193,4 @@
   <script src="/js/image-map-pro-editor-init-jquery.js"></script>
   <!-- Image Map Pro Plugin -->
   <script src="/js/image-map-pro.js"></script>
-  <!-- Submodules -->
-  <link rel="stylesheet" href="/submodules/squares/css/squares.css">
-  <link rel="stylesheet" href="/submodules/squares/css/squares-editor.css">
-  <link rel="stylesheet" href="/submodules/squares/css/squares-controls.css">
-  <link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor.css">
-  <link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor-controls.css">
-  <link rel="stylesheet" href="/submodules/wcp-tour/css/wcp-tour.css">
-  <!-- Image Map Pro Editor -->
-  <link rel="stylesheet" href="/css/image-map-pro-editor.css">
-  <!-- Image Map Pro Plugin -->
-  <link rel="stylesheet" href="/css/image-map-pro.css">
 @endsection
