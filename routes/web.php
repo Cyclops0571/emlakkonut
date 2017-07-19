@@ -11,14 +11,12 @@
 |
 */
 
-
-
 Auth::routes();
-
 
 Route::get('/', function () {
     return view('auth/login');
 });
+
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('/projects', 'HomeController@projects')->name('projects');
@@ -28,6 +26,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/apartments', 'HomeController@apartments')->name('apartments');
     Route::get('/location', 'HomeController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'HomeController@projectDesigner')->name('projectDesigner');
+    Route::get('/designer', 'HomeController@designer')->name('designer');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/project-interacivity/save', 'ProjectController@saveProjectInteractive')->name('projectInteractivity');
 });

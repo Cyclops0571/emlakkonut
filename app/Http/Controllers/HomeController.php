@@ -22,7 +22,6 @@ class HomeController extends Controller
 
     public function postures(Request $request, EstateProject $project)
     {
-
         $request->session()->put('projectID', $project->id);
         return view('postures', compact('project'));
     }
@@ -50,6 +49,11 @@ class HomeController extends Controller
     public function projectDesigner(EstateProject $project)
     {
         return view('project.designer', compact('project'));
+    }
+
+    public function designer()
+    {
+        return view('designer');
     }
 
     public function index($view)
