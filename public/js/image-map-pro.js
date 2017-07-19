@@ -1,2 +1,1834 @@
-!function(t,e,i,o){function s(e,i){this.element=e,this.settings=t.extend(!0,{},u,i),this.root=t(e),this.wrap=o,this.ui=o,this.shapeContainer=o,this.shapeSvgContainer=o,this.fullscreenTooltipsContainer=o,this.visibleTooltip=o,this.visibleTooltipIndex=o,this.highlightedShape=o,this.highlightedShapeIndex=o,this.clickedShape=o,this.clickedShapeIndex=o,this.bodyOverflow=o,this.initTimeout=o,this.touch=!1,this.fullscreenTooltipVisible=!1,this.init()}function a(t){var e=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(t);return e?{r:parseInt(e[1],16),g:parseInt(e[2],16),b:parseInt(e[3],16)}:null}function n(t,e,i,o,s,a){return t>=i&&t<=i+s&&e>=o&&e<=o+a}function l(t,e,i){for(var o=!1,s=0,a=i.length-1;s<i.length;a=s++){var n=i[s][0],l=i[s][1],r=i[a][0],p=i[a][1],h=l>e!=p>e&&t<(r-n)*(e-l)/(p-l)+n;h&&(o=!o)}return o}function r(t,e,i,o,s,a){var n=(t-i)*(t-i),l=s*s,r=(e-o)*(e-o),p=a*a;return n/l+r/p<=1}function p(e,o,s,a){return e<0&&(e=0),o<0&&(o=0),e>t(i).width()-s&&(e=t(i).width()-s),o>t(i).height()-a&&(o=t(i).height()-a),{x:e,y:o}}function h(t){for(var e,i,o=t.length;0!==o;)i=Math.floor(Math.random()*o),o-=1,e=t[o],t[o]=t[i],t[i]=e;return t}function d(){return!!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)}var g=o;t.imageMapProInitialized=function(t){},t.imageMapProEventHighlightedShape=function(t,e){},t.imageMapProEventUnhighlightedShape=function(t,e){},t.imageMapProEventClickedShape=function(t,e){},t.imageMapProEventOpenedTooltip=function(t,e){},t.imageMapProEventClosedTooltip=function(t){},t.imageMapProHighlightShape=function(e,i){var o=t('[data-shape-title="'+i+'"]').data("index");f[e].highlightedShapeIndex!=o&&(f[e].highlightedShape&&f[e].unhighlightShape(),f[e].manuallyHighlightedShape=!0,f[e].highlightShape(o,!1))},t.imageMapProUnhighlightShape=function(t){f[t].highlightedShape&&f[t].unhighlightShape()},t.imageMapProOpenTooltip=function(e,i){var o=t('[data-shape-title="'+i+'"]').data("index");f[e].manuallyShownTooltip=!0,f[e].showTooltip(o),f[e].updateTooltipPosition(o)},t.imageMapProHideTooltip=function(t){f[t].hideTooltip()},t.imageMapProReInitMap=function(t){f[t].init()},t.imageMapProIsMobile=function(){return d()};var c="imageMapPro",u=t.imageMapProEditorDefaults,m=t.imageMapProShapeDefaults,f=new Array;MutationObserver=e.MutationObserver||e.WebKitMutationObserver;var y;t.extend(s.prototype,{init:function(){var i=this;i.parseSettings(),f[this.settings.general.name]=this,this.id=100*Math.random();for(var o=0;o<i.settings.spots.length;o++){var s=i.settings.spots[o],a=t.extend(!0,{},m);s=t.extend(!0,a,s),i.settings.spots[o]=t.extend(!0,{},s),i.settings.spots[o].title&&0!=i.settings.spots[o].title.length||(i.settings.spots[o].title=i.settings.spots[o].id)}i.root.addClass("imp-initialized"),i.root.attr("data-image-map-pro-id",i.settings.id),i.root.html('<div class="imp-wrap"></div>'),i.wrap=i.root.find(".imp-wrap");var n=new Image;n.src=i.settings.image.url,i.loadImage(n,function(){},function(){var e="";e+='<img src="'+i.settings.image.url+'">',i.wrap.html(e),i.centerImageMap(),i.adjustSize(),i.drawShapes(),i.addTooltips(),i.initFullscreen(),i.events(),i.animateShapesLoop(),t.imageMapProInitialized(i.settings.general.name)}),t(e).on("resize",function(){i.visibleTooltip&&i.updateTooltipPosition(i.highlightedShapeIndex)})},parseSettings:function(){this.settings.general.image_url&&(this.settings.image.url=this.settings.general.image_url)},loadImage:function(e,i,s){e.complete&&e.naturalWidth!==o&&e.naturalHeight!==o?s():(i(),t(e).on("load",function(){t(e).off("load"),s()}))},centerImageMap:function(){var t=this;1==parseInt(t.settings.general.center_image_map,10)&&t.wrap.css({margin:"0 auto"})},adjustSize:function(){var i=this;if(1==parseInt(i.settings.runtime.is_fullscreen,10)){var o=t(e).width()/t(e).height(),s=i.settings.general.width/i.settings.general.height;return s<o?(i.settings.general.width=t(e).height()*s,i.settings.general.height=t(e).height()):(i.settings.general.width=t(e).width(),i.settings.general.height=t(e).width()/s),void i.wrap.css({width:i.settings.general.width,height:i.settings.general.height})}if(1==parseInt(i.settings.general.responsive,10)){if(1==parseInt(i.settings.general.preserve_quality,10)){i.settings.general.naturalWidth||i.settings.general.width;i.wrap.css({"max-width":i.settings.general.naturalWidth})}}else i.wrap.css({width:i.settings.general.width,height:i.settings.general.height})},drawShapes:function(){for(var t=this,e=0;e<t.settings.spots.length;e++){var i=t.settings.spots[e];if(i.x=parseFloat(i.x),i.y=parseFloat(i.y),i.width=parseFloat(i.width),i.height=parseFloat(i.height),i.default_style.stroke_width=parseInt(i.default_style.stroke_width),i.mouseover_style.stroke_width=parseInt(i.mouseover_style.stroke_width),"poly"==i.type)for(var o=0;o<i.points.length;o++)i.points[o].x=parseFloat(i.points[o].x),i.points[o].y=parseFloat(i.points[o].y)}t.settings.general.width=parseInt(t.settings.general.width),t.settings.general.height=parseInt(t.settings.general.height),t.wrap.prepend('<div class="imp-shape-container"></div>'),t.shapeContainer=t.wrap.find(".imp-shape-container");var s="",n=!1,l=t.settings.general.width,r=t.settings.general.height;1==parseInt(t.settings.general.responsive,10)&&(l=t.settings.general.naturalWidth,r=t.settings.general.naturalHeight);for(var p='<svg class="hs-poly-svg" viewBox="0 0 '+l+" "+r+'" preserveAspectRatio="none">',e=0;e<t.settings.spots.length;e++){var i=t.settings.spots[e];if("spot"==i.type)if(1==parseInt(i.default_style.use_icon,10)){var h="",d=i.width<44?44:i.width,g=i.height<44?44:i.height;h+="left: "+i.x+"%;",h+="top: "+i.y+"%;",h+="width: "+d+"px;",h+="height: "+g+"px;";var c=-g/2,u=-d/2;if(1==parseInt(i.default_style.icon_is_pin,10)&&(c=-g,i.height<44&&(c=-g/2-i.height/2)),h+="margin-left: "+u+"px;",h+="margin-top: "+c+"px;",h+="background-image: url("+i.default_style.icon_url+")",h+="background-position: center;",h+="background-repeat: no-repeat;","fade"==t.settings.general.pageload_animation&&(h+="opacity: 0;"),"grow"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";",h+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);",1==parseInt(i.default_style.icon_is_pin,10)&&(h+="transform-origin: 50% 100%;-moz-transform-origin: 50% 100%;-webkit-transform-origin: 50% 100%;")),"none"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";"),s+='<div class="imp-shape imp-shape-spot" id="'+i.id+'" data-shape-title="'+i.title+'" style="'+h+'" data-index='+e+">","library"==i.default_style.icon_type?(s+='   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="'+i.default_style.icon_svg_viewbox+'" xml:space="preserve" width="'+i.width+'px" height="'+i.height+'px">',s+='       <path style="fill:'+i.default_style.icon_fill+'" d="'+i.default_style.icon_svg_path+'"></path>',s+="   </svg>"):s+='<img src="'+i.default_style.icon_url+'" style="width: '+i.width+"px; height: "+i.height+'px">',1==parseInt(i.default_style.icon_shadow,10)){var m="";m+="width: "+i.width+"px;",m+="height: "+i.height+"px;",m+="top: "+i.height/2+"px;",s+='<div style="'+m+'" class="imp-shape-icon-shadow"></div>'}s+="</div>"}else{var h="",f=a(i.default_style.background_color)||{r:0,b:0,g:0},y=a(i.default_style.border_color)||{r:0,b:0,g:0};h+="left: "+i.x+"%;",h+="top: "+i.y+"%;",h+="width: "+i.width+"px;",h+="height: "+i.height+"px;",h+="margin-left: -"+i.width/2+"px;",h+="margin-top: -"+i.height/2+"px;",h+="border-radius: "+i.default_style.border_radius+"px;",h+="background: rgba("+f.r+", "+f.g+", "+f.b+", "+i.default_style.background_opacity+");",h+="border-width: "+i.default_style.border_width+"px;",h+="border-style: "+i.default_style.border_style+";",h+="border-color: rgba("+y.r+", "+y.g+", "+y.b+", "+i.default_style.border_opacity+");","fade"==t.settings.general.pageload_animation&&(h+="opacity: 0;"),"grow"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";",h+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);"),"none"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";"),s+='<div class="imp-shape imp-shape-spot" id="'+i.id+'" data-shape-title="'+i.title+'" style="'+h+'" data-index='+e+"></div>"}if("rect"==i.type){var h="",f=a(i.default_style.background_color)||{r:0,b:0,g:0},y=a(i.default_style.border_color)||{r:0,b:0,g:0};h+="left: "+i.x+"%;",h+="top: "+i.y+"%;",h+="width: "+i.width+"%;",h+="height: "+i.height+"%;",h+="border-radius: "+i.default_style.border_radius+"px;",h+="background: rgba("+f.r+", "+f.g+", "+f.b+", "+i.default_style.background_opacity+");",h+="border-width: "+i.default_style.border_width+"px;",h+="border-style: "+i.default_style.border_style+";",h+="border-color: rgba("+y.r+", "+y.g+", "+y.b+", "+i.default_style.border_opacity+");","fade"==t.settings.general.pageload_animation&&(h+="opacity: 0;"),"grow"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";",h+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);"),"none"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";"),s+='<div class="imp-shape imp-shape-rect" id="'+i.id+'" data-shape-title="'+i.title+'" style="'+h+'" data-index='+e+"></div>"}if("oval"==i.type){var h="",f=a(i.default_style.background_color)||{r:0,b:0,g:0},y=a(i.default_style.border_color)||{r:0,b:0,g:0};h+="left: "+i.x+"%;",h+="top: "+i.y+"%;",h+="width: "+i.width+"%;",h+="height: "+i.height+"%;",h+="border-radius: 50% 50%;",h+="background: rgba("+f.r+", "+f.g+", "+f.b+", "+i.default_style.background_opacity+");",h+="border-width: "+i.default_style.border_width+"px;",h+="border-style: "+i.default_style.border_style+";",h+="border-color: rgba("+y.r+", "+y.g+", "+y.b+", "+i.default_style.border_opacity+");","fade"==t.settings.general.pageload_animation&&(h+="opacity: 0;"),"grow"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";",h+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);"),"none"==t.settings.general.pageload_animation&&(h+="opacity: "+i.default_style.opacity+";"),s+='<div class="imp-shape imp-shape-oval" id="'+i.id+'" data-shape-title="'+i.title+'" style="'+h+'" data-index='+e+"></div>"}if("poly"==i.type){n=!0;var _=a(i.default_style.fill)||{r:0,b:0,g:0},v=a(i.default_style.stroke_color)||{r:0,b:0,g:0},b="";if(b+="width: 100%;",b+="height: 100%;",b+="fill: rgba("+_.r+", "+_.g+", "+_.b+", "+i.default_style.fill_opacity+");",b+="stroke: rgba("+v.r+", "+v.g+", "+v.b+", "+i.default_style.stroke_opacity+");",b+="stroke-width: "+i.default_style.stroke_width+"px;",b+="stroke-dasharray: "+i.default_style.stroke_dasharray+";",b+="stroke-linecap: "+i.default_style.stroke_linecap+";","fade"==t.settings.general.pageload_animation&&(b+="opacity: 0;"),"grow"==t.settings.general.pageload_animation){b+="opacity: "+i.default_style.opacity+";",b+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);";var w=i.x+i.width/2,k=i.y+i.height/2;b+="transform-origin: "+w+"% "+k+"%;-moz-transform-origin: "+w+"% "+k+"%;-webkit-transform-origin: "+w+"% "+k+"%;"}"none"==t.settings.general.pageload_animation&&(b+="opacity: "+i.default_style.opacity+";");var x=l*(i.width/100),S=r*(i.height/100);p+='           <polygon class="imp-shape imp-shape-poly" style="'+b+'" data-index='+e+' id="'+i.id+'" data-shape-title="'+i.title+'" points="',i.vs=new Array;for(var o=0;o<i.points.length;o++){var T=l*(i.x/100)+i.points[o].x/100*x,I=r*(i.y/100)+i.points[o].y/100*S;p+=T+","+I+" ",i.vs.push([T,I])}p+='           "></polygon>'}}p+="</svg>",n?t.shapeContainer.html(s+p):t.shapeContainer.html(s)},addTooltips:function(){var e=this;if("always"==e.settings.tooltips.fullscreen_tooltips||"mobile-only"==e.settings.tooltips.fullscreen_tooltips&&d()){e.fullscreenTooltipsContainer||(t('.imp-fullscreen-tooltips-container[data-image-map-id="'+e.settings.id+'"]').remove(),t("body").prepend('<div class="imp-fullscreen-tooltips-container" data-image-map-id="'+e.settings.id+'"></div>'),e.fullscreenTooltipsContainer=t('.imp-fullscreen-tooltips-container[data-image-map-id="'+e.settings.id+'"]'));for(var i="",o=0;o<e.settings.spots.length;o++){var s=e.settings.spots[o];s.tooltip_content.plain_text=s.tooltip_content.plain_text.replace(/\n/g,"<br>");var n="",l=a(s.tooltip_style.background_color)||{r:0,b:0,g:0};if(n+="padding: "+s.tooltip_style.padding+"px;",n+="background: rgba("+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+");","none"==e.settings.tooltips.tooltip_animation&&(n+="opacity: 0;"),"fade"==e.settings.tooltips.tooltip_animation&&(n+="opacity: 0;",n+="transition-property: opacity;-moz-transition-property: opacity;-webkit-transition-property: opacity;"),"grow"==e.settings.tooltips.tooltip_animation&&(n+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);",n+="transition-property: transform;-moz-transition-property: -moz-transform;-webkit-transition-property: -webkit-transform;",n+="transform-origin: 50% 50%;-moz-transform-origin: 50% 50%;-webkit-transform-origin: 50% 50%;"),i+='<div class="imp-fullscreen-tooltip" style="'+n+'" data-index="'+o+'">',i+='   <div class="imp-tooltip-close-button" data-index="'+o+'"><i class="fa fa-times" aria-hidden="true"></i></div>',"plain-text"==s.tooltip_content.content_type){var n="";n+="color: "+s.tooltip_content.plain_text_color+";",i+='<div class="imp-tooltip-plain-text" style="'+n+'">'+s.tooltip_content.plain_text+"</div>"}else i+=s.tooltip_content.squares_json?t.squaresRendererRenderObject(s.tooltip_content.squares_json):t.squaresRendererRenderObject(s.tooltip_content.squares_settings);i+="</div>"}e.fullscreenTooltipsContainer.html(i)}else{for(var i="",o=0;o<e.settings.spots.length;o++){var s=e.settings.spots[o];s.tooltip_content.plain_text=s.tooltip_content.plain_text.replace(/\n/g,"<br>");var n="",l=a(s.tooltip_style.background_color)||{r:0,b:0,g:0},r="poly"==s.type?"imp-tooltip-buffer-large":"";if(n+="border-radius: "+s.tooltip_style.border_radius+"px;",n+="padding: "+s.tooltip_style.padding+"px;",n+="background: rgba("+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+");","none"==e.settings.tooltips.tooltip_animation&&(n+="opacity: 0;"),"fade"==e.settings.tooltips.tooltip_animation&&(n+="opacity: 0;",n+="transition-property: opacity;-moz-transition-property: opacity;-webkit-transition-property: opacity;"),"grow"==e.settings.tooltips.tooltip_animation&&(n+="transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);",n+="transition-property: transform;-moz-transition-property: -moz-transform;-webkit-transition-property: -webkit-transform;","top"==s.tooltip_style.position&&(n+="transform-origin: 50% 100%;-moz-transform-origin: 50% 100%;-webkit-transform-origin: 50% 100%;"),"bottom"==s.tooltip_style.position&&(n+="transform-origin: 50% 0%;-moz-transform-origin: 50% 0%;-webkit-transform-origin: 50% 0%;"),"left"==s.tooltip_style.position&&(n+="transform-origin: 100% 50%;-moz-transform-origin: 100% 50%;-webkit-transform-origin: 100% 50%;"),"right"==s.tooltip_style.position&&(n+="transform-origin: 0% 50%;-moz-transform-origin: 0% 50%;-webkit-transform-origin: 0% 50%;")),i+='<div class="imp-tooltip" style="'+n+'" data-index="'+o+'">',"top"==s.tooltip_style.position&&(i+='   <div class="hs-arrow hs-arrow-bottom" style="border-top-color: rgba('+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+');"></div>',0==parseInt(e.settings.tooltips.sticky_tooltips,10)&&(i+='   <div class="imp-tooltip-buffer imp-tooltip-buffer-bottom '+r+'"></div>')),"bottom"==s.tooltip_style.position&&(i+='   <div class="hs-arrow hs-arrow-top" style="border-bottom-color: rgba('+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+');"></div>',0==parseInt(e.settings.tooltips.sticky_tooltips,10)&&(i+='   <div class="imp-tooltip-buffer imp-tooltip-buffer-top '+r+'"></div>')),"left"==s.tooltip_style.position&&(i+='   <div class="hs-arrow hs-arrow-right" style="border-left-color: rgba('+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+');"></div>',0==parseInt(e.settings.tooltips.sticky_tooltips,10)&&(i+='   <div class="imp-tooltip-buffer imp-tooltip-buffer-right '+r+'"></div>')),"right"==s.tooltip_style.position&&(i+='   <div class="hs-arrow hs-arrow-left" style="border-right-color: rgba('+l.r+", "+l.g+", "+l.b+", "+s.tooltip_style.background_opacity+');"></div>',0==parseInt(e.settings.tooltips.sticky_tooltips,10)&&(i+='   <div class="imp-tooltip-buffer imp-tooltip-buffer-left '+r+'"></div>')),"plain-text"==s.tooltip_content.content_type){var n="";n+="color: "+s.tooltip_content.plain_text_color+";",i+='<div class="imp-tooltip-plain-text" style="'+n+'">'+s.tooltip_content.plain_text+"</div>"}else i+=s.tooltip_content.squares_json?t.squaresRendererRenderObject(s.tooltip_content.squares_json):t.squaresRendererRenderObject(s.tooltip_content.squares_settings);i+="</div>"}e.wrap.prepend(i)}},initFullscreen:function(){var t=this;if(1==parseInt(t.settings.fullscreen.enable_fullscreen_mode,10)){var e="";e+="background: "+t.settings.fullscreen.fullscreen_button_color+"; ",e+="color: "+t.settings.fullscreen.fullscreen_button_text_color+"; ";var i='<i class="fa fa-arrows-alt" aria-hidden="true"></i>';1==parseInt(t.settings.runtime.is_fullscreen,10)&&(i='<i class="fa fa-times" aria-hidden="true"></i>');var o="Go Fullscreen";1==parseInt(t.settings.runtime.is_fullscreen,10)&&(o="Close Fullscreen");var s="";"icon"==t.settings.fullscreen.fullscreen_button_type&&(s+=i),"text"==t.settings.fullscreen.fullscreen_button_type&&(s+=o),"icon_and_text"==t.settings.fullscreen.fullscreen_button_type&&(s+=i+" "+o);var a="";"icon"==t.settings.fullscreen.fullscreen_button_type&&(a+="imp-fullscreen-button-icon-only");var n="";n+='<div style="'+e+'" class="'+a+" imp-fullscreen-button imp-fullscreen-button-position-"+t.settings.fullscreen.fullscreen_button_position+'">',n+=s,n+="</div>",t.wrap.append('<div class="imp-ui"></div>'),t.ui=t.wrap.find(".imp-ui"),t.ui.append(n);var l=t.ui.find(".imp-fullscreen-button");1!=parseInt(t.settings.fullscreen.fullscreen_button_position,10)&&4!=parseInt(t.settings.fullscreen.fullscreen_button_position,10)||l.css({"margin-left":-l.outerWidth()/2}),1==parseInt(t.settings.fullscreen.start_in_fullscreen_mode,10)&&0==t.settings.runtime.is_fullscreen&&t.toggleFullscreen()}},measureTooltipSize:function(t){if(!("always"==this.settings.tooltips.fullscreen_tooltips||"mobile"==this.settings.tooltips.fullscreen_tooltips&&d())){var e=this.settings.spots[t],i=this.wrap.find('.imp-tooltip[data-index="'+t+'"]');0==parseInt(e.tooltip_style.auto_width,10)&&i.css({width:e.tooltip_style.width}),i.data("imp-measured-width",i.outerWidth()),i.data("imp-measured-height",i.outerHeight())}},animateShapesLoop:function(){if("none"!=this.settings.general.pageload_animation)for(var t=750/this.settings.spots.length,e=h(this.settings.spots.slice()),i=0;i<e.length;i++)this.animateShape(e[i],t*i)},animateShape:function(e,i){var o=this,s=t("#"+e.id);setTimeout(function(){"fade"==o.settings.general.pageload_animation&&s.css({opacity:e.default_style.opacity}),"grow"==o.settings.general.pageload_animation&&s.css({transform:"scale(1, 1)","-moz-transform":"scale(1, 1)","-webkit-transform":"scale(1, 1)"})},i)},events:function(){var e=this;this.wrap.off("mousemove"),this.wrap.on("mousemove",function(t){e.touch||e.handleEventMove(t)}),this.wrap.off("mouseup"),this.wrap.on("mouseup",function(t){e.touch||e.handleEventEnd(t)}),this.wrap.off("touchstart"),this.wrap.on("touchstart",function(t){e.touch=!0,e.handleEventMove(t)}),this.wrap.off("touchmove"),this.wrap.on("touchmove",function(t){e.handleEventMove(t)}),this.wrap.off("touchend"),this.wrap.on("touchend",function(t){e.handleEventEnd(t)}),t(i).off("mousemove."+this.settings.id),t(i).on("mousemove."+this.settings.id,function(i){e.touch||e.manuallyHighlightedShape||e.manuallyShownTooltip||0==t(i.target).closest(".imp-wrap").length&&0==t(i.target).closest(".imp-fullscreen-tooltips-container").length&&(e.visibleTooltip&&e.hideTooltip(),e.clickedShape&&e.unclickShape(),e.highlightedShape&&e.unhighlightShape())}),t(i).off("touchstart."+this.settings.id),t(i).on("touchstart."+this.settings.id,function(i){e.manuallyHighlightedShape||e.manuallyShownTooltip||0==t(i.target).closest(".imp-wrap").length&&0==t(i.target).closest(".imp-fullscreen-tooltips-container").length&&(e.visibleTooltip&&e.hideTooltip(),e.clickedShape&&e.unclickShape(),e.highlightedShape&&e.unhighlightShape())}),t(i).off("click."+this.settings.id,".imp-tooltip-close-button"),t(i).on("click."+this.settings.id,".imp-tooltip-close-button",function(){e.hideTooltip(),e.clickedShape&&e.unclickShape(),e.highlightedShape&&e.unhighlightShape()}),1==parseInt(this.settings.general.late_initialization,10)?y||(y=new MutationObserver(function(i,o){clearTimeout(e.initTimeout),e.initTimeout=setTimeout(function(){for(var o=0;o<i.length;o++)if(0==t(i[o].target).closest(".imp-initialized").length&&!t(i[o].target).hasClass("imp-initialized")){e.init();break}},50)}),y.observe(i,{subtree:!0,attributes:!0})):y&&(y.disconnect(),y=o),t(i).off("click."+this.settings.id,'[data-image-map-pro-id="'+this.settings.id+'"] .imp-fullscreen-button'),t(i).on("click."+this.settings.id,'[data-image-map-pro-id="'+this.settings.id+'"] .imp-fullscreen-button',function(){e.toggleFullscreen()}),t(i).on("mouseover","[data-imp-highlight-shape-on-mouseover]",function(){var i=t(this).data("imp-highlight-shape-on-mouseover"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.manuallyHighlightedShape=!0,e.highlightShape(s,!0)}}),t(i).on("mouseout","[data-imp-highlight-shape-on-mouseover]",function(){var i=(t(this).data("imp-highlight-shape-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.unhighlightShape()}),t(i).on("click","[data-imp-highlight-shape-on-click]",function(){var i=t(this).data("imp-highlight-shape-on-click"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.highlightedShape&&e.unhighlightShape(),e.manuallyHighlightedShape=!0,e.highlightShape(s,!0)}}),t(i).on("mouseover","[data-imp-unhighlight-shape-on-mouseover]",function(){var i=(t(this).data("imp-unhighlight-shape-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.highlightedShape&&e.unhighlightShape()}),t(i).on("mouseover","[data-imp-unhighlight-shape-on-click]",function(){var i=(t(this).data("imp-unhighlight-shape-on-click"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.highlightedShape&&e.unhighlightShape()}),t(i).on("mouseover","[data-imp-open-tooltip-on-mouseover]",function(){var i=t(this).data("imp-open-tooltip-on-mouseover"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.manuallyShownTooltip=!0,e.showTooltip(s),e.updateTooltipPosition(s)}}),t(i).on("mouseout","[data-imp-open-tooltip-on-mouseover]",function(){var i=(t(this).data("imp-open-tooltip-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.hideTooltip()}),t(i).on("click","[data-imp-open-tooltip-on-click]",function(){var i=t(this).data("imp-open-tooltip-on-click"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.manuallyShownTooltip=!0,e.showTooltip(s),e.updateTooltipPosition(s)}}),t(i).on("mouseover","[data-imp-close-tooltip-on-mouseover]",function(){var i=(t(this).data("imp-close-tooltip-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.hideTooltip()}),t(i).on("click","[data-imp-close-tooltip-on-click]",function(){var i=(t(this).data("imp-close-tooltip-on-click"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||e.hideTooltip()}),t(i).on("mouseover","[data-imp-trigger-shape-on-mouseover]",function(){var i=t(this).data("imp-trigger-shape-on-mouseover"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.manuallyHighlightedShape=!0,e.manuallyShownTooltip=!0,e.highlightShape(s,!0),e.showTooltip(s),e.updateTooltipPosition(s)}}),t(i).on("mouseout","[data-imp-trigger-shape-on-mouseover]",function(){var i=(t(this).data("imp-trigger-shape-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||(e.unhighlightShape(),e.hideTooltip())}),t(i).on("click","[data-imp-trigger-shape-on-click]",function(){var i=t(this).data("imp-trigger-shape-on-click"),o=t(this).data("imp-image-map-name");if(!o||o==e.settings.general.name){var s=t('[data-shape-title="'+i+'"]').data("index");e.highlightedShape&&e.unhighlightShape(),e.manuallyHighlightedShape=!0,e.manuallyShownTooltip=!0,e.highlightShape(s,!0),e.showTooltip(s),e.updateTooltipPosition(s)}}),t(i).on("mouseover","[data-imp-untrigger-shape-on-mouseover]",function(){var i=(t(this).data("imp-untrigger-shape-on-mouseover"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||(e.highlightedShape&&e.unhighlightShape(),e.hideTooltip())}),t(i).on("mouseover","[data-imp-untrigger-shape-on-click]",function(){var i=(t(this).data("imp-untrigger-shape-on-click"),t(this).data("imp-image-map-name"));i&&i!=e.settings.general.name||(e.highlightedShape&&e.unhighlightShape(),e.hideTooltip())})},disableEvents:function(){this.wrap.off("mousemove"),this.wrap.off("mouseup"),this.wrap.off("touchstart"),this.wrap.off("touchmove"),this.wrap.off("touchend"),t(i).off("mousemove."+this.settings.id),t(i).off("touchstart."+this.settings.id),t(i).off("click."+this.settings.id,".imp-tooltip-close-button"),t(i).off("click."+this.settings.id,".imp-fullscreen-button")},handleEventMove:function(e){if(!this.fullscreenTooltipVisible&&(0==t(e.target).closest(".imp-tooltip").length&&!t(e.target).hasClass("imp-tooltip")||0!=parseInt(this.settings.tooltips.sticky_tooltips,10))){(this.manuallyHighlightedShape||this.manuallyShownTooltip)&&(this.manuallyHighlightedShape=!1,this.manuallyShownTooltip=!1);var i=this.getEventRelativeCoordinates(e),o=this.matchShapeToCoords(i);o!=-1&&o!=this.highlightedShapeIndex?(this.highlightedShape&&this.unhighlightShape(),this.highlightShape(o,!0)):o==-1&&this.highlightedShape&&this.highlightedShapeIndex!=this.clickedShapeIndex&&this.unhighlightShape(),this.highlightedShape&&this.visibleTooltipIndex!=this.highlightedShapeIndex?"show-tooltip"==this.highlightedShape.actions.mouseover&&(this.visibleTooltip&&this.hideTooltip(),this.clickedShape&&this.unclickShape(),this.showTooltip(this.highlightedShapeIndex),this.updateTooltipPosition(o,e)):!this.visibleTooltip||this.highlightedShape||this.clickedShape||this.visibleTooltip&&this.hideTooltip(),this.visibleTooltip&&this.highlightedShape&&1==parseInt(this.settings.tooltips.sticky_tooltips,10)&&"show-tooltip"==this.highlightedShape.actions.mouseover&&this.updateTooltipPosition(this.highlightedShapeIndex,e)}},handleEventEnd:function(e){if((0==t(e.target).closest(".imp-tooltip").length||t(e.target).hasClass("imp-tooltip-buffer"))&&!this.fullscreenTooltipVisible){(this.manuallyHighlightedShape||this.manuallyShownTooltip)&&(this.manuallyHighlightedShape=!1,this.manuallyShownTooltip=!1);var i=this.getEventRelativeCoordinates(e),o=this.matchShapeToCoords(i);o!=-1&&o!=this.clickedShapeIndex?(this.clickedShape&&this.unclickShape(),this.clickShape(o,e)):o==-1&&this.clickedShape&&this.unclickShape()}},getEventRelativeCoordinates:function(t){var e,i;if("touchstart"==t.type||"touchmove"==t.type||"touchend"==t.type||"touchcancel"==t.type){var o=t.originalEvent.touches[0]||t.originalEvent.changedTouches[0];e=o.pageX,i=o.pageY}else"mousedown"!=t.type&&"mouseup"!=t.type&&"mousemove"!=t.type&&"mouseover"!=t.type&&"mouseout"!=t.type&&"mouseenter"!=t.type&&"mouseleave"!=t.type||(e=t.pageX,i=t.pageY);return e-=this.wrap.offset().left,i-=this.wrap.offset().top,e=e/this.wrap.width()*100,i=i/this.wrap.height()*100,{x:e,y:i}},getEventCoordinates:function(t){var e,i;if("touchstart"==t.type||"touchmove"==t.type||"touchend"==t.type||"touchcancel"==t.type){var o=t.originalEvent.touches[0]||t.originalEvent.changedTouches[0];e=o.pageX,i=o.pageY}else"mousedown"!=t.type&&"mouseup"!=t.type&&"mousemove"!=t.type&&"mouseover"!=t.type&&"mouseout"!=t.type&&"mouseenter"!=t.type&&"mouseleave"!=t.type||(e=t.pageX,i=t.pageY);return{x:e,y:i}},matchShapeToCoords:function(t){for(var e=this.settings.spots.length-1;e>=0;e--){var i=this.settings.spots[e];if("poly"==i.type){var o=t.x/100*this.wrap.width(),s=t.y/100*this.wrap.height();if(o=o*this.settings.general.width/this.wrap.width(),s=s*this.settings.general.height/this.wrap.height(),l(o,s,i.vs))return e}if("spot"==i.type){var a=i.width<44?44:i.width,p=i.height<44?44:i.height,o=t.x/100*this.wrap.width(),s=t.y/100*this.wrap.height(),h=i.x/100*this.wrap.width()-a/2,d=i.y/100*this.wrap.height()-p/2,g=a,c=p;if(1==parseInt(i.default_style.icon_is_pin,10)&&1==parseInt(i.default_style.use_icon,10)&&(d-=p/2,i.height<44&&(d+=i.height/2)),n(o,s,h,d,g,c))return e}if("rect"==i.type&&n(t.x,t.y,i.x,i.y,i.width,i.height))return e;if("oval"==i.type){var o=t.x,s=t.y,u=i.x+i.width/2,m=i.y+i.height/2,h=i.width/2,d=i.height/2;if(r(o,s,u,m,h,d))return e}}return-1},applyMouseoverStyles:function(t){var e=this,i=e.settings.spots[t],o=this.wrap.find("#"+i.id),s="";if("spot"==i.type&&0==parseInt(i.default_style.use_icon,10)){var n=a(i.mouseover_style.background_color)||{r:0,b:0,g:0},l=a(i.mouseover_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"px;",s+="height: "+i.height+"px;",s+="margin-left: -"+i.width/2+"px;",s+="margin-top: -"+i.height/2+"px;",s+="opacity: "+i.mouseover_style.opacity+";",s+="border-radius: "+i.mouseover_style.border_radius+"px;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.mouseover_style.background_opacity+");",s+="border-width: "+i.mouseover_style.border_width+"px;",s+="border-style: "+i.mouseover_style.border_style+";",s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.mouseover_style.border_opacity+");"}if("spot"==i.type&&1==parseInt(i.default_style.use_icon,10)){var r=i.width<44?44:i.width,p=i.height<44?44:i.height;s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+r+"px;",s+="height: "+p+"px;";var h=-p/2,d=-r/2;1==parseInt(i.default_style.icon_is_pin,10)&&(h=-p,i.height<44&&(h=-p/2-i.height/2)),s+="margin-left: "+d+"px;",s+="margin-top: "+h+"px;",s+="opacity: "+i.mouseover_style.opacity+";"}if("spot"==i.type&&1==parseInt(i.default_style.use_icon,10)&&"library"==i.default_style.icon_type&&o.find("path").attr("style","fill:"+i.mouseover_style.icon_fill),"rect"==i.type){var n=a(i.mouseover_style.background_color)||{r:0,b:0,g:0},l=a(i.mouseover_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"%;",s+="height: "+i.height+"%;",s+="opacity: "+i.mouseover_style.opacity+";",s+="border-radius: "+i.mouseover_style.border_radius+"px;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.mouseover_style.background_opacity+");",s+="border-width: "+i.mouseover_style.border_width+"px;",s+="border-style: "+i.mouseover_style.border_style+";",s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.mouseover_style.border_opacity+");"}if("oval"==i.type){var n=a(i.mouseover_style.background_color)||{r:0,b:0,g:0},l=a(i.mouseover_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"%;",s+="height: "+i.height+"%;",s+="opacity: "+i.mouseover_style.opacity+";",s+="border-radius: 50% 50%;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.mouseover_style.background_opacity+");",s+="border-width: "+i.mouseover_style.border_width+"px;",s+="border-style: "+i.mouseover_style.border_style+";",
-s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.mouseover_style.border_opacity+");"}if("poly"==i.type){var g=a(i.mouseover_style.fill)||{r:0,b:0,g:0},c=a(i.mouseover_style.stroke_color)||{r:0,b:0,g:0};s+="opacity: "+i.mouseover_style.opacity+";",s+="fill: rgba("+g.r+", "+g.g+", "+g.b+", "+i.mouseover_style.fill_opacity+");",s+="stroke: rgba("+c.r+", "+c.g+", "+c.b+", "+i.mouseover_style.stroke_opacity+");",s+="stroke-width: "+i.mouseover_style.stroke_width+"px;",s+="stroke-dasharray: "+i.mouseover_style.stroke_dasharray+";",s+="stroke-linecap: "+i.mouseover_style.stroke_linecap+";"}o.attr("style",s)},applyDefaultStyles:function(t){var e=this,i=e.settings.spots[t],o=this.wrap.find("#"+i.id),s="";if("spot"==i.type&&0==parseInt(i.default_style.use_icon,10)){var n=a(i.default_style.background_color)||{r:0,b:0,g:0},l=a(i.default_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"px;",s+="height: "+i.height+"px;",s+="margin-left: -"+i.width/2+"px;",s+="margin-top: -"+i.height/2+"px;",s+="opacity: "+i.default_style.opacity+";",s+="border-radius: "+i.default_style.border_radius+"px;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.default_style.background_opacity+");",s+="border-width: "+i.default_style.border_width+"px;",s+="border-style: "+i.default_style.border_style+";",s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.default_style.border_opacity+");"}if("spot"==i.type&&1==parseInt(i.default_style.use_icon,10)){var r=i.width<44?44:i.width,p=i.height<44?44:i.height;s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+r+"px;",s+="height: "+p+"px;";var h=-p/2,d=-r/2;1==parseInt(i.default_style.icon_is_pin,10)&&(h=-p,i.height<44&&(h=-p/2-i.height/2)),s+="margin-left: "+d+"px;",s+="margin-top: "+h+"px;",s+="opacity: "+i.default_style.opacity+";"}if("spot"==i.type&&1==parseInt(i.default_style.use_icon,10)&&"library"==i.default_style.icon_type&&o.find("path").attr("style","fill:"+i.default_style.icon_fill),"rect"==i.type){var n=a(i.default_style.background_color)||{r:0,b:0,g:0},l=a(i.default_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"%;",s+="height: "+i.height+"%;",s+="opacity: "+i.default_style.opacity+";",s+="border-radius: "+i.default_style.border_radius+"px;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.default_style.background_opacity+");",s+="border-width: "+i.default_style.border_width+"px;",s+="border-style: "+i.default_style.border_style+";",s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.default_style.border_opacity+");"}if("oval"==i.type){var n=a(i.default_style.background_color)||{r:0,b:0,g:0},l=a(i.default_style.border_color)||{r:0,b:0,g:0};s+="left: "+i.x+"%;",s+="top: "+i.y+"%;",s+="width: "+i.width+"%;",s+="height: "+i.height+"%;",s+="opacity: "+i.default_style.opacity+";",s+="border-radius: 50% 50%;",s+="background: rgba("+n.r+", "+n.g+", "+n.b+", "+i.default_style.background_opacity+");",s+="border-width: "+i.default_style.border_width+"px;",s+="border-style: "+i.default_style.border_style+";",s+="border-color: rgba("+l.r+", "+l.g+", "+l.b+", "+i.default_style.border_opacity+");"}if("poly"==i.type){var g=a(i.default_style.fill)||{r:0,b:0,g:0},c=a(i.default_style.stroke_color)||{r:0,b:0,g:0};s+="opacity: "+i.default_style.opacity+";",s+="fill: rgba("+g.r+", "+g.g+", "+g.b+", "+i.default_style.fill_opacity+");",s+="stroke: rgba("+c.r+", "+c.g+", "+c.b+", "+i.default_style.stroke_opacity+");",s+="stroke-width: "+i.default_style.stroke_width+"px;",s+="stroke-dasharray: "+i.default_style.stroke_dasharray+";",s+="stroke-linecap: "+i.default_style.stroke_linecap+";"}o.attr("style",s)},highlightShape:function(e,i){this.applyMouseoverStyles(e),this.highlightedShapeIndex=e,this.highlightedShape=this.settings.spots[e],i&&t.imageMapProEventHighlightedShape(this.settings.general.name,this.highlightedShape.title)},unhighlightShape:function(){this.applyDefaultStyles(this.highlightedShapeIndex),t.imageMapProEventUnhighlightedShape(this.settings.general.name,this.highlightedShape.title),this.highlightedShapeIndex=o,this.highlightedShape=o},clickShape:function(e,i){"show-tooltip"==this.settings.spots[e].actions.click&&(this.applyMouseoverStyles(e),this.showTooltip(e),this.updateTooltipPosition(e,i),this.clickedShapeIndex=e,this.clickedShape=this.settings.spots[e]),"follow-link"==this.settings.spots[e].actions.click&&(0==t("#imp-temp-link").length&&t("body").append('<a href="" id="imp-temp-link" target="_blank"></a>'),t("#imp-temp-link").attr("href",this.settings.spots[e].actions.link),1==parseInt(this.settings.spots[e].actions.open_link_in_new_window,10)?t("#imp-temp-link").attr("target","_blank"):t("#imp-temp-link").removeAttr("target"),t("#imp-temp-link")[0].click()),t.imageMapProEventClickedShape(this.settings.general.name,this.settings.spots[e].id)},unclickShape:function(){this.applyDefaultStyles(this.clickedShapeIndex),"show-tooltip"==this.clickedShape.actions.click&&this.hideTooltip(),this.clickedShapeIndex=o,this.clickedShape=o},showTooltip:function(e){if("mobile-only"==this.settings.tooltips.fullscreen_tooltips&&d()||"always"==this.settings.tooltips.fullscreen_tooltips){this.visibleTooltip=t('.imp-fullscreen-tooltip[data-index="'+e+'"]'),this.visibleTooltipIndex=e,this.fullscreenTooltipsContainer.show();var i=this;setTimeout(function(){i.visibleTooltip.addClass("imp-tooltip-visible")},20),this.fullscreenTooltipVisible=!0,this.bodyOverflow=t("body").css("overflow"),t("body").css({overflow:"hidden"})}else t(".imp-tooltip-visible").removeClass("imp-tooltip-visible"),this.visibleTooltip=this.wrap.find('.imp-tooltip[data-index="'+e+'"]'),this.visibleTooltipIndex=e,this.visibleTooltip.addClass("imp-tooltip-visible"),this.measureTooltipSize(e);t.imageMapProEventOpenedTooltip(this.settings.general.name,this.settings.spots[e].title)},hideTooltip:function(){if(t(".imp-tooltip-visible").removeClass("imp-tooltip-visible"),this.visibleTooltip=o,this.visibleTooltipIndex=o,"mobile-only"==this.settings.tooltips.fullscreen_tooltips&&d()||"always"==this.settings.tooltips.fullscreen_tooltips){var e=this;setTimeout(function(){e.fullscreenTooltipsContainer.hide()},200),this.fullscreenTooltipVisible=!1,t("body").css({overflow:this.bodyOverflow})}t.imageMapProEventClosedTooltip(this.settings.general.name)},updateTooltipPosition:function(i,o){if(!this.fullscreenTooltipVisible){var s,a,n,l,r,h,d,g,c,u,m=20;if(s=this.visibleTooltip,a=this.visibleTooltip.data("imp-measured-width"),n=this.visibleTooltip.data("imp-measured-height"),u=this.settings.spots[i],1==parseInt(this.settings.tooltips.sticky_tooltips,10)&&"show-tooltip"==u.actions.mouseover&&o){var f=this.getEventCoordinates(o);g=f.x,c=f.y,l=g-this.wrap.offset().left,r=c-this.wrap.offset().top,h=0,d=0}else"spot"==u.type?(h=u.width,d=u.height,l=Math.round(10*u.x)/10/100*this.wrap.width()-h/2,r=Math.round(10*u.y)/10/100*this.wrap.height()-d/2):(h=u.width/100*this.wrap.width(),d=u.height/100*this.wrap.height(),l=Math.round(10*u.x)/10/100*this.wrap.width(),r=Math.round(10*u.y)/10/100*this.wrap.height());var y,_;"left"==u.tooltip_style.position&&(y=l-a-m,_=r+d/2-n/2),"right"==u.tooltip_style.position&&(y=l+h+m,_=r+d/2-n/2),"top"==u.tooltip_style.position&&(y=l+h/2-a/2,_=r-n-m),"bottom"==u.tooltip_style.position&&(y=l+h/2-a/2,_=r+d+m),"spot"==u.type&&1==parseInt(u.default_style.icon_is_pin,10)&&"spot"==u.type&&1==parseInt(u.default_style.use_icon,10)&&(_-=d/2);var v={x:y,y:_};if(1==parseInt(this.settings.tooltips.constrain_tooltips,10)){var b=this.wrap.offset().left-t(e).scrollLeft(),w=this.wrap.offset().top-t(e).scrollTop();v=p(y+b,_+w,a,n),v.x-=b,v.y-=w}s.css({left:v.x,top:v.y})}},toggleFullscreen:function(){if(0==parseInt(this.settings.runtime.is_fullscreen,10)){t("body").addClass("imp-fullscreen-mode");var e=t.extend(!0,{},this.settings);e.runtime.is_fullscreen=1,e.id="999999",e.general.responsive=0;var i="";i+="background: "+this.settings.fullscreen.fullscreen_background,t("body").append('<div id="imp-fullscreen-wrap" style="'+i+'"><div id="image-map-pro-'+e.id+'"></div></div>'),t("#image-map-pro-"+e.id).imageMapPro(e),this.disableEvents(),g=this}else t("body").removeClass("imp-fullscreen-mode"),t("#imp-fullscreen-wrap").remove(),this.disableEvents(),g.events()}}),t.fn[c]=function(e){return this.each(function(){t.data(this,"plugin_"+c,new s(this,e))})}}(jQuery,window,document);
+;(function ( $, window, document, undefined ) {
+
+    // Variable to hold the currently fullscreen image map
+    var fullscreenMap = undefined;
+
+    // API
+
+    /*
+        HTML API
+        ---------------------------------------
+        data-imp-highlight-shape-on-mouseover
+        data-imp-highlight-shape-on-click
+        data-imp-unhighlight-shape-on-mouseover
+        data-imp-unhighlight-shape-on-click
+
+        data-imp-open-tooltip-on-mouseover
+        data-imp-open-tooltip-on-click
+        data-imp-close-tooltip-on-mouseover
+        data-imp-close-tooltip-on-click
+
+        data-trigger-shape-on-mouseover
+        data-trigger-shape-on-click
+        data-untrigger-shape-on-mouseover
+        data-untrigger-shape-on-click
+
+        EXAMPLE
+        ---------------------------------------
+        <div data-imp-highlight-shape-on-mouseover="myshape1" data-imp-image-map-name="map1">Click</div>
+    */
+
+    // Events (called by the plugin, need implementation)
+    $.imageMapProInitialized = function(imageMapName) {
+        
+    }
+    $.imageMapProEventHighlightedShape = function(imageMapName, shapeName) {
+
+    }
+    $.imageMapProEventUnhighlightedShape = function(imageMapName, shapeName) {
+
+    }
+    $.imageMapProEventClickedShape = function(imageMapName, shapeName) {
+
+    }
+    $.imageMapProEventOpenedTooltip = function(imageMapName, shapeName) {
+
+    }
+    $.imageMapProEventClosedTooltip = function(imageMapName) {
+
+    }
+    // Actions (called by a third party, implemented here)
+    $.imageMapProHighlightShape = function(imageMapName, shapeName) {
+        var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+
+        if (instances[imageMapName].highlightedShapeIndex == i) return;
+
+        if (instances[imageMapName].highlightedShape) {
+            instances[imageMapName].unhighlightShape();
+        }
+
+        instances[imageMapName].manuallyHighlightedShape = true;
+        instances[imageMapName].highlightShape(i, false);
+    }
+    $.imageMapProUnhighlightShape = function(imageMapName) {
+        if (instances[imageMapName].highlightedShape) {
+            instances[imageMapName].unhighlightShape();
+        }
+    }
+    $.imageMapProOpenTooltip = function(imageMapName, shapeName) {
+        var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+
+        instances[imageMapName].manuallyShownTooltip = true;
+        instances[imageMapName].showTooltip(i);
+        instances[imageMapName].updateTooltipPosition(i);
+    }
+    $.imageMapProHideTooltip = function(imageMapName) {
+        instances[imageMapName].hideTooltip();
+    }
+    $.imageMapProReInitMap = function(imageMapName) {
+        instances[imageMapName].init();
+    }
+    $.imageMapProIsMobile = function() {
+        return isMobile();
+    }
+
+    "use strict";
+
+    // undefined is used here as the undefined global variable in ECMAScript 3 is
+    // mutable (ie. it can be changed by someone else). undefined isn't really being
+    // passed in so we can ensure the value of it is truly undefined. In ES5, undefined
+    // can no longer be modified.
+
+    // window and document are passed through as local variable rather than global
+    // as this (slightly) quickens the resolution process and can be more efficiently
+    // minified (especially when both are regularly referenced in your plugin).
+
+    // Create the defaults once
+    var pluginName = "imageMapPro";
+    var default_settings = $.imageMapProEditorDefaults;
+	var default_spot_settings = $.imageMapProShapeDefaults;
+
+    var instances = new Array();
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    var mutationObserver;
+
+
+    // The actual plugin constructor
+    function Plugin ( element, options ) {
+        this.element = element;
+        // jQuery has an extend method which merges the contents of two or
+        // more objects, storing the result in the first object. The first object
+        // is generally empty as we don't want to alter the default options for
+        // future instances of the plugin
+        this.settings = $.extend(true, {}, default_settings, options);
+
+        this.root = $(element);
+        this.wrap = undefined;
+        this.ui = undefined;
+        this.shapeContainer = undefined;
+        this.shapeSvgContainer = undefined;
+        this.fullscreenTooltipsContainer = undefined;
+
+        // Cache
+        this.visibleTooltip = undefined;
+        this.visibleTooltipIndex = undefined;
+        this.highlightedShape = undefined;
+        this.highlightedShapeIndex = undefined;
+        this.clickedShape = undefined;
+        this.clickedShapeIndex = undefined;
+        this.bodyOverflow = undefined;
+
+        // Mutations observer
+        this.initTimeout = undefined;
+
+        // Flags
+        this.touch = false;
+        this.fullscreenTooltipVisible = false;
+
+        this.init();
+    }
+
+    // Avoid Plugin.prototype conflicts
+    $.extend(Plugin.prototype, {
+        init: function () {
+            var self = this;
+
+            self.parseSettings();
+
+            instances[this.settings.general.name] = this;
+
+            this.id = Math.random()*100;
+
+            // Fill out any missing properties
+            for (var i=0; i<self.settings.spots.length; i++) {
+                var s = self.settings.spots[i];
+                var d = $.extend(true, {}, default_spot_settings);
+                s = $.extend(true, d, s);
+                self.settings.spots[i] = $.extend(true, {}, s);
+
+                // Support for image maps created before 3.1.0
+                if (!self.settings.spots[i].title || self.settings.spots[i].title.length == 0) {
+                    self.settings.spots[i].title = self.settings.spots[i].id;
+                }
+            }
+
+            self.root.addClass('imp-initialized');
+            self.root.attr('data-image-map-pro-id', self.settings.id);
+            self.root.html('<div class="imp-wrap"></div>');
+            self.wrap = self.root.find('.imp-wrap');
+
+            var img = new Image();
+            img.src = self.settings.image.url;
+
+            self.loadImage(img, function() {
+                // Image loading
+            }, function() {
+                // Image loaded
+                var html = '';
+
+                html += '<img src="'+ self.settings.image.url +'">';
+
+                self.wrap.html(html);
+
+                self.centerImageMap();
+                self.adjustSize();
+                self.drawShapes();
+                self.addTooltips();
+                self.initFullscreen();
+                self.events();
+                self.animateShapesLoop();
+
+                $.imageMapProInitialized(self.settings.general.name);
+            });
+
+            $(window).on('resize', function() {
+                if (self.visibleTooltip) {
+                    self.updateTooltipPosition(self.highlightedShapeIndex);
+                }
+            });
+        },
+        parseSettings: function() {
+            // If there is a value for the old image URL in the settings, use that instead
+            // This happens when the user updates from an older version using the old format and the
+            // image map has not been saved yet.
+            if (this.settings.general.image_url) {
+                this.settings.image.url = this.settings.general.image_url;
+            }
+        },
+        loadImage: function(image, cbLoading, cbComplete) {
+            if (!image.complete || image.naturalWidth === undefined || image.naturalHeight === undefined) {
+                cbLoading();
+                $(image).on('load', function() {
+                    $(image).off('load');
+                    cbComplete();
+                });
+            } else {
+                cbComplete();
+            }
+        },
+
+        centerImageMap: function() {
+            var self = this;
+
+            if (parseInt(self.settings.general.center_image_map, 10) == 1) {
+                self.wrap.css({
+                    margin: '0 auto'
+                });
+            }
+        },
+        adjustSize: function() {
+            var self = this;
+
+            // If the image map is in fullscreen mode, adjust according to the window and return
+            if (parseInt(self.settings.runtime.is_fullscreen, 10) == 1) {
+                var screenRatio = $(window).width() / $(window).height();
+                var imageRatio = self.settings.general.width / self.settings.general.height;
+                
+                if (imageRatio < screenRatio) {
+                    self.settings.general.width = $(window).height() * imageRatio;
+                    self.settings.general.height = $(window).height();
+                } else {
+                    self.settings.general.width = $(window).width();
+                    self.settings.general.height = $(window).width() / imageRatio;
+                }
+
+                self.wrap.css({
+                    width: self.settings.general.width,
+                    height: self.settings.general.height,
+                });
+                
+                return;
+            }
+
+            // If the image map is responsive, fit the map to its parent element
+            if (parseInt(self.settings.general.responsive, 10) == 1) {
+                if (parseInt(self.settings.general.preserve_quality, 10) == 1) {
+                    var width = self.settings.general.naturalWidth || self.settings.general.width;
+                    self.wrap.css({
+                        'max-width': self.settings.general.naturalWidth
+                    });
+                }
+            } else {
+                self.wrap.css({
+                    width: self.settings.general.width,
+                    height: self.settings.general.height,
+                });
+            }
+        },
+        drawShapes: function() {
+            var self = this;
+
+            // Make sure spot coordinates are numbers
+            for (var i=0; i<self.settings.spots.length; i++) {
+                var s = self.settings.spots[i];
+
+                s.x = parseFloat(s.x);
+                s.y = parseFloat(s.y);
+                s.width = parseFloat(s.width);
+                s.height = parseFloat(s.height);
+                s.default_style.stroke_width = parseInt(s.default_style.stroke_width);
+                s.mouseover_style.stroke_width = parseInt(s.mouseover_style.stroke_width);
+
+                if (s.type == 'poly') {
+                    for (var j=0; j<s.points.length; j++) {
+                        s.points[j].x = parseFloat(s.points[j].x);
+                        s.points[j].y = parseFloat(s.points[j].y);
+                    }
+                }
+            }
+            self.settings.general.width = parseInt(self.settings.general.width);
+            self.settings.general.height = parseInt(self.settings.general.height);
+
+            self.wrap.prepend('<div class="imp-shape-container"></div>');
+            self.shapeContainer = self.wrap.find('.imp-shape-container');
+
+            var html = '';
+            var hasPolygons = false;
+
+            // If the image map is responsive, use natural width and height
+            // Otherwise, use the width/height set from the editor
+            var imageMapWidth = self.settings.general.width;
+            var imageMapHeight = self.settings.general.height;
+            if (parseInt(self.settings.general.responsive, 10) == 1) {
+                imageMapWidth = self.settings.general.naturalWidth;
+                imageMapHeight = self.settings.general.naturalHeight;
+            }
+            var svgHtml = '<svg class="hs-poly-svg" viewBox="0 0 '+ imageMapWidth +' '+ imageMapHeight +'" preserveAspectRatio="none">';
+
+            for (var i=0; i<self.settings.spots.length; i++) {
+                var s = self.settings.spots[i];
+                if (s.type == 'spot') {
+                    if (parseInt(s.default_style.use_icon, 10) == 1) {
+                        var style = '';
+
+                        var wrapperWidth = (s.width < 44) ? 44 : s.width;
+                        var wrapperHeight = (s.height < 44) ? 44 : s.height;
+
+                        style += 'left: '+ s.x +'%;';
+                        style += 'top: '+ s.y +'%;';
+                        style += 'width: '+ wrapperWidth +'px;';
+                        style += 'height: '+ wrapperHeight +'px;';
+
+                        // If the icon is a pin, center it on the bottom edge
+                        var marginTop = -wrapperHeight/2;
+                        var marginLeft = -wrapperWidth/2;
+
+                        if (parseInt(s.default_style.icon_is_pin, 10) == 1) {
+                            marginTop = -wrapperHeight;
+
+                            if (s.height < 44) {
+                                marginTop = -wrapperHeight/2 -s.height/2;
+                            }
+                        }
+
+                        style += 'margin-left: '+ marginLeft +'px;';
+                        style += 'margin-top: '+ marginTop +'px;';
+
+                        style += 'background-image: url('+ s.default_style.icon_url +')';
+                        style += 'background-position: center;';
+                        style += 'background-repeat: no-repeat;';
+
+                        // Page load animations
+                        if (self.settings.general.pageload_animation == 'fade') {
+                            style += 'opacity: 0;';
+                        }
+                        if (self.settings.general.pageload_animation == 'grow') {
+                            style += 'opacity: ' + s.default_style.opacity + ';';
+                            style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                            if (parseInt(s.default_style.icon_is_pin, 10) == 1) {
+                                style += 'transform-origin: 50% 100%;-moz-transform-origin: 50% 100%;-webkit-transform-origin: 50% 100%;';
+                            }
+                        }
+                        if (self.settings.general.pageload_animation == 'none') {
+                            style += 'opacity: ' + s.default_style.opacity + ';';
+                        }
+
+                        html += '<div class="imp-shape imp-shape-spot" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'>';
+
+                        // Icon
+                        if (s.default_style.icon_type == 'library') {
+                            html += '   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="'+ s.default_style.icon_svg_viewbox +'" xml:space="preserve" width="'+ s.width +'px" height="'+ s.height +'px">';
+                            html += '       <path style="fill:'+ s.default_style.icon_fill +'" d="'+ s.default_style.icon_svg_path +'"></path>';
+                            html += '   </svg>';
+                        } else {
+                            html += '<img src="'+ s.default_style.icon_url +'" style="width: '+ s.width +'px; height: '+ s.height +'px">';
+                        }
+
+                        // Shadow
+                        if (parseInt(s.default_style.icon_shadow, 10) == 1) {
+                            var shadowStyle = '';
+
+                            shadowStyle += 'width: ' + s.width + 'px;';
+                            shadowStyle += 'height: ' + s.height + 'px;';
+                            shadowStyle += 'top: '+ s.height/2 +'px;';
+
+                            html += '<div style="'+ shadowStyle +'" class="imp-shape-icon-shadow"></div>';
+                        }
+
+                        html += '</div>';
+                    } else {
+                        var style = '';
+                        var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                        var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                        style += 'left: '+ s.x +'%;';
+                        style += 'top: '+ s.y +'%;';
+                        style += 'width: '+ s.width +'px;';
+                        style += 'height: '+ s.height +'px;';
+                        style += 'margin-left: -'+ s.width/2 +'px;';
+                        style += 'margin-top: -'+ s.height/2 +'px;';
+
+                        style += 'border-radius: ' + s.default_style.border_radius + 'px;';
+                        style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                        style += 'border-width: ' + s.default_style.border_width + 'px;';
+                        style += 'border-style: ' + s.default_style.border_style + ';';
+                        style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+
+                        if (self.settings.general.pageload_animation == 'fade') {
+                            style += 'opacity: 0;';
+                        }
+                        if (self.settings.general.pageload_animation == 'grow') {
+                            style += 'opacity: ' + s.default_style.opacity + ';';
+                            style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                        }
+                        if (self.settings.general.pageload_animation == 'none') {
+                            style += 'opacity: ' + s.default_style.opacity + ';';
+                        }
+
+                        html += '<div class="imp-shape imp-shape-spot" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'></div>';
+                    }
+                }
+                if (s.type == 'rect') {
+                    var style = '';
+                    var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                    var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                    style += 'left: '+ s.x +'%;';
+                    style += 'top: '+ s.y +'%;';
+                    style += 'width: '+ s.width +'%;';
+                    style += 'height: '+ s.height +'%;';
+
+                    style += 'border-radius: ' + s.default_style.border_radius + 'px;';
+                    style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                    style += 'border-width: ' + s.default_style.border_width + 'px;';
+                    style += 'border-style: ' + s.default_style.border_style + ';';
+                    style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+
+                    if (self.settings.general.pageload_animation == 'fade') {
+                        style += 'opacity: 0;';
+                    }
+                    if (self.settings.general.pageload_animation == 'grow') {
+                        style += 'opacity: ' + s.default_style.opacity + ';';
+                        style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                    }
+                    if (self.settings.general.pageload_animation == 'none') {
+                        style += 'opacity: ' + s.default_style.opacity + ';';
+                    }
+
+                    html += '<div class="imp-shape imp-shape-rect" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'></div>';
+                }
+                if (s.type == 'oval') {
+                    var style = '';
+                    var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                    var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                    style += 'left: '+ s.x +'%;';
+                    style += 'top: '+ s.y +'%;';
+                    style += 'width: '+ s.width +'%;';
+                    style += 'height: '+ s.height +'%;';
+
+                    style += 'border-radius: 50% 50%;';
+                    style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                    style += 'border-width: ' + s.default_style.border_width + 'px;';
+                    style += 'border-style: ' + s.default_style.border_style + ';';
+                    style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+
+                    if (self.settings.general.pageload_animation == 'fade') {
+                        style += 'opacity: 0;';
+                    }
+                    if (self.settings.general.pageload_animation == 'grow') {
+                        style += 'opacity: ' + s.default_style.opacity + ';';
+                        style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                    }
+                    if (self.settings.general.pageload_animation == 'none') {
+                        style += 'opacity: ' + s.default_style.opacity + ';';
+                    }
+
+                    html += '<div class="imp-shape imp-shape-oval" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'></div>';
+                }
+                if (s.type == 'poly') {
+                    hasPolygons = true;
+                    var c_fill = hexToRgb(s.default_style.fill) || { r: 0, b: 0, g: 0 };
+                    var c_stroke = hexToRgb(s.default_style.stroke_color) || { r: 0, b: 0, g: 0 };
+
+                    var svgStyle = '';
+                    svgStyle += 'width: 100%;';
+                    svgStyle += 'height: 100%;';
+                    svgStyle += 'fill: rgba('+ c_fill.r +', '+ c_fill.g +', '+ c_fill.b +', '+ s.default_style.fill_opacity +');';
+                    svgStyle += 'stroke: rgba('+ c_stroke.r +', '+ c_stroke.g +', '+ c_stroke.b +', '+ s.default_style.stroke_opacity +');';
+                    svgStyle += 'stroke-width: ' + s.default_style.stroke_width + 'px;';
+                    svgStyle += 'stroke-dasharray: ' + s.default_style.stroke_dasharray + ';';
+                    svgStyle += 'stroke-linecap: ' + s.default_style.stroke_linecap + ';';
+
+                    if (self.settings.general.pageload_animation == 'fade') {
+                        svgStyle += 'opacity: 0;';
+                    }
+                    if (self.settings.general.pageload_animation == 'grow') {
+                        svgStyle += 'opacity: ' + s.default_style.opacity + ';';
+                        svgStyle += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                        var originX = s.x + s.width/2;
+                        var originY = s.y + s.height/2;
+                        svgStyle += 'transform-origin: '+ originX +'% '+ originY +'%;-moz-transform-origin: '+ originX +'% '+ originY +'%;-webkit-transform-origin: '+ originX +'% '+ originY +'%;';
+                    }
+                    if (self.settings.general.pageload_animation == 'none') {
+                        svgStyle += 'opacity: ' + s.default_style.opacity + ';';
+                    }
+
+                    var shapeWidthPx = imageMapWidth * (s.width/100);
+                    var shapeHeightPx = imageMapHeight * (s.height/100);
+
+                    svgHtml += '           <polygon class="imp-shape imp-shape-poly" style="'+ svgStyle +'" data-index='+ i +' id="'+ s.id +'" data-shape-title="'+ s.title +'" points="';
+
+                    s.vs = new Array();
+                    for (var j=0; j<s.points.length; j++) {
+                        var x = (imageMapWidth * (s.x/100)) + (s.points[j].x / 100) * (shapeWidthPx);
+                        var y = (imageMapHeight * (s.y/100)) + (s.points[j].y / 100) * (shapeHeightPx);
+
+                        svgHtml += x + ',' + y + ' ';
+
+                        // Cache an array of coordinates for later use in mouse events
+                        s.vs.push([ x, y ]);
+                    }
+
+                    svgHtml += '           "></polygon>';
+                }
+            }
+            svgHtml += '</svg>';
+
+            if (hasPolygons) {
+                self.shapeContainer.html(html + svgHtml);
+            } else {
+                self.shapeContainer.html(html);
+            }
+        },
+        addTooltips: function() {
+            var self = this;
+
+            if (self.settings.tooltips.fullscreen_tooltips == 'always' || (self.settings.tooltips.fullscreen_tooltips == 'mobile-only' && isMobile())) {
+                // Fullscreen tooltips
+                if (!self.fullscreenTooltipsContainer) {
+                    $('.imp-fullscreen-tooltips-container[data-image-map-id="'+ self.settings.id +'"]').remove();
+                    $('body').prepend('<div class="imp-fullscreen-tooltips-container" data-image-map-id="'+ self.settings.id +'"></div>');
+                    self.fullscreenTooltipsContainer = $('.imp-fullscreen-tooltips-container[data-image-map-id="'+ self.settings.id +'"]');
+                }
+
+                var html = '';
+
+                for (var i=0; i<self.settings.spots.length; i++) {
+                    var s = self.settings.spots[i];
+
+                    // Fix new lines
+                    s.tooltip_content.plain_text = s.tooltip_content.plain_text.replace(/\n/g, '<br>');
+
+                    var style = '';
+                    var color_bg = hexToRgb(s.tooltip_style.background_color) || { r: 0, b: 0, g: 0 };
+
+                    style += 'padding: '+ s.tooltip_style.padding +'px;';
+                    style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');';
+
+                    if (self.settings.tooltips.tooltip_animation == 'none') {
+                        style += 'opacity: 0;';
+                    }
+                    if (self.settings.tooltips.tooltip_animation == 'fade') {
+                        style += 'opacity: 0;';
+                        style += 'transition-property: opacity;-moz-transition-property: opacity;-webkit-transition-property: opacity;';
+                    }
+                    if (self.settings.tooltips.tooltip_animation == 'grow') {
+                        style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                        style += 'transition-property: transform;-moz-transition-property: -moz-transform;-webkit-transition-property: -webkit-transform;';
+                        style += 'transform-origin: 50% 50%;-moz-transform-origin: 50% 50%;-webkit-transform-origin: 50% 50%;';
+                    }
+
+                    html += '<div class="imp-fullscreen-tooltip" style="'+ style +'" data-index="'+ i +'">';
+                    html += '   <div class="imp-tooltip-close-button" data-index="'+ i +'"><i class="fa fa-times" aria-hidden="true"></i></div>';
+
+                    if (s.tooltip_content.content_type == 'plain-text') {
+                        var style = '';
+                        style += 'color: ' + s.tooltip_content.plain_text_color + ';';
+
+                        html += '<div class="imp-tooltip-plain-text" style="'+ style +'">' + s.tooltip_content.plain_text + '</div>';
+                    } else {
+						if (s.tooltip_content.squares_json) {
+							html += $.squaresRendererRenderObject(s.tooltip_content.squares_json);
+						} else {
+							html += $.squaresRendererRenderObject(s.tooltip_content.squares_settings);
+						}
+                    }
+
+                    html += '</div>';
+                }
+
+                self.fullscreenTooltipsContainer.html(html);
+            } else {
+                // Regular tooltips
+                var html = '';
+
+                for (var i=0; i<self.settings.spots.length; i++) {
+                    var s = self.settings.spots[i];
+
+                    // Fix new lines
+                    s.tooltip_content.plain_text = s.tooltip_content.plain_text.replace(/\n/g, '<br>');
+
+                    var style = '';
+                    var color_bg = hexToRgb(s.tooltip_style.background_color) || { r: 0, b: 0, g: 0 };
+                    var tooltipBufferPolyClass = (s.type == 'poly') ? 'imp-tooltip-buffer-large' : '';
+
+                    style += 'border-radius: '+ s.tooltip_style.border_radius +'px;';
+                    style += 'padding: '+ s.tooltip_style.padding +'px;';
+                    style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');';
+
+                    if (self.settings.tooltips.tooltip_animation == 'none') {
+                        style += 'opacity: 0;';
+                    }
+                    if (self.settings.tooltips.tooltip_animation == 'fade') {
+                        style += 'opacity: 0;';
+                        style += 'transition-property: opacity;-moz-transition-property: opacity;-webkit-transition-property: opacity;';
+                    }
+                    if (self.settings.tooltips.tooltip_animation == 'grow') {
+                        style += 'transform: scale(0, 0);-moz-transform: scale(0, 0);-webkit-transform: scale(0, 0);';
+                        style += 'transition-property: transform;-moz-transition-property: -moz-transform;-webkit-transition-property: -webkit-transform;';
+
+                        if (s.tooltip_style.position == 'top') {
+                            style += 'transform-origin: 50% 100%;-moz-transform-origin: 50% 100%;-webkit-transform-origin: 50% 100%;';
+                        }
+                        if (s.tooltip_style.position == 'bottom') {
+                            style += 'transform-origin: 50% 0%;-moz-transform-origin: 50% 0%;-webkit-transform-origin: 50% 0%;';
+                        }
+                        if (s.tooltip_style.position == 'left') {
+                            style += 'transform-origin: 100% 50%;-moz-transform-origin: 100% 50%;-webkit-transform-origin: 100% 50%;';
+                        }
+                        if (s.tooltip_style.position == 'right') {
+                            style += 'transform-origin: 0% 50%;-moz-transform-origin: 0% 50%;-webkit-transform-origin: 0% 50%;';
+                        }
+                    }
+
+                    html += '<div class="imp-tooltip" style="'+ style +'" data-index="'+ i +'">';
+
+                    if (s.tooltip_style.position == 'top') {
+                        html += '   <div class="hs-arrow hs-arrow-bottom" style="border-top-color: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');"></div>';
+                        if (parseInt(self.settings.tooltips.sticky_tooltips, 10) == 0) {
+                            html += '   <div class="imp-tooltip-buffer imp-tooltip-buffer-bottom '+ tooltipBufferPolyClass +'"></div>';
+                        }
+                    }
+                    if (s.tooltip_style.position == 'bottom') {
+                        html += '   <div class="hs-arrow hs-arrow-top" style="border-bottom-color: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');"></div>';
+                        if (parseInt(self.settings.tooltips.sticky_tooltips, 10) == 0) {
+                            html += '   <div class="imp-tooltip-buffer imp-tooltip-buffer-top '+ tooltipBufferPolyClass +'"></div>';
+                        }
+                    }
+                    if (s.tooltip_style.position == 'left') {
+                        html += '   <div class="hs-arrow hs-arrow-right" style="border-left-color: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');"></div>';
+                        if (parseInt(self.settings.tooltips.sticky_tooltips, 10) == 0) {
+                            html += '   <div class="imp-tooltip-buffer imp-tooltip-buffer-right '+ tooltipBufferPolyClass +'"></div>';
+                        }
+                    }
+                    if (s.tooltip_style.position == 'right') {
+                        html += '   <div class="hs-arrow hs-arrow-left" style="border-right-color: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.tooltip_style.background_opacity +');"></div>';
+                        if (parseInt(self.settings.tooltips.sticky_tooltips, 10) == 0) {
+                            html += '   <div class="imp-tooltip-buffer imp-tooltip-buffer-left '+ tooltipBufferPolyClass +'"></div>';
+                        }
+                    }
+
+                    if (s.tooltip_content.content_type == 'plain-text') {
+                        var style = '';
+                        style += 'color: ' + s.tooltip_content.plain_text_color + ';';
+
+                        html += '<div class="imp-tooltip-plain-text" style="'+ style +'">' + s.tooltip_content.plain_text + '</div>';
+                    } else {
+						if (s.tooltip_content.squares_json) {
+							html += $.squaresRendererRenderObject(s.tooltip_content.squares_json);
+						} else {
+							html += $.squaresRendererRenderObject(s.tooltip_content.squares_settings);
+						}
+                    }
+
+                    html += '</div>';
+                }
+                
+                self.wrap.prepend(html);
+            }
+        },
+        initFullscreen: function() {
+            var self = this;
+
+            if (parseInt(self.settings.fullscreen.enable_fullscreen_mode, 10) == 1) {
+                // Button style
+                var style = '';
+                style += 'background: ' + self.settings.fullscreen.fullscreen_button_color + '; ';
+                style += 'color: ' + self.settings.fullscreen.fullscreen_button_text_color + '; ';
+
+                // Button content
+                var icon = '<i class="fa fa-arrows-alt" aria-hidden="true"></i>';
+                if (parseInt(self.settings.runtime.is_fullscreen, 10) == 1) {
+                    icon = '<i class="fa fa-times" aria-hidden="true"></i>';
+                }
+
+                var text = 'Go Fullscreen';
+                if (parseInt(self.settings.runtime.is_fullscreen, 10) == 1) {
+                    text = 'Close Fullscreen';
+                }
+
+                var buttonContent = '';
+                if (self.settings.fullscreen.fullscreen_button_type == 'icon') {
+                    buttonContent += icon;
+                }
+                if (self.settings.fullscreen.fullscreen_button_type == 'text') {
+                    buttonContent += text;
+                }
+                if (self.settings.fullscreen.fullscreen_button_type == 'icon_and_text') {
+                    buttonContent += icon + ' ' + text;
+                }
+
+                // Button classes
+                var classes = '';
+                if (self.settings.fullscreen.fullscreen_button_type == 'icon') {
+                    classes += 'imp-fullscreen-button-icon-only';
+                }
+
+                // Button html
+                var html = '';
+                html += '<div style="'+ style +'" class="'+ classes +' imp-fullscreen-button imp-fullscreen-button-position-'+ self.settings.fullscreen.fullscreen_button_position +'">';
+                html += buttonContent;
+                html += '</div>';
+                
+                // Append
+                self.wrap.append('<div class="imp-ui"></div>');
+                self.ui = self.wrap.find('.imp-ui');
+                self.ui.append(html);
+
+                // Correct the button's position
+                var btn = self.ui.find('.imp-fullscreen-button');
+
+                if (parseInt(self.settings.fullscreen.fullscreen_button_position, 10) == 1 || parseInt(self.settings.fullscreen.fullscreen_button_position, 10) == 4) {
+                    btn.css({ "margin-left" : - btn.outerWidth()/2 });
+                }
+
+                // Start in fullscreen mode
+                if (parseInt(self.settings.fullscreen.start_in_fullscreen_mode, 10) == 1 && self.settings.runtime.is_fullscreen == 0) {
+                    self.toggleFullscreen();
+                }
+            }
+        },
+        measureTooltipSize: function(i) {
+            // Size needs to be calculated just before
+            // the tooltip displays, and for the specific tooltip only.
+            // No calculations needed if in fullscreen mode
+
+            // 1. Does size need to be calculated?
+            if (this.settings.tooltips.fullscreen_tooltips == 'always' || (this.settings.tooltips.fullscreen_tooltips == 'mobile' && isMobile())) return;
+
+            var s = this.settings.spots[i];
+            var t = this.wrap.find('.imp-tooltip[data-index="'+ i +'"]');
+
+            // 2. If the tooltip has manual width, set it
+            if (parseInt(s.tooltip_style.auto_width, 10) == 0) {
+                t.css({
+                    width: s.tooltip_style.width
+                });
+            }
+
+            // 3. Measure width/height
+            t.data('imp-measured-width', t.outerWidth());
+            t.data('imp-measured-height', t.outerHeight());
+        },
+        animateShapesLoop: function() {
+            if (this.settings.general.pageload_animation == 'none') return;
+
+            var interval = 750 / this.settings.spots.length;
+            var shapesRandomOrderArray = shuffle(this.settings.spots.slice());
+
+            for (var i=0; i<shapesRandomOrderArray.length; i++) {
+                this.animateShape(shapesRandomOrderArray[i], interval * i);
+            }
+        },
+        animateShape: function(shape, delay) {
+            var self = this;
+            var spotEl = $('#' + shape.id);
+
+            setTimeout(function() {
+                if (self.settings.general.pageload_animation == 'fade') {
+                    spotEl.css({
+                        opacity: shape.default_style.opacity
+                    });
+                }
+                if (self.settings.general.pageload_animation == 'grow') {
+                    spotEl.css({
+                        transform: 'scale(1, 1)',
+                        '-moz-transform': 'scale(1, 1)',
+                        '-webkit-transform': 'scale(1, 1)'
+                    });
+                }
+            }, delay);
+        },
+        events: function() {
+            // to do - complete rewrite
+            // events will search for the first shape, which is within the event
+            // coordinates.
+            var self = this;
+
+            // Mouse events
+            this.wrap.off('mousemove');
+            this.wrap.on('mousemove', function(e) {
+                if (self.touch) return;
+                self.handleEventMove(e);
+            });
+            this.wrap.off('mouseup');
+            this.wrap.on('mouseup', function(e) {
+                if (self.touch) return;
+                self.handleEventEnd(e);
+            });
+
+            // Touch events
+            this.wrap.off('touchstart');
+            this.wrap.on('touchstart', function(e) {
+                self.touch = true;
+                self.handleEventMove(e);
+            });
+            this.wrap.off('touchmove');
+            this.wrap.on('touchmove', function(e) {
+                self.handleEventMove(e);
+            });
+            this.wrap.off('touchend');
+            this.wrap.on('touchend', function(e) {
+                self.handleEventEnd(e);
+            });
+
+            // Hide tooltips when mouse leaves the image map container
+            $(document).off('mousemove.' + this.settings.id);
+            $(document).on('mousemove.' + this.settings.id, function(e) {
+                if (self.touch) return;
+
+                if (self.manuallyHighlightedShape || self.manuallyShownTooltip) return;
+
+                if ($(e.target).closest('.imp-wrap').length == 0 && $(e.target).closest('.imp-fullscreen-tooltips-container').length == 0) {
+                    if (self.visibleTooltip) {
+                        self.hideTooltip();
+                    }
+                    if (self.clickedShape) {
+                        self.unclickShape();
+                    }
+                    if (self.highlightedShape) {
+                        self.unhighlightShape();
+                    }
+                }
+            });
+            $(document).off('touchstart.' + this.settings.id);
+            $(document).on('touchstart.' + this.settings.id, function(e) {
+                if (self.manuallyHighlightedShape || self.manuallyShownTooltip) return;
+
+                if ($(e.target).closest('.imp-wrap').length == 0 && $(e.target).closest('.imp-fullscreen-tooltips-container').length == 0) {
+                    if (self.visibleTooltip) {
+                        self.hideTooltip();
+                    }
+                    if (self.clickedShape) {
+                        self.unclickShape();
+                    }
+                    if (self.highlightedShape) {
+                        self.unhighlightShape();
+                    }
+                }
+            });
+
+            // Tooltips close button
+            $(document).off('click.' + this.settings.id, '.imp-tooltip-close-button');
+            $(document).on('click.' + this.settings.id, '.imp-tooltip-close-button', function() {
+                self.hideTooltip();
+
+                if (self.clickedShape) {
+                    self.unclickShape();
+                }
+                if (self.highlightedShape) {
+                    self.unhighlightShape();
+                }
+            });
+
+            if (parseInt(this.settings.general.late_initialization, 10) == 1) {
+                if (!mutationObserver) {
+                    mutationObserver = new MutationObserver(function(mutations, observer) {
+                        clearTimeout(self.initTimeout);
+                        self.initTimeout = setTimeout(function() {
+                            for (var i=0; i<mutations.length; i++) {
+                                // Check if the mutation is not in an image map
+                                if ($(mutations[i].target).closest('.imp-initialized').length == 0 && !$(mutations[i].target).hasClass('imp-initialized')) {
+                                    self.init();
+                                    break;
+                                }
+                            }
+                        }, 50);
+                    });
+
+                    mutationObserver.observe(document, {
+                        subtree: true,
+                        attributes: true
+                    });
+                }
+            } else {
+                if (mutationObserver) {
+                    mutationObserver.disconnect();
+                    mutationObserver = undefined;
+                }
+            }
+
+            // Fullscreen button
+            $(document).off('click.' + this.settings.id, '[data-image-map-pro-id="' + this.settings.id + '"] .imp-fullscreen-button');
+            $(document).on('click.' + this.settings.id, '[data-image-map-pro-id="' + this.settings.id + '"] .imp-fullscreen-button', function() {
+                self.toggleFullscreen();
+            });
+
+            /*
+
+            HTML API
+            ---------------------------------------
+            data-imp-highlight-shape-on-mouseover
+            data-imp-highlight-shape-on-click
+            data-imp-unhighlight-shape-on-mouseover
+            data-imp-unhighlight-shape-on-click
+
+            data-imp-open-tooltip-on-mouseover
+            data-imp-open-tooltip-on-click
+            data-imp-close-tooltip-on-mouseover
+            data-imp-close-tooltip-on-click
+
+            data-trigger-shape-on-mouseover
+            data-trigger-shape-on-click
+            data-untrigger-shape-on-mouseover
+            data-untrigger-shape-on-click
+
+            */
+
+            // HTML API - SHAPE
+
+            // [data-imp-highlight-shape-on-mouseover]
+            $(document).on('mouseover', '[data-imp-highlight-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-highlight-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    self.manuallyHighlightedShape = true;
+                    self.highlightShape(i, true);
+                }
+            });
+            $(document).on('mouseout', '[data-imp-highlight-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-highlight-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    self.unhighlightShape();
+                }
+            });
+
+            // [data-imp-highlight-shape-on-click]
+            $(document).on('click', '[data-imp-highlight-shape-on-click]', function() {
+                var shapeName = $(this).data('imp-highlight-shape-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    if (self.highlightedShape) self.unhighlightShape();
+
+                    self.manuallyHighlightedShape = true;
+                    self.highlightShape(i, true);
+                }
+            });
+
+            // [data-imp-unhighlight-shape-on-mouseover]
+            $(document).on('mouseover', '[data-imp-unhighlight-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-unhighlight-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    if (self.highlightedShape) self.unhighlightShape();
+                }
+            });
+
+            // [data-imp-unhighlight-shape-on-click]
+            $(document).on('mouseover', '[data-imp-unhighlight-shape-on-click]', function() {
+                var shapeName = $(this).data('imp-unhighlight-shape-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    if (self.highlightedShape) self.unhighlightShape();
+                }
+            });
+
+            // HTML API - TOOLTIP
+
+            // [data-imp-open-tooltip-on-mouseover]
+            $(document).on('mouseover', '[data-imp-open-tooltip-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-open-tooltip-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    self.manuallyShownTooltip = true;
+                    self.showTooltip(i);
+                    self.updateTooltipPosition(i);
+                }
+            });
+            $(document).on('mouseout', '[data-imp-open-tooltip-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-open-tooltip-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    self.hideTooltip();
+                }
+            });
+
+            // [data-imp-open-tooltip-on-click]
+            $(document).on('click', '[data-imp-open-tooltip-on-click]', function() {
+                var shapeName = $(this).data('imp-open-tooltip-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    self.manuallyShownTooltip = true;
+                    self.showTooltip(i);
+                    self.updateTooltipPosition(i);
+                }
+            });
+
+            // [data-imp-close-tooltip-on-mouseover]
+            $(document).on('mouseover', '[data-imp-close-tooltip-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-close-tooltip-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    self.hideTooltip();
+                }
+            });
+
+            // [data-imp-close-tooltip-on-click]
+            $(document).on('click', '[data-imp-close-tooltip-on-click]', function() {
+                var shapeName = $(this).data('imp-close-tooltip-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    self.hideTooltip();
+                }
+            });
+
+            // HTML API - TRIGGER
+
+            // [data-imp-trigger-shape-on-mouseover]
+            $(document).on('mouseover', '[data-imp-trigger-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-trigger-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    self.manuallyHighlightedShape = true;
+                    self.manuallyShownTooltip = true;
+                    self.highlightShape(i, true);
+                    self.showTooltip(i);
+                    self.updateTooltipPosition(i);
+                }
+            });
+            $(document).on('mouseout', '[data-imp-trigger-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-trigger-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    self.unhighlightShape();
+                    self.hideTooltip();
+                }
+            });
+
+            // [data-imp-trigger-shape-on-click]
+            $(document).on('click', '[data-imp-trigger-shape-on-click]', function() {
+                var shapeName = $(this).data('imp-trigger-shape-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    var i = $('[data-shape-title="' + shapeName + '"]').data('index');
+                    
+                    if (self.highlightedShape) self.unhighlightShape();
+
+                    self.manuallyHighlightedShape = true;
+                    self.manuallyShownTooltip = true;
+                    self.highlightShape(i, true);
+                    self.showTooltip(i);
+                    self.updateTooltipPosition(i);
+                }
+            });
+
+            // [data-imp-untrigger-shape-on-mouseover]
+            $(document).on('mouseover', '[data-imp-untrigger-shape-on-mouseover]', function() {
+                var shapeName = $(this).data('imp-untrigger-shape-on-mouseover');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    if (self.highlightedShape) self.unhighlightShape();
+
+                    self.hideTooltip();
+                }
+            });
+
+            // [data-imp-untrigger-shape-on-click]
+            $(document).on('mouseover', '[data-imp-untrigger-shape-on-click]', function() {
+                var shapeName = $(this).data('imp-untrigger-shape-on-click');
+                var mapName = $(this).data('imp-image-map-name');
+                
+                if (!mapName || mapName == self.settings.general.name) {
+                    if (self.highlightedShape) self.unhighlightShape();
+
+                    self.hideTooltip();
+                }
+            });
+        },
+        disableEvents: function() {
+            this.wrap.off('mousemove');
+            this.wrap.off('mouseup');
+
+            // Touch events
+            this.wrap.off('touchstart');
+            this.wrap.off('touchmove');
+            this.wrap.off('touchend');
+
+            // Hide tooltips when mouse leaves the image map container
+            $(document).off('mousemove.' + this.settings.id);
+            $(document).off('touchstart.' + this.settings.id);
+
+            // Tooltips close button
+            $(document).off('click.' + this.settings.id, '.imp-tooltip-close-button');
+
+            // Fullscreen button
+            $(document).off('click.' + this.settings.id, '.imp-fullscreen-button');
+        },
+        handleEventMove: function(e) {
+            // If there is a visible fullscreen tooltip, return
+            if (this.fullscreenTooltipVisible) return;
+
+            // If the mouse is over a tooltip AND sticky tooltips are OFF, return
+            if (($(e.target).closest('.imp-tooltip').length != 0 || $(e.target).hasClass('imp-tooltip')) && parseInt(this.settings.tooltips.sticky_tooltips, 10) == 0) return;
+
+            // If there is a manually highlightedShape / visible tooltip, remove the flags
+            if (this.manuallyHighlightedShape || this.manuallyShownTooltip) {
+                this.manuallyHighlightedShape = false;
+                this.manuallyShownTooltip = false;
+            }
+
+            // Get event data
+            var c = this.getEventRelativeCoordinates(e);
+            var i = this.matchShapeToCoords(c);
+
+            // Highlight logic
+            if (i != -1 && i != this.highlightedShapeIndex) {
+                if (this.highlightedShape) {
+                    this.unhighlightShape();
+                }
+                
+                this.highlightShape(i, true);
+            } else if (i == -1 && this.highlightedShape && this.highlightedShapeIndex != this.clickedShapeIndex) {
+                this.unhighlightShape();
+            }
+
+            // Tooltips logic
+            if (this.highlightedShape && this.visibleTooltipIndex != this.highlightedShapeIndex) {
+                if (this.highlightedShape.actions.mouseover == 'show-tooltip') {
+                    if (this.visibleTooltip) {
+                        this.hideTooltip();
+                    }
+
+                    if (this.clickedShape) {
+                        this.unclickShape();
+                    }
+
+                    this.showTooltip(this.highlightedShapeIndex);
+                    this.updateTooltipPosition(i, e);
+                }
+            } else if (this.visibleTooltip && !this.highlightedShape && !this.clickedShape) {
+                if (this.visibleTooltip) {
+                    this.hideTooltip();
+                }
+            }
+
+            // If there is a shape active and sticky tooltips is on,
+            // update the position of the visible tooltip
+            if (this.visibleTooltip && this.highlightedShape && parseInt(this.settings.tooltips.sticky_tooltips, 10) == 1 && this.highlightedShape.actions.mouseover == 'show-tooltip') {
+                this.updateTooltipPosition(this.highlightedShapeIndex, e);
+            }
+        },
+        handleEventEnd: function(e) {
+			// Did the user click on a tooltip?
+			if ($(e.target).closest('.imp-tooltip').length != 0 && !$(e.target).hasClass('imp-tooltip-buffer')) {
+				return;
+			}
+
+            // If there is a visible fullscreen tooltip, return
+            if (this.fullscreenTooltipVisible) return;
+
+            // If there is a manually highlightedShape / visible tooltip, remove the flags
+            if (this.manuallyHighlightedShape || this.manuallyShownTooltip) {
+                this.manuallyHighlightedShape = false;
+                this.manuallyShownTooltip = false;
+            }
+
+            // Get event data
+            var c = this.getEventRelativeCoordinates(e);
+            var i = this.matchShapeToCoords(c);
+
+            // Click logic
+            if (i != -1 && i != this.clickedShapeIndex) {
+                if (this.clickedShape) {
+                    this.unclickShape();
+                }
+
+                this.clickShape(i, e);
+            } else if (i == -1 && this.clickedShape) {
+                this.unclickShape();
+            }
+        },
+
+        getEventRelativeCoordinates: function(e) {
+            var x, y;
+
+            if (e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel') {
+                var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                x = touch.pageX;
+                y = touch.pageY;
+            } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+                x = e.pageX;
+                y = e.pageY;
+            }
+
+            // Make coordinates relative to the container
+            x -= this.wrap.offset().left;
+            y -= this.wrap.offset().top;
+
+            // Take window scroll into account
+            // x += $(window).scrollLeft();
+            // y += $(window).scrollTop();
+
+            // Convert coordinates to %
+            x = (x / this.wrap.width()) * 100;
+            y = (y / this.wrap.height()) * 100;
+
+            return { x: x, y: y };
+        },
+        getEventCoordinates: function(e) {
+            var x, y;
+
+            if (e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel') {
+                var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                x = touch.pageX;
+                y = touch.pageY;
+            } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+                x = e.pageX;
+                y = e.pageY;
+            }
+
+            return { x: x, y: y };
+        },
+        matchShapeToCoords: function(c) {
+            for (var i=this.settings.spots.length - 1; i>=0; i--) {
+                var s = this.settings.spots[i];
+
+                if (s.type == 'poly') {
+                    var x = (c.x / 100) * this.wrap.width();
+                    var y = (c.y / 100) * this.wrap.height();
+
+                    x = (x * this.settings.general.width) / this.wrap.width();
+                    y = (y * this.settings.general.height) / this.wrap.height();
+
+                    if (isPointInsidePolygon(x, y, s.vs)) {
+                        return i;
+                        break;
+                    }
+                }
+
+                if (s.type == 'spot') {
+                    var shapeWidth = (s.width < 44) ? 44 : s.width;
+                    var shapeHeight = (s.height < 44) ? 44 : s.height;
+
+                    var x = (c.x/100) * this.wrap.width();
+                    var y = (c.y/100) * this.wrap.height();
+                    var rx = (s.x/100) * this.wrap.width() - shapeWidth/2;
+                    var ry = (s.y/100) * this.wrap.height() - shapeHeight/2;
+                    var rw = shapeWidth;
+                    var rh = shapeHeight;
+
+                    if (parseInt(s.default_style.icon_is_pin, 10) == 1 && parseInt(s.default_style.use_icon, 10) == 1) {
+                        ry -= shapeHeight/2;
+
+                        if (s.height < 44) {
+                            ry += s.height/2;
+                        }
+                    }
+
+                    if (isPointInsideRect(x, y, rx, ry, rw, rh)) {
+                        return i;
+                        break;
+                    }
+                }
+
+                if (s.type == 'rect') {
+                    if (isPointInsideRect(c.x, c.y, s.x, s.y, s.width, s.height)) {
+                        return i;
+                        break;
+                    }
+                }
+
+                if (s.type == 'oval') {
+                    var x = c.x;
+                    var y = c.y;
+                    var ex = s.x + s.width/2;
+                    var ey = s.y + s.height/2;
+                    var rx = s.width/2;
+                    var ry = s.height/2;
+
+                    if (isPointInsideEllipse(x, y, ex, ey, rx, ry)) {
+                        return i;
+                        break;
+                    }
+                }
+            }
+
+            return -1;
+        },
+
+        applyMouseoverStyles: function(i) {
+            var self = this;
+
+            var s = self.settings.spots[i];
+            // If it's an icon, return
+            // if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1) return;
+
+            var el = this.wrap.find('#' + s.id);
+
+            var style = '';
+
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 0) {
+                var color_bg = hexToRgb(s.mouseover_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.mouseover_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                
+                style += 'width: '+ s.width +'px;';
+                style += 'height: '+ s.height +'px;';
+                style += 'margin-left: -'+ s.width/2 +'px;';
+                style += 'margin-top: -'+ s.height/2 +'px;';
+
+                style += 'opacity: ' + s.mouseover_style.opacity + ';';
+                style += 'border-radius: ' + s.mouseover_style.border_radius + 'px;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.mouseover_style.background_opacity +');';
+                style += 'border-width: ' + s.mouseover_style.border_width + 'px;';
+                style += 'border-style: ' + s.mouseover_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.mouseover_style.border_opacity +');';
+            }
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1) {
+                // If it's an icon, apply opacity
+                var wrapperWidth = (s.width < 44) ? 44 : s.width;
+                var wrapperHeight = (s.height < 44) ? 44 : s.height;
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ wrapperWidth +'px;';
+                style += 'height: '+ wrapperHeight +'px;';
+
+                // If the icon is a pin, center it on the bottom edge
+                var marginTop = -wrapperHeight/2;
+                var marginLeft = -wrapperWidth/2;
+
+                if (parseInt(s.default_style.icon_is_pin, 10) == 1) {
+                    marginTop = -wrapperHeight;
+
+                    if (s.height < 44) {
+                        marginTop = -wrapperHeight/2 -s.height/2;
+                    }
+                }
+
+                style += 'margin-left: '+ marginLeft +'px;';
+                style += 'margin-top: '+ marginTop +'px;';
+
+                style += 'opacity: ' + s.mouseover_style.opacity + ';';
+            }
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1 && s.default_style.icon_type == 'library') {
+                // If it's an icon and it's from library, apply SVG fill
+                el.find('path').attr('style', 'fill:' + s.mouseover_style.icon_fill);
+            }
+            if (s.type == 'rect') {
+                var color_bg = hexToRgb(s.mouseover_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.mouseover_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ s.width +'%;';
+                style += 'height: '+ s.height +'%;';
+
+                style += 'opacity: ' + s.mouseover_style.opacity + ';';
+                style += 'border-radius: ' + s.mouseover_style.border_radius + 'px;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.mouseover_style.background_opacity +');';
+                style += 'border-width: ' + s.mouseover_style.border_width + 'px;';
+                style += 'border-style: ' + s.mouseover_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.mouseover_style.border_opacity +');';
+            }
+            if (s.type == 'oval') {
+                var color_bg = hexToRgb(s.mouseover_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.mouseover_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ s.width +'%;';
+                style += 'height: '+ s.height +'%;';
+
+                style += 'opacity: ' + s.mouseover_style.opacity + ';';
+                style += 'border-radius: 50% 50%;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.mouseover_style.background_opacity +');';
+                style += 'border-width: ' + s.mouseover_style.border_width + 'px;';
+                style += 'border-style: ' + s.mouseover_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.mouseover_style.border_opacity +');';
+            }
+            if (s.type == 'poly') {
+                var c_fill = hexToRgb(s.mouseover_style.fill) || { r: 0, b: 0, g: 0 };
+                var c_stroke = hexToRgb(s.mouseover_style.stroke_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'opacity: ' + s.mouseover_style.opacity + ';';
+                style += 'fill: rgba('+ c_fill.r +', '+ c_fill.g +', '+ c_fill.b +', '+ s.mouseover_style.fill_opacity +');';
+                style += 'stroke: rgba('+ c_stroke.r +', '+ c_stroke.g +', '+ c_stroke.b +', '+ s.mouseover_style.stroke_opacity +');';
+                style += 'stroke-width: ' + s.mouseover_style.stroke_width + 'px;';
+                style += 'stroke-dasharray: ' + s.mouseover_style.stroke_dasharray + ';';
+                style += 'stroke-linecap: ' + s.mouseover_style.stroke_linecap + ';';
+            }
+
+            el.attr('style', style);
+        },
+        applyDefaultStyles: function(i) {
+            var self = this;
+            var s = self.settings.spots[i];
+
+            // If it's an icon, return
+            // if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1) return;
+            var el = this.wrap.find('#' + s.id);
+            var style = '';
+
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 0) {
+                var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ s.width +'px;';
+                style += 'height: '+ s.height +'px;';
+                style += 'margin-left: -'+ s.width/2 +'px;';
+                style += 'margin-top: -'+ s.height/2 +'px;';
+
+                style += 'opacity: ' + s.default_style.opacity + ';';
+                style += 'border-radius: ' + s.default_style.border_radius + 'px;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                style += 'border-width: ' + s.default_style.border_width + 'px;';
+                style += 'border-style: ' + s.default_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+            }
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1) {
+                // If it's an icon, apply opacity
+                var wrapperWidth = (s.width < 44) ? 44 : s.width;
+                var wrapperHeight = (s.height < 44) ? 44 : s.height;
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ wrapperWidth +'px;';
+                style += 'height: '+ wrapperHeight +'px;';
+
+                // If the icon is a pin, center it on the bottom edge
+                var marginTop = -wrapperHeight/2;
+                var marginLeft = -wrapperWidth/2;
+
+                if (parseInt(s.default_style.icon_is_pin, 10) == 1) {
+                    marginTop = -wrapperHeight;
+
+                    if (s.height < 44) {
+                        marginTop = -wrapperHeight/2 -s.height/2;
+                    }
+                }
+
+                style += 'margin-left: '+ marginLeft +'px;';
+                style += 'margin-top: '+ marginTop +'px;';
+
+                style += 'opacity: ' + s.default_style.opacity + ';';
+            }
+            if (s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1 && s.default_style.icon_type == 'library') {
+                // If it's an icon and it's from library, apply SVG fill
+
+                el.find('path').attr('style', 'fill:' + s.default_style.icon_fill);
+            }
+            if (s.type == 'rect') {
+                var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ s.width +'%;';
+                style += 'height: '+ s.height +'%;';
+
+                style += 'opacity: ' + s.default_style.opacity + ';';
+                style += 'border-radius: ' + s.default_style.border_radius + 'px;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                style += 'border-width: ' + s.default_style.border_width + 'px;';
+                style += 'border-style: ' + s.default_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+            }
+            if (s.type == 'oval') {
+                var color_bg = hexToRgb(s.default_style.background_color) || { r: 0, b: 0, g: 0 };
+                var color_border = hexToRgb(s.default_style.border_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'left: '+ s.x +'%;';
+                style += 'top: '+ s.y +'%;';
+                style += 'width: '+ s.width +'%;';
+                style += 'height: '+ s.height +'%;';
+
+                style += 'opacity: ' + s.default_style.opacity + ';';
+                style += 'border-radius: 50% 50%;';
+                style += 'background: rgba('+ color_bg.r +', '+ color_bg.g +', '+ color_bg.b +', '+ s.default_style.background_opacity +');';
+                style += 'border-width: ' + s.default_style.border_width + 'px;';
+                style += 'border-style: ' + s.default_style.border_style + ';';
+                style += 'border-color: rgba('+ color_border.r +', '+ color_border.g +', '+ color_border.b +', '+ s.default_style.border_opacity +');';
+            }
+            if (s.type == 'poly') {
+                var c_fill = hexToRgb(s.default_style.fill) || { r: 0, b: 0, g: 0 };
+                var c_stroke = hexToRgb(s.default_style.stroke_color) || { r: 0, b: 0, g: 0 };
+
+                style += 'opacity: ' + s.default_style.opacity + ';';
+                style += 'fill: rgba('+ c_fill.r +', '+ c_fill.g +', '+ c_fill.b +', '+ s.default_style.fill_opacity +');';
+                style += 'stroke: rgba('+ c_stroke.r +', '+ c_stroke.g +', '+ c_stroke.b +', '+ s.default_style.stroke_opacity +');';
+                style += 'stroke-width: ' + s.default_style.stroke_width + 'px;';
+                style += 'stroke-dasharray: ' + s.default_style.stroke_dasharray + ';';
+                style += 'stroke-linecap: ' + s.default_style.stroke_linecap + ';';
+            }
+
+            el.attr('style', style);
+        },
+
+        highlightShape: function(i, sendEvent) {
+            this.applyMouseoverStyles(i);
+            this.highlightedShapeIndex = i;
+            this.highlightedShape = this.settings.spots[i];
+
+            if (sendEvent) {
+                $.imageMapProEventHighlightedShape(this.settings.general.name, this.highlightedShape.title);
+            }
+        },
+        unhighlightShape: function() {
+            this.applyDefaultStyles(this.highlightedShapeIndex);
+
+            // Send event
+            $.imageMapProEventUnhighlightedShape(this.settings.general.name, this.highlightedShape.title);
+
+            // Reset vars
+            this.highlightedShapeIndex = undefined;
+            this.highlightedShape = undefined;
+        },
+        clickShape: function(i, e) {
+            if (this.settings.spots[i].actions.click == 'show-tooltip') {
+                this.applyMouseoverStyles(i);
+                this.showTooltip(i);
+                this.updateTooltipPosition(i, e);
+
+                this.clickedShapeIndex = i;
+                this.clickedShape = this.settings.spots[i];
+            }
+            if (this.settings.spots[i].actions.click == 'follow-link') {
+                if ($('#imp-temp-link').length == 0) {
+                    $('body').append('<a href="" id="imp-temp-link" target="_blank"></a>');
+                }
+                $('#imp-temp-link').attr('href', this.settings.spots[i].actions.link);
+
+                if (parseInt(this.settings.spots[i].actions.open_link_in_new_window, 10) == 1) {
+                    $('#imp-temp-link').attr('target', '_blank');
+                } else {
+                    $('#imp-temp-link').removeAttr('target');
+                }
+
+                $('#imp-temp-link')[0].click();
+            }
+
+            $.imageMapProEventClickedShape(this.settings.general.name, this.settings.spots[i].id);
+        },
+        unclickShape: function() {
+            this.applyDefaultStyles(this.clickedShapeIndex);
+
+            if (this.clickedShape.actions.click == 'show-tooltip') {
+                this.hideTooltip();
+            }
+
+            this.clickedShapeIndex = undefined;
+            this.clickedShape = undefined;
+        },
+
+        showTooltip: function(i) {
+            if ((this.settings.tooltips.fullscreen_tooltips == 'mobile-only' && isMobile()) || this.settings.tooltips.fullscreen_tooltips == 'always') {
+                // Fullscreen tooltips
+                this.visibleTooltip = $('.imp-fullscreen-tooltip[data-index="'+ i +'"]');
+                this.visibleTooltipIndex = i;
+                this.fullscreenTooltipsContainer.show();
+
+                var self = this;
+                setTimeout(function() {
+                    self.visibleTooltip.addClass('imp-tooltip-visible');
+                }, 20);
+
+                this.fullscreenTooltipVisible = true;
+
+                // Prevent scrolling of the body and store the original overflow attribute value
+                this.bodyOverflow = $('body').css('overflow');
+                $('body').css({
+                    overflow: 'hidden'
+                });
+            } else {
+                // Normal tooltips
+                $('.imp-tooltip-visible').removeClass('imp-tooltip-visible');
+                this.visibleTooltip = this.wrap.find('.imp-tooltip[data-index="'+ i +'"]');
+                this.visibleTooltipIndex = i;
+                this.visibleTooltip.addClass('imp-tooltip-visible');
+
+                this.measureTooltipSize(i);
+            }
+
+            $.imageMapProEventOpenedTooltip(this.settings.general.name, this.settings.spots[i].title);
+        },
+        hideTooltip: function() {
+            $('.imp-tooltip-visible').removeClass('imp-tooltip-visible');
+            this.visibleTooltip = undefined;
+            this.visibleTooltipIndex = undefined;
+
+            if ((this.settings.tooltips.fullscreen_tooltips == 'mobile-only' && isMobile()) || this.settings.tooltips.fullscreen_tooltips == 'always') {
+                var self = this;
+
+                setTimeout(function() {
+                    self.fullscreenTooltipsContainer.hide();
+                }, 200);
+
+                this.fullscreenTooltipVisible = false;
+
+                // Restore the body overflow to allow scrolling
+                $('body').css({
+                    overflow: this.bodyOverflow
+                });
+            }
+
+            $.imageMapProEventClosedTooltip(this.settings.general.name);
+        },
+        updateTooltipPosition: function(i, e) {
+            // t = tooltip element
+            // tw/th = tooltip width/height
+            // sx/sy/sw/sh = spot x/y/width/height
+            // p = padding
+            // ex/ey = event x/y
+            // s = target shape
+
+            // If fullscreen tooltips are on, then do nothing
+            if (this.fullscreenTooltipVisible) return;
+
+            var t, tw, th, sx, sy, sw, sh, p = 20, ex, ey, s;
+
+            t = this.visibleTooltip;
+            tw = this.visibleTooltip.data('imp-measured-width');
+            th = this.visibleTooltip.data('imp-measured-height');
+            s = this.settings.spots[i];
+
+            if (parseInt(this.settings.tooltips.sticky_tooltips, 10) == 1 && s.actions.mouseover == 'show-tooltip' && e) {
+                // Sticky tooltips
+                // Set width/height of the spot to 0
+                // and X and Y to the mouse coordinates
+                // Get the event coordinates
+                var c = this.getEventCoordinates(e);
+                ex = c.x;
+                ey = c.y;
+
+                sx = ex - this.wrap.offset().left;
+                sy = ey - this.wrap.offset().top;
+                sw = 0;
+                sh = 0;
+            } else {
+                // Calculate the position and dimentions of the spot
+                if (s.type == 'spot') {
+                    sw = s.width;
+                    sh = s.height;
+                    sx = ((Math.round(s.x*10)/10)/100)*this.wrap.width() - sw/2;
+                    sy = ((Math.round(s.y*10)/10)/100)*this.wrap.height() - sh/2;
+                } else {
+                    sw = (s.width/100)*this.wrap.width();
+                    sh = (s.height/100)*this.wrap.height();
+                    sx = ((Math.round(s.x*10)/10)/100)*this.wrap.width();
+                    sy = ((Math.round(s.y*10)/10)/100)*this.wrap.height();
+                }
+            }
+
+            // Calculate and set the position
+            var x, y;
+            if (s.tooltip_style.position == 'left') {
+                x = sx - tw - p;
+                y = sy + sh/2 - th/2;
+            }
+            if (s.tooltip_style.position == 'right') {
+                x = sx + sw + p;
+                y = sy + sh/2 - th/2;
+            }
+            if (s.tooltip_style.position == 'top') {
+                x = sx + sw/2 - tw/2
+                y = sy - th - p;
+            }
+            if (s.tooltip_style.position == 'bottom') {
+                x = sx + sw/2 - tw/2;
+                y = sy + sh + p;
+            }
+
+            // If the spot is a pin, offset it to the top
+            if (s.type == 'spot' && parseInt(s.default_style.icon_is_pin, 10) == 1 && s.type == 'spot' && parseInt(s.default_style.use_icon, 10) == 1) {
+                y -= sh/2;
+            }
+
+            var pos = { x: x, y: y };
+            if (parseInt(this.settings.tooltips.constrain_tooltips, 10) == 1) {
+                var wrapOffsetLeft = this.wrap.offset().left - $(window).scrollLeft();
+                var wrapOffsetTop = this.wrap.offset().top - $(window).scrollTop();
+
+                pos = fitRectToScreen(x + wrapOffsetLeft, y + wrapOffsetTop, tw, th);
+                pos.x -= wrapOffsetLeft;
+                pos.y -= wrapOffsetTop;
+            }
+
+            t.css({
+                left: pos.x,
+                top: pos.y
+            });
+        },
+
+        toggleFullscreen: function() {
+            if (parseInt(this.settings.runtime.is_fullscreen, 10) == 0) {
+                // Go fullscreen
+                $('body').addClass('imp-fullscreen-mode');
+
+                var fullscreenSettings = $.extend(true, {}, this.settings);
+                fullscreenSettings.runtime.is_fullscreen = 1;
+                fullscreenSettings.id = '999999';
+                fullscreenSettings.general.responsive = 0;
+
+                var style = '';
+                style += 'background: ' + this.settings.fullscreen.fullscreen_background;
+                $('body').append('<div id="imp-fullscreen-wrap" style="'+ style +'"><div id="image-map-pro-'+ fullscreenSettings.id +'"></div></div>');
+
+                $('#image-map-pro-'+ fullscreenSettings.id).imageMapPro(fullscreenSettings);
+
+                // Disable current image map
+                this.disableEvents();
+
+                fullscreenMap = this;
+            } else {
+                // Close fullscreen
+                $('body').removeClass('imp-fullscreen-mode');
+                $('#imp-fullscreen-wrap').remove();
+                this.disableEvents();
+
+                fullscreenMap.events();
+            }
+        },
+    });
+
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[ pluginName ] = function ( options ) {
+        return this.each(function() {
+            $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+        });
+    };
+
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+    function isPointInsideRect(x, y, rx, ry, rw, rh) {
+        if (x>=rx && x<=rx+rw && y>=ry && y<=ry+rh) return true;
+        return false;
+    }
+    function isPointInsidePolygon(x, y, vs) {
+        // ray-casting algorithm based on
+        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+            var xi = vs[i][0], yi = vs[i][1];
+            var xj = vs[j][0], yj = vs[j][1];
+
+            var intersect = ((yi > y) != (yj > y))
+            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+
+        return inside;
+    }
+    function isPointInsideEllipse(x, y, ex, ey, rx, ry) {
+        var a = (x - ex)*(x - ex);
+        var b = rx*rx;
+        var c = (y - ey)*(y - ey);
+        var d = ry*ry;
+
+        if (a/b + c/d <= 1) return true;
+
+        return false;
+    }
+    function fitRectToScreen(x, y, w, h) {
+        if (x < 0) x = 0;
+        if (y < 0) y = 0;
+        if (x > $(document).width() - w) x = $(document).width() - w;
+        if (y > $(document).height() - h) y = $(document).height() - h;
+
+        return { x: x, y: y };
+    }
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex ;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+    function isMobile() {
+        if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return true;
+        }
+
+        return false;
+    }
+
+})( jQuery, window, document );
