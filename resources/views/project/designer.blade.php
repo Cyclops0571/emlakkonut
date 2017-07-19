@@ -4,6 +4,7 @@
   body {
     padding-top: 60px !important;
   }
+
   #wcp-editor-button-new {
     display: none !important;
   }
@@ -15,10 +16,8 @@
 <link rel="stylesheet" href="/submodules/squares/css/squares-controls.css">
 <link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor.css">
 <link rel="stylesheet" href="/submodules/wcp-editor/css/wcp-editor-controls.css">
-<link rel="stylesheet" href="/submodules/wcp-tour/css/wcp-tour.css">
-<!-- Image Map Pro Editor -->
-<link rel="stylesheet" href="/css/image-map-pro-editor.css">
-<!-- Image Map Pro Plugin -->
+<link rel="stylesheet" href="/submodules/wcp-tour/css/wcp-tour.css"><!-- Image Map Pro Editor -->
+<link rel="stylesheet" href="/css/image-map-pro-editor.css"><!-- Image Map Pro Plugin -->
 <link rel="stylesheet" href="/css/image-map-pro.css">
 
 @section('content')
@@ -31,8 +30,8 @@
 @section('javascript')
   @parent
   {{--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"--}}
-          {{--integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"--}}
-          {{--crossorigin="anonymous"></script>--}}
+  {{--integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"--}}
+  {{--crossorigin="anonymous"></script>--}}
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <!-- Submodules -->
   <script src="/submodules/squares/js/squares-renderer.js"></script>
@@ -46,6 +45,7 @@
   <script src="/submodules/wcp-icons/js/wcp-icons.js"></script>
   <!-- Image Map Pro Editor -->
   <script>
+      var projectJson = {!! $project->EstateProjectInteractivity ? $project->EstateProjectInteractivity->interactiveJson : json_encode(false) !!};
       (function ($, window, document, undefined) {
           $.imageMapProShapeDefaults = {
               id: 'spot-0',
@@ -191,24 +191,25 @@
           };
 
 
-          $(function() {
-              $.imp_editor_storage_store_save = function(save, cb) {
+          $(function () {
+              $.imp_editor_storage_store_save = function (save, cb) {
                   $.post({
                       url: '{{URL::route('projectInteractivity')}}',
                       data: {
                           _token: "{{ csrf_token() }}",
                           id: '{{$project->id}}',
-                          interactiveJson: JSON.stringify(save)},
+                          interactiveJson: JSON.stringify(save)
+                      },
                       success: cb(true),
                       dataType: 'json'
                   });
               }
 
               editor = $.image_map_pro_init_editor(undefined, $.WCPEditorSettings);
-              {{--console.log({!! $project->EstateProjectInteractivity->interactiveJson !!});--}}
-              $.wcpEditorEventImportedJSON({!! $project->EstateProjectInteractivity->interactiveJson !!});
-
-
+            {{--console.log({!! $project->EstateProjectInteractivity->interactiveJson !!});--}}
+            if (projectJson) {
+                $.wcpEditorEventImportedJSON(projectJson);
+            }
           });
 
       })(jQuery, window, document);
