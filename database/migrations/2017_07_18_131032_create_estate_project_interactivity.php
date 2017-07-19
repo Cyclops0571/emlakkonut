@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserEstateProject extends Migration
+class CreateEstateProjectInteractivity extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUserEstateProject extends Migration
      */
     public function up()
     {
-        Schema::create('user_estate_project', function(Blueprint $table) {
-            $table->unsignedInteger('user_id');
+        Schema::create('estate_project_interactivity', function(Blueprint $table) {
+            $table->increments('id');
             $table->string('project_id');
-            $table->unique(['user_id', 'project_id']);
+            $table->longText('interactiveJson');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateUserEstateProject extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        //
     }
 }

@@ -21,6 +21,7 @@ use Illuminate\Pagination\Paginator;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProject whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto $projectPhoto
+ * @property-read \App\Model\EstateProjectInteractivity $EstateProjectInteractivity
  */
 class EstateProject extends Model {
 
@@ -81,5 +82,20 @@ class EstateProject extends Model {
 
     public function getPhotoPath() {
         return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->name : '';
+    }
+
+    public function EstateProjectInteractivity()
+    {
+        return $this->hasOne(EstateProjectInteractivity::class, 'project_id');
+    }
+
+    public function setEstateProjectInteractivity($interactiveJson) {
+        if(!$this->EstateProjectInteractivity) {
+            $this->EstateProjectInteractivity = new EstateProjectInteractivity();
+        }
+
+        $this->EstateProjectInteractivity->project_id = $this->id;
+        $this->EstateProjectInteractivity->interactiveJson = $interactiveJson;
+        $this->EstateProjectInteractivity->save();
     }
 }

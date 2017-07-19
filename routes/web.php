@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/location', 'HomeController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'HomeController@projectDesigner')->name('projectDesigner');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::post('/project-interacivity/save', 'ProjectController@saveProjectInteractive')->name('projectInteractivity');
 });
 
 Route::resource('photo', 'PhotoController');

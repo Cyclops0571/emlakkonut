@@ -3,6 +3,9 @@
   body {
     padding-top: 76px !important;
   }
+  #wcp-editor-button-new {
+    display: none !important;
+  }
 </style>
 
 @section('content')
@@ -14,9 +17,10 @@
 
 @section('javascript')
   @parent
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-          integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-          crossorigin="anonymous"></script>
+  {{--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"--}}
+          {{--integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"--}}
+          {{--crossorigin="anonymous"></script>--}}
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <!-- Submodules -->
   <script src="/submodules/squares/js/squares-renderer.js"></script>
   <script src="/submodules/squares/js/squares.js"></script>
@@ -30,7 +34,6 @@
   <!-- Image Map Pro Editor -->
   <script>
       (function ($, window, document, undefined) {
-
           $.imageMapProShapeDefaults = {
               id: 'spot-0',
               title: '',
@@ -127,6 +130,7 @@
               vs: []
           };
 
+
           $.imageMapProEditorDefaults = {
               id: 0,
               editor: {
@@ -172,6 +176,28 @@
                   fullscreen_tooltips: 'none', // none / mobile / always,
               }, spots: []
           };
+
+
+          $(function() {
+              $.imp_editor_storage_store_save = function(save, cb) {
+                  $.post({
+                      url: '{{URL::route('projectInteractivity')}}',
+                      data: {
+                          _token: "{{ csrf_token() }}",
+                          id: '{{$project->id}}',
+                          interactiveJson: JSON.stringify(save)},
+                      success: cb(true),
+                      dataType: 'json'
+                  });
+              }
+
+              editor = $.image_map_pro_init_editor(undefined, $.WCPEditorSettings);
+              {{--console.log({!! $project->EstateProjectInteractivity->interactiveJson !!});--}}
+              $.wcpEditorEventImportedJSON({!! $project->EstateProjectInteractivity->interactiveJson !!});
+
+
+          });
+
       })(jQuery, window, document);
 
   </script>

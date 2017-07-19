@@ -448,7 +448,6 @@
 	$.wcpEditorEventNewButtonPressed = function() {}
 	$.wcpEditorEventSaveButtonPressed = function() {
 		$.wcpEditorPresentLoadingScreen('Saving...');
-
 		$.imp_editor_storage_store_save(editor.getCompressedSettings(), function(success) {
 			if (success) {
 				$.wcpEditorHideLoadingScreenWithMessage('Saved!', false, false);
@@ -931,6 +930,7 @@
 	$.image_map_pro_init_editor = function(initSettings, wcpEditorSettings) {
 		editor = new Editor();
 		editor.init(initSettings, wcpEditorSettings);
+		return editor;
 	}
 
 	$.image_map_pro_editor_current_settings = function() {

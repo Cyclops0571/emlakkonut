@@ -30,7 +30,6 @@
 
     // Events (called by the plugin, need implementation)
     $.imageMapProInitialized = function(imageMapName) {
-        
     }
     $.imageMapProEventHighlightedShape = function(imageMapName, shapeName) {
 

@@ -1,183 +1,184 @@
+var editor = undefined;
 ;(function ( $, window, document, undefined) {
     // Register Forms
     $.wcpEditorCreateForm({
         name: 'Image Map Settings',
         controlGroups: [
-            {
-                groupName: 'general',
-                groupTitle: 'General',
-                groupIcon: 'fa fa-cog',
-                controls: [
-                    {
-                        type: 'text',
-                        name: 'image_map_name',
-                        title: 'Image Map Name',
-                        value: $.imageMapProDefaultSettings.general.name
-                    },
-                    {
-                        type: 'switch',
-                        name: 'responsive',
-                        title: 'Responsive',
-                        value: $.imageMapProDefaultSettings.general.responsive,
-                    },
-                    {
-                        type: 'switch',
-                        name: 'preserve_quality',
-                        title: 'Preserve Quality',
-                        value: $.imageMapProDefaultSettings.general.preserve_quality,
-                    },
-                    {
-                        type: 'int',
-                        name: 'image_map_width',
-                        title: 'Width',
-                        value: $.imageMapProDefaultSettings.general.width,
-                    },
-                    {
-                        type: 'int',
-                        name: 'image_map_height',
-                        title: 'Height',
-                        value: $.imageMapProDefaultSettings.general.height
-                        },
-                    {
-                        type: 'button',
-                        name: 'reset_size',
-                        title: 'Reset Size',
-                        options: { event_name: 'button-reset-size-clicked' },
-                        value: undefined
-                    },
-                    {
-                        type: 'select',
-                        name: 'pageload_animation',
-                        title: 'Page Load Animation',
-                        options: [
-                            { value: 'none', title: 'None' },
-                            { value: 'grow', title: 'Grow' },
-                            { value: 'fade', title: 'Fade' },
-                        ],
-                        value: $.imageMapProDefaultSettings.general.pageload_animation
-                    },
-                    {
-                        type: 'switch',
-                        name: 'late_initialization',
-                        title: 'Late Initialization',
-                        value: $.imageMapProDefaultSettings.general.late_initialization,
-                    },
-                    {
-                        type: 'switch',
-                        name: 'center_image_map',
-                        title: 'Center Image Map',
-                        value: $.imageMapProDefaultSettings.general.center_image_map,
-                    },
-                ]
-            },
-            {
-                groupName: 'image',
-                groupTitle: 'Image',
-                groupIcon: 'fa fa-photo',
-                controls: [
-                    {
-                        type: 'wp media upload',
-                        name: 'image_url',
-                        title: 'Image URL',
-                        value: $.imageMapProDefaultSettings.general.image_url
-                    },
-                ]
-            },
-            {
-                groupName: 'tooltips',
-                groupTitle: 'Tooltips',
-                groupIcon: 'fa fa-comment',
-                controls: [
-                    {
-                        type: 'switch',
-                        name: 'sticky_tooltips',
-                        title: 'Sticky Tooltips',
-                        value: $.imageMapProDefaultSettings.general.sticky_tooltips,
-                    },
-                    {
-                        type: 'switch',
-                        name: 'constrain_tooltips',
-                        title: 'Constrain Tooltips',
-                        value: $.imageMapProDefaultSettings.general.constrain_tooltips,
-                    },
-                    {
-                        type: 'select',
-                        name: 'tooltip_animation',
-                        title: 'Tooltip Animation',
-                        options: [
-                            { value: 'none', title: 'None' },
-                            { value: 'grow', title: 'Grow' },
-                            { value: 'fade', title: 'Fade' },
-                        ],
-                        value: $.imageMapProDefaultSettings.general.tooltip_animation
-                    },
-                    {
-                        type: 'select',
-                        name: 'fullscreen_tooltips',
-                        title: 'Fullscreen Tooltips',
-                        options: [
-                            { value: 'none', title: 'None' },
-                            { value: 'mobile-only', title: 'Mobile Only' },
-                            { value: 'always', title: 'Always' },
-                        ],
-                        value: $.imageMapProDefaultSettings.general.fullscreen_tooltips
-                    },
-                ]
-            },
-            {
-                groupName: 'fullscreen',
-                groupTitle: 'Fullscreen',
-                groupIcon: 'fa fa-arrows-alt',
-                controls: [
-                    {
-                        type: 'switch',
-                        name: 'enable_fullscreen_mode',
-                        title: 'Enable Fullscreen Mode',
-                        value: $.imageMapProDefaultSettings.fullscreen.enable_fullscreen_mode,
-                    },
-                    {
-                        type: 'switch',
-                        name: 'start_in_fullscreen_mode',
-                        title: 'Start in Fullscreen Mode',
-                        value: $.imageMapProDefaultSettings.fullscreen.start_in_fullscreen_mode,
-                    },
-                    {
-                        type: 'color',
-                        name: 'fullscreen_background',
-                        title: 'Fullscreen Background',
-                        value: $.imageMapProDefaultSettings.fullscreen.fullscreen_background,
-                    },
-                    {
-                        type: 'fullscreen button position',
-                        name: 'fullscreen_button_position',
-                        title: 'Fullscreen Button Position',
-                        value: 1 // 0 = top left, 1 = top center, 2 = top right, 3 = bottom right, 4 = bottom center, 5 = bottom left
-                    },
-                    {
-                        type: 'button group',
-                        name: 'fullscreen_button_type',
-                        title: 'Button Type',
-                        options: [
-                            { value: 'icon', title: 'Icon' },
-                            { value: 'text', title: 'Text' },
-                            { value: 'icon_and_text', title: 'Icon and Text' }
-                        ],
-                        value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_type,
-                    },
-                    {
-                        type: 'color',
-                        name: 'fullscreen_button_color',
-                        title: 'Button Color',
-                        value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_color,
-                    },
-                    {
-                        type: 'color',
-                        name: 'fullscreen_button_text_color',
-                        title: 'Button Icon/Text Color',
-                        value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_text_color,
-                    }
-                ]
-            }
+            // {
+            //     groupName: 'general',
+            //     groupTitle: 'General',
+            //     groupIcon: 'fa fa-cog',
+            //     controls: [
+            //         {
+            //             type: 'text',
+            //             name: 'image_map_name',
+            //             title: 'Image Map Name',
+            //             value: $.imageMapProDefaultSettings.general.name
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'responsive',
+            //             title: 'Responsive',
+            //             value: $.imageMapProDefaultSettings.general.responsive,
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'preserve_quality',
+            //             title: 'Preserve Quality',
+            //             value: $.imageMapProDefaultSettings.general.preserve_quality,
+            //         },
+            //         {
+            //             type: 'int',
+            //             name: 'image_map_width',
+            //             title: 'Width',
+            //             value: $.imageMapProDefaultSettings.general.width,
+            //         },
+            //         {
+            //             type: 'int',
+            //             name: 'image_map_height',
+            //             title: 'Height',
+            //             value: $.imageMapProDefaultSettings.general.height
+            //             },
+            //         {
+            //             type: 'button',
+            //             name: 'reset_size',
+            //             title: 'Reset Size',
+            //             options: { event_name: 'button-reset-size-clicked' },
+            //             value: undefined
+            //         },
+            //         {
+            //             type: 'select',
+            //             name: 'pageload_animation',
+            //             title: 'Page Load Animation',
+            //             options: [
+            //                 { value: 'none', title: 'None' },
+            //                 { value: 'grow', title: 'Grow' },
+            //                 { value: 'fade', title: 'Fade' },
+            //             ],
+            //             value: $.imageMapProDefaultSettings.general.pageload_animation
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'late_initialization',
+            //             title: 'Late Initialization',
+            //             value: $.imageMapProDefaultSettings.general.late_initialization,
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'center_image_map',
+            //             title: 'Center Image Map',
+            //             value: $.imageMapProDefaultSettings.general.center_image_map,
+            //         },
+            //     ]
+            // },
+            // {
+            //     groupName: 'image',
+            //     groupTitle: 'Image',
+            //     groupIcon: 'fa fa-photo',
+            //     controls: [
+            //         {
+            //             type: 'wp media upload',
+            //             name: 'image_url',
+            //             title: 'Image URL',
+            //             value: $.imageMapProDefaultSettings.general.image_url
+            //         },
+            //     ]
+            // },
+            // {
+            //     groupName: 'tooltips',
+            //     groupTitle: 'Tooltips',
+            //     groupIcon: 'fa fa-comment',
+            //     controls: [
+            //         {
+            //             type: 'switch',
+            //             name: 'sticky_tooltips',
+            //             title: 'Sticky Tooltips',
+            //             value: $.imageMapProDefaultSettings.general.sticky_tooltips,
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'constrain_tooltips',
+            //             title: 'Constrain Tooltips',
+            //             value: $.imageMapProDefaultSettings.general.constrain_tooltips,
+            //         },
+            //         {
+            //             type: 'select',
+            //             name: 'tooltip_animation',
+            //             title: 'Tooltip Animation',
+            //             options: [
+            //                 { value: 'none', title: 'None' },
+            //                 { value: 'grow', title: 'Grow' },
+            //                 { value: 'fade', title: 'Fade' },
+            //             ],
+            //             value: $.imageMapProDefaultSettings.general.tooltip_animation
+            //         },
+            //         {
+            //             type: 'select',
+            //             name: 'fullscreen_tooltips',
+            //             title: 'Fullscreen Tooltips',
+            //             options: [
+            //                 { value: 'none', title: 'None' },
+            //                 { value: 'mobile-only', title: 'Mobile Only' },
+            //                 { value: 'always', title: 'Always' },
+            //             ],
+            //             value: $.imageMapProDefaultSettings.general.fullscreen_tooltips
+            //         },
+            //     ]
+            // },
+            // {
+            //     groupName: 'fullscreen',
+            //     groupTitle: 'Fullscreen',
+            //     groupIcon: 'fa fa-arrows-alt',
+            //     controls: [
+            //         {
+            //             type: 'switch',
+            //             name: 'enable_fullscreen_mode',
+            //             title: 'Enable Fullscreen Mode',
+            //             value: $.imageMapProDefaultSettings.fullscreen.enable_fullscreen_mode,
+            //         },
+            //         {
+            //             type: 'switch',
+            //             name: 'start_in_fullscreen_mode',
+            //             title: 'Start in Fullscreen Mode',
+            //             value: $.imageMapProDefaultSettings.fullscreen.start_in_fullscreen_mode,
+            //         },
+            //         {
+            //             type: 'color',
+            //             name: 'fullscreen_background',
+            //             title: 'Fullscreen Background',
+            //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_background,
+            //         },
+            //         {
+            //             type: 'fullscreen button position',
+            //             name: 'fullscreen_button_position',
+            //             title: 'Fullscreen Button Position',
+            //             value: 1 // 0 = top left, 1 = top center, 2 = top right, 3 = bottom right, 4 = bottom center, 5 = bottom left
+            //         },
+            //         {
+            //             type: 'button group',
+            //             name: 'fullscreen_button_type',
+            //             title: 'Button Type',
+            //             options: [
+            //                 { value: 'icon', title: 'Icon' },
+            //                 { value: 'text', title: 'Text' },
+            //                 { value: 'icon_and_text', title: 'Icon and Text' }
+            //             ],
+            //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_type,
+            //         },
+            //         {
+            //             type: 'color',
+            //             name: 'fullscreen_button_color',
+            //             title: 'Button Color',
+            //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_color,
+            //         },
+            //         {
+            //             type: 'color',
+            //             name: 'fullscreen_button_text_color',
+            //             title: 'Button Icon/Text Color',
+            //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_text_color,
+            //         }
+            //     ]
+            // }
         ]
     });
     $.wcpEditorCreateForm({
@@ -972,7 +973,8 @@
     };
 
     // Init Editor
-    $(document).ready(function() {
-        $.image_map_pro_init_editor(undefined, $.WCPEditorSettings);
-    });
+    // $(document).ready(function() {
+    //     editor = $.image_map_pro_init_editor(undefined, $.WCPEditorSettings);
+    //     console.log(editor);
+    // });
 })( jQuery, window, document );

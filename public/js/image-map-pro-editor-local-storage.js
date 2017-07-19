@@ -36,7 +36,6 @@
         if (!localStorage.editor_saves) {
             localStorage.editor_saves = '[]';
         }
-
         var currentSaves = JSON.parse(localStorage.editor_saves);
         var updated = false;
         for (var i=0; i<currentSaves.length; i++) {
