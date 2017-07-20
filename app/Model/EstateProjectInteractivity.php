@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Designer\Designer;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -22,4 +23,11 @@ use Illuminate\Database\Eloquent\Model;
 class EstateProjectInteractivity extends Model
 {
     protected $table = 'estate_project_interactivity';
+
+    public function updateImage($url)
+    {
+        $jsonData = Designer::updateImage(json_decode($this->interactiveJson), $url);
+        $this->interactiveJson = json_encode($jsonData);
+        $this->save();
+    }
 }

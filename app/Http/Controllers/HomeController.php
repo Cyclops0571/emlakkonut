@@ -48,6 +48,9 @@ class HomeController extends Controller
 
     public function projectDesigner(EstateProject $project)
     {
+        if(!$project->EstateProjectInteractivity) {
+            $project->initEstateProjectInteractivity();
+        }
         return view('project.designer', compact('project'));
     }
 
