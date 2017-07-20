@@ -16,6 +16,11 @@
         border-bottom: 1px solid #0e1a35;
         text-align: center;
     }
+
+    .file {
+        color: #fff;
+        margin: 0 auto;
+    }
 </style>
 
 @section('content')
@@ -27,19 +32,27 @@
         <div class="row">
             <ul class="mapnav nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="icon-kroki" style="color: #fff;"></i>
-                        <p>Proje Görseli</p>
-                    </a>
+                    <div class="input-group">
+                        <label class="input-group-addon file">
+                            <i class="icon-kroki" style="color: #fff;"></i>
+                            <span style="color: #fff; font-size: 1rem;">Proje Görseli</span>
+                            <input type="file" id="inputProjeGorsel" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
+                        </label>
+                    </div>
+                    <img id="imgProjeGorsel" src="#">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="icon-kroki" style="color: #fff;"></i>
-                        <p>Kroki</p>
-                    </a>
+                    <div class="input-group">
+                        <label class="input-group-addon file">
+                            <i class="icon-kroki" style="color: #fff;"></i>
+                            <span style="color: #fff; font-size: 1rem;">Kroki</span>
+                            <input type="file" id="inputProjeKroki" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
+                        </label>
+                    </div>
                 </li>
             </ul>
             <div id="map"></div>
+            <img id="imgProjeKroki" src="#">
         </div>
     </div>
 </main>
@@ -49,10 +62,8 @@
   @parent
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI8qNnWc7vcryJwCLs3Q5DWymgNyO3UTM&libraries=drawing&callback=initMap" async defer></script>
   <script>
-      function onClickActiveNav(p) {
-          $(".nav li").removeClass("active");
-          $('#' + p).addClass('active');
-      }
+      var marker = "http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg";
+
       function initMap() {
           var map = new google.maps.Map(document.getElementById("map"), {
               center: {lat: 41.0082, lng: 28.9784},
@@ -70,7 +81,7 @@
                   position: google.maps.ControlPosition.RIGHT_CENTER,
                   drawingModes: ["marker"]
               },
-              markerOptions: {icon: 'http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg'},
+              markerOptions: {icon: marker},
               circleOptions: {
                   fillColor: '#ffff00',
                   fillOpacity: 1,
@@ -81,6 +92,24 @@
               }
           });
           drawingManager.setMap(map);
+      }
+
+      function fileUpload(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader(),
+                  sId = input.getAttribute("id");
+
+              reader.onload = function (e) {
+                  if (sId === "inputProjeGorsel") {
+                    //$("#imgProjeGorsel").attr('src', e.target.result);
+                    marker = e.target.result;
+                  } else if (sId === "inputProjeKroki") {
+                    $("#imgProjeKroki").attr('src', e.target.result);
+                  }
+              };
+
+              reader.readAsDataURL(input.files[0]);
+          }
       }
   </script>
 @endsection
