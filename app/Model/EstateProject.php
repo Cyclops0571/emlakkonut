@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Designer\Designer;
+use App\ParcelInteractivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\Paginator;
@@ -24,6 +25,8 @@ use Illuminate\Pagination\Paginator;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto $projectPhoto
  * @property-read \App\Model\EstateProjectInteractivity $EstateProjectInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProjectApartment[] $EstateProjectApartment
+ * @property-read \App\ParcelInteractivity $ParcelInteractivity
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $Parcels
  */
 class EstateProject extends Model {
 
@@ -65,28 +68,8 @@ class EstateProject extends Model {
         return $this->hasOne(ProjectPhoto::class, 'project_id');
     }
 
-    public function createPhoto(UploadedFile $file)
-    {
-        if(!$this->projectPhoto) {
-            $this->projectPhoto = new ProjectPhoto();
-        }
-        $oldImageUrl = $this->getImageUrl();
-        $this->projectPhoto->project_id = $this->id;
-        $this->projectPhoto->name = $file->getFilename() . '.jpg';
-        $this->projectPhoto->size = $file->getSize();
-        $this->projectPhoto->original_name = $file->getClientOriginalName();
-        $file->move($this->getPhotoRealPath(), $file->getFilename() . '.jpg');
-        $this->projectPhoto->save();
-
-        if($this->EstateProjectInteractivity) {
-            //change the image url in the json data.
-            $this->EstateProjectInteractivity->updateImage($this->getImageUrl());
-            $this->EstateProjectInteractivity->save();
-        }
-    }
-
-    private function getPhotoRealPath($filename = '') {
-        return public_path('uploads/project/' . $filename);
+    private function photoDirectory() {
+        return public_path('uploads/project/');
     }
 
     public function getPhotoPath() {
@@ -101,6 +84,11 @@ class EstateProject extends Model {
     public function EstateProjectInteractivity()
     {
         return $this->hasOne(EstateProjectInteractivity::class, 'project_id');
+    }
+
+    public function ParcelInteractivity()
+    {
+        return $this->hasOne(ParcelInteractivity::class, 'project_id');
     }
 
     public function setEstateProjectInteractivity($interactiveJson) {
@@ -129,12 +117,44 @@ class EstateProject extends Model {
 
     public function EstateProjectApartment()
     {
-        return $this->hasMany(EstateProjectApartment::class, "ProjeID", "ProjeID");
+        return $this->hasMany(EstateProjectApartment::class, "proje_id");
     }
 
     public function getBlocks() {
         return $this->EstateProjectApartment()->getQuery()->select('BlokNo')->distinct()->get();
     }
 
+    public function Parcels() {
+        return $this->hasMany(Parcel::class, 'project_id');
+    }
 
+    public function createPhoto(UploadedFile $file)
+    {
+        if(!$this->projectPhoto) {
+            $this->projectPhoto = new ProjectPhoto();
+        }
+        $this->projectPhoto->project_id = $this->id;
+        $this->projectPhoto->name = $file->getFilename() . '.jpg';
+        $this->projectPhoto->size = $file->getSize();
+        $this->projectPhoto->original_name = $file->getClientOriginalName();
+        $file->move($this->photoDirectory(), $file->getFilename() . '.jpg');
+        $this->projectPhoto->save();
+
+        if($this->EstateProjectInteractivity) {
+            //change the image url in the json data.
+            $this->EstateProjectInteractivity->updateImage($this->getImageUrl());
+            $this->EstateProjectInteractivity->save();
+        }
+    }
+
+    /**
+     * @param $parcelName
+     * @return \Illuminate\Database\Eloquent\Collection|\App\Model\ParcelPhoto
+     */
+    public function getParcelPhoto($parcelName)
+    {
+        return ParcelPhoto::where('project_id', $this->id)
+            ->where('parcel', $parcelName)
+            ->first();
+    }
 }

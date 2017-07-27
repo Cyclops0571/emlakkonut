@@ -15,7 +15,7 @@ class CreateUserEstateProject extends Migration
     {
         Schema::create('user_estate_project', function(Blueprint $table) {
             $table->unsignedInteger('user_id');
-            $table->string('project_id');
+            $table->unsignedInteger('project_id');
             $table->unique(['user_id', 'project_id']);
         });
     }

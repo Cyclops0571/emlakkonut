@@ -28,7 +28,7 @@
             </label>
             <span
                 id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
-            <button class="input-group-addon" id="basic-addon1" onclick="addItem()"><i class="icon-Accept"></i></button>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
             <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <img id="imgPosture" src="{{$project->getPhotoPath()}}">

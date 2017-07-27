@@ -4,23 +4,37 @@
 namespace App\Designer;
 
 
+/**
+ * @property \stdClass squares_settings
+ */
 class Spot {
+
     public $id;
     public $title;
     public $x, $y;
     public $tooltip_content;
 
 
-    public function __construct($title, $text = '')
+    public function __construct($title, $content = '')
     {
-        $this->id = isset($data['id']) ? $data['id'] : "spot-" . rand();
+        $this->id = uniqid("spot-");
         $this->title = $title;
         $this->x = 5;
         $this->y = 5;
-        $this->tooltip_content = $this->tooltipContent($text);
+        $this->tooltip_content = $this->tooltipContent($content);
     }
 
-    private function tooltipContent($text = '')
+    private function tooltipContent($content = '')
+    {
+        if (is_string($content))
+        {
+            return $this->plainTextContent($content);
+        } else {
+            return new ContentBuilder($content);
+        }
+    }
+
+    private function plainTextContent($text)
     {
         $tooltipContent = '{
         "plain_text": "PLAIN_TEXT",
@@ -42,6 +56,7 @@ class Spot {
           ]
         }
       }';
+
         return json_decode(str_replace('PLAIN_TEXT', $text, $tooltipContent));
     }
 }

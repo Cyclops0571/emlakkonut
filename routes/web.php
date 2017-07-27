@@ -21,15 +21,17 @@ Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('/projects', 'HomeController@projects')->name('projects');
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
-    Route::get('/parcels', 'HomeController@parcels')->name('parcels');
+    Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
     Route::get('/floors', 'HomeController@floors')->name('floors');
     Route::get('/apartments', 'HomeController@apartments')->name('apartments');
     Route::get('/location', 'HomeController@location')->name('location');
-    Route::get('/projectDesigner/{project}', 'HomeController@projectDesigner')->name('projectDesigner');
-    Route::get('/designer', 'HomeController@designer')->name('designer');
+    Route::get('/projectDesigner/{project}', 'DesignerController@project')->name('projectDesigner');
+    Route::get('/parcelDesigner/{parcel}', 'DesignerController@parcel')->name('parcelDesigner');
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::post('/project-interacivity/save', 'ProjectController@saveProjectInteractive')->name('projectInteractivity');
+    Route::post('/interactivity/project', 'InteractiveController@project')->name('projectInteractivity');
+    Route::post('/interactivity/parcel', 'InteractiveController@parcel')->name('projectInteractivity');
 });
 
-Route::resource('photo', 'PhotoController');
+Route::post('photo', 'PhotoController@store')->name('photo.store');
+Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');
 Route::get('test', 'TTestController@index');

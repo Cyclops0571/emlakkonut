@@ -14,7 +14,7 @@
       </a>
     </li>
     <li class="nav-item" id="parcels">
-      <a class="nav-link" href="{{URL::route('parcels')}}" onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i>
+      <a class="nav-link" href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}" onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i>
         Parseller
       </a>
     </li>

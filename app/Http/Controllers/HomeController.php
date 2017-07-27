@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function parcels(EstateProject $project)
     {
-        return view('parcels', compact($project));
+        return view('parcels', compact("project"));
     }
 
     public function floors()
@@ -44,19 +44,6 @@ class HomeController extends Controller
     public function location()
     {
         return view('location');
-    }
-
-    public function projectDesigner(EstateProject $project)
-    {
-        if(!$project->EstateProjectInteractivity) {
-            $project->initEstateProjectInteractivity();
-        }
-        return view('project.designer', compact('project'));
-    }
-
-    public function designer()
-    {
-        return view('designer');
     }
 
     public function index($view)

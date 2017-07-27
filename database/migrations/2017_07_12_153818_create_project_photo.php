@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProjectPhoto extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -15,7 +16,7 @@ class CreateProjectPhoto extends Migration
     {
         Schema::create('project_photo', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('project_id');
+            $table->unsignedInteger('project_id');
             $table->string('name');
             $table->string('size');
             $table->string('original_name');
@@ -30,6 +31,5 @@ class CreateProjectPhoto extends Migration
      */
     public function down()
     {
-        //
     }
 }

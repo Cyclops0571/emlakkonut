@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstateProjectInteractivity extends Migration
+class CreateParcelInteractivityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEstateProjectInteractivity extends Migration
      */
     public function up()
     {
-        Schema::create('estate_project_interactivity', function(Blueprint $table) {
+        Schema::create('parcel_interactivity', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('parcel_id');
             $table->longText('interactiveJson');
             $table->timestamps();
         });

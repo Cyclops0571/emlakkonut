@@ -1,51 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+  <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
-        <div class="card-header">
-            Parseller
-            <!-- <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button> -->
-        </div>
-        <input type="text" id="inputParcel" class="form-control" placeholder="Parsel tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
-        <ul id="listParcels" class="list-group list-group-flush">
-
-                <li class="list-group-item justify-content-between">
-                    <span>
-                        <label class="custom-file">
-                            <i class="icon-Quantity icon-size"></i>
-                            <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
-                        </label>
-                        Parsel 1
-                    </span>
-                    <span>
-                        <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-                        <button class="btn btn-success btn-sm rounded-circle" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
-                        <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
-                        <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
-                    </span>
-                </li>
-
-        </ul>
+      <div class="card-header">
+        Parseller
+        <!-- <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button> -->
+      </div>
+      <input type="text" id="inputParcel" class="form-control" placeholder="Parsel tipini giriniz..."
+             aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+      <ul id="listParcels" class="list-group list-group-flush">
+        @foreach($project->Parcels as $parcel)
+          <li class="list-group-item justify-content-between">
+            <form name="{{$parcel->id}}" method="post" action="{{URL::route('photo.parcelStore')}}"
+                  enctype="multipart/form-data">
+              {{csrf_field()}}
+              <input type="hidden" name="id" value="{{$parcel->id}}">
+              <span>
+                <label class="custom-file">
+                  <i class="icon-Quantity icon-size"></i>
+                  <input type="file" name="photo" class="form-control" aria-describedby="basic-addon1"
+                         onchange="fileUpload(this)">
+                </label>
+                {{$parcel->parcel}}
+              </span>
+              <span>
+                <button class="btn btn-primary btn-sm rounded-circle" type="submit"><i class="icon-Accept"></i></button>
+                <button class="btn btn-success btn-sm rounded-circle" type="button"
+                        onclick="window.location='{{ URL::route('parcelDesigner', $parcel->id) }}'">
+                  <i class="icon-designer"></i>
+                </button>
+                <button class="btn btn-danger btn-sm rounded-circle"><i class="icon-delete"></i></button>
+                <button class="btn btn-success btn-sm rounded-circle"><i class="icon-settings"></i></button>
+              </span>
+            </form>
+          </li>
+        @endforeach
+      </ul>
     </div>
-</main>
+  </main>
 @endsection
 
 @section('javascript')
   @parent
   <script>
-    function fileUpload(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+      function fileUpload(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
 
-            reader.onload = function (e) {
-                // $('#imgPosture').attr('src', e.target.result);
-            };
+              reader.onload = function (e) {
+                  // $('#imgPosture').attr('src', e.target.result);
+              };
 
-            reader.readAsDataURL(input.files[0]);
+              reader.readAsDataURL(input.files[0]);
 
-            // document.getElementById("spanPosture").innerHTML = input.files[0].name;
-        }
-    }
+              // document.getElementById("spanPosture").innerHTML = input.files[0].name;
+          }
+      }
   </script>
 @endsection

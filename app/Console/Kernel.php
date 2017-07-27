@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\KkysDataCommand::class
+        Commands\KkysDataCommand::class,
+        Commands\KkysParcelCommand::class,
     ];
 
     /**

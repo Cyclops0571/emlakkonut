@@ -16,8 +16,7 @@ class CreateEstateProjectApartment extends Migration {
         Schema::create('estate_project_apartment', function (Blueprint $table)
         {
             $table->increments('id');
-            $table->string('ProjeID')->index();
-            $table->string('ProjeAdi')->nullable();
+            $table->string('proje_id')->index();
             $table->string('Il')->nullable();
             $table->string('Ilce')->nullable();
             $table->string('Ada')->nullable();

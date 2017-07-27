@@ -45,7 +45,7 @@
   <script src="/submodules/wcp-icons/js/wcp-icons.js"></script>
   <!-- Image Map Pro Editor -->
   <script>
-      var projectJson = {!! $project->EstateProjectInteractivity ? $project->EstateProjectInteractivity->interactiveJson     : json_encode(false) !!};
+      var objectJson = {!! $project->EstateProjectInteractivity ? $project->EstateProjectInteractivity->interactiveJson     : json_encode(false) !!};
       (function ($, window, document, undefined) {
           $.imageMapProShapeDefaults = {
               id: 'spot-0',
@@ -206,9 +206,9 @@
               }
 
               editor = $.image_map_pro_init_editor(undefined, $.WCPEditorSettings);
-            {{--console.log({!! $project->EstateProjectInteractivity->interactiveJson !!});--}}
-            if (projectJson) {
-                $.wcpEditorEventImportedJSON(projectJson);
+//            console.log(objectJson);
+            if (objectJson) {
+                $.wcpEditorEventImportedJSON(objectJson);
             }
           });
 

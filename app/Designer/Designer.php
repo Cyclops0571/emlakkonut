@@ -3,6 +3,7 @@
 namespace App\Designer;
 
 use App\Model\EstateProject;
+use App\Model\Parcel;
 
 class Designer {
 
@@ -20,12 +21,33 @@ class Designer {
             $this->setGeneral($object->ProjeAdi);
             $this->setImage($object->getImageUrl());
             $this->setEditor();
-            $spotNames = [];
             foreach ($object->getBlocks() as $block)
             {
-                $spotNames[] = $block->BlokNo;
+                $this->spots[] = new Spot($block->BlokNo, "Blok - " . $block->BlokNo);
             }
-            $this->setSpots($spotNames);
+        } elseif ($object instanceof Parcel) {
+            $this->id = $object->id;
+            $this->editor = $this->setEditor();
+            $this->setGeneral($object->parcel);
+            $this->setImage($object->parcelPhoto->getImageUrl());
+            $this->setEditor();
+            $currentBlock = null;
+            $currentDirection = null;
+            $elementFactories = [];
+            foreach ($object->getApartments() as $apartment)
+            {
+                $elementFactories[] = new ElementButtonFactory($apartment->KapiNo, $apartment->url(), $apartment->statusColor());
+
+                //create a spot for every block
+                if($currentBlock != $apartment->BlokNo || $currentDirection != $apartment->Yon){
+                    $currentBlock = $apartment->BlokNo;
+                    $currentDirection = $apartment->Yon;
+                    //create a button for each apertment
+                    $this->spots[] = new Spot('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
+                    //empty the spots
+                    $elementFactories = [];
+                }
+            }
         } else
         {
             throw new \Exception(sprintf("Unknown object type in file  %s at line %s given object type: %ss", __FILE__, __LINE__, gettype($object)));
@@ -63,19 +85,6 @@ class Designer {
 
     private function setImage($url) {
         $this->image = (object)['url' => $url];
-    }
-
-    private function setSpots($spotNames = [])
-    {
-        if (!$this->spots)
-        {
-            $this->spots = [];
-        }
-
-        foreach ($spotNames as $spotName)
-        {
-            array_push($this->spots, new Spot($spotName));
-        }
     }
 
 

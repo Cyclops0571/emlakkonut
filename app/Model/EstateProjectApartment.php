@@ -4,83 +4,82 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * App\Model\EstateProjectApartment
  *
  * @property int $id
- * @property string $ProjeID
- * @property string $ProjeAdi
- * @property string $Il
- * @property string $Ilce
- * @property string $Ada
- * @property string $Parsel
- * @property string $BlokNo
- * @property string $KapiNo
- * @property string $KullanilisSekli
- * @property string $BulunduguKat
- * @property string $OdaSayisi
- * @property string $Yon
- * @property string $NetM2
- * @property string $AcikNetM2
- * @property string $BrutM2
- * @property string $Eklenti1Nitelik
- * @property string $Eklenti1NetM2
- * @property string $Eklenti1BrutM2
- * @property string $Eklenti2Nitelik
- * @property string $Eklenti2NetM2
- * @property string $Eklenti2BrutM2
- * @property string $Eklenti3Nitelik
- * @property string $Eklenti3NetM2
- * @property string $Eklenti3BrutM2
- * @property string $Eklenti4Nitelik
- * @property string $Eklenti4NetM2
- * @property string $Eklenti4BrutM2
- * @property string $Eklenti5Nitelik
- * @property string $Eklenti5NetM2
- * @property string $Eklenti5BrutM2
- * @property string $GayrimenkulDurumu
- * @property string $SatisDegeri
- * @property string $SozlesmeNo
- * @property string $MusteriAdi
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereAcikNetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereAda($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereBlokNo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereBrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereBulunduguKat($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti1BrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti1NetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti1Nitelik($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti2BrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti2NetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti2Nitelik($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti3BrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti3NetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti3Nitelik($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti4BrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti4NetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti4Nitelik($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti5BrutM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti5NetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereEklenti5Nitelik($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereGayrimenkulDurumu($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereIl($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereIlce($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereKapiNo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereKullanilisSekli($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereMusteriAdi($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereNetM2($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereOdaSayisi($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereParsel($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereProjeAdi($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereProjeID($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereSatisDegeri($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereSozlesmeNo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Model\EstateProjectApartment whereYon($value)
+ * @property int|null $proje_id
+ * @property string|null $Il
+ * @property string|null $Ilce
+ * @property string|null $Ada
+ * @property string|null $Parsel
+ * @property string|null $BlokNo
+ * @property string|null $KapiNo
+ * @property string|null $KullanilisSekli
+ * @property string|null $BulunduguKat
+ * @property string|null $OdaSayisi
+ * @property string|null $Yon
+ * @property string|null $NetM2
+ * @property string|null $AcikNetM2
+ * @property string|null $BrutM2
+ * @property string|null $Eklenti1Nitelik
+ * @property string|null $Eklenti1NetM2
+ * @property string|null $Eklenti1BrutM2
+ * @property string|null $Eklenti2Nitelik
+ * @property string|null $Eklenti2NetM2
+ * @property string|null $Eklenti2BrutM2
+ * @property string|null $Eklenti3Nitelik
+ * @property string|null $Eklenti3NetM2
+ * @property string|null $Eklenti3BrutM2
+ * @property string|null $Eklenti4Nitelik
+ * @property string|null $Eklenti4NetM2
+ * @property string|null $Eklenti4BrutM2
+ * @property string|null $Eklenti5Nitelik
+ * @property string|null $Eklenti5NetM2
+ * @property string|null $Eklenti5BrutM2
+ * @property string|null $GayrimenkulDurumu
+ * @property string|null $SatisDegeri
+ * @property string|null $SozlesmeNo
+ * @property string|null $MusteriAdi
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereAcikNetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereAda($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereBlokNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereBrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereBulunduguKat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti1BrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti1NetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti1Nitelik($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti2BrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti2NetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti2Nitelik($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti3BrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti3NetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti3Nitelik($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti4BrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti4NetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti4Nitelik($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti5BrutM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti5NetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereEklenti5Nitelik($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereGayrimenkulDurumu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereIl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereIlce($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereKapiNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereKullanilisSekli($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereMusteriAdi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereNetM2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereOdaSayisi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereParsel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereProjeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereSatisDegeri($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereSozlesmeNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereYon($value)
  * @mixin \Eloquent
  */
 class EstateProjectApartment extends Model {
@@ -90,6 +89,7 @@ class EstateProjectApartment extends Model {
 
     public static function setAttributesFromService($projectPartsRaw)
     {
+        $projectAll = EstateProject::all();
         $projectParts = json_decode($projectPartsRaw);
 
         foreach ($projectParts as $projectPart)
@@ -106,8 +106,8 @@ class EstateProjectApartment extends Model {
 
             }
 
-            $estateProjectPart->ProjeID = $projectPart->ProjeID;
-            $estateProjectPart->ProjeAdi = $projectPart->ProjeAdi;
+            $currentProject = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
+            $estateProjectPart->proje_id = $currentProject->id;
             $estateProjectPart->Il = $projectPart->Il;
             $estateProjectPart->Ilce = $projectPart->Ilce;
             $estateProjectPart->Ada = $projectPart->Ada;
@@ -145,5 +145,24 @@ class EstateProjectApartment extends Model {
 
         }
 
+    }
+
+    public function url()
+    {
+        return 'http://emlakkonut.app/apertment/' . $this->id;
+    }
+
+    public function statusColor()
+    {
+        switch ($this->GayrimenkulDurumu) {
+            case 'Satıldı':
+                return 'red';
+            case 'Uygun':
+                return 'green';
+            case 'Ön Satış':
+                return 'dark yellow';
+            default:
+                return 'red';
+        }
     }
 }
