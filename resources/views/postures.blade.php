@@ -11,7 +11,6 @@
 </style>
 
 @section('content')
-  <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <form id="photoForm" method="post" action="{{URL::route('photo.store')}}" enctype="multipart/form-data">
       {{csrf_field()}}
       <input type="hidden" name="id" value="{{$project->id}}">
@@ -34,7 +33,6 @@
         <img id="imgPosture" src="{{$project->getPhotoPath()}}">
       </div>
     </form>
-  </main>
 @endsection
 
 @section('javascript')

@@ -14,7 +14,6 @@
     <?php
     /** @var \App\Model\EstateProject[] $project */
     ?>
-    <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
       <div class="card card-size">
         <div class="card-header">
           Projeler
@@ -29,7 +28,6 @@
           @endforeach
         </ul>
       </div>
-    </main>
 @endsection
 
 @section('javascript')
