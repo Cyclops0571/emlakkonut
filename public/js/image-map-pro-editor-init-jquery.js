@@ -186,7 +186,7 @@ var editor = undefined;
         controlGroups: [
             {
                 groupName: 'general',
-                groupTitle: 'General',
+                groupTitle: 'Genel',
                 groupIcon: 'fa fa-cog',
                 controls: [
                     {
@@ -204,26 +204,26 @@ var editor = undefined;
                     {
                         type: 'float',
                         name: 'width',
-                        title: 'Width',
+                        title: 'Genişlik',
                         value: $.imageMapProDefaultSpotSettings.width
                     },
                     {
                         type: 'float',
                         name: 'height',
-                        title: 'Height',
+                        title: 'Yükseklik',
                         value: $.imageMapProDefaultSpotSettings.height
                     },
                 ]
             },
             {
                 groupName: 'actions',
-                groupTitle: 'Actions',
+                groupTitle: 'Aksiyonlar',
                 groupIcon: 'fa fa-bolt',
                 controls: [
                     {
                         type: 'select',
                         name: 'mouseover',
-                        title: 'Mouseover Action',
+                        title: 'Hover Aksiyonu',
                         options: [
                             { value: 'no-action', title: 'No Action' },
                             { value: 'show-tooltip', title: 'Show Tooltip' },
@@ -233,7 +233,7 @@ var editor = undefined;
                     {
                         type: 'select',
                         name: 'click',
-                        title: 'Click Action',
+                        title: 'Aksiyon Al',
                         options: [
                             { value: 'no-action', title: 'No Action' },
                             { value: 'show-tooltip', title: 'Show Tooltip' },
@@ -244,13 +244,13 @@ var editor = undefined;
                     {
                         type: 'text',
                         name: 'link',
-                        title: 'Link URL',
+                        title: 'Link',
                         value: $.imageMapProDefaultSpotSettings.actions.link
                     },
                     {
                         type: 'switch',
                         name: 'open_link_in_new_window',
-                        title: 'Open Link in New Window',
+                        title: 'Linki Yeni Pencerede Aç',
                         value: $.imageMapProDefaultSpotSettings.actions.open_link_in_new_window
                     },
                 ]
@@ -263,13 +263,13 @@ var editor = undefined;
                     {
                         type: 'switch',
                         name: 'use_icon',
-                        title: 'Use Icon',
+                        title: 'İkon Kullan',
                         value: $.imageMapProDefaultSpotSettings.default_style.use_icon
                     },
                     {
                         type: 'button group',
                         name: 'icon_type',
-                        title: 'Icon Type',
+                        title: 'İkon Tipi',
                         options: [
                             { value: 'library', title: 'Library' },
                             { value: 'custom', title: 'Custom' },
@@ -279,14 +279,14 @@ var editor = undefined;
                     {
                         type: 'button',
                         name: 'choose_icon_from_library',
-                        title: 'Choose from Library',
+                        title: 'Kütüphaneden Seç',
                         options: { event_name: 'button-choose-icon-clicked' },
                         value: undefined
                     },
                     {
                         type: 'text',
                         name: 'icon_svg_path',
-                        title: 'Icon SVG Path',
+                        title: 'İkon SVG Yolu',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_svg_path,
                         render: false
                     },
@@ -300,7 +300,7 @@ var editor = undefined;
                     {
                         type: 'text',
                         name: 'icon_url',
-                        title: 'Icon URL',
+                        title: 'Icon Yolu',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_url
                     },
                     {
@@ -312,20 +312,20 @@ var editor = undefined;
                     {
                         type: 'switch',
                         name: 'icon_shadow',
-                        title: 'Icon Shadow',
+                        title: 'İkon Gölgesi',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_shadow
                     },
                 ]
             },
             {
                 groupName: 'default_style',
-                groupTitle: 'Default Style',
+                groupTitle: 'Varsayılan Stil',
                 groupIcon: 'fa fa-paint-brush',
                 controls: [
                     {
                         type: 'slider',
                         name: 'opacity',
-                        title: 'Opacity',
+                        title: 'Saydamlık',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.default_style.opacity
                     },
@@ -445,7 +445,7 @@ var editor = undefined;
             },
             {
                 groupName: 'mouseover_style',
-                groupTitle: 'Mouseover Style',
+                groupTitle: 'Hover Stili',
                 groupIcon: 'fa fa-paint-brush',
                 controls: [
                     {
@@ -578,7 +578,7 @@ var editor = undefined;
             },
             {
                 groupName: 'tooltip_settings',
-                groupTitle: 'Tooltip Settings',
+                groupTitle: 'Tooltip Ayarları',
                 groupIcon: 'fa fa-comment',
                 controls: [
                     {
@@ -596,13 +596,13 @@ var editor = undefined;
                     {
                         type: 'color',
                         name: 'tooltip_background_color',
-                        title: 'Background Color',
+                        title: 'Arkaplan Rengi',
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.background_color
                     },
                     {
                         type: 'slider',
                         name: 'tooltip_background_opacity',
-                        title: 'Background Opacity',
+                        title: 'Arkaplan Saydamlık',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.background_opacity
                     },
@@ -621,20 +621,20 @@ var editor = undefined;
                     {
                         type: 'switch',
                         name: 'tooltip_auto_width',
-                        title: 'Auto Width',
+                        title: 'Otomatik Genişlik',
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.auto_width
                     },
                     {
                         type: 'int',
                         name: 'tooltip_width',
-                        title: 'Width',
+                        title: 'Genişlik',
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.width
                     },
                 ]
             },
             {
                 groupName: 'tooltip_content',
-                groupTitle: 'Tooltip Content',
+                groupTitle: 'Tooltip İçeriği',
                 groupIcon: 'fa fa-paragraph',
                 controls: [
                     {
@@ -649,13 +649,13 @@ var editor = undefined;
                     {
                         type: 'textarea',
                         name: 'plain_text',
-                        title: 'Tooltip Content',
+                        title: 'Tooltip İçerik',
                         value: $.imageMapProDefaultSpotSettings.tooltip_content.plain_text
                     },
                     {
                         type: 'color',
                         name: 'plain_text_color',
-                        title: 'Text Color',
+                        title: 'Metin Rengi',
                         value: $.imageMapProDefaultSpotSettings.tooltip_content.plain_text_color
                     },
                     {
@@ -909,17 +909,17 @@ var editor = undefined;
                 {
                     name: 'select',
                     icon: 'fa fa-mouse-pointer',
-                    title: 'Select'
+                    title: 'Seç'
                 },
                 {
                     name: 'zoom-in',
                     icon: 'fa fa-search-plus',
-                    title: 'Zoom In (CTRL +)',
+                    title: 'Yakınlaştır (CTRL +)',
                 },
                 {
                     name: 'zoom-out',
                     icon: 'fa fa-search-minus',
-                    title: 'Zoom Out (CTRL -)'
+                    title: 'Uzaklaştır (CTRL -)'
                 },
                 {
                     name: 'drag',
@@ -929,7 +929,7 @@ var editor = undefined;
                 {
                     name: 'reset',
                     customIcon: '1:1',
-                    title: 'Reset Canvas Zoom & Pan (CTRL + 0)',
+                    title: 'Sıfırla (CTRL + 0)',
                     kind: 'button'
                 },
             ]
@@ -938,32 +938,32 @@ var editor = undefined;
         listItemButtons: [
                
         ],
-        listItemTitle: 'Shapes',
+        listItemTitle: 'Eklediklerim',
         listItemTitleButtons: [
             {
                 name: 'rename',
                 icon: 'fa fa-pencil',
-                title: 'Rename'
+                title: 'Adlandır'
             },
             {
                 name: 'copy',
                 icon: 'fa fa-files-o',
-                title: 'Copy Style'
+                title: 'Stili Kopyala'
             },
             {
                 name: 'paste',
                 icon: 'fa fa-clipboard',
-                title: 'Paste Style'
+                title: 'Stili Yapıştır'
             },
             {
                 name: 'duplicate',
                 icon: 'fa fa-clone',
-                title: 'Duplicate'
+                title: 'Aynı'
             },
             {
                 name: 'delete',
                 icon: 'fa fa-trash-o',
-                title: 'Delete'
+                title: 'Sil'
             },
         ],
         fullscreenButton: false,
