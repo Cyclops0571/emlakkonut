@@ -263,7 +263,7 @@ a:focus {
 }
 .navbar-brand>img {
     width: 104px;
-    margin-left: 80px;
+    margin-left: 60px;
     margin-bottom: 20px;
 }
 .nav-link {
@@ -325,6 +325,7 @@ main>h2 {
 .navbar-inverse .navbar-nav .nav-link:focus,
 .navbar-inverse .navbar-nav .nav-link:hover {
     color: #0e1a35;
+    font-weight: bold;
 }
 .sidebar .nav-item .active {
     border-left: 5px solid #00A65E;
@@ -350,6 +351,9 @@ input[type="file"] {
 .justify-content-between span .btn {
     margin-left: 8px;
 }
+.col-md-2 {
+    max-width: 12%;
+}
 /********************************************************************/
 #wcp-editor-button-load,
 #wcp-editor-extra-main-buttons,
@@ -374,6 +378,7 @@ input[type="file"] {
 #wcp-editor-left {
     background: none;
     width: 300px;
+    height: 465px;
     margin-top: 100px;
     border-right: none;
 }
