@@ -13,5 +13,6 @@ class ElementSetting {
     {
         $this->name = $name;
         $this->iconClass = $iconClass;
-}
+
+    }
 }

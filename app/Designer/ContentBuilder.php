@@ -8,6 +8,11 @@ class ContentBuilder {
 
     public $content_type = "content-builder";
     public $plain_text = "";
+
+    /**
+     * ContentBuilder constructor.
+     * @param ElementButtonFactory[] $elementFactories
+     */
     public function __construct($elementFactories)
     {
         $elements = [];
