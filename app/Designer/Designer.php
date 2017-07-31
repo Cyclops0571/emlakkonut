@@ -43,7 +43,7 @@ class Designer {
                     $currentBlock = $apartment->BlokNo;
                     $currentDirection = $apartment->Yon;
                     //create a button for each apertment
-                    $this->spots[] = new Spot('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
+                    $this->spots[] = new Polygon('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
                     //empty the spots
                     $elementFactories = [];
                 }
