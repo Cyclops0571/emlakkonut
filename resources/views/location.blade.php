@@ -24,7 +24,6 @@
 </style>
 
 @section('content')
-<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <div class="card card-size">
         <div class="card-header">
             Proje Konumu
@@ -55,7 +54,6 @@
             <img id="imgProjeKroki" src="#">
         </div>
     </div>
-</main>
 @endsection
 
 @section('javascript')

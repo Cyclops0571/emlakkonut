@@ -41,7 +41,7 @@
       <div class="container-fluid">
         <div class="row">
           @include('layouts.sidebar')
-          <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+          <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
             @if($errors->any())
               <ul class="alert alert-danger">
                 @foreach($errors->all() as $error)
@@ -54,8 +54,8 @@
                 <li style="list-style: none">{{Session::get('success')}}</li>
               </ul>
             @endif
-          </div>
-          @yield('content')
+            @yield('content')
+          </main>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
     @section('javascript')
       <script>
           function onClickActiveNav(p) {
-              $(".nav li").removeClass("active");
+              $(".nav a.active").removeClass('active');
               $('#' + p).addClass('active');
           }
 

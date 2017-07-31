@@ -21,10 +21,8 @@
 <link rel="stylesheet" href="/css/image-map-pro.css">
 
 @section('content')
-  <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
     <h4 class="editor-title">Tasarlayıcı / Vaziyet Planı</h4>
     <div id="wcp-editor"></div>
-  </main>
 @endsection
 
 @section('javascript')
@@ -161,7 +159,6 @@
                   name: '',
                   shortcode: '',
                   width: 1280,
-                  height: 776,
                   naturalWidth: 1280,
                   naturalHeight: 776,
                   responsive: 1,

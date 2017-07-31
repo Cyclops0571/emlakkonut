@@ -351,10 +351,6 @@ input[type="file"] {
     margin-left: 8px;
 }
 /********************************************************************/
-#wcp-editor {
-    background: none;
-}
-//#wcp-editor-button-preview,
 #wcp-editor-button-load,
 #wcp-editor-extra-main-buttons,
 #wcp-editor-main-tab-buttons,
@@ -390,7 +386,7 @@ input[type="file"] {
     transform: rotate(-90deg);
     transform-origin: right top;
     z-index: 1000;
-    top: 0;
+    top: 15px;
     left: 20%;
 }
 #wcp-editor-toolbar {
