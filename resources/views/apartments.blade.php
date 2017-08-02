@@ -15,7 +15,7 @@
                 <li class="list-group-item justify-content-between">
                     <span>
                         <label class="custom-file">
-                            <i class="icon-Quantity icon-size"></i>
+                            <i class="icon-Quantity"></i>
                             <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
                         </label>
                         Tip 1

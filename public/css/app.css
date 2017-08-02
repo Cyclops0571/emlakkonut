@@ -10486,9 +10486,8 @@ a.text-gray-dark:hover {
 .input-group-addon {
   background-color: transparent;
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
-  font-size: 1.4rem;
+  font-size: 1.9rem;
 }
 
 .pass {
@@ -10601,8 +10600,13 @@ main > h2 {
 }
 
 .nav-link > [class^="icon-"],
-[class*=" icon-"] {
+.nav-link > [class*=" icon-"] {
   margin-right: 8px;
+}
+
+.custom-file > [class^="icon-"],
+.custom-file > [class*=" icon-"] {
+  font-size: 1.9rem;
 }
 
 .card-size {
@@ -10618,10 +10622,6 @@ input[type="file"] {
 .input-group {
   padding-left: .5rem;
   padding-right: .5rem;
-}
-
-.icon-size {
-  font-size: 1.4rem;
 }
 
 .justify-content-between span .btn {
@@ -10646,9 +10646,6 @@ input[type="file"] {
 .list-group-flush {
   max-height: 500px;
   overflow-y: auto;
-}
-
-.list-group-flush .list-group-item {
   display: block;
 }
 

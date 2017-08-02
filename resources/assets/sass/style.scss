@@ -233,9 +233,8 @@
 .input-group-addon {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
-    font-size: 1.4rem;
+    font-size: 1.9rem;
 }
 .pass {
     margin-bottom: 50px;
@@ -326,8 +325,12 @@ main>h2 {
     border-left: 5px solid #00A65E;
 }
 .nav-link>[class^="icon-"],
-[class*=" icon-"] {
+.nav-link>[class*=" icon-"] {
     margin-right: 8px;
+}
+.custom-file>[class^="icon-"],
+.custom-file>[class*=" icon-"] {
+    font-size: 1.9rem;
 }
 .card-size {
     width: 60rem;
@@ -340,9 +343,6 @@ input[type="file"] {
 .input-group {
     padding-left: .5rem;
     padding-right: .5rem;
-}
-.icon-size {
-    font-size: 1.4rem;
 }
 .justify-content-between span .btn {
     margin-left: 8px;
@@ -360,8 +360,6 @@ input[type="file"] {
 .list-group-flush {
   max-height: 500px;
   overflow-y: auto;
-}
-.list-group-flush .list-group-item {
   display: block;
 }
 .list-img {
