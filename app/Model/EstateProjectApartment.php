@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Model\EstateProjectApartment
  *
  * @property int $id
- * @property int|null $proje_id
+ * @property int|null $project_id
  * @property string|null $Il
  * @property string|null $Ilce
  * @property string|null $Ada
@@ -81,6 +81,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereYon($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereProjectId($value)
  */
 class EstateProjectApartment extends Model {
 
@@ -107,7 +108,7 @@ class EstateProjectApartment extends Model {
             }
 
             $currentProject = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
-            $estateProjectPart->proje_id = $currentProject->id;
+            $estateProjectPart->project_id = $currentProject->id;
             $estateProjectPart->Il = $projectPart->Il;
             $estateProjectPart->Ilce = $projectPart->Ilce;
             $estateProjectPart->Ada = $projectPart->Ada;

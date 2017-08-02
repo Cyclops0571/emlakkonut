@@ -10,8 +10,10 @@
 
     <title>{{ config('app.name') }}</title>
 
+    @section('css')
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @show
   </head>
 
   <body>
@@ -71,31 +73,31 @@
           }
 
           function filter(p) {
-            var input, filter, ul, li, id = p.getAttribute("id");
-            input = document.getElementById(id);
-            filter = input.value.toUpperCase();
+              var input, filter, ul, li, id = p.getAttribute("id");
+              input = document.getElementById(id);
+              filter = input.value.toUpperCase();
 
-            if (id.indexOf("Project") > -1) {
-                ul = document.getElementById("listProjects");
-            } else if (id.indexOf("Apartment") > -1) {
-                ul = document.getElementById("listApartments");
-            } else if (id.indexOf("Floor") > -1) {
-                ul = document.getElementById("listFloors");
-            } else if (id.indexOf("Parcel") > -1) {
-                ul = document.getElementById("listParcels");
-            }
+              if (id.indexOf("Project") > -1) {
+                  ul = document.getElementById("listProjects");
+              } else if (id.indexOf("Apartment") > -1) {
+                  ul = document.getElementById("listApartments");
+              } else if (id.indexOf("Floor") > -1) {
+                  ul = document.getElementById("listFloors");
+              } else if (id.indexOf("Parcel") > -1) {
+                  ul = document.getElementById("listParcels");
+              }
 
-            li = ul.getElementsByTagName("li");
+              li = ul.getElementsByTagName("li");
 
-            for (var i in li) {
-                if (li[i].innerHTML) {
-                    if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        li[i].style.display = "";
-                    } else {
-                        li[i].style.display = "none";
-                    }
-                }
-            }
+              for (var i in li) {
+                  if (li[i].innerHTML) {
+                      if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                          li[i].style.display = "";
+                      } else {
+                          li[i].style.display = "none";
+                      }
+                  }
+              }
           }
       </script>
     @show

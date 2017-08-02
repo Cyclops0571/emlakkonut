@@ -27,6 +27,7 @@ use Illuminate\Pagination\Paginator;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProjectApartment[] $EstateProjectApartment
  * @property-read \App\ParcelInteractivity $ParcelInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $Parcels
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floor
  */
 class EstateProject extends Model {
 
@@ -117,7 +118,7 @@ class EstateProject extends Model {
 
     public function EstateProjectApartment()
     {
-        return $this->hasMany(EstateProjectApartment::class, "proje_id");
+        return $this->hasMany(EstateProjectApartment::class, "project_id");
     }
 
     public function getBlocks() {
@@ -137,7 +138,11 @@ class EstateProject extends Model {
         $this->projectPhoto->name = $file->getFilename() . '.jpg';
         $this->projectPhoto->size = $file->getSize();
         $this->projectPhoto->original_name = $file->getClientOriginalName();
-        $file->move($this->photoDirectory(), $file->getFilename() . '.jpg');
+        $image = \Image::make($file->getRealPath());
+        $image->widen(1280);
+        $image->save($this->photoDirectory() . $file->getFilename() . '.jpg');
+        $this->projectPhoto->width = $image->width();
+        $this->projectPhoto->height = $image->height();
         $this->projectPhoto->save();
 
         if($this->EstateProjectInteractivity) {
@@ -156,5 +161,10 @@ class EstateProject extends Model {
         return ParcelPhoto::where('project_id', $this->id)
             ->where('parcel', $parcelName)
             ->first();
+    }
+
+    public function floor()
+    {
+        return $this->hasMany(Floor::class, 'project_id');
     }
 }

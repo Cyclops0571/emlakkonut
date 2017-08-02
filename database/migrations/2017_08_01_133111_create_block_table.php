@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectPhoto extends Migration
+class CreateBlockTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,14 +13,11 @@ class CreateProjectPhoto extends Migration
      */
     public function up()
     {
-        Schema::create('project_photo', function(Blueprint $table) {
+        Schema::create('block', function(Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('project_id');
-            $table->string('name');
-            $table->string('size');
-            $table->string('original_name');
-            $table->unsignedInteger('width');
-            $table->unsignedInteger('height');
+            $table->unsignedInteger('parcel_id');
+            $table->string('block_no');
             $table->timestamps();
         });
     }
@@ -33,5 +29,6 @@ class CreateProjectPhoto extends Migration
      */
     public function down()
     {
+        Schema::drop('block');
     }
 }

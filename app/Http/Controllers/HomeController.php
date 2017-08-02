@@ -31,9 +31,19 @@ class HomeController extends Controller
         return view('parcels', compact("project"));
     }
 
-    public function floors()
+    public function floors(EstateProject $project)
     {
-        return view('floors');
+        $floors = $project->floor->sortBy('block_id');
+        $floorsWithoutImage = [];
+        $floorsWithImage = [];
+        foreach ($floors as $floor) {
+            if($floor->floorPhoto) {
+                $floorsWithImage[] = $floor;
+            } else {
+                $floorsWithoutImage[] = $floor;
+            }
+        }
+        return view('floors', compact('project','floorsWithoutImage', 'floorsWithImage'));
     }
 
     public function apartments()

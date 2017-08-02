@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\KkysDataCommand::class,
         Commands\KkysParcelCommand::class,
+        Commands\KkysFloorCommand::class,
+        Commands\KkysBlockCommand::class,
     ];
 
     /**

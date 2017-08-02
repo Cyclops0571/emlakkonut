@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="/css/image-map-pro.css">
 
 @section('content')
-    <h4 class="editor-title">Tasarlayıcı / Vaziyet Planı</h4>
-    <div id="wcp-editor"></div>
+  <h4 class="editor-title">Tasarlayıcı / Parsel Planı</h4>
+  <div id="wcp-editor"></div>
 @endsection
 
 @section('javascript')
@@ -44,14 +44,13 @@
   <script src="/js/image-map-initiator.js"></script>
   <!-- Image Map Pro Editor -->
   <script>
-
-      var objectJson = {!! $project->EstateProjectInteractivity ? $project->EstateProjectInteractivity->interactiveJson     : json_encode(false) !!};
-      var imagePath = {!! json_encode($project->getPhotoPath()) !!};
-      var imageWidth = {{$project->projectPhoto->width}};
-      var imageHeight = {{$project->projectPhoto->height}};
-      var postUrl = {!! json_encode(URL::route('projectInteractivity')) !!};
+      var objectJson = {!! $parcel->parcelInteractivity ? $parcel->parcelInteractivity->interactiveJson     : json_encode(false) !!};
+      var imagePath = {!! json_encode($parcel->parcelPhoto->getImageUrl()) !!};
+      var imageWidth = {{$parcel->parcelPhoto->width}};
+      var imageHeight = {{$parcel->parcelPhoto->height}};
+      var postUrl = {!! json_encode(URL::route('parcelInteractivity')) !!};
       (function ($, window, document, undefined) {
-          imageMapInitiate({{$project->id}}, objectJson, imagePath, imageWidth, imageHeight, postUrl);
+          imageMapInitiate({{$parcel->id}}, objectJson, imagePath, imageWidth, imageHeight, postUrl);
       })(jQuery, window, document);
   </script>
   <script src="/js/image-map-pro-editor.js"></script>

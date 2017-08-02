@@ -57,7 +57,11 @@ class Parcel extends Model {
         $this->parcelPhoto->name = $file->getFilename() . '.jpg';
         $this->parcelPhoto->size = $file->getSize();
         $this->parcelPhoto->original_name = $file->getClientOriginalName();
-        $file->move($this->parcelPhoto->directory(), $file->getFilename() . '.jpg');
+        $image = \Image::make($file->getRealPath());
+        $image->widen(1280);
+        $image->save($this->parcelPhoto->directory() . $file->getFilename() . '.jpg');
+        $this->parcelPhoto->width = $image->width();
+        $this->parcelPhoto->height = $image->height();
         $this->parcelPhoto->save();
 
         if ($this->parcelInteractivity)
@@ -86,7 +90,7 @@ class Parcel extends Model {
      */
     public function getApartments()
     {
-        return EstateProjectApartment::where('proje_id', $this->project_id)
+        return EstateProjectApartment::where('project_id', $this->project_id)
             ->where('Parsel', $this->parcel)
             ->orderBy('BlokNo', 'DESC')
             ->orderBy("Yon", 'ASC')

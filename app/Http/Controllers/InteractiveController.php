@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\EstateProject;
 use App\Model\Parcel;
 use Illuminate\Http\Request;
 

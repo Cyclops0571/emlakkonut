@@ -25,6 +25,11 @@ use Illuminate\Http\UploadedFile;
  * @mixin \Eloquent
  * @property string $name
  * @method static \Illuminate\Database\Query\Builder|\App\Model\ProjectPhoto whereName($value)
+ * @property int $width
+ * @property int $height
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereWidth($value)
  */
 class ProjectPhoto extends Model
 {

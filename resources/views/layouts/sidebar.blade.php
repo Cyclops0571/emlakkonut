@@ -19,7 +19,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a id="floors" class="nav-link" href="{{URL::route('floors')}}" onclick="onClickActiveNav('floors')"><i class="icon-Kat_Plani"></i>
+      <a id="floors" class="nav-link" href="{{URL::route('floors', session('projectID', Auth::user()->estateProject[0]->id))}}" onclick="onClickActiveNav('floors')"><i class="icon-Kat_Plani"></i>
         Kat Planı
       </a>
     </li>

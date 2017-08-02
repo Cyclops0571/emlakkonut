@@ -10634,10 +10634,6 @@ input[type="file"] {
 
 /********************************************************************/
 
-#wcp-editor {
-  background: none;
-}
-
 #wcp-editor-button-load,
 #wcp-editor-extra-main-buttons,
 #wcp-editor-main-tab-buttons,
@@ -10681,7 +10677,7 @@ input[type="file"] {
   -webkit-transform-origin: right top;
           transform-origin: right top;
   z-index: 1000;
-  top: 0;
+  top: 15px;
   left: 20%;
 }
 

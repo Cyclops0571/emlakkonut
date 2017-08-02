@@ -19,6 +19,8 @@ class CreateParcelPhoto extends Migration
             $table->string('name');
             $table->string('size');
             $table->string('original_name');
+            $table->unsignedInteger('width');
+            $table->unsignedInteger('height');
             $table->timestamps();
         });
     }

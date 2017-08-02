@@ -27,6 +27,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\ParcelPhoto whereParcelId($value)
  * @property-read \App\Model\Parcel $parcel
  * @property-read \App\Model\ParcelPhoto $parcelPhoto
+ * @property int $width
+ * @property int $height
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereWidth($value)
  */
 class ParcelPhoto extends Model
 {
