@@ -1,15 +1,5 @@
 @extends('layouts.app')
 
-<style>
-.list-group-flush {
-  max-height: 500px;
-  overflow-y: auto;
-}
-.list-group-flush .list-group-item {
-  display: block;
-}
-</style>
-
 @section('content')
     <?php
     /** @var \App\Model\EstateProject[] $project */

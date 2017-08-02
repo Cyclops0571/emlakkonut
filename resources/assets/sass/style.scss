@@ -247,14 +247,9 @@
     margin-left: 8.33%;
 }
 body {
-    padding-top: 200px;
+    padding-top: 5%;
     background-color: #f6f7fa;
     font-family: 'Roboto', sans-serif;
-}
-h1 {
-    margin-bottom: 20px;
-    padding-bottom: 9px;
-    border-bottom: 1px solid #eee;
 }
 a,
 a:hover,
@@ -337,6 +332,7 @@ main>h2 {
 .card-size {
     width: 60rem;
     margin: 0 auto;
+    margin-top: 5rem;
 }
 input[type="file"] {
     display: none !important;
@@ -360,6 +356,13 @@ input[type="file"] {
 }
 .offset-md-2 {
     margin-left: 12%;
+}
+.list-group-flush {
+  max-height: 500px;
+  overflow-y: auto;
+}
+.list-group-flush .list-group-item {
+  display: block;
 }
 /********************************************************************/
 #wcp-editor {

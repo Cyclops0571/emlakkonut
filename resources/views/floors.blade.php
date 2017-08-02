@@ -10,16 +10,11 @@
   </form>
   <div class="card card-size">
     <div class="card-header">
-      Kat Planı
-      <span class="float-right">
-                <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-Asset-2"></i></button>
-        <!-- <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button> -->
-            </span>
+      İmajı Yüklenmemiş Katlar
     </div>
     <input id="inputFloor" type="text" class="form-control" placeholder="Plan tipini giriniz..."
            aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
     @if ($floorsWithoutImage)
-      Imaji Yuklenmemis Katlar:
       <ul id="listFloors" class="list-group list-group-flush">
         @foreach($floorsWithoutImage as $floor)
           <li class="list-group-item justify-content-between">
