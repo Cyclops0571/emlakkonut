@@ -13,6 +13,7 @@
         <ul id="listProjects" class="list-group list-group-flush">
           @foreach($projects as $project)
             <li class="list-group-item list-group-item-action" onclick="return window.location='{{URL::route('postures', $project->id)}}'">
+              <img src="https://i.ytimg.com/vi/CjwhePYkrAo/hqdefault.jpg" class="list-img"/>
               {{$project->ProjeAdi}}
             </li>
           @endforeach

@@ -364,6 +364,13 @@ input[type="file"] {
 .list-group-flush .list-group-item {
   display: block;
 }
+.list-img {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  margin-right: .5rem;
+}
 /********************************************************************/
 #wcp-editor {
     height: 98%;
