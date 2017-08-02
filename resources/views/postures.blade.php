@@ -30,7 +30,7 @@
             <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
             <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
-        <img id="imgPosture" src="{{$project->getPhotoPath()}}">
+        <img id="imgPosture" @if($project->projectPhoto) src="{{$project->getImageUrl()}}" @endif>
       </div>
     </form>
 @endsection
