@@ -10741,3 +10741,15 @@ input[type="file"] {
   color: #005aab !important;
 }
 
+#wcp-editor-right .wcp-editor-list-item {
+  background-color: #fff;
+}
+
+#wcp-editor-right .wcp-editor-list-item.wcp-active {
+  background-color: #f5f5f5;
+}
+
+#wcp-editor-list-title {
+  font-weight: normal;
+}
+
