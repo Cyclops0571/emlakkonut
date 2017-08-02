@@ -12,7 +12,7 @@ var editor = undefined;
             //         {
             //             type: 'text',
             //             name: 'image_map_name',
-            //             title: 'Image Map Name',
+            //             title: 'Harita Görsel İsmi',
             //             value: $.imageMapProDefaultSettings.general.name
             //         },
             //         {
@@ -30,26 +30,26 @@ var editor = undefined;
             //         {
             //             type: 'int',
             //             name: 'image_map_width',
-            //             title: 'Width',
+            //             title: 'Genişlik',
             //             value: $.imageMapProDefaultSettings.general.width,
             //         },
             //         {
             //             type: 'int',
             //             name: 'image_map_height',
-            //             title: 'Height',
+            //             title: 'Yükseklik',
             //             value: $.imageMapProDefaultSettings.general.height
             //             },
             //         {
             //             type: 'button',
             //             name: 'reset_size',
-            //             title: 'Reset Size',
+            //             title: 'Boyutu Sıfırla',
             //             options: { event_name: 'button-reset-size-clicked' },
             //             value: undefined
             //         },
             //         {
             //             type: 'select',
             //             name: 'pageload_animation',
-            //             title: 'Page Load Animation',
+            //             title: 'Sayfa Yüklenme Animasyonu',
             //             options: [
             //                 { value: 'none', title: 'None' },
             //                 { value: 'grow', title: 'Grow' },
@@ -60,13 +60,13 @@ var editor = undefined;
             //         {
             //             type: 'switch',
             //             name: 'late_initialization',
-            //             title: 'Late Initialization',
+            //             title: 'Geç Yüklenme',
             //             value: $.imageMapProDefaultSettings.general.late_initialization,
             //         },
             //         {
             //             type: 'switch',
             //             name: 'center_image_map',
-            //             title: 'Center Image Map',
+            //             title: 'Merkez Harita Görseli',
             //             value: $.imageMapProDefaultSettings.general.center_image_map,
             //         },
             //     ]
@@ -79,26 +79,26 @@ var editor = undefined;
             //         {
             //             type: 'wp media upload',
             //             name: 'image_url',
-            //             title: 'Image URL',
+            //             title: 'Görsel URL',
             //             value: $.imageMapProDefaultSettings.general.image_url
             //         },
             //     ]
             // },
             // {
             //     groupName: 'tooltips',
-            //     groupTitle: 'Tooltips',
+            //     groupTitle: 'İpuçları',
             //     groupIcon: 'fa fa-comment',
             //     controls: [
             //         {
             //             type: 'switch',
             //             name: 'sticky_tooltips',
-            //             title: 'Sticky Tooltips',
+            //             title: 'Yapışkan İpuçları',
             //             value: $.imageMapProDefaultSettings.general.sticky_tooltips,
             //         },
             //         {
             //             type: 'switch',
             //             name: 'constrain_tooltips',
-            //             title: 'Constrain Tooltips',
+            //             title: 'Constrain İpuçları',
             //             value: $.imageMapProDefaultSettings.general.constrain_tooltips,
             //         },
             //         {
@@ -115,7 +115,7 @@ var editor = undefined;
             //         {
             //             type: 'select',
             //             name: 'fullscreen_tooltips',
-            //             title: 'Fullscreen Tooltips',
+            //             title: 'Tam Ekran İpuçları',
             //             options: [
             //                 { value: 'none', title: 'None' },
             //                 { value: 'mobile-only', title: 'Mobile Only' },
@@ -127,37 +127,37 @@ var editor = undefined;
             // },
             // {
             //     groupName: 'fullscreen',
-            //     groupTitle: 'Fullscreen',
+            //     groupTitle: 'Tam Ekran',
             //     groupIcon: 'fa fa-arrows-alt',
             //     controls: [
             //         {
             //             type: 'switch',
             //             name: 'enable_fullscreen_mode',
-            //             title: 'Enable Fullscreen Mode',
+            //             title: 'Tam Ekran Modu Aktif',
             //             value: $.imageMapProDefaultSettings.fullscreen.enable_fullscreen_mode,
             //         },
             //         {
             //             type: 'switch',
             //             name: 'start_in_fullscreen_mode',
-            //             title: 'Start in Fullscreen Mode',
+            //             title: 'Tam Ekran Modunu Başlat',
             //             value: $.imageMapProDefaultSettings.fullscreen.start_in_fullscreen_mode,
             //         },
             //         {
             //             type: 'color',
             //             name: 'fullscreen_background',
-            //             title: 'Fullscreen Background',
+            //             title: 'Tam Ekran Arkaplanı',
             //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_background,
             //         },
             //         {
             //             type: 'fullscreen button position',
             //             name: 'fullscreen_button_position',
-            //             title: 'Fullscreen Button Position',
+            //             title: 'Tam Ekran Buton Pozisyonu',
             //             value: 1 // 0 = top left, 1 = top center, 2 = top right, 3 = bottom right, 4 = bottom center, 5 = bottom left
             //         },
             //         {
             //             type: 'button group',
             //             name: 'fullscreen_button_type',
-            //             title: 'Button Type',
+            //             title: 'Buton Tipi',
             //             options: [
             //                 { value: 'icon', title: 'Icon' },
             //                 { value: 'text', title: 'Text' },
@@ -168,7 +168,7 @@ var editor = undefined;
             //         {
             //             type: 'color',
             //             name: 'fullscreen_button_color',
-            //             title: 'Button Color',
+            //             title: 'Buton Rengi',
             //             value: $.imageMapProDefaultSettings.fullscreen.fullscreen_button_color,
             //         },
             //         {
@@ -225,8 +225,8 @@ var editor = undefined;
                         name: 'mouseover',
                         title: 'Hover Aksiyonu',
                         options: [
-                            { value: 'no-action', title: 'No Action' },
-                            { value: 'show-tooltip', title: 'Show Tooltip' },
+                            { value: 'no-action', title: 'Aksiyon Yok' },
+                            { value: 'show-tooltip', title: 'İpucunu Göster' },
                         ],
                         value: $.imageMapProDefaultSpotSettings.actions.mouseover
                     },
@@ -235,9 +235,9 @@ var editor = undefined;
                         name: 'click',
                         title: 'Aksiyon Al',
                         options: [
-                            { value: 'no-action', title: 'No Action' },
-                            { value: 'show-tooltip', title: 'Show Tooltip' },
-                            { value: 'follow-link', title: 'Follow Link' },
+                            { value: 'no-action', title: 'Aksiyon Yok' },
+                            { value: 'show-tooltip', title: 'İpucunu Göster' },
+                            { value: 'follow-link', title: 'Linki Takip Et' },
                         ],
                         value: $.imageMapProDefaultSpotSettings.actions.click
                     },
@@ -257,7 +257,7 @@ var editor = undefined;
             },
             {
                 groupName: 'icon',
-                groupTitle: 'Icon',
+                groupTitle: 'İkon',
                 groupIcon: 'fa fa-map-marker',
                 controls: [
                     {
@@ -271,8 +271,8 @@ var editor = undefined;
                         name: 'icon_type',
                         title: 'İkon Tipi',
                         options: [
-                            { value: 'library', title: 'Library' },
-                            { value: 'custom', title: 'Custom' },
+                            { value: 'library', title: 'Kütüphaneden' },
+                            { value: 'custom', title: 'Özel' },
                         ],
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_type
                     },
@@ -293,20 +293,20 @@ var editor = undefined;
                     {
                         type: 'text',
                         name: 'icon_svg_viewbox',
-                        title: 'Icon SVG Viewbox',
+                        title: 'İkon SVG Viewbox',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_svg_viewbox,
                         render: false
                     },
                     {
                         type: 'text',
                         name: 'icon_url',
-                        title: 'Icon Yolu',
+                        title: 'İkon Yolu',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_url
                     },
                     {
                         type: 'switch',
                         name: 'icon_is_pin',
-                        title: 'Icon is a Pin',
+                        title: 'Pin İkonu',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_is_pin
                     },
                     {
@@ -332,46 +332,46 @@ var editor = undefined;
                     {
                         type: 'color',
                         name: 'icon_fill',
-                        title: 'SVG Icon Fill Color',
+                        title: 'SVG İkon Rengi',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_fill
                     },
                     {
                         type: 'int',
                         name: 'border_radius',
-                        title: 'Border Radius',
+                        title: 'Çerçeve Yumuşaklığı',
                         value: $.imageMapProDefaultSpotSettings.default_style.border_radius
                     },
                     {
                         type: 'color',
                         name: 'background_color',
-                        title: 'Background Color',
+                        title: 'Arkaplan Rengi',
                         value: $.imageMapProDefaultSpotSettings.default_style.background_color
                     },
                     {
                         type: 'slider',
                         name: 'background_opacity',
-                        title: 'Background Opacity',
+                        title: 'Arkaplan Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.default_style.background_opacity
                     },
                     {
                         type: 'slider',
                         name: 'border_width',
-                        title: 'Border Width',
+                        title: 'Çerçeve Kalınlığı',
                         options: { min: 0, max: 20, type: 'int' },
                         value: $.imageMapProDefaultSpotSettings.default_style.border_width
                     },
                     {
                         type: 'select',
                         name: 'border_style',
-                        title: 'Border Style',
+                        title: 'Çerçeve Stili',
                         options: [
-                            { value: 'none', title: 'None' },
-                            { value: 'hidden', title: 'Hidden' },
+                            { value: 'none', title: 'Yok' },
+                            { value: 'hidden', title: 'Gizli' },
                             { value: 'solid', title: 'Solid' },
-                            { value: 'dotted', title: 'Dotted' },
-                            { value: 'dashed', title: 'Dashed' },
-                            { value: 'double', title: 'Double' },
+                            { value: 'dotted', title: 'Nokta' },
+                            { value: 'dashed', title: 'Çizgi' },
+                            { value: 'double', title: 'Çift' },
                             { value: 'groove', title: 'Groove' },
                             { value: 'inset', title: 'Inset' },
                             { value: 'outset', title: 'Outset' },
@@ -381,59 +381,59 @@ var editor = undefined;
                     {
                         type: 'color',
                         name: 'border_color',
-                        title: 'Border Color',
+                        title: 'Çerçeve Rengi',
                         value: $.imageMapProDefaultSpotSettings.default_style.border_color
                     },
                     {
                         type: 'slider',
                         name: 'border_opacity',
-                        title: 'Border Opacity',
+                        title: 'Çerçeve Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.default_style.border_opacity
                     },
                     {
                         type: 'color',
                         name: 'fill',
-                        title: 'Fill',
+                        title: 'Dolum Rengi',
                         value: $.imageMapProDefaultSpotSettings.default_style.fill
                     },
                     {
                         type: 'slider',
                         name: 'fill_opacity',
-                        title: 'Fill Opacity',
+                        title: 'Dolum Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.default_style.fill_opacity
                     },
                     {
                         type: 'color',
                         name: 'stroke_color',
-                        title: 'Stroke Color',
+                        title: 'Kalınlık Rengi',
                         value: $.imageMapProDefaultSpotSettings.default_style.stroke_color
                     },
                     {
                         type: 'slider',
                         name: 'stroke_opacity',
-                        title: 'Stroke Opacity',
+                        title: 'Kenar Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.default_style.stroke_opacity
                     },
                     {
                         type: 'slider',
                         name: 'stroke_width',
-                        title: 'Stroke Width',
+                        title: 'Kenar Genişliği',
                         options: { min: 0, max: 20, type: 'int' },
                         value: $.imageMapProDefaultSpotSettings.default_style.stroke_width
                     },
                     {
                         type: 'text',
                         name: 'stroke_dasharray',
-                        title: 'Stroke Dasharray',
+                        title: 'Çizgi Dizisi Kalınlığı',
                         value: $.imageMapProDefaultSpotSettings.default_style.stroke_dasharray
                     },
                     {
                         type: 'select',
                         name: 'stroke_linecap',
-                        title: 'Stroke Linecap',
+                        title: 'Hat Kalınlığı',
                         options: [
                             { value: 'butt', title: 'Butt' },
                             { value: 'round', title: 'Round' },
@@ -458,53 +458,53 @@ var editor = undefined;
                     {
                         type: 'slider',
                         name: 'mouseover_opacity',
-                        title: 'Opacity',
+                        title: 'Hover Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.opacity
                     },
                     {
                         type: 'color',
                         name: 'mouseover_icon_fill',
-                        title: 'SVG Icon Fill Color',
+                        title: 'SVG İkon Dolum Rengi',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.icon_fill
                     },
                     {
                         type: 'int',
                         name: 'mouseover_border_radius',
-                        title: 'Border Radius',
+                        title: 'Çerçeve Yumuşaklığı',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.border_radius
                     },
                     {
                         type: 'color',
                         name: 'mouseover_background_color',
-                        title: 'Background Color',
+                        title: 'Arkaplan Rengi',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.background_color
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_background_opacity',
-                        title: 'Background Opacity',
+                        title: 'Arkaplan Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.background_opacity
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_border_width',
-                        title: 'Border Width',
+                        title: 'Çerçeve Genişliği',
                         options: { min: 0, max: 20, type: 'int' },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.border_width
                     },
                     {
                         type: 'select',
                         name: 'mouseover_border_style',
-                        title: 'Border Style',
+                        title: 'Çerçeve Stili',
                         options: [
-                            { value: 'none', title: 'None' },
-                            { value: 'hidden', title: 'Hidden' },
+                            { value: 'none', title: 'Yok' },
+                            { value: 'hidden', title: 'Gizli' },
                             { value: 'solid', title: 'Solid' },
-                            { value: 'dotted', title: 'Dotted' },
-                            { value: 'dashed', title: 'Dashed' },
-                            { value: 'double', title: 'Double' },
+                            { value: 'dotted', title: 'Nokta' },
+                            { value: 'dashed', title: 'Çizgi' },
+                            { value: 'double', title: 'Çift' },
                             { value: 'groove', title: 'Groove' },
                             { value: 'inset', title: 'Inset' },
                             { value: 'outset', title: 'Outset' },
@@ -514,59 +514,59 @@ var editor = undefined;
                     {
                         type: 'color',
                         name: 'mouseover_border_color',
-                        title: 'Border Color',
+                        title: 'Çerçeve Rengi',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.border_color
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_border_opacity',
-                        title: 'Border Opacity',
+                        title: 'Çerçeve Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.border_opacity
                     },
                     {
                         type: 'color',
                         name: 'mouseover_fill',
-                        title: 'Fill',
+                        title: 'Dolum Rengi',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.fill
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_fill_opacity',
-                        title: 'Fill Opacity',
+                        title: 'Dolum Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.fill_opacity
                     },
                     {
                         type: 'color',
                         name: 'mouseover_stroke_color',
-                        title: 'Stroke Color',
+                        title: 'Kalınlık Rengi',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.stroke_color
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_stroke_opacity',
-                        title: 'Stroke Opacity',
+                        title: 'Kalınlık Şeffaflığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.stroke_opacity
                     },
                     {
                         type: 'slider',
                         name: 'mouseover_stroke_width',
-                        title: 'Stroke Width',
+                        title: 'Kalınlık Genişliği',
                         options: { min: 0, max: 20, type: 'int' },
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.stroke_width
                     },
                     {
                         type: 'text',
                         name: 'mouseover_stroke_dasharray',
-                        title: 'Stroke Dasharray',
+                        title: 'Nokta Dizesi Kalınlığı',
                         value: $.imageMapProDefaultSpotSettings.mouseover_style.stroke_dasharray
                     },
                     {
                         type: 'select',
                         name: 'mouseover_stroke_linecap',
-                        title: 'Stroke Linecap',
+                        title: 'Hat Kalınlığı',
                         options: [
                             { value: 'butt', title: 'Butt' },
                             { value: 'round', title: 'Round' },
@@ -584,13 +584,13 @@ var editor = undefined;
                     {
                         type: 'int',
                         name: 'tooltip_border_radius',
-                        title: 'Border Radius',
+                        title: 'Çerçeve Yumuşaklığı',
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.border_radius
                     },
                     {
                         type: 'int',
                         name: 'tooltip_padding',
-                        title: 'Padding',
+                        title: 'Mesafe',
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.padding
                     },
                     {
@@ -602,19 +602,19 @@ var editor = undefined;
                     {
                         type: 'slider',
                         name: 'tooltip_background_opacity',
-                        title: 'Arkaplan Saydamlık',
+                        title: 'Arkaplan Saydamlığı',
                         options: { min: 0, max: 1 },
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.background_opacity
                     },
                     {
                         type: 'select',
                         name: 'tooltip_position',
-                        title: 'Position',
+                        title: 'Pozisyon',
                         options: [
-                            { value: 'top', title: 'Top' },
-                            { value: 'bottom', title: 'Bottom' },
-                            { value: 'left', title: 'Left' },
-                            { value: 'right', title: 'Right' },
+                            { value: 'top', title: 'Üst' },
+                            { value: 'bottom', title: 'Alt' },
+                            { value: 'left', title: 'Sol' },
+                            { value: 'right', title: 'Sağ' },
                         ],
                         value: $.imageMapProDefaultSpotSettings.tooltip_style.position
                     },
@@ -634,22 +634,22 @@ var editor = undefined;
             },
             {
                 groupName: 'tooltip_content',
-                groupTitle: 'Tooltip İçeriği',
+                groupTitle: 'İpucu İçeriği',
                 groupIcon: 'fa fa-paragraph',
                 controls: [
                     {
                         type: 'button group',
                         name: 'tooltip_content_type',
-                        title: 'Tooltip Content',
+                        title: 'İpucu İçeriği',
                         options: [
-                            { value: 'plain-text', title: 'Plain Text' },
-                            { value: 'content-builder', title: 'Content Builder' },
+                            { value: 'plain-text', title: 'Düz Yazı' },
+                            { value: 'content-builder', title: 'İçerik Editörü' },
                         ]
                     },
                     {
                         type: 'textarea',
                         name: 'plain_text',
-                        title: 'Tooltip İçerik',
+                        title: 'İpucu İçeriği',
                         value: $.imageMapProDefaultSpotSettings.tooltip_content.plain_text
                     },
                     {
@@ -668,7 +668,7 @@ var editor = undefined;
                     {
                         type: 'button',
                         name: 'launch_content_builder',
-                        title: 'Launch Content Builder',
+                        title: 'İçerik Editörünü Çalıştır',
                         options: { event_name: 'button-launch-content-builder-clicked' },
                         value: undefined
                     },
@@ -681,10 +681,10 @@ var editor = undefined;
     $.wcpTourRegister({
         name: 'Image Map Pro Editor Tour',
         welcomeScreen: {
-            title: 'Welcome!',
+            title: 'Hoşgeldiniz!',
             text: 'This is a guided tour to get you started quickly with Image Map Pro.<br>Click the button below to begin!',
-            startButtonTitle: 'Take the Tour',
-            cancelButtonTitle: 'Or skip this guide',
+            startButtonTitle: 'Tur atabilir',
+            cancelButtonTitle: 'Veya eğitimi geçebilirsiniz',
         },
         steps: [
             {
@@ -874,12 +874,12 @@ var editor = undefined;
             {
                 name: 'Image Map',
                 icon: 'fa fa-cog',
-                title: 'Image Map Settings'
+                title: 'Görsel Harita Ayarları'
             },
             {
                 name: 'Shape',
                 icon: 'fa fa-object-ungroup',
-                title: 'Selected Shape Settings'
+                title: 'Şekil Ayarları'
             }
         ],
         toolbarButtons: [
@@ -887,22 +887,22 @@ var editor = undefined;
                 {
                     name: 'spot',
                     icon: 'fa fa-map-marker',
-                    title: 'Icon'
+                    title: 'İkon'
                 },
                 {
                     name: 'oval',
                     customIcon: '<div style="width: 14px; height: 14px; border: 2px solid #222; border-radius: 50px;"></div>',
-                    title: 'Ellipse'
+                    title: 'Elips'
                 },
                 {
                     name: 'rect',
                     customIcon: '<div style="width: 20px; height: 14px; border: 2px solid #222; border-radius: 5px;"></div>',
-                    title: 'Rectangle'
+                    title: 'Kare'
                 },
                 {
                     name: 'poly',
                     customIcon: '<svg width="24px" height="24px" viewport="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon fill="none" style="stroke: black; stroke-width: 2px;" points="20,20 18,4 7,7 4,20"></polygon><ellipse cx="20" cy="20" rx="3" ry="3"></ellipse><ellipse cx="18" cy="4" rx="3" ry="3"></ellipse><ellipse cx="7" cy="7" rx="3" ry="3"></ellipse><ellipse cx="4" cy="20" rx="3" ry="3"></ellipse></svg>',
-                    title: 'Polygon'
+                    title: 'Poligon'
                 },
             ],
             [
@@ -924,7 +924,7 @@ var editor = undefined;
                 {
                     name: 'drag',
                     icon: 'fa fa-hand-paper-o',
-                    title: 'Drag Canvas (Hold Spacebar and Drag)'
+                    title: 'Alanı Sürükle (Spacebar tuşuna basın ve sürükleyin)'
                 },
                 {
                     name: 'reset',
@@ -958,7 +958,7 @@ var editor = undefined;
             {
                 name: 'duplicate',
                 icon: 'fa fa-clone',
-                title: 'Aynı'
+                title: 'Kopyala'
             },
             {
                 name: 'delete',

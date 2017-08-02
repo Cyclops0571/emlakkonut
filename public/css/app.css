@@ -10204,7 +10204,7 @@ a.text-gray-dark:hover {
 @font-face {
   font-family: 'emlakkonut';
   src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861);
-  src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861) format("embedded-opentype"), url(/fonts/emlakkonut.ttf?1eb456647d424a13300c0a5624104a98) format("truetype"), url(/fonts/emlakkonut.woff?cb7e4c92e6b3105b2d46b317ffc4aa89) format("woff"), url(/fonts/emlakkonut.svg?46a8bd3bc3fd08e8c3177cea17160b4f) format("svg");
+  src: url(/fonts/emlakkonut.eot?01dff2156b464059c8d702b0f95f1861) format("embedded-opentype"), url(/fonts/emlakkonut.ttf?1eb456647d424a13300c0a5624104a98) format("truetype"), url(/fonts/emlakkonut.woff?cb7e4c92e6b3105b2d46b317ffc4aa89) format("woff"), url(/fonts/emlakkonut.svg?44d383bca69a727d01a1cc530069566d) format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -10633,11 +10633,17 @@ input[type="file"] {
   margin-left: 8px;
 }
 
+(??)
 .col-md-2 {
   max-width: 12%;
+(??)
 }
 
 /********************************************************************/
+
+#wcp-editor {
+  height: 98%;
+}
 
 #wcp-editor-button-load,
 #wcp-editor-extra-main-buttons,
@@ -10666,7 +10672,7 @@ input[type="file"] {
 #wcp-editor-left {
   background: none;
   width: 300px;
-  height: 465px;
+  height: 529px;
   margin-top: 100px;
   border-right: none;
 }
@@ -10675,6 +10681,7 @@ input[type="file"] {
   background: none;
   margin-top: 100px;
   border-left: none;
+  height: 529px;
 }
 
 #wcp-editor-toolbar-wrap {

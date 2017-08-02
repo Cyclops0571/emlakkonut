@@ -351,10 +351,20 @@ input[type="file"] {
 .justify-content-between span .btn {
     margin-left: 8px;
 }
+.col-md-10 {
+    flex: 0 0 88%;
+    max-width: 88%;
+}
 .col-md-2 {
     max-width: 12%;
 }
+.offset-md-2 {
+    margin-left: 12%;
+}
 /********************************************************************/
+#wcp-editor {
+    height: 98%;
+}
 #wcp-editor-button-load,
 #wcp-editor-extra-main-buttons,
 #wcp-editor-main-tab-buttons,
@@ -378,7 +388,7 @@ input[type="file"] {
 #wcp-editor-left {
     background: none;
     width: 300px;
-    height: 465px;
+    height: 529px;
     margin-top: 100px;
     border-right: none;
 }
@@ -386,6 +396,7 @@ input[type="file"] {
     background: none;
     margin-top: 100px;
     border-left: none;
+    height: 529px;
 }
 #wcp-editor-toolbar-wrap {
     transform: rotate(-90deg);
