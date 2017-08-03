@@ -17,8 +17,6 @@
       <div class="card card-size">
         <div class="card-header">
           Genel Vaziyet Planı
-          <button type="button" class="btn btn-warning btn-sm rounded-circle float-right"
-                  onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
         </div>
         <div class="input-group">
             <label class="input-group-addon">
@@ -26,8 +24,10 @@
                 <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
             </label>
             <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Save"></i></button>
-            <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
+            <span class="input-group-addon">
+                <button type="button" class="btn btn-warning btn-sm rounded-circle"
+                    onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
+            </span>
         </div>
         <img id="imgPosture" @if($project->projectPhoto) src="{{$project->getImageUrl()}}" @endif>
       </div>
@@ -48,6 +48,8 @@
               reader.readAsDataURL(input.files[0]);
 
               document.getElementById("spanPosture").innerHTML = input.files[0].name;
+
+              document.getElementById("photoForm").submit();
           }
       }
   </script>

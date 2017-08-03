@@ -632,25 +632,25 @@
                     }
                 },
                 width: {
-                    name: "Width",
+                    name: "Genişlik",
                     type: "int",
                     group: "Layout Manual",
                     default: "100"
                 },
                 auto_width: {
-                    name: "Auto Width",
+                    name: "Otomatik Genişlik",
                     type: "switch",
                     group: "Layout Manual",
                     default: 1
                 },
                 height: {
-                    name: "Height",
+                    name: "Yükseklik",
                     type: "int",
                     group: "Layout Manual",
                     default: "100"
                 },
                 auto_height: {
-                    name: "Auto Height",
+                    name: "Otomatik Yükseklik",
                     type: "switch",
                     group: "Layout Manual",
                     default: 1
@@ -658,12 +658,12 @@
             },
             style: {
                 background_color: {
-                    name: "Background Color",
+                    name: "Arkaplan Rengi",
                     type: "color",
                     default: "#ffffff"
                 },
                 background_opacity: {
-                    name: "Background Opacity",
+                    name: "Arkaplan Şeffaflığı",
                     type: "slider",
                     options: {
                         min: 0,
@@ -672,7 +672,7 @@
                     default: "0"
                 },
                 opacity: {
-                    name: "Opacity",
+                    name: "Şeffaflık",
                     type: "slider",
                     options: {
                         min: 0,
@@ -681,12 +681,12 @@
                     default: "1"
                 },
                 box_shadow: {
-                    name: "Box Shadow",
+                    name: "Kutu Gölgesi",
                     type: "text",
                     default: "none"
                 },
                 border_width: {
-                    name: "Border Width",
+                    name: "Çerçeve Genişliği",
                     type: "slider",
                     options: {
                         min: 0,
@@ -696,18 +696,18 @@
                     default: "0"
                 },
                 border_style: {
-                    name: "Border Style",
+                    name: "Çerçeve Stili",
                     type: "select",
                     options: ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"],
                     default: "none"
                 },
                 border_color: {
-                    name: "Border Color",
+                    name: "Çerçeve Rengi",
                     type: "color",
                     default: "#000000"
                 },
                 border_opacity: {
-                    name: "Border Opacity",
+                    name: "Çerçeve Şeffaflığı",
                     type: "slider",
                     options: {
                         min: 0,
@@ -716,7 +716,7 @@
                     default: "1"
                 },
                 border_radius: {
-                    name: "Border Radius",
+                    name: "Çerçeve Yumuşaklığı",
                     type: "slider",
                     options: {
                         min: 0,
@@ -728,18 +728,18 @@
             },
             font: {
                 font_family: {
-                    name: "Font Family",
+                    name: "Font Ailesi",
                     type: "text",
                     default: "sans-serif"
                 },
                 font_size: {
-                    name: "Font Size",
+                    name: "Font Boyutu",
                     type: "text",
                     format: "int",
                     default: "14"
                 },
                 font_weight: {
-                    name: "Font Weight",
+                    name: "Font Genişliği",
                     type: "text",
                     default: "normal"
                 },
@@ -791,7 +791,7 @@
                     default: ""
                 },
                 classes: {
-                    name: "Classes",
+                    name: "Sınıf",
                     type: "text",
                     default: ""
                 },
