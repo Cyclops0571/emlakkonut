@@ -10,23 +10,24 @@ use Illuminate\Http\UploadedFile;
  *
  * @property int $id
  * @property int $project_id
+ * @property int $island_id
  * @property int $parcel_id
+ * @property int $block_id
  * @property string $floor_numbering
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereParcelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereProjeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereUpdatedAt($value)
- * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereFloorNumbering($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereProjectId($value)
- * @property int $block_id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereBlockId($value)
- * @property-read \App\Model\FloorPhoto $floorPhoto
  * @property-read \App\Model\Block $block
  * @property-read \App\Model\FloorInteractivity $floorInteractivity
+ * @property-read \App\Model\FloorPhoto $floorPhoto
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereBlockId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereFloorNumbering($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereIslandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereParcelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Floor whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Floor extends Model
 {
@@ -34,15 +35,22 @@ class Floor extends Model
 
     public static function setFloorPhoto(UploadedFile $photo)
     {
+        //proje - ada-parcel-block-kapi diye bakilmali...
         // 1- parse the name
         // 2- find the floor
         // 3- check if floorPhoto is exits
         // 4- save the new photo
         // 5- move it to the place
         // 6- change the photoUrl to new url
-        $filename = $photo->getClientOriginalName();
-        $fileFormat = explode("_");
 
+        //name formula...
+
+
+        $filename = $photo->getClientOriginalName();
+        $fileFormat = explode("__");
+
+        //"ADA__PARSEL__BLOK__KATNUMARALARI"
+        
         dd($filename);
 
 //        if (!$this->parcelPhoto)

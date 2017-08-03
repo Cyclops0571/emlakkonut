@@ -70,7 +70,7 @@ class LoginController extends Controller
         $serviceResponse = ServiceResponse::setUserAttributesFromService($credentials['name'], $credentials['password']);
         if($serviceResponse && $serviceResponse->Durum == 0) {
             $user = User::setAttributesFromService($serviceResponse->Sonuc, $credentials['name']);
-            $projectList = $user->setProjectListFromService();
+            $projectList = $user->setProjectListFromService(); //571571 check this with cron not from service
             $user->estateProject()->sync($projectList->pluck('id'));
             \Auth::login($user);
             $this->clearLoginAttempts($request);

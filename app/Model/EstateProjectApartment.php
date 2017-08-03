@@ -96,19 +96,20 @@ class EstateProjectApartment extends Model {
         foreach ($projectParts as $projectPart)
         {
 
-            $estateProjectPart = self::query()->where('ProjeID', $projectPart->ProjeID)
+            $estateProjectPart = static::where('ProjeID', $projectPart->ProjeID)
+                ->where('Ada', $projectPart->Ada)
                 ->where('Parsel', $projectPart->Parsel)
                 ->where('BlokNo', $projectPart->BlokNo)
                 ->where('KapiNo', $projectPart->KapiNo)
                 ->first();
             if (!$estateProjectPart)
             {
-                $estateProjectPart = new self();
+                $estateProjectPart = new static();
 
             }
 
-            $currentProject = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
-            $estateProjectPart->project_id = $currentProject->id;
+            $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
+            $estateProjectPart->project_id = $project->id;
             $estateProjectPart->Il = $projectPart->Il;
             $estateProjectPart->Ilce = $projectPart->Ilce;
             $estateProjectPart->Ada = $projectPart->Ada;

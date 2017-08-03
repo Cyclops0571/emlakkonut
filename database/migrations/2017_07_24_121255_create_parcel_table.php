@@ -16,6 +16,7 @@ class CreateParcelTable extends Migration
         Schema::create('parcel', function(Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('project_id')->index();
+            $table->unsignedInteger('island_id')->index();
             $table->string('parcel');
             $table->timestamps();
 

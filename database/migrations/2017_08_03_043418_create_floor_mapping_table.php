@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlockTable extends Migration
+class CreateFloorMappingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBlockTable extends Migration
      */
     public function up()
     {
-        Schema::create('block', function(Blueprint $table){
+        Schema::create('floor_mapping', function (Blueprint $table){
             $table->increments('id');
-            $table->unsignedInteger('project_id');
-            $table->unsignedInteger('island_id');
-            $table->unsignedInteger('parcel_id');
-            $table->string('block_no');
+            $table->integer('floor_no');
+            $table->integer('floor_name');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBlockTable extends Migration
      */
     public function down()
     {
-        Schema::drop('block');
+        Schema::drop('floor_mapping');
     }
 }

@@ -17,7 +17,8 @@ class CreateFloorTable extends Migration {
         {
             $table->increments('id');
             $table->unsignedInteger('project_id');
-            $table->unsignedInteger('parcel _id');
+            $table->unsignedInteger('island_id');
+            $table->unsignedInteger('parcel_id');
             $table->unsignedInteger('block_id');
             $table->string('floor_numbering');
             $table->timestamps();

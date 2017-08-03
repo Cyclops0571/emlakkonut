@@ -6,8 +6,10 @@ use App\Model\Block;
 use App\Model\EstateProject;
 use App\Model\EstateProjectApartment;
 use App\Model\Floor;
+use App\Model\Island;
 use App\Model\Parcel;
 use Illuminate\Console\Command;
+use PhpParser\Error;
 
 class KkysFloorCommand extends Command {
 
@@ -32,25 +34,22 @@ class KkysFloorCommand extends Command {
      */
     public function handle()
     {
-        $floors = EstateProjectApartment::groupBy(['project_id', 'Parsel', 'BlokNo', 'BulunduguKat'])->get(['project_id', 'Parsel', 'BlokNo', 'BulunduguKat']);
-        foreach ($floors as $floorData)
+        $apartments = EstateProjectApartment::groupBy(['project_id', 'Ada', 'Parsel', 'BlokNo', 'BulunduguKat'])->get(['project_id', 'Ada', 'Parsel', 'BlokNo', 'BulunduguKat']);
+        foreach ($apartments as $apartment)
         {
-            $parcel = Parcel::where('project_id', $floorData->project_id)
-                ->where('parcel', $floorData->Parsel)
-                ->first();
-            $block = Block::where('project_id', $floorData->project_id)
-                ->where('parcel_id', $parcel->id)
-                ->where('block_no', $floorData->BlokNo)
-                ->first();
-            if (!$parcel || !$block)
+            $island = Island::getFromApartment($apartment);
+            $parcel = Parcel::getFromApartment($apartment, $island);
+            $block = Block::getFromApartment($apartment, $island, $parcel);
+
+            if (!$island || !$parcel || !$block )
             {
+                \Log::critical(static::class . " data conflict!!!");
                 continue;
             }
 
-
-
-            $floorNumbering = $floorData->BulunduguKat ? $floorData->BulunduguKat : 'Bulunduğu Kat Girilmemiş';
-            $floor = Floor::where('project_id', $floorData->project_id)
+            $floorNumbering = $apartment->BulunduguKat ? $apartment->BulunduguKat : 'Bulunduğu Kat Girilmemiş';
+            $floor = Floor::where('project_id', $apartment->project_id)
+                ->where('island_id', $island->id)
                 ->where('parcel_id', $parcel->id)
                 ->where('block_id', $block->id)
                 ->where('floor_numbering', $floorNumbering)
@@ -59,7 +58,8 @@ class KkysFloorCommand extends Command {
             {
                 $floor = new Floor();
             }
-            $floor->project_id = $floorData->project_id;
+            $floor->project_id = $apartment->project_id;
+            $floor->island_id = $island->id;
             $floor->parcel_id = $parcel->id;
             $floor->block_id = $block->id;
             $floor->floor_numbering = $floorNumbering;

@@ -26,14 +26,35 @@ use Illuminate\Http\UploadedFile;
  * @property-read \App\Model\EstateProject $estateProject
  * @property-read \App\Model\ParcelPhoto $parcelPhoto
  * @property-read \App\ParcelInteractivity $parcelInteractivity
+ * @property int $island_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Parcel whereIslandId($value)
+ * @property-read \App\Model\Island $island
  */
 class Parcel extends Model {
 
     protected $table = 'parcel';
 
+    /**
+     * @param EstateProjectApartment $apartment
+     * @param Island $island
+     * @return null|static
+     */
+    public static function getFromApartment(EstateProjectApartment $apartment, Island $island)
+    {
+        return static::where('project_id', $apartment->project_id)
+            ->where('island_id', $island->id)
+            ->where('parcel', $apartment->Parsel)
+            ->first();
+    }
+
     public function estateProject()
     {
-        return $this->belongsTo(EstateProject::class, 'project_id', 'id');
+        return $this->belongsTo(EstateProject::class, 'project_id');
+    }
+
+    public function island()
+    {
+        return $this->belongsTo(Island::class, 'island_id');
     }
 
     public function parcelPhoto()
@@ -101,7 +122,8 @@ class Parcel extends Model {
 
     public function setInteractivity($interactiveJson)
     {
-        if(!$this->parcelInteractivity) {
+        if (!$this->parcelInteractivity)
+        {
             $this->parcelInteractivity = new ParcelInteractivity();
         }
         $this->parcelInteractivity->parcel_id = $this->id;

@@ -21,7 +21,7 @@
                   <input type="file" name="photo" class="form-control" aria-describedby="basic-addon1"
                          onchange="fileUpload(this)">
                 </label>
-                {{$parcel->parcel}}
+                Ada: {{$parcel->island->island_kkys}} - Parsel: {{$parcel->parcel}}
               </span>
               <span>
                 <button class="btn btn-primary btn-sm rounded-circle" type="submit"><i class="icon-Accept"></i></button>
