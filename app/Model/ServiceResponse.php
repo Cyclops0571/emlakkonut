@@ -29,11 +29,10 @@ class ServiceResponse extends Model
     }
 
     public static function setAttributesFromService($url) {
-        echo $url, PHP_EOL;
         $client = new Client();
         $response = $client->get($url);
         $response = json_decode($response->getBody()->getContents());
-        $serviceResponse = new self();
+        $serviceResponse = new static();
         $serviceResponse->Durum = $response->Durum;
         $serviceResponse->DurumAciklama = $response->DurumAciklama;
         $serviceResponse->Sonuc = $response->Sonuc;

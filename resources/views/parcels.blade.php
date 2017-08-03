@@ -18,7 +18,7 @@
                   <input type="file" name="photo" class="form-control" aria-describedby="basic-addon1"
                          onchange="fileUpload(this)">
                 </label>
-                {{$parcel->parcel}}
+                Ada: {{$parcel->island->island_kkys}} - Parsel: {{$parcel->parcel}}
               </span>
             </form>
             <form name="{{$parcel->id}}" method="post" action="{{URL::route('photo.parcelStore')}}" enctype="multipart/form-data">

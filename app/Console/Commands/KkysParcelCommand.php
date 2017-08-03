@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Model\EstateProject;
 use App\Model\EstateProjectApartment;
+use App\Model\Island;
 use App\Model\Parcel;
 use Illuminate\Console\Command;
 use phpDocumentor\Reflection\Project;
@@ -31,21 +32,23 @@ class KkysParcelCommand extends Command {
      */
     public function handle()
     {
-        $parcels = EstateProjectApartment::groupBy(['project_id', 'Parsel'])->get(['project_id', 'Parsel']);
-        foreach ($parcels as $parcel)
+        $apartments = EstateProjectApartment::groupBy(['project_id', 'Ada', 'Parsel'])->get(['project_id', 'Ada', 'Parsel']);
+        foreach ($apartments as $apartment)
         {
-            $project = EstateProject::where('id', $parcel->project_id)->first();
-            if (!$project)
-            {
+            $island = Island::getFromApartment($apartment);
+            if(!$island) {
+                \Log::critical(static::class . " data conflict!!!");
                 continue;
             }
-            $oldParcel = Parcel::where('project_id', $project->id)->where('parcel')->first();
-            if (!$oldParcel)
+
+            $parcel = Parcel::getFromApartment($apartment, $island);
+            if (!$parcel)
             {
-                $newParcel = new Parcel();
-                $newParcel->project_id = $project->id;
-                $newParcel->parcel = $parcel->Parsel;
-                $newParcel->save();
+                $parcel = new Parcel();
+                $parcel->project_id = $apartment->project_id;
+                $parcel->island_id = $island->id;
+                $parcel->parcel = $apartment->Parsel;
+                $parcel->save();
             }
         }
     }

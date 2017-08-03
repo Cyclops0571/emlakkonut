@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Model\Block;
 use App\Model\EstateProjectApartment;
+use App\Model\Island;
 use App\Model\Parcel;
 use Illuminate\Console\Command;
 
@@ -23,15 +24,6 @@ class KkysBlockCommand extends Command
      */
     protected $description = 'Parse and insert block';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Execute the console command.
@@ -41,28 +33,26 @@ class KkysBlockCommand extends Command
     public function handle()
     {
 
-        $blocks = EstateProjectApartment::groupBy(['project_id', 'Parsel', 'BlokNo'])->get(['project_id', 'Parsel', 'BlokNo']);
-        foreach ($blocks as $blockData)
+        $apartments = EstateProjectApartment::groupBy(['project_id', 'Ada', 'Parsel', 'BlokNo'])->get(['project_id', 'Ada', 'Parsel', 'BlokNo']);
+        foreach ($apartments as $apartment)
         {
-            $parcel = Parcel::where('project_id', $blockData->project_id)
-                ->where('parcel', $blockData->Parsel)
-                ->first();
-            if (!$parcel)
+            $island = Island::getFromApartment($apartment);
+            $parcel = Parcel::getFromApartment($apartment, $island);
+            if (!$island || !$parcel)
             {
+                \Log::critical(static::class . " data conflict!!!");
                 continue;
             }
 
-            $block = Block::where('project_id', $blockData->project_id)
-                ->where('parcel_id', $parcel->id)
-                ->where('block_no', $blockData->BlokNo)
-                ->first();
+            $block = Block::getFromApartment($apartment, $island, $parcel);
             if (!$block)
             {
                 $block = new Block();
             }
-            $block->project_id = $blockData->project_id;
+            $block->project_id = $apartment->project_id;
+            $block->island_id = $island->id;
             $block->parcel_id = $parcel->id;
-            $block->block_no = $blockData->BlokNo;
+            $block->block_no = $apartment->BlokNo;
             $block->save();
         }
     }
