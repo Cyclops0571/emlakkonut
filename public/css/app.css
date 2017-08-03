@@ -10503,7 +10503,7 @@ a.text-gray-dark:hover {
 }
 
 body {
-  padding-top: 5%;
+  padding-top: 6rem;
   background-color: #f6f7fa;
   font-family: 'Roboto', sans-serif;
 }
@@ -10516,7 +10516,7 @@ a:focus {
 
 .navbar-brand > img {
   width: 104px;
-  margin-left: 60px;
+  margin-left: 44px;
   margin-bottom: 20px;
 }
 
@@ -10606,6 +10606,7 @@ main > h2 {
 
 .custom-file {
   display: inline;
+  margin-right: 8px;
 }
 
 .custom-file > [class^="icon-"],
@@ -10792,5 +10793,13 @@ input[type="file"] {
 
 #imp-editor-tooltip-content-builder-close {
   top: 20;
+}
+
+/********************************************************************/
+
+.dropzone {
+  border: 2px dashed rgba(0, 0, 0, 0.3) !important;
+  margin: auto;
+  width: 60%;
 }
 

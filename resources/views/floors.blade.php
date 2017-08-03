@@ -4,6 +4,7 @@
   @parent
   <link href="/css/dropzone.css" rel="stylesheet">
 @endsection
+
 @section('content')
   <form id="addPhotosForm" action="{{URL::route('photo.floorStore', $project->id)}}" method="post" class="dropzone">
     {{csrf_field()}}
@@ -23,8 +24,15 @@
         @endforeach
       </ul>
     @endif
+  </div>
 
-    <ul id="listFloors" class="list-group list-group-flush">
+  <div class="card card-size">
+    <div class="card-header">
+      İmajı Yüklenmiş Katlar
+    </div>
+    <input id="inputFloorOK" type="text" class="form-control" placeholder="Plan tipini giriniz..."
+           aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+    <ul id="listFloorsOK" class="list-group list-group-flush">
       @foreach($floorsWithImage as $floor)
         <li class="list-group-item justify-content-between">
           <span>
@@ -48,6 +56,7 @@
     </ul>
   </div>
 @endsection
+
 @section('javascript')
   @parent
   <script src="/js/dropzone.js"></script>
