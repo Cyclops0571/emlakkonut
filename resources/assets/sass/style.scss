@@ -233,9 +233,8 @@
 .input-group-addon {
     background-color: transparent;
     border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0;
-    font-size: 1.4rem;
+    font-size: 1.9rem;
 }
 .pass {
     margin-bottom: 50px;
@@ -247,14 +246,9 @@
     margin-left: 8.33%;
 }
 body {
-    padding-top: 200px;
+    padding-top: 5%;
     background-color: #f6f7fa;
     font-family: 'Roboto', sans-serif;
-}
-h1 {
-    margin-bottom: 20px;
-    padding-bottom: 9px;
-    border-bottom: 1px solid #eee;
 }
 a,
 a:hover,
@@ -331,12 +325,20 @@ main>h2 {
     border-left: 5px solid #00A65E;
 }
 .nav-link>[class^="icon-"],
-[class*=" icon-"] {
+.nav-link>[class*=" icon-"] {
     margin-right: 8px;
+}
+.custom-file {
+    display: inline;
+}
+.custom-file>[class^="icon-"],
+.custom-file>[class*=" icon-"] {
+    font-size: 1.9rem;
 }
 .card-size {
     width: 60rem;
     margin: 0 auto;
+    margin-top: 5rem;
 }
 input[type="file"] {
     display: none !important;
@@ -345,10 +347,7 @@ input[type="file"] {
     padding-left: .5rem;
     padding-right: .5rem;
 }
-.icon-size {
-    font-size: 1.4rem;
-}
-.justify-content-between span .btn {
+.btn-margin-left {
     margin-left: 8px;
 }
 .col-md-10 {
@@ -360,6 +359,18 @@ input[type="file"] {
 }
 .offset-md-2 {
     margin-left: 12%;
+}
+.list-group-flush {
+    max-height: 500px;
+    overflow-y: auto;
+    display: block;
+}
+.list-img {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 50%;
+    margin-right: .5rem;
 }
 /********************************************************************/
 #wcp-editor {
@@ -415,6 +426,9 @@ input[type="file"] {
 #wcp-editor-list-title {
     background-color: #005aab !important;
 }
+.wcp-editor-form-tab-button.wcp-active {
+    background-color: #044a89 !important;
+}
 #wcp-editor-main-buttons {
     margin-bottom: 15px;
 }
@@ -433,4 +447,31 @@ input[type="file"] {
 .wcp-editor-main-button,
 .wcp-editor-toolbar-button-icon {
     color: #005aab !important;
+}
+#wcp-editor-right .wcp-editor-list-item {
+    background-color: #fff;
+}
+#wcp-editor-right .wcp-editor-list-item.wcp-active {
+    background-color: #f5f5f5;
+}
+#wcp-editor-list-title {
+    font-weight: normal;
+}
+.sq-window-main-nav-button {
+    padding-top: 1rem;
+}
+.sq-window-header {
+    height: 50px;
+}
+.sq-add-elements {
+    padding-top: .6rem;
+}
+.sq-window-content {
+    padding: 29px;
+}
+.sq-window-close {
+    top: 10;
+}
+#imp-editor-tooltip-content-builder-close {
+    top: 20;
 }

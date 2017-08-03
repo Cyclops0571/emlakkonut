@@ -1,15 +1,5 @@
 @extends('layouts.app')
 
-<style>
-.list-group-flush {
-  max-height: 500px;
-  overflow-y: auto;
-}
-.list-group-flush .list-group-item {
-  display: block;
-}
-</style>
-
 @section('content')
     <?php
     /** @var \App\Model\EstateProject[] $project */
@@ -17,12 +7,12 @@
       <div class="card card-size">
         <div class="card-header">
           Projeler
-          <!-- <button class="btn btn-primary btn-sm rounded-circle float-right"><i class="icon-plus"></i></button> -->
         </div>
         <input id="inputProject" type="text" class="form-control" placeholder="Proje adı giriniz..." onkeyup="filter(this)" autofocus>
         <ul id="listProjects" class="list-group list-group-flush">
           @foreach($projects as $project)
             <li class="list-group-item list-group-item-action" onclick="return window.location='{{URL::route('postures', $project->id)}}'">
+              <img src="https://i.ytimg.com/vi/CjwhePYkrAo/hqdefault.jpg" class="list-img"/>
               {{$project->ProjeAdi}}
             </li>
           @endforeach
