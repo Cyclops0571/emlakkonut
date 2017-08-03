@@ -2,11 +2,7 @@
 
 <style>
   body {
-    padding-top: 60px !important;
-  }
-
-  #wcp-editor-button-new {
-    display: none !important;
+    padding-bottom: 0 !important;
   }
 </style>
 
