@@ -578,7 +578,7 @@ var editor = undefined;
             },
             {
                 groupName: 'tooltip_settings',
-                groupTitle: 'Tooltip Ayarları',
+                groupTitle: 'İpucu Ayarları',
                 groupIcon: 'fa fa-comment',
                 controls: [
                     {

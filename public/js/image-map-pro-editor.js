@@ -309,7 +309,7 @@
 				loadImage(editor.canvasImage, function() {
 					// Image is loading
 					// Show loader
-					$.wcpEditorPresentLoadingScreen('Loading Image...');
+					$.wcpEditorPresentLoadingScreen('İmaj yükleniyor...');
 				}, function() {
 					// Image has loaded
 					// init canvas events
@@ -331,7 +331,7 @@
 					editor.redraw();
 					editor.addAction();
 				}, function() {
-					$.wcpEditorHideLoadingScreenWithMessage('Error Loading Image!', true, false);
+					$.wcpEditorHideLoadingScreenWithMessage('İmaj yüklenemedi!', true, false);
 				});
 			} else {
 				settings.general.name = m.general.image_map_name.trim();
@@ -467,7 +467,7 @@
 							{
 								class: 'primary',
 								name: 'done',
-								title: 'Done'
+								title: 'Tamam'
 							}
 						],
 						body: modalBody
@@ -695,7 +695,7 @@
 				buttons: [
 					{
 						name: 'done',
-						title: 'Done',
+						title: 'Tamam',
 						class: 'primary'
 					}
 				],
@@ -869,11 +869,11 @@
 
 	// Event for loading a save
 	$.wcpEditorEventLoadSaveWithID = function(saveID) {
-		$.wcpEditorPresentLoadingScreen('Loading Image Map...');
+		$.wcpEditorPresentLoadingScreen('İmaj yükleniyor...');
 
 		$.imp_editor_storage_get_save(saveID, function(save) {
 			if (!save) {
-				$.wcpEditorHideLoadingScreenWithMessage('Error loading image map.', true, false);
+				$.wcpEditorHideLoadingScreenWithMessage('İmaj yüklenemedi!', true, false);
 			} else {
 				settings = save;
 
@@ -1072,10 +1072,10 @@
 			// Load last save
 			$.imp_editor_storage_get_last_save(function(lastSaveID) {
 				if (lastSaveID && parseInt(lastSaveID, 10) != 0 && !isNaN(parseInt(lastSaveID, 10))) {
-					$.wcpEditorPresentLoadingScreen('Loading Image Map...');
+					$.wcpEditorPresentLoadingScreen('İmaj yükleniyor...');
 					$.imp_editor_storage_get_save(parseInt(lastSaveID, 10), function(save) {
 						if (!save) {
-							$.wcpEditorHideLoadingScreenWithMessage('Error loading image map.', true, false);
+							$.wcpEditorHideLoadingScreenWithMessage('İmaj yüklenemedi!', true, false);
 						} else {
 							settings = save;
 							editor.launch();
@@ -1133,7 +1133,7 @@
 			loadImage(self.canvasImage, function() {
 				// Image is loading
 				// Show loader
-				$.wcpEditorPresentLoadingScreen('Loading Image...');
+				$.wcpEditorPresentLoadingScreen('İmaj yükleniyor...');
 			}, function() {
 				// Image has loaded
 				// Hide loader
@@ -1156,7 +1156,7 @@
 
 				$.wcpEditorHideLoadingScreen();
 			}, function() {
-				$.wcpEditorHideLoadingScreenWithMessage('Error Loading Image!', true, false);
+				$.wcpEditorHideLoadingScreenWithMessage('İmaj yüklenemedi!', true, false);
 			});
 		} else {
 			$.wcpEditorHideLoadingScreen();
@@ -3444,9 +3444,9 @@
 			html += '       <div id="imp-editor-tooltip-content-builder" class="squares"></div>';
 			html += '   </div>';
 			html += '   <div id="imp-editor-tooltip-content-builder-description">';
-			html += '       <p>Press the Done button when you are done editing, or click the Close button in the upper-right corner.</p>';
+			html += '       <p>Düzenleme bittikten sonra "Tamam" butonuna veya sağ üstte bulunan kapatma butonuna basın.</p>';
 			html += '   </div>';
-			html += '   <div class="wcp-editor-control-button" id="imp-editor-done-editing-tooltip">Done</div>';
+			html += '   <div class="wcp-editor-control-button" id="imp-editor-done-editing-tooltip">Tamam</div>';
 			html += '</div>';
 
 			$('body').append(html);

@@ -426,6 +426,9 @@ input[type="file"] {
 #wcp-editor-list-title {
     background-color: #005aab !important;
 }
+.wcp-editor-form-tab-button.wcp-active {
+    background-color: #044a89 !important;
+}
 #wcp-editor-main-buttons {
     margin-bottom: 15px;
 }
@@ -453,4 +456,22 @@ input[type="file"] {
 }
 #wcp-editor-list-title {
     font-weight: normal;
+}
+.sq-window-main-nav-button {
+    padding-top: 1rem;
+}
+.sq-window-header {
+    height: 50px;
+}
+.sq-add-elements {
+    padding-top: .6rem;
+}
+.sq-window-content {
+    padding: 29px;
+}
+.sq-window-close {
+    top: 10;
+}
+#imp-editor-tooltip-content-builder-close {
+    top: 20;
 }
