@@ -4,9 +4,6 @@
     <div class="card card-size">
         <div class="card-header">
             Daireler
-            <span class="float-right">
-                <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-Asset-2"></i></button>
-            </span>
         </div>
         <input id="inputApartment" type="text" class="form-control" placeholder="Daire tipini giriniz..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
         <ul id="listApartments" class="list-group list-group-flush">

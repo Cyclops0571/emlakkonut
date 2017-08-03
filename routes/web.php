@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
     Route::get('/floors/{project}', 'HomeController@floors')->name('floors');
-    Route::get('/apartmentslarlar', 'HomeController@apartments')->name('apartments');
+    Route::get('/apartments', 'HomeController@apartments')->name('apartments');
     Route::get('/location', 'HomeController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'DesignerController@project')->name('projectDesigner');
     Route::get('/parcelDesigner/{parcel}', 'DesignerController@parcel')->name('parcelDesigner');
