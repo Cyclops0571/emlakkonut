@@ -2,14 +2,14 @@
 
 <style>
     #map {
-        width: 50rem;
+        width: 84.1%;
         height: 500px;
     }
 
     .mapnav {
-        margin-left: 15px;
+        margin-left: 1.4%;
         background-color: #044a89;
-        width: 10rem;
+        width: 13%;
     }
 
     .mapnav .nav-item {
@@ -20,6 +20,11 @@
     .file {
         color: #fff;
         margin: 0 auto;
+    }
+
+    #imgProjeKroki {
+        margin: 0 1.4%;
+        width: 100%;
     }
 </style>
 
@@ -38,7 +43,6 @@
                             <input type="file" id="inputProjeGorsel" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
                         </label>
                     </div>
-                    <img id="imgProjeGorsel" src="#">
                 </li>
                 <li class="nav-item">
                     <div class="input-group">
@@ -51,7 +55,7 @@
                 </li>
             </ul>
             <div id="map"></div>
-            <img id="imgProjeKroki" src="#">
+            <img id="imgProjeKroki">
         </div>
     </div>
 @endsection

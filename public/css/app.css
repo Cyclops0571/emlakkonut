@@ -10503,9 +10503,10 @@ a.text-gray-dark:hover {
 }
 
 body {
-  padding-top: 6rem;
+  padding: 6rem 0;
   background-color: #f6f7fa;
   font-family: 'Roboto', sans-serif;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAASUlEQVQokc3QsQkAMAhE0TPO4v5zuIFTCA5wkD4RYpkr5WHxxd3NTFXxmmTmxAFYQwdgDd2/NCJIHkepqpuSvMv0X9uCnxZotwF/OhEkm8OoNAAAAABJRU5ErkJggg==);
 }
 
 a,
