@@ -3,9 +3,26 @@
 @section('css')
   @parent
   <link href="/css/dropzone.css" rel="stylesheet">
+  <style>
+    .dropzone {
+      border: 2px dashed rgba(0, 0, 0, 0.3) !important;
+      margin: auto;
+      width: 60%;
+    }
+    .dropzone .dz-message {
+      margin: 4rem 2rem 2rem 2rem;
+    }
+    .img-up {
+      width: 3rem;
+      position: absolute;
+      left: 48%;
+      top: 2.5rem;
+    }
+  </style>
 @endsection
 
 @section('content')
+  <img src="/img/DRAG_DROP.svg" class="img-up"/>
   <form id="addPhotosForm" action="{{URL::route('photo.floorStore', $project->id)}}" method="post" class="dropzone">
     {{csrf_field()}}
   </form>
