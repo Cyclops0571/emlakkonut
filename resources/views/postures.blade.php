@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
             <label class="input-group-addon">
-                <i class="icon-Quantity"></i>
+                <button type="button" class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></button>
                 <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
             </label>
             <span

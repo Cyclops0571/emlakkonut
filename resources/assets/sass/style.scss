@@ -328,6 +328,9 @@ main>h2 {
 .nav-link>[class*=" icon-"] {
     margin-right: 8px;
 }
+.custom-file {
+    display: inline;
+}
 .custom-file>[class^="icon-"],
 .custom-file>[class*=" icon-"] {
     font-size: 1.9rem;
@@ -344,7 +347,7 @@ input[type="file"] {
     padding-left: .5rem;
     padding-right: .5rem;
 }
-.justify-content-between span .btn {
+.btn-margin-left {
     margin-left: 8px;
 }
 .col-md-10 {
