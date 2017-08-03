@@ -23,10 +23,11 @@
                         {{csrf_field()}}
                         <input type="hidden" name="id" value="">
                         <span>
-                            <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-                            <button class="btn btn-success btn-sm rounded-circle btn-margin-left" onclick="window.location='{{ url('designer') }}'"><i class="icon-designer"></i></button>
-                            <button class="btn btn-danger btn-sm rounded-circle btn-margin-left"><i class="icon-delete"></i></button>
-                            <button class="btn btn-success btn-sm rounded-circle btn-margin-left"><i class="icon-settings"></i></button>
+                            <button type="button" class="btn btn-warning btn-sm rounded-circle">
+                                <i class="icon-designer"></i>
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm rounded-circle btn-margin-left"><img src="/img/checked.svg" style="width: 14px; height: 20px;"/></button>
+                            <button type="button" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 20px;"/></button>
                         </span>
                     </form>
                 </li>

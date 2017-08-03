@@ -21,10 +21,14 @@
                 Ada: {{$parcel->island->island_kkys}} - Parsel: {{$parcel->parcel}}
               </span>
             </form>
-            <button class="btn btn-warning btn-sm rounded-circle btn-margin-left" type="button"
-                    onclick="window.location='{{ URL::route('parcelDesigner', $parcel->id) }}'">
-              <i class="icon-designer"></i>
-            </button>
+            <span>
+              <button class="btn btn-warning btn-sm rounded-circle" type="button"
+                      onclick="window.location='{{ URL::route('parcelDesigner', $parcel->id) }}'">
+                <i class="icon-designer"></i>
+              </button>
+              <button type="button" class="btn btn-success btn-sm rounded-circle btn-margin-left"><img src="/img/checked.svg" style="width: 14px; height: 20px;"/></button>
+              <button type="button" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 20px;"/></button>
+            </span>
           </li>
         @endforeach
       </ul>
