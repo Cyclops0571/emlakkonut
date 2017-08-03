@@ -18,7 +18,7 @@
               </span>
               <span>
                 <button type="button" class="btn btn-success btn-sm rounded-circle"><img src="/img/checked.svg" style="width: 14px; height: 20px;"/></button>
-                <button type="button" class="btn btn-danger btn-sm rounded-circle"><img src="/img/cancel.svg" style="width: 14px; height: 20px;"/></button>
+                <button type="button" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 20px;"/></button>
               </span>
             </li>
           @endforeach
