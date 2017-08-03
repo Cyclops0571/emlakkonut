@@ -25,13 +25,11 @@
               {{csrf_field()}}
               <input type="hidden" name="id" value="{{$parcel->id}}">
               <span>
-                <button class="btn btn-success btn-sm rounded-circle" type="submit"><i class="icon-Accept"></i></button>
-                <button class="btn btn-success btn-sm rounded-circle btn-margin-left" type="button"
+                <button class="btn btn-success btn-sm rounded-circle" type="submit"><i class="icon-Save"></i></button>
+                <button class="btn btn-warning btn-sm rounded-circle btn-margin-left" type="button"
                         onclick="window.location='{{ URL::route('parcelDesigner', $parcel->id) }}'">
                   <i class="icon-designer"></i>
                 </button>
-                <button class="btn btn-danger btn-sm rounded-circle btn-margin-left" type="button"><i class="icon-delete"></i></button>
-                <button class="btn btn-success btn-sm rounded-circle btn-margin-left" type="button"><i class="icon-settings"></i></button>
               </span>
             </form>
           </li>

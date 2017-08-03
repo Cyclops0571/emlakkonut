@@ -17,7 +17,7 @@
       <div class="card card-size">
         <div class="card-header">
           Genel Vaziyet Planı
-          <button type="button" class="btn btn-success btn-sm rounded-circle float-right"
+          <button type="button" class="btn btn-warning btn-sm rounded-circle float-right"
                   onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
         </div>
         <div class="input-group">
@@ -25,9 +25,8 @@
                 <i class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></i>
                 <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
             </label>
-            <span
-                id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
-            <button class="input-group-addon" id="basic-addon1"><i class="icon-Accept"></i></button>
+            <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
+            <button class="input-group-addon" id="basic-addon1"><i class="icon-Save"></i></button>
             <!-- <button class="input-group-addon" id="basic-addon1" onclick=""><i class="icon-Cancel"></i></button> -->
         </div>
         <img id="imgPosture" @if($project->projectPhoto) src="{{$project->getImageUrl()}}" @endif>

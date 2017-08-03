@@ -10363,7 +10363,7 @@ a.text-gray-dark:hover {
 
 .icon-Save:before {
   content: "\E91D";
-  color: #005aab;
+  color: #fff;
 }
 
 .icon-Search:before {
@@ -10614,7 +10614,7 @@ main > h2 {
 }
 
 .card-size {
-  width: 60rem;
+  width: 60%;
   margin: 0 auto;
   margin-top: 5rem;
 }
