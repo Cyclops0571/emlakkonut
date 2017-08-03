@@ -1084,7 +1084,7 @@
 				} else {
 					// Present guided tour
 					if (!$.wcpTourIsFinished('Image Map Pro Editor Tour')) {
-						$.wcpTourStart('Image Map Pro Editor Tour');
+						// $.wcpTourStart('Image Map Pro Editor Tour');
 					} else {
 						// Get a list of saves
 						$.imp_editor_storage_get_saves_list(function(savesList) {

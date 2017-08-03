@@ -40,7 +40,6 @@
   <script src="/js/image-map-initiator.js"></script>
   <!-- Image Map Pro Editor -->
   <script>
-
       var objectJson = {!! $project->EstateProjectInteractivity ? $project->EstateProjectInteractivity->interactiveJson     : json_encode(false) !!};
       var imagePath = {!! json_encode($project->getPhotoPath()) !!};
       var imageWidth = {{$project->projectPhoto->width}};
