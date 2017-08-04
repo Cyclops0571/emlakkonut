@@ -11,6 +11,7 @@
     }
     .dropzone .dz-message {
       margin: 4rem 2rem 2rem 2rem;
+      color: #aaa;
     }
     .img-up {
       width: 3rem;
