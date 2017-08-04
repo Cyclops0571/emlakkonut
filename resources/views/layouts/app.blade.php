@@ -79,7 +79,7 @@
           function filter(p) {
               var input, filter, ul, li, id = p.getAttribute("id");
               input = document.getElementById(id);
-              filter = input.value.toUpperCase();
+              filter = input.value.toLocaleUpperCase();
 
               if (id.indexOf("Project") > -1) {
                   ul = document.getElementById("listProjects");
@@ -97,7 +97,7 @@
 
               for (var i in li) {
                   if (li[i].innerHTML) {
-                      if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      if (li[i].innerHTML.toLocaleUpperCase().indexOf(filter) > -1) {
                           li[i].style.display = "";
                       } else {
                           li[i].style.display = "none";
