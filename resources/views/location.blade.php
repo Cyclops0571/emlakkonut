@@ -39,15 +39,6 @@
                     <div class="input-group">
                         <label class="input-group-addon file">
                             <i class="icon-kroki" style="color: #fff;"></i>
-                            <span style="color: #fff; font-size: 1rem;">Proje Görseli</span>
-                            <input type="file" id="inputProjeGorsel" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
-                        </label>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="input-group">
-                        <label class="input-group-addon file">
-                            <i class="icon-kroki" style="color: #fff;"></i>
                             <span style="color: #fff; font-size: 1rem;">Kroki</span>
                             <input type="file" id="inputProjeKroki" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
                         </label>
@@ -69,8 +60,7 @@
       function initMap() {
           var map = new google.maps.Map(document.getElementById("map"), {
               center: {lat: 41.0082, lng: 28.9784},
-              zoom: 10,
-              zoomControl: false,
+              zoom: 14,
               scaleControl: false,
               streetViewControl: false,
               mapTypeControl: false
@@ -81,7 +71,7 @@
               drawingControlOptions: {
                   style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
                   position: google.maps.ControlPosition.RIGHT_CENTER,
-                  drawingModes: ["marker"]
+                  drawingModes: ["polygon"]
               },
               markerOptions: {icon: marker},
               circleOptions: {

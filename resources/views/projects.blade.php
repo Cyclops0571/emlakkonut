@@ -8,7 +8,10 @@
         <div class="card-header">
           Projeler
         </div>
-        <input id="inputProject" type="text" class="form-control" placeholder="Proje adı giriniz..." onkeyup="filter(this)" autofocus>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
+            <input type="text" id="inputProject" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+        </div>
         <ul id="listProjects" class="list-group list-group-flush">
           @foreach($projects as $project)
             <li class="list-group-item list-group-item-action justify-content-between" onclick="return window.location='{{URL::route('postures', $project->id)}}'">

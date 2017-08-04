@@ -10462,10 +10462,12 @@ a.text-gray-dark:hover {
   box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .form-signin .form-control:focus {
   z-index: 2;
+  border-color: #2c9bff;
 }
 
 .form-signin input[type="email"] {
@@ -10478,7 +10480,6 @@ a.text-gray-dark:hover {
 
 .form-control {
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
   padding: 1rem;
 }

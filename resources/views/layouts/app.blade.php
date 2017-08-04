@@ -13,6 +13,7 @@
     @section('css')
     <!-- Styles -->
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+      <link rel="icon" type="image/png" href="/img/fav.png" />
     @show
   </head>
 
