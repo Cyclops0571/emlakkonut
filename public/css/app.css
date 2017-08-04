@@ -10481,7 +10481,7 @@ a.text-gray-dark:hover {
 .form-control {
   border: 0;
   border-radius: 0;
-  padding: 1rem;
+  padding: 1rem .8rem;
 }
 
 .input-group-addon {
