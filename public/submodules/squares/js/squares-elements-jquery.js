@@ -2,7 +2,7 @@
 
     var l = {
 
-        name: "Paragraph",
+        name: "Paragraf",
 
         iconClass: "fa fa-paragraph",
 
@@ -62,7 +62,7 @@
 
     var n = {
 
-        name: "Header",
+        name: "Başlık",
 
         iconClass: "fa fa-header",
 
@@ -122,7 +122,7 @@
 
     var o = {
 
-        name: "Image",
+        name: "İmaj",
 
         iconClass: "fa fa-camera",
 
@@ -484,7 +484,7 @@
 
     var c = {
 
-        name: "Button",
+        name: "Buton",
 
         iconClass: "fa fa-link",
 
