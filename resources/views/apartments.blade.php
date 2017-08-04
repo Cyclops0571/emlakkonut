@@ -29,8 +29,8 @@
                             <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle">
                                 <i class="icon-designer"></i>
                             </button>
-                            <button type="button" title="Aktifleştir" class="btn btn-success btn-sm rounded-circle btn-margin-left"><img src="/img/checked.svg" style="width: 14px; height: 20px;"/></button>
-                            <button type="button" title="Pasifleştir" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 20px;"/></button>
+                            <button type="button" title="Aktifleştir" class="btn btn-success btn-sm rounded-circle btn-margin-left"><img src="/img/checked.svg" style="width: 14px; height: 21px;"/></button>
+                            <button type="button" title="Pasifleştir" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 21px;"/></button>
                         </span>
                     </form>
                 </li>
