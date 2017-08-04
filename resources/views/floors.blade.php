@@ -27,29 +27,34 @@
   <form id="addPhotosForm" action="{{URL::route('photo.floorStore', $project->id)}}" method="post" class="dropzone">
     {{csrf_field()}}
   </form>
+
+  @if ($floorsWithoutImage)
   <div class="card card-size">
     <div class="card-header">
       İmajı Yüklenmemiş Katlar
     </div>
-    <input id="inputFloor" type="text" class="form-control" placeholder="Plan tipini giriniz..."
-           aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
-    @if ($floorsWithoutImage)
-      <ul id="listFloors" class="list-group list-group-flush">
-        @foreach($floorsWithoutImage as $floor)
-          <li class="list-group-item justify-content-between">
-            {{$floor->block->block_no}}_{{$floor->floor_numbering}}
-          </li>
-        @endforeach
-      </ul>
-    @endif
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
+      <input type="text" id="inputFloor" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+    </div>
+    <ul id="listFloors" class="list-group list-group-flush">
+      @foreach($floorsWithoutImage as $floor)
+        <li class="list-group-item justify-content-between">
+          {{$floor->block->block_no}}_{{$floor->floor_numbering}}
+        </li>
+      @endforeach
+    </ul>
   </div>
+  @endif
 
   <div class="card card-size">
     <div class="card-header">
       İmajı Yüklenmiş Katlar
     </div>
-    <input id="inputFloorOK" type="text" class="form-control" placeholder="Plan tipini giriniz..."
-           aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
+      <input type="text" id="inputFloorOK" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+    </div>
     <ul id="listFloorsOK" class="list-group list-group-flush">
       @foreach($floorsWithImage as $floor)
         <li class="list-group-item justify-content-between">

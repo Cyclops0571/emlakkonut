@@ -138,7 +138,7 @@
 }
 .icon-Search:before {
   content: "\e91e";
-  color: #fff;
+  color: #005aab;
 }
 .icon-Select_Icon:before {
   content: "\e91f";
@@ -332,6 +332,7 @@ main>h2 {
 .custom-file {
     display: inline;
     margin-right: 8px;
+    cursor: default;
 }
 .custom-file>[class^="icon-"],
 .custom-file>[class*=" icon-"] {

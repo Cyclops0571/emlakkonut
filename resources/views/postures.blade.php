@@ -20,12 +20,12 @@
         </div>
         <div class="input-group">
             <label class="input-group-addon">
-                <i class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></i>
+                <i title="Resim Ekle" class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></i>
                 <input type="file" name="photo" id="inputPosture" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
             </label>
             <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
             <span class="input-group-addon">
-                <button type="button" class="btn btn-warning btn-sm rounded-circle"
+                <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle"
                     onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-designer"></i></button>
             </span>
         </div>

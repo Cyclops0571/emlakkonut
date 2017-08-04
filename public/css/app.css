@@ -10368,7 +10368,7 @@ a.text-gray-dark:hover {
 
 .icon-Search:before {
   content: "\E91E";
-  color: #fff;
+  color: #005aab;
 }
 
 .icon-Select_Icon:before {
@@ -10608,6 +10608,7 @@ main > h2 {
 .custom-file {
   display: inline;
   margin-right: 8px;
+  cursor: default;
 }
 
 .custom-file > [class^="icon-"],
