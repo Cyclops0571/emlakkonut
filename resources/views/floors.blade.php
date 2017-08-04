@@ -53,9 +53,9 @@
     </div>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
-      <input type="text" id="inputFloorOK" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+      <input type="text" id="inputOK" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
     </div>
-    <ul id="listFloorsOK" class="list-group list-group-flush">
+    <ul id="listOKs" class="list-group list-group-flush">
       @foreach($floorsWithImage as $floor)
         <li class="list-group-item justify-content-between">
           <span>

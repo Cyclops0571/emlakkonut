@@ -31,6 +31,9 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+              <a class="nav-link" href="#"><i class="icon-menu"></i></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">{{isset($project) ? $project->ProjeAdi : ''}}</a>
             </li>
           </ul>
@@ -84,6 +87,8 @@
                   ul = document.getElementById("listApartments");
               } else if (id.indexOf("Floor") > -1) {
                   ul = document.getElementById("listFloors");
+              } else if (id.indexOf("OK") > -1) {
+                  ul = document.getElementById("listOKs");
               } else if (id.indexOf("Parcel") > -1) {
                   ul = document.getElementById("listParcels");
               }
