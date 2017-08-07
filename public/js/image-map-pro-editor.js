@@ -3076,7 +3076,7 @@
 			this.updateShapesFormStateMaster();
 		} else {
 			this.shapesFormSpotIndex = -1;
-			$.wcpEditorSetContentForTabWithName('Shape', '<div class="wcp-editor-form-tabs-content-wrap">No shape selected.</div>');
+			$.wcpEditorSetContentForTabWithName('Shape', '<div class="wcp-editor-form-tabs-content-wrap">Hiçbir eleman seçilmedi.</div>');
 		}
 	}
 	Editor.prototype.updateShapesFormState = function() {

@@ -223,7 +223,7 @@ var editor = undefined;
                     {
                         type: 'select',
                         name: 'mouseover',
-                        title: 'Hover Aksiyonu',
+                        title: 'Üzerine Gelince',
                         options: [
                             { value: 'no-action', title: 'Aksiyon Yok' },
                             { value: 'show-tooltip', title: 'İpucunu Göster' },
@@ -233,7 +233,7 @@ var editor = undefined;
                     {
                         type: 'select',
                         name: 'click',
-                        title: 'Aksiyon Al',
+                        title: 'Tıklanınca',
                         options: [
                             { value: 'no-action', title: 'Aksiyon Yok' },
                             { value: 'show-tooltip', title: 'İpucunu Göster' },
@@ -300,7 +300,7 @@ var editor = undefined;
                     {
                         type: 'text',
                         name: 'icon_url',
-                        title: 'İkon Yolu',
+                        title: 'İkon URL Gir',
                         value: $.imageMapProDefaultSpotSettings.default_style.icon_url
                     },
                     {
@@ -451,7 +451,7 @@ var editor = undefined;
                     {
                         type: 'button',
                         name: 'copy_from_default_styles',
-                        title: 'Copy from Default Styles',
+                        title: 'Varsayılan Stilden Kopyala',
                         options: { event_name: 'button-copy-from-default-styles-clicked' },
                         value: undefined
                     },

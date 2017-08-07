@@ -72,7 +72,7 @@
     @section('javascript')
       <script>
           function onClickActiveNav(p) {
-              $(".nav a.active").removeClass('active');
+              $('.nav a.active').removeClass('active');
               $('#' + p).addClass('active');
           }
 
