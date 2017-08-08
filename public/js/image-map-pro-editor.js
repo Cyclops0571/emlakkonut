@@ -594,42 +594,42 @@
 
 			$.wcpEditorPresentModal({
 				name: 'confirm-delete-shape',
-				title: 'Confirm Delete',
+				title: 'Silmek istediğinize emin misiniz?',
 				buttons: [
 					{
 						name: 'cancel',
-						title: 'Cancel',
+						title: 'İptal',
 						class: ''
 					},
 					{
 						name: 'delete',
-						title: 'Delete',
+						title: 'Sil',
 						class: 'danger'
 					}
 				],
-				body: 'Delete this shape?'
+				body: 'Bu öğe silinecek?'
 			});
 		}
 
 		if (buttonName == 'rename') {
 			var html = '<div class="wcp-editor-form-control">';
-			html += '<label>Shape Name</label>';
+			html += '<label>Adı</label>';
 			html += '<input type="text" id="input-shape-name">';
 			html += '<div class="modal-error-text" id="rename-shape-error" style="margin-top: 10px; display: none;"></div>';
 			html += '</div>';
 
 			$.wcpEditorPresentModal({
 				name: 'confirm-rename-shape',
-				title: 'Rename Shape',
+				title: 'Yeniden Adlandır',
 				buttons: [
 					{
 						name: 'cancel',
-						title: 'Cancel',
+						title: 'İptal',
 						class: ''
 					},
 					{
 						name: 'rename',
-						title: 'Rename',
+						title: 'Tamam',
 						class: 'primary'
 					}
 				],
