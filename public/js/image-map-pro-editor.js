@@ -450,7 +450,7 @@
 		$.wcpEditorPresentLoadingScreen('Saving...');
 		$.imp_editor_storage_store_save(editor.getCompressedSettings(), function(success) {
 			if (success) {
-				$.wcpEditorHideLoadingScreenWithMessage('Saved!', false, false);
+				$.wcpEditorHideLoadingScreenWithMessage('Kaydedildi!', false, false);
 			} else {
 				$.wcpEditorHideLoadingScreenWithMessage('There was an error saving the image map!', true, false);
 
@@ -833,7 +833,7 @@
 			}
 
 			if (shapeTitleExists || newTitle.length == 0) {
-				$('#rename-shape-error').show().html('A shape with this name already exists!');
+				$('#rename-shape-error').show().html('Aynı isimde bir öğe mevcut!');
 				return;
 			}
 
