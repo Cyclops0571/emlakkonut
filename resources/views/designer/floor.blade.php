@@ -40,13 +40,13 @@
   <script src="/js/image-map-initiator.js"></script>
   <!-- Image Map Pro Editor -->
   <script>
-      var objectJson = {!! $parcel->parcelInteractivity ? $parcel->parcelInteractivity->interactiveJson     : json_encode(false) !!};
-      var imagePath = {!! json_encode($parcel->parcelPhoto->getImageUrl()) !!};
-      var imageWidth = {{$parcel->parcelPhoto->width}};
-      var imageHeight = {{$parcel->parcelPhoto->height}};
-      var postUrl = {!! json_encode(URL::route('parcelInteractivity')) !!};
+      var objectJson = {!! $floor->parcelInteractivity ? $floor->parcelInteractivity->interactiveJson     : json_encode(false) !!};
+      var imagePath = {!! json_encode($floor->parcelPhoto->getImageUrl()) !!};
+      var imageWidth = {{$floor->parcelPhoto->width}};
+      var imageHeight = {{$floor->parcelPhoto->height}};
+      var postUrl = {!! json_encode(URL::route('floorInteractivity')) !!};
       (function ($, window, document, undefined) {
-          imageMapInitiate({{$parcel->id}}, objectJson, imagePath, imageWidth, imageHeight, postUrl);
+          imageMapInitiate({{$floor->id}}, objectJson, imagePath, imageWidth, imageHeight, postUrl);
       })(jQuery, window, document);
   </script>
   <script src="/js/image-map-pro-editor.js"></script>

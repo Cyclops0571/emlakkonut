@@ -45,7 +45,11 @@ class PhotoController extends Controller {
             'photo' => 'required|mimes:jpg,jpeg|image'
         ]);
 
-        Floor::setFloorPhoto($request->file('photo'));
+        Floor::setFloorPhoto($project, $request->file('photo'));
+
+        //return floorsWithPhoto and floorsWithoutPhoto
+        return [];
+
     }
 
 }

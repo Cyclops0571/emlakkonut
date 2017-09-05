@@ -18,7 +18,11 @@
               <input type="hidden" name="id" value="{{$parcel->id}}">
               <span>
                 <label class="custom-file">
+                  @if($parcel->parcelPhoto)
+                  <img src="{{$parcel->parcelPhoto->getThumbnailUrl()}}" class="list-img"/>
+                  @else
                   <i title="Resim Ekle" class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></i>
+                  @endif
                   <input type="file" name="photo" class="form-control" aria-describedby="basic-addon1" onchange="javascript:this.form.submit();">
                 </label>
                 Ada: {{$parcel->island->island_kkys}} - Parsel: {{$parcel->parcel}}

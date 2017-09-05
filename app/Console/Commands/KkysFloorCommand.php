@@ -6,6 +6,7 @@ use App\Model\Block;
 use App\Model\EstateProject;
 use App\Model\EstateProjectApartment;
 use App\Model\Floor;
+use App\Model\FloorMapping;
 use App\Model\Island;
 use App\Model\Parcel;
 use Illuminate\Console\Command;
@@ -62,7 +63,7 @@ class KkysFloorCommand extends Command {
             $floor->island_id = $island->id;
             $floor->parcel_id = $parcel->id;
             $floor->block_id = $block->id;
-            $floor->floor_numbering = $floorNumbering;
+            $floor->floor_no = FloorMapping::getFloorNo($floorNumbering);
             $floor->save();
         }
     }

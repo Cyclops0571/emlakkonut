@@ -27,14 +27,33 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\FloorPhoto whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\FloorPhoto whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\FloorPhoto whereWidth($value)
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\FloorPhoto whereThumbnail($value)
  */
 class FloorPhoto extends Model
 {
     protected $table = 'floor_photo';
+    protected static $directory = 'uploads/floor/';
 
+    public static function directory() {
+        return public_path(static::$directory);
+    }
 
     public function floor()
     {
         return $this->belongsTo(Floor::class, 'floor_id');
+    }
+
+    public function getImagePath() {
+        return static::$directory . $this->name;
+    }
+
+    public function getImageUrl() {
+        $path = $this->getImagePath();
+        return $path ? \URL::to($path) : '';
+    }
+
+    public function getThumbnailUrl() {
+        return \URL::to(static::$directory . $this->thumbnail);
     }
 }

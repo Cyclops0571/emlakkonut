@@ -18,6 +18,7 @@ class CreateProjectPhoto extends Migration
             $table->increments('id');
             $table->unsignedInteger('project_id');
             $table->string('name');
+            $table->string('thumbnail');
             $table->string('size');
             $table->string('original_name');
             $table->unsignedInteger('width');

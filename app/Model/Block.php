@@ -42,4 +42,26 @@ class Block extends Model
             ->where('block_no', $apartment->BlokNo)
             ->first();
     }
+
+    /**
+     * @param $islandId
+     * @param $parcelId
+     * @param $blockNo
+     * @return null|static
+     * @throws \Exception
+     */
+    public static function getBlock($islandId, $parcelId, $blockNo) {
+        $projectId = EstateProject::getCurrentProjectIdFromSession();
+        $result = static::where('project_id', $projectId)
+            ->where('island_id', $islandId)
+            ->where('parcel_id', $parcelId)
+            ->where('block_no', $blockNo)
+            ->first();
+
+        if (!$result) {
+            throw new \Exception('Aranılan isimde bir blok bulunamadı');
+        }
+
+        return $result;
+    }
 }

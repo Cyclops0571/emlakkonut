@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\User;
+use http\Url;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -16,8 +18,22 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $user = User::find(1);
+        $response = $this->actingAs($user)->get(\URL::route('projects'));
+        $response->assertSee('PARK MAVERA');
+    }
 
-        $response->assertStatus(200);
+    public function testGenelVaziyetPlani() {
+        $user = User::find(1);
+        $response = $this->actingAs($user)->get(\URL::route('postures', 1));
+        $response->assertSee('Genel Vaziyet Planı');
+    }
+
+    public function testMytest()
+    {
+        $this->browse(function ($browser) {
+            $browser->visit('/')
+                -> assertSee('Latest Transactions');
+        });
     }
 }

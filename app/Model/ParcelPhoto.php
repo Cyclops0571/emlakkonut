@@ -32,6 +32,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereWidth($value)
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ParcelPhoto whereThumbnail($value)
  */
 class ParcelPhoto extends Model
 {
@@ -51,6 +53,12 @@ class ParcelPhoto extends Model
         return $path ? \URL::to($path) : '';
     }
 
+    public function getThumbnailUrl()
+    {
+        $path = $this->getThumbnailPath();
+        return $path ? \URL::to($path) : '';
+    }
+
     public function parcel() {
         return $this->belongsTo(Parcel::class, 'parcel_id', 'id');
     }
@@ -58,5 +66,10 @@ class ParcelPhoto extends Model
     public function parcelPhoto()
     {
         return $this->hasOne(ParcelPhoto::class, 'parcel_id', 'parcel_id');
+    }
+
+    private function getThumbnailPath()
+    {
+        return '/uploads/parcel/' . $this->thumbnail;
     }
 }

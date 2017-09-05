@@ -17,6 +17,7 @@ class CreateFloorPhotoTable extends Migration
            $table->increments('id');
             $table->string('floor_id');
             $table->string('name');
+            $table->string('thumbnail');
             $table->string('size');
             $table->string('original_name');
             $table->unsignedInteger('width');

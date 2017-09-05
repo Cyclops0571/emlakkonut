@@ -64,6 +64,15 @@ class EstateProject extends Model {
         return collect($projectList);
     }
 
+    public static function setSession($id)
+    {
+        \Session::put('projectID', $id);
+    }
+    
+    public static function getCurrentProjectIdFromSession() {
+        return \Session::get('projectID');
+    }
+
     public function projectPhoto()
     {
         return $this->hasOne(ProjectPhoto::class, 'project_id');
@@ -77,9 +86,19 @@ class EstateProject extends Model {
         return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->name : '';
     }
 
+    public function getThumbnailPath() {
+        return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->thumbnail : '';
+    }
+
     public function getImageUrl() {
         $path = $this->getPhotoPath();
         return $path ? \URL::to($path) : '';
+    }
+
+    public function getThumbnailUrl()
+    {
+        $path = $this->getThumbnailPath();
+        return $path ? \URL::to($path) : \URL::to('/img/upload.png');
     }
 
     public function EstateProjectInteractivity()
@@ -136,11 +155,18 @@ class EstateProject extends Model {
         }
         $this->projectPhoto->project_id = $this->id;
         $this->projectPhoto->name = $file->getFilename() . '.jpg';
+        $this->projectPhoto->thumbnail = $file->getFilename() . '_thumb.jpg';
         $this->projectPhoto->size = $file->getSize();
         $this->projectPhoto->original_name = $file->getClientOriginalName();
+
+        $image = \Image::make($file->getRealPath());
+        $image->widen(50);
+        $image->save($this->photoDirectory() . $file->getFilename() . '_thumb.jpg');
+
         $image = \Image::make($file->getRealPath());
         $image->widen(1280);
         $image->save($this->photoDirectory() . $file->getFilename() . '.jpg');
+
         $this->projectPhoto->width = $image->width();
         $this->projectPhoto->height = $image->height();
         $this->projectPhoto->save();
@@ -162,6 +188,7 @@ class EstateProject extends Model {
             ->where('parcel', $parcelName)
             ->first();
     }
+
 
     public function floor()
     {

@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function postures(Request $request, EstateProject $project)
     {
-        $request->session()->put('projectID', $project->id);
+        EstateProject::setSession($project->id);
         return view('postures', compact('project'));
     }
 
@@ -31,20 +31,6 @@ class HomeController extends Controller
         return view('parcels', compact("project"));
     }
 
-    public function floors(EstateProject $project)
-    {
-        $floors = $project->floor->sortBy('block_id');
-        $floorsWithoutImage = [];
-        $floorsWithImage = [];
-        foreach ($floors as $floor) {
-            if($floor->floorPhoto) {
-                $floorsWithImage[] = $floor;
-            } else {
-                $floorsWithoutImage[] = $floor;
-            }
-        }
-        return view('floors', compact('project','floorsWithoutImage', 'floorsWithImage'));
-    }
 
     public function apartments()
     {

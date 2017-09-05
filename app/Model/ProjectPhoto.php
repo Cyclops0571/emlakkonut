@@ -30,6 +30,8 @@ use Illuminate\Http\UploadedFile;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereWidth($value)
+ * @property string|null $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectPhoto whereThumbnail($value)
  */
 class ProjectPhoto extends Model
 {

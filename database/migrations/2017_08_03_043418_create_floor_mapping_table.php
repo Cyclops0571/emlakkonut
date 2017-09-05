@@ -16,7 +16,7 @@ class CreateFloorMappingTable extends Migration
         Schema::create('floor_mapping', function (Blueprint $table){
             $table->increments('id');
             $table->integer('floor_no');
-            $table->integer('floor_name');
+            $table->string('floor_name');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 /**
  * App\Model\Island
@@ -32,5 +33,22 @@ class Island extends Model
         return static::where('project_id', $estateApartment->project_id)
             ->where('island_kkys', $estateApartment->Ada)
             ->first();
+    }
+
+    /**
+     * @param $islandKkys
+     * @return null|static
+     * @throws \Exception
+     */
+    public static function getIslandFromIslandKkys($islandKkys) {
+        $projectId = EstateProject::getCurrentProjectIdFromSession();
+        $result = static::where('project_id', $projectId)
+            ->where('island_kkys', $islandKkys)
+            ->first();
+        if (!$result) {
+            throw new \Exception('Aranılan isimde bir ada bulunamadı');
+        }
+
+        return $result;
     }
 }

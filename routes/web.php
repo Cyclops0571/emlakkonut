@@ -18,20 +18,23 @@ Route::get('/', function ()
     return view('auth/login');
 });
 
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('/projects', 'HomeController@projects')->name('projects');
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
-    Route::get('/floors/{project}', 'HomeController@floors')->name('floors');
+    Route::get('/floors/{project}', 'FloorController@index')->name('floors');
     Route::get('/apartments', 'HomeController@apartments')->name('apartments');
     Route::get('/location', 'HomeController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'DesignerController@project')->name('projectDesigner');
     Route::get('/parcelDesigner/{parcel}', 'DesignerController@parcel')->name('parcelDesigner');
-    Route::get('/parcelDesigner/{floor}', 'DesignerController@floor')->name('floorDesigner');
+    Route::get('/floorDesigner/{floor}', 'DesignerController@floor')->name('floorDesigner');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::post('/interactivity/project', 'InteractiveController@project')->name('projectInteractivity');
     Route::post('/interactivity/parcel', 'InteractiveController@parcel')->name('parcelInteractivity');
+    Route::post('/interactivity/floor', 'InteractiveController@floor')->name('floorInteractivity');
 
     Route::post('photo', 'PhotoController@store')->name('photo.store');
     Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');

@@ -16,7 +16,7 @@
           @foreach($projects as $project)
             <li class="list-group-item list-group-item-action justify-content-between" onclick="return window.location='{{URL::route('postures', $project->id)}}'">
               <span style="max-width: 95%">
-                <img src="https://i.ytimg.com/vi/CjwhePYkrAo/hqdefault.jpg" class="list-img"/>
+                <img src="{{$project->getThumbnailUrl()}}" class="list-img"/>
                 {{$project->ProjeAdi}}
               </span>
               <span>

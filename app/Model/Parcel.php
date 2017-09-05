@@ -47,6 +47,26 @@ class Parcel extends Model {
             ->first();
     }
 
+    /**
+     * @param $islandId
+     * @param $parcelKkysId
+     * @return null|static
+     * @throws \Exception
+     */
+    public static function getParcel($islandId, $parcelKkysId)
+    {
+        $projectId = EstateProject::getCurrentProjectIdFromSession();
+        $result = static::where('project_id', $projectId)
+            ->where('island_id', $islandId)
+            ->where('parcel', $parcelKkysId)
+            ->first();
+
+        if (!$result) {
+            throw new \Exception('Aranılan isimde bir parsel bulunamadı');
+        }
+        return $result;
+    }
+
     public function estateProject()
     {
         return $this->belongsTo(EstateProject::class, 'project_id');
@@ -76,11 +96,18 @@ class Parcel extends Model {
         }
         $this->parcelPhoto->parcel_id = $this->id;
         $this->parcelPhoto->name = $file->getFilename() . '.jpg';
+        $this->parcelPhoto->thumbnail = $file->getFilename() . '_thumb.jpg';
         $this->parcelPhoto->size = $file->getSize();
         $this->parcelPhoto->original_name = $file->getClientOriginalName();
+
+        $image = \Image::make($file->getRealPath());
+        $image->widen(50);
+        $image->save($this->parcelPhoto->directory() . $file->getFilename() . '_thumb.jpg');
+
         $image = \Image::make($file->getRealPath());
         $image->widen(1280);
         $image->save($this->parcelPhoto->directory() . $file->getFilename() . '.jpg');
+
         $this->parcelPhoto->width = $image->width();
         $this->parcelPhoto->height = $image->height();
         $this->parcelPhoto->save();

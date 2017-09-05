@@ -41,6 +41,9 @@ class ParcelInteractivity extends Model {
         }
     }
 
+    public function parcelPhoto() {
+        return $this->hasOne(ParcelPhoto::class, 'parcel_id', 'parcel_id');
+    }
 
     public function parcel()
     {
