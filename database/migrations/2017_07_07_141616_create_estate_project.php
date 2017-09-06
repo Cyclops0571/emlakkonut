@@ -19,6 +19,7 @@ class CreateEstateProject extends Migration
             $table->increments('id');
             $table->string('ProjeID')->index();
             $table->string('ProjeAdi')->nullable();
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

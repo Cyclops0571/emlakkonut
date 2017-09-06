@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/css/image-map-pro.css">
 
 @section('content')
-    <h4 class="editor-title">Tasarlayıcı / Parsel Planı</h4>
+    <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
     <div id="wcp-editor"></div>
 @endsection
 

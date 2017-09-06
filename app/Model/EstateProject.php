@@ -28,6 +28,8 @@ use Illuminate\Pagination\Paginator;
  * @property-read \App\ParcelInteractivity $ParcelInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $Parcels
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floor
+ * @property int|null $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProject whereStatus($value)
  */
 class EstateProject extends Model {
 

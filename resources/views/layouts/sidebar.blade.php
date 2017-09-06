@@ -15,7 +15,7 @@
     </li>
     <li class="nav-item">
       <a id="parcels" class="nav-link" href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}" onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i>
-        Parseller
+        Numarataj
       </a>
     </li>
     <li class="nav-item">

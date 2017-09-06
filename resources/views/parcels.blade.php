@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-size">
       <div class="card-header">
-        Parseller
+        Numarataj
       </div>
       <div class="input-group">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>

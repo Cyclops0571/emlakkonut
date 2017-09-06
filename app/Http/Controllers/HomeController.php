@@ -8,18 +8,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function projects()
-    {
-        $projects = \Auth::user()->estateProject;
-        return view('projects', compact('projects'));
-    }
-
     public function postures(Request $request, EstateProject $project)
     {
         EstateProject::setSession($project->id);

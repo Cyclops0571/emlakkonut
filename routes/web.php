@@ -22,7 +22,9 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::group(['middleware' => 'auth'], function ()
 {
-    Route::get('/projects', 'HomeController@projects')->name('projects');
+    Route::get('/projects', 'ProjectController@projects')->name('projects');
+    Route::post('/toogleProjectStatus/{project}', 'ProjectController@toogleStatus')
+        ->name('toogleProjectStatus');
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
     Route::get('/floors/{project}', 'FloorController@index')->name('floors');
@@ -39,6 +41,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('photo', 'PhotoController@store')->name('photo.store');
     Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
+    Route::post('map/save/{project}', 'MapController@save')->name('mapSave');
 });
 
 
