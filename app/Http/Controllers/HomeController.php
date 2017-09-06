@@ -20,11 +20,6 @@ class HomeController extends Controller
     }
 
 
-    public function apartments()
-    {
-        return view('apartments');
-    }
-
     public function location()
     {
         return view('location');

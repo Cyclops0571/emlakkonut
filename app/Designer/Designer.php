@@ -3,6 +3,7 @@
 namespace App\Designer;
 
 use App\Model\EstateProject;
+use App\Model\Floor;
 use App\Model\Parcel;
 
 class Designer {
@@ -48,8 +49,12 @@ class Designer {
                     $elementFactories = [];
                 }
             }
-        } else
-        {
+        } elseif($object instanceof Floor) {
+            $this->id = $object->id;
+            $this->editor = $this->setEditor();
+            $this->setGeneral($object->KapiNo);
+            $this->setImage($object->floorPhoto->getImageUrl());
+        } else {
             throw new \Exception(sprintf("Unknown object type in file  %s at line %s given object type: %ss", __FILE__, __LINE__, gettype($object)));
         }
 

@@ -70,13 +70,13 @@
             {{$floor->block->block_no}}_{{$floor->floor_numbering}}
           </span>
           <span>
-            <button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>
-            <button class="btn btn-success btn-sm rounded-circle btn-margin-left"
-                    onclick="window.location='{{ URL::route('floorDesigner', $floor->id) }}'">
-              <i class="icon-designer"></i>
-            </button>
-            <button class="btn btn-danger btn-sm rounded-circle btn-margin-left"><i class="icon-delete"></i></button>
-            <button class="btn btn-success btn-sm rounded-circle btn-margin-left"><i class="icon-settings"></i></button>
+            {{--<button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>--}}
+            {{--<button class="btn btn-success btn-sm rounded-circle btn-margin-left"--}}
+                    {{--onclick="window.location='{{ URL::route('floorDesigner', $floor->id) }}'">--}}
+              {{--<i class="icon-designer"></i>--}}
+            {{--</button>--}}
+            {{--<button class="btn btn-danger btn-sm rounded-circle btn-margin-left"><i class="icon-delete"></i></button>--}}
+            {{--<button class="btn btn-success btn-sm rounded-circle btn-margin-left"><i class="icon-settings"></i></button>--}}
           </span>
         </li>
       @endforeach

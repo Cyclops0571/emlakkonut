@@ -149,6 +149,10 @@ class EstateProjectApartment extends Model {
 
     }
 
+    public static function setFloorPhoto($project, $file)
+    {
+    }
+
     public function url()
     {
         return 'http://emlakkonut.app/apertment/' . $this->id;

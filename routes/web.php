@@ -28,8 +28,8 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
     Route::get('/floors/{project}', 'FloorController@index')->name('floors');
-    Route::get('/apartments', 'HomeController@apartments')->name('apartments');
-    Route::get('/location', 'HomeController@location')->name('location');
+    Route::get('/apartments/{project}', 'ApartmentController@index')->name('apartments');
+    Route::get('/location/{project}', 'HomeController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'DesignerController@project')->name('projectDesigner');
     Route::get('/parcelDesigner/{parcel}', 'DesignerController@parcel')->name('parcelDesigner');
     Route::get('/floorDesigner/{floor}', 'DesignerController@floor')->name('floorDesigner');
@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('photo', 'PhotoController@store')->name('photo.store');
     Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
+    Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
     Route::post('map/save/{project}', 'MapController@save')->name('mapSave');
 });
 

@@ -75,6 +75,14 @@ class EstateProject extends Model {
         return \Session::get('projectID');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null|static|static[]
+     */
+    public static function getCurrentProjectFromSession() {
+        $projectID = self::getCurrentProjectIdFromSession();
+        return self::find($projectID);
+    }
+
     public function projectPhoto()
     {
         return $this->hasOne(ProjectPhoto::class, 'project_id');

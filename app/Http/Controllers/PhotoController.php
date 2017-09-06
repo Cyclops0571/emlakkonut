@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\EstateProject;
+use App\Model\EstateProjectApartment;
 use App\Model\Floor;
 use App\Model\Parcel;
-use App\Model\Photo;
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Http\Request;
 use View;
 
@@ -46,6 +45,20 @@ class PhotoController extends Controller {
         ]);
 
         Floor::setFloorPhoto($project, $request->file('photo'));
+
+        //return floorsWithPhoto and floorsWithoutPhoto
+        return [];
+
+    }
+
+    public function apartmentStore(Request $request)
+    {
+        $project = EstateProject::getCurrentProjectFromSession();
+        $this->validate($request, [
+            'photo' => 'required|mimes:jpg,jpeg|image'
+        ]);
+
+        EstateProjectApartment::setFloorPhoto($project, $request->file('photo'));
 
         //return floorsWithPhoto and floorsWithoutPhoto
         return [];
