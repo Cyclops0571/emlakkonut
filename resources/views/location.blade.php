@@ -33,7 +33,6 @@
         <form action="{{URL::route('mapSave')}}" method="post">
         {{csrf_field()}}
         <input id="inputPositions" type="hidden" name="positions">
-        <input id="inputImage" type="hidden" name="image">
         <div class="card-header">
             Proje Konumu
             <button class="btn btn-success btn-sm rounded-circle" style="float: right"><i class="icon-save"></i></button>
@@ -45,7 +44,7 @@
                         <label class="input-group-addon file">
                             <i class="icon-kroki" style="color: #fff;"></i>
                             <span style="color: #fff; font-size: 1rem;">Kroki</span>
-                            <input type="file" id="inputProjeKroki" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
+                            <input type="file" name="image" id="inputProjeKroki" class="form-control" aria-describedby="basic-addon1" accept="image/jpeg" onchange="fileUpload(this)">
                         </label>
                     </div>
                 </li>
@@ -107,7 +106,6 @@
               reader.onload = function (e) {
                   if (sId === "inputProjeKroki") {
                     $("#imgProjeKroki").attr('src', e.target.result);
-                    $("#inputImage").attr('value', e.target.result);
                   }
               };
 
