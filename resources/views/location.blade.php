@@ -30,6 +30,8 @@
 
 @section('content')
     <div class="card card-size">
+        <form action="{{URL::route('mapSave', $project->id)}}" method="post">
+        {{csrf_field()}}
         <div class="card-header">
             Proje Konumu
             <button class="btn btn-success btn-sm rounded-circle" style="float: right"><i class="icon-save"></i></button>
@@ -49,6 +51,7 @@
             <div id="map"></div>
             <img id="imgProjeKroki">
         </div>
+        </form>
     </div>
 @endsection
 
@@ -56,8 +59,6 @@
   @parent
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI8qNnWc7vcryJwCLs3Q5DWymgNyO3UTM&libraries=drawing&callback=initMap" async defer></script>
   <script>
-      var marker = "http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg";
-
       function initMap() {
           var polygonArray = [];
           var map = new google.maps.Map(document.getElementById("map"), {
@@ -75,7 +76,6 @@
                   position: google.maps.ControlPosition.RIGHT_CENTER,
                   drawingModes: ["polygon"]
               },
-              markerOptions: {icon: marker},
               circleOptions: {
                   fillColor: '#ffff00',
                   fillOpacity: 1,
@@ -102,10 +102,7 @@
                   sId = input.getAttribute("id");
 
               reader.onload = function (e) {
-                  if (sId === "inputProjeGorsel") {
-                    //$("#imgProjeGorsel").attr('src', e.target.result);
-                    marker = e.target.result;
-                  } else if (sId === "inputProjeKroki") {
+                  if (sId === "inputProjeKroki") {
                     $("#imgProjeKroki").attr('src', e.target.result);
                   }
               };
