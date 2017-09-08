@@ -30,7 +30,7 @@
 
 @section('content')
     <div class="card card-size">
-        <form action="{{URL::route('mapSave', $project->id)}}" method="post">
+        <form action="{{URL::route('mapSave', $projectId    )}}" method="post">
         {{csrf_field()}}
         <div class="card-header">
             Proje Konumu

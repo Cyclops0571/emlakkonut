@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\EstateProject;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
@@ -9,7 +10,8 @@ class MapController extends Controller
 
     public function location()
     {
-        return view('location');
+        $projectId = EstateProject::getCurrentProjectIdFromSession();
+        return view('location', compact('projectId'));
     }
 
     public function save(Request $request)
