@@ -23,7 +23,7 @@
                 {{$project->ProjeAdi}}
               </span>
             <span>
-              <form action="{{URL::route('toogleProjectStatus', $project->id)}}" method="post">
+              <form action="{{URL::route('toggleProjectStatus', $project->id)}}" method="post">
                 {{csrf_field()}}
                 @if($project->status !== 1)
                 <button type="submit" title="Aktifleştir" class="btn btn-success btn-sm rounded-circle">

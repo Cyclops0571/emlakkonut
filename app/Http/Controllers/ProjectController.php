@@ -18,10 +18,10 @@ class ProjectController extends Controller
         return view('projects', compact('projects'));
     }
 
-    public function toogleStatus(EstateProject $project) {
+    public function toggleStatus(EstateProject $project) {
         $project->status = ($project->status + 1) % 2;
         $project->save();
-        return \Redirect::route('projects');
+        return \Redirect::back();
     }
 
 }

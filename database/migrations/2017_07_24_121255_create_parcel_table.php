@@ -18,6 +18,7 @@ class CreateParcelTable extends Migration
             $table->unsignedInteger('project_id')->index();
             $table->unsignedInteger('island_id')->index();
             $table->string('parcel');
+            $table->tinyInteger('status');
             $table->timestamps();
 
         });

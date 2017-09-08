@@ -24,7 +24,7 @@ class Designer {
             $this->setEditor();
             foreach ($object->getBlocks() as $block)
             {
-                $this->spots[] = new Spot($block->BlokNo, "Blok - " . $block->BlokNo);
+                $this->spots[] = Polygon::createWithPlainText($block->BlokNo, "Blok - " . $block->BlokNo);
             }
         } elseif ($object instanceof Parcel) {
             $this->id = $object->id;
@@ -44,7 +44,7 @@ class Designer {
                     $currentBlock = $apartment->BlokNo;
                     $currentDirection = $apartment->Yon;
                     //create a button for each apertment
-                    $this->spots[] = new Polygon('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
+                    $this->spots[] =  Polygon::createWithButtons('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
                     //empty the spots
                     $elementFactories = [];
                 }
