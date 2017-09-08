@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
     Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
-    Route::post('map/save/{project}', 'MapController@save')->name('mapSave');
+    Route::post('map/save/', 'MapController@save')->name('mapSave');
 });
 
 

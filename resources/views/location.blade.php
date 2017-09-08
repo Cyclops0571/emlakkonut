@@ -30,8 +30,10 @@
 
 @section('content')
     <div class="card card-size">
-        <form action="{{URL::route('mapSave', $projectId    )}}" method="post">
+        <form action="{{URL::route('mapSave')}}" method="post">
         {{csrf_field()}}
+        <input id="inputPositions" type="hidden" name="positions">
+        <input id="inputImage" type="hidden" name="image">
         <div class="card-header">
             Proje Konumu
             <button class="btn btn-success btn-sm rounded-circle" style="float: right"><i class="icon-save"></i></button>
@@ -93,6 +95,7 @@
                points.push(polygon.getPath().getAt(i).toUrlValue(6));
             }
             polygonArray.push(points);
+            $("#inputPositions").attr('value', JSON.stringify(polygonArray));
           });
       }
 
@@ -104,6 +107,7 @@
               reader.onload = function (e) {
                   if (sId === "inputProjeKroki") {
                     $("#imgProjeKroki").attr('src', e.target.result);
+                    $("#inputImage").attr('value', e.target.result);
                   }
               };
 

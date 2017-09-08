@@ -28,9 +28,7 @@ class PhotoController extends Controller {
 
     public function parcelStore(Request $request)
     {
-        $this->validate($request, [
-            'id'     => 'exists:parcel',
-            'photo'  => 'mimes:jpeg,jpg|required|image']);
+        $this->validate($request, ['id' => 'exists:parcel', 'photo'  => 'mimes:jpeg,jpg|required|image']);
 
         $parcel = Parcel::find($request->get('id'));
         $parcel->setParcelPhoto($request->file('photo'));
