@@ -4,7 +4,8 @@
 namespace App\Designer;
 
 
-class Polygon {
+class Polygon
+{
 
 
     public $id;
@@ -13,24 +14,63 @@ class Polygon {
     public $tooltip_content;
     public $height;
     public $width;
+    public $type;
+    public $points;
 
     /**
      * Polygon constructor.
      * @param static $title
      * @param ElementButtonFactory[] $buttonFactories
      */
-    public function __construct($title, $buttonFactories)
+    private function __construct()
     {
-        $this->id = uniqid("rect-");
-        $this->title = $title;
-        $this->type = 'poly';
-        $this->x = 0;
-        $this->y = 0;
-        $this->width = 20;
-        $this->height = 20;
-        $this->points = $this->getDefaultPoints();
 
-        $this->tooltip_content = $this->tooltipContent($buttonFactories);
+    }
+
+    /**
+     * Polygon constructor.
+     * @param string $title
+     * @param string $text
+     * @return Polygon
+     */
+    public static function createWithPlainText($title, $text)
+    {
+        $self = new self;
+        $self->id = uniqid("rect-");
+        $self->title = $title;
+        $self->type = 'poly';
+        $self->x = 0;
+        $self->y = 0;
+        $self->width = 20;
+        $self->height = 20;
+        $self->points = $self->getDefaultPoints();
+
+        $self->tooltip_content = $self->plainTextContent($text);
+
+        return $self;
+    }
+
+    /**
+     * Polygon constructor.
+     * @param string $title
+     * @param ElementButtonFactory[] $buttonFactories
+     * @return Polygon
+     */
+    public static function createWithButtons($title, $buttonFactories)
+    {
+        $self = new self;
+        $self->id = uniqid("rect-");
+        $self->title = $title;
+        $self->type = 'poly';
+        $self->x = 0;
+        $self->y = 0;
+        $self->width = 20;
+        $self->height = 20;
+        $self->points = $self->getDefaultPoints();
+
+        $self->tooltip_content = $self->tooltipContent($buttonFactories);
+
+        return $self;
     }
 
     private function getDefaultPoints()
@@ -47,6 +87,7 @@ class Polygon {
         $dr = new \stdClass();
         $dr->x = 0;
         $dr->y = 100;
+
         return [$ul, $ur, $dl, $dr];
     }
 

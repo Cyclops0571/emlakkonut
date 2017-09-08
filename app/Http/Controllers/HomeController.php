@@ -14,17 +14,6 @@ class HomeController extends Controller
         return view('postures', compact('project'));
     }
 
-    public function parcels(EstateProject $project)
-    {
-        return view('parcels', compact("project"));
-    }
-
-
-    public function location()
-    {
-        return view('location');
-    }
-
     public function index($view)
     {
         return view($view);

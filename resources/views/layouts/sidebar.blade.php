@@ -29,7 +29,7 @@
         Kat Planı
       </a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" style="display: none">
       <a id="apartments" class="nav-link"
          href="{{URL::route('apartments', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('apartments')"><i class="icon-Houses"></i>

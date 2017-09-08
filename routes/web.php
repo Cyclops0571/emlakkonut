@@ -23,13 +23,15 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::group(['middleware' => 'auth'], function ()
 {
     Route::get('/projects', 'ProjectController@projects')->name('projects');
-    Route::post('/toogleProjectStatus/{project}', 'ProjectController@toogleStatus')
-        ->name('toogleProjectStatus');
+    Route::post('/toggleProjectStatus/{project}', 'ProjectController@toggleStatus')
+        ->name('toggleProjectStatus');
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
-    Route::get('/parcels/{project}', 'HomeController@parcels')->name('parcels');
+    Route::get('/parcels/{project}', 'ParcelController@parcels')->name('parcels');
+    Route::post('/toggleParcelStatus/{parcel}', 'ParcelController@toggleStatus')
+        ->name('toggleParcelStatus');
     Route::get('/floors/{project}', 'FloorController@index')->name('floors');
     Route::get('/apartments/{project}', 'ApartmentController@index')->name('apartments');
-    Route::get('/location/{project}', 'HomeController@location')->name('location');
+    Route::get('/location/{project}', 'MapController@location')->name('location');
     Route::get('/projectDesigner/{project}', 'DesignerController@project')->name('projectDesigner');
     Route::get('/parcelDesigner/{parcel}', 'DesignerController@parcel')->name('parcelDesigner');
     Route::get('/floorDesigner/{floor}', 'DesignerController@floor')->name('floorDesigner');
