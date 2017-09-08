@@ -6,6 +6,9 @@ use App\Model\EstateProject;
 use App\Model\Floor;
 use App\Model\Parcel;
 
+/**
+ * @property object image
+ */
 class Designer {
 
     public $id;
@@ -24,7 +27,7 @@ class Designer {
             $this->setEditor();
             foreach ($object->getBlocks() as $block)
             {
-                $this->spots[] = Polygon::createWithPlainText($block->BlokNo, "Blok - " . $block->BlokNo);
+                $this->spots[] = new Circle($block->BlokNo, "Blok - " . $block->BlokNo);
             }
         } elseif ($object instanceof Parcel) {
             $this->id = $object->id;
@@ -52,7 +55,7 @@ class Designer {
         } elseif($object instanceof Floor) {
             $this->id = $object->id;
             $this->editor = $this->setEditor();
-            $this->setGeneral($object->KapiNo);
+            $this->setGeneral($object->floor_numbering);
             $this->setImage($object->floorPhoto->getImageUrl());
         } else {
             throw new \Exception(sprintf("Unknown object type in file  %s at line %s given object type: %ss", __FILE__, __LINE__, gettype($object)));

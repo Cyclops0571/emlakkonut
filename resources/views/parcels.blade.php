@@ -12,7 +12,8 @@
     </div>
     <ul id="listParcels" class="list-group list-group-flush">
       @foreach($project->Parcels as $parcel)
-        <li class="list-group-item justify-content-between" style="{{$parcel->status !== 1 ? 'background-color:lightgrey': ''}}">
+        <li class="list-group-item justify-content-between"
+            style="{{$parcel->status !== 1 ? 'background-color:lightgrey': ''}}">
           <form name="{{$parcel->id}}" method="post" action="{{URL::route('photo.parcelStore')}}"
                 enctype="multipart/form-data">
             {{csrf_field()}}
@@ -27,29 +28,27 @@
                   <input type="file" name="photo" class="form-control" aria-describedby="basic-addon1"
                          onchange="this.form.submit();">
                 </label>
-                Ada: {{$parcel->island->island_kkys}} - Parsel: {{$parcel->parcel}}
+                Ada: {{$parcel->island->island_kkys}} - Numarataj: {{$parcel->parcel}}
               </span>
           </form>
-          <span>
-              <form action="{{URL::route('toggleParcelStatus', $parcel->id)}}" method="post">
-                {{csrf_field()}}
-                <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle"
+          <form action="{{URL::route('toggleParcelStatus', $parcel->id)}}" method="post">
+            {{csrf_field()}}
+            <span>
+              <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle"
                       onclick="window.location='{{ URL::route('parcelDesigner', $parcel->id) }}'">
                 <i class="icon-designer"></i>
               </button>
-                @if($parcel->status !== 1)
-                  <button title="Aktifleştir"
-                          class="btn btn-success btn-sm rounded-circle btn-margin-left">
+              @if($parcel->status !== 1)
+                <button title="Aktifleştir" class="btn btn-success btn-sm rounded-circle btn-margin-left">
                     <img src="/img/checked.svg" style="width: 14px; height: 21px;"/>
                   </button>
-                @else
-                  <button title="Pasifleştir"
-                          class="btn btn-danger btn-sm rounded-circle btn-margin-left">
+              @else
+                <button title="Pasifleştir" class="btn btn-danger btn-sm rounded-circle btn-margin-left">
                     <img src="/img/cancel.svg" style="width: 14px; height: 21px;"/>
                   </button>
-                @endif
-              </form>
+              @endif
             </span>
+          </form>
         </li>
       @endforeach
     </ul>
