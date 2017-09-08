@@ -30,7 +30,7 @@
 
 @section('content')
     <div class="card card-size">
-        <form action="{{URL::route('mapSave', 1)}}" method="post">
+        <form type="multipart/form-data" action="{{URL::route('mapSave', 1)}}" method="post">
         {{csrf_field()}}
         <input id="inputPositions" type="hidden" name="positions">
         <div class="card-header">
