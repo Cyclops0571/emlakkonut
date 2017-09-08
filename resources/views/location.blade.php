@@ -95,7 +95,7 @@
                points.push(polygon.getPath().getAt(i).toUrlValue(6));
             }
             polygonArray.push(points);
-            $("#inputPositions").attr('value', polygonArray);
+            $("#inputPositions").attr('value', JSON.stringify(polygonArray));
           });
       }
 
