@@ -32,6 +32,7 @@
     <div class="card card-size">
         <div class="card-header">
             Proje Konumu
+            <button class="btn btn-success btn-sm rounded-circle" style="float: right"><i class="icon-save"></i></button>
         </div>
         <div class="row">
             <ul class="mapnav nav nav-pills flex-column">
@@ -58,6 +59,7 @@
       var marker = "http://basaksehirbahcesehir.com/wp-content/uploads/2015/11/kroki2-150x150.jpg";
 
       function initMap() {
+          var polygonArray = [];
           var map = new google.maps.Map(document.getElementById("map"), {
               center: {lat: 41.0082, lng: 28.9784},
               zoom: 14,
@@ -66,7 +68,7 @@
               mapTypeControl: false
           });
           var drawingManager = new google.maps.drawing.DrawingManager({
-              drawingMode: google.maps.drawing.OverlayType.MARKER,
+              drawingMode: google.maps.drawing.OverlayType.POLYGON,
               drawingControl: true,
               drawingControlOptions: {
                   style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
@@ -84,6 +86,14 @@
               }
           });
           drawingManager.setMap(map);
+          
+          google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+            var points = [];
+            for (var i = 0; i < polygon.getPath().getLength(); i++) {
+               points.push(polygon.getPath().getAt(i).toUrlValue(6));
+            }
+            polygonArray.push(points);
+          });
       }
 
       function fileUpload(input) {
