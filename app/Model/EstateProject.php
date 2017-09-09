@@ -6,7 +6,6 @@ use App\Designer\Designer;
 use App\ParcelInteractivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Pagination\Paginator;
 
 /**
  * App\Model\EstateProject
@@ -72,7 +71,11 @@ class EstateProject extends Model {
     }
     
     public static function getCurrentProjectIdFromSession() {
-        return \Session::get('projectID');
+        $projectId = \Session::get('projectID');
+        if(!$projectId) {
+            return \Redirect::route('projects')->withErrors('Yapmak istediğiniz işlem için önce bir proje seçmelisiniz');
+        }
+        return $projectId;
     }
 
     /**

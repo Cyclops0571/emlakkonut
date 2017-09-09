@@ -18,7 +18,7 @@ class CreateProjectLocation extends Migration
             $table->increments('id')->index();
             $table->string('project_id');
             $table->text('map_data');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
