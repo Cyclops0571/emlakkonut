@@ -91,9 +91,8 @@
           });
           drawingManager.setMap(map);
 
-          var triangleCoords;
           @if($projectLocation)
-            {!! $projectLocation->map_data ? triangleCoords = $projectLocation->map_data : triangleCoords = null !!};
+            var triangleCoords = {!!$projectLocation->map_data ? $projectLocation->map_data : json_encode(null); !!};
 
             if (triangleCoords) {
               for (var i in triangleCoords) {
