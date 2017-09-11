@@ -29,11 +29,6 @@
 </style>
 
 @section('content')
-  @if($projectLocation)
-    <p>
-      {{$projectLocation->map_data}}
-    </p>
-  @endif
   <div class="card card-size">
     <form enctype="multipart/form-data" action="{{URL::route('mapSave')}}" method="post">
       {{csrf_field()}}
@@ -96,6 +91,28 @@
           });
           drawingManager.setMap(map);
 
+          var triangleCoords;
+          @if($projectLocation)
+            triangleCoords = {!!$projectLocation->map_data!!};
+
+            for (var i in triangleCoords) {
+              triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
+                var items = obj.split(",");
+                return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
+              });
+            }
+
+            var polygonMap = new google.maps.Polygon({
+              paths: triangleCoords,
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 3,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35
+            });
+            polygonMap.setMap(map);
+          @endif
+
           google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
               var points = [];
               for (var i = 0; i < polygon.getPath().getLength(); i++) {
@@ -104,29 +121,6 @@
               polygonArray.push(points);
               $("#inputPositions").attr('value', JSON.stringify(polygonArray));
           });
-      }
-
-      function showArrays(event) {
-        // Since this polygon has only one path, we can call getPath() to return the
-        // MVCArray of LatLngs.
-        var vertices = this.getPath();
-
-        var contentString = '<b>Bermuda Triangle polygon</b><br>' +
-            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
-            '<br>';
-
-        // Iterate over the vertices.
-        for (var i =0; i < vertices.getLength(); i++) {
-          var xy = vertices.getAt(i);
-          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
-              xy.lng();
-        }
-
-        // Replace the info window's content and position.
-        infoWindow.setContent(contentString);
-        infoWindow.setPosition(event.latLng);
-
-        infoWindow.open(map);
       }
 
       function fileUpload(input) {
