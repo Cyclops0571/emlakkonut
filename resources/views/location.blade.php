@@ -95,22 +95,24 @@
           @if($projectLocation)
             triangleCoords = {!!$projectLocation->map_data!!};
 
-            for (var i in triangleCoords) {
-              triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
-                var items = obj.split(",");
-                return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
-              });
-            }
+            if (triangleCoords) {
+              for (var i in triangleCoords) {
+                triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
+                  var items = obj.split(",");
+                  return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
+                });
+              }
 
-            var polygonMap = new google.maps.Polygon({
-              paths: triangleCoords,
-              strokeColor: '#FF0000',
-              strokeOpacity: 0.8,
-              strokeWeight: 3,
-              fillColor: '#FF0000',
-              fillOpacity: 0.35
-            });
-            polygonMap.setMap(map);
+              var polygonMap = new google.maps.Polygon({
+                paths: triangleCoords,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 3,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35
+              });
+              polygonMap.setMap(map);
+            }
           @endif
 
           google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
