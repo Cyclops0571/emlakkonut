@@ -93,7 +93,7 @@
 
           var triangleCoords;
           @if($projectLocation)
-            triangleCoords = {!!$projectLocation->map_data ? $projectLocation->map_data : null !!};
+            {!! $projectLocation->map_data ? triangleCoords = $projectLocation->map_data : triangleCoords = null !!};
 
             if (triangleCoords) {
               for (var i in triangleCoords) {
