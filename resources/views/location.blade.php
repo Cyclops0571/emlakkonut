@@ -23,7 +23,7 @@
   }
 
   #imgProjeKroki {
-    margin: 0 1.4%;
+    padding: 0 15px;
     width: 100%;
   }
 </style>
@@ -32,9 +32,6 @@
   @if($projectLocation)
     <p>
       {{$projectLocation->map_data}}
-    </p>
-    <p>
-      {{ $projectLocation->photo ? $projectLocation->photo->getImageUrl(): ''}}
     </p>
   @endif
   <div class="card card-size">
@@ -59,7 +56,7 @@
           </li>
         </ul>
         <div id="map"></div>
-        <img id="imgProjeKroki">
+        <img id="imgProjeKroki" @if($projectLocation->photo) src="{{$projectLocation->photo->getImageUrl()}}" @endif>
       </div>
     </form>
   </div>
@@ -107,6 +104,29 @@
               polygonArray.push(points);
               $("#inputPositions").attr('value', JSON.stringify(polygonArray));
           });
+      }
+
+      function showArrays(event) {
+        // Since this polygon has only one path, we can call getPath() to return the
+        // MVCArray of LatLngs.
+        var vertices = this.getPath();
+
+        var contentString = '<b>Bermuda Triangle polygon</b><br>' +
+            'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+            '<br>';
+
+        // Iterate over the vertices.
+        for (var i =0; i < vertices.getLength(); i++) {
+          var xy = vertices.getAt(i);
+          contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+              xy.lng();
+        }
+
+        // Replace the info window's content and position.
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
       }
 
       function fileUpload(input) {
