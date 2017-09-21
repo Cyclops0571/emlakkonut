@@ -29,15 +29,25 @@ class KkysDataCommand extends Command {
      */
     public function handle()
     {
-        $username = 'm_y';
-        $password = '23we';
+        $username = config('app.kkysUser');
+        $password = config('app.kkysPassword');
 
         $serviceResponse = ServiceResponse::setUserAttributesFromService($username, $password);
+        dd($serviceResponse);
         $user = User::setAttributesFromService($serviceResponse->Sonuc);
+        dump($user);
         $projectList = $user->setProjectListFromService();
+        dump($projectList);
         foreach ($projectList as $project)
         {
             $user->setProjectPartsFromService($project->ProjeID);
         }
+
+        \Artisan::call('kkys:island');
+        \Artisan::call('kkys:parcel');
+        \Artisan::call('kkys:block');
+        \Artisan::call('kkys:floor');
+        \Artisan::call('kkys:floormapping');
+
     }
 }

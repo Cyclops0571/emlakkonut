@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use App\Designer\Designer;
-use App\ParcelInteractivity;
+use App\Model\ParcelInteractivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -24,7 +24,7 @@ use Illuminate\Http\UploadedFile;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto $projectPhoto
  * @property-read \App\Model\EstateProjectInteractivity $EstateProjectInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProjectApartment[] $EstateProjectApartment
- * @property-read \App\ParcelInteractivity $ParcelInteractivity
+ * @property-read \App\Model\ParcelInteractivity $ParcelInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $Parcels
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floor
  * @property int|null $status

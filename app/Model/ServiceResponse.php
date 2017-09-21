@@ -30,7 +30,7 @@ class ServiceResponse extends Model
 
     public static function setAttributesFromService($url) {
         $client = new Client();
-        $response = $client->get($url);
+        $response = $client->post($url);
         $response = json_decode($response->getBody()->getContents());
         $serviceResponse = new static();
         $serviceResponse->Durum = $response->Durum;

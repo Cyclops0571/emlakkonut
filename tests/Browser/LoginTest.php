@@ -19,8 +19,8 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->type('name', 'm_y')
-                ->type('password', '23we')
+                ->type('name', config('app.kkysUser'))
+                ->type('password', config('app.kkysPassword'))
                 ->press('Giriş')
                 ->assertPathIs('/projects');
         });

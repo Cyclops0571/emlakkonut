@@ -41,7 +41,7 @@
         <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-user icon-color"></i></span>
           <input type="text" id="name" class="form-control" placeholder="Kullanıcı Adı" aria-describedby="basic-addon1"
-                 name="name" value="{{ app()->isLocal() ? 'm_y' : old('name')  }}" required autofocus>
+                 name="name" value="{{ app()->isLocal() ? config('app.kkysUser') : old('name')  }}" required autofocus>
         </div>
         @if ($errors->has('name'))
           <span class="help-block">
@@ -51,7 +51,7 @@
         <div class="input-group{{ $errors->has('password') ? ' has-error' : '' }} pass">
           <span class="input-group-addon" id="basic-addon1"><i class="icon-lock icon-color"></i></span>
           <input type="password" id="password" class="form-control" placeholder="Şifre" aria-describedby="basic-addon1"
-                 name="password" value="{{app()->isLocal() ? '23we' : '' }}" required>
+                 name="password" value="{{app()->isLocal() ? config('app.kkysPassword') : '' }}" required>
         </div>
         @if ($errors->has('password'))
           <span class="help-block">

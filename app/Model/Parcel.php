@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Designer\Designer;
-use App\ParcelInteractivity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -25,7 +24,7 @@ use Illuminate\Http\UploadedFile;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\Parcel whereProjectId($value)
  * @property-read \App\Model\EstateProject $estateProject
  * @property-read \App\Model\ParcelPhoto $parcelPhoto
- * @property-read \App\ParcelInteractivity $parcelInteractivity
+ * @property-read \App\Model\ParcelInteractivity $parcelInteractivity
  * @property int $island_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Parcel whereIslandId($value)
  * @property-read \App\Model\Island $island

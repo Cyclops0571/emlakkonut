@@ -2,6 +2,8 @@
 
 return [
 
+    'kkysUser' => 'akif.aydoğan',
+    'kkysPassword' => 'a+++123456',
     /*
     |--------------------------------------------------------------------------
     | Application Name
