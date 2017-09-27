@@ -18,7 +18,7 @@ class MapController extends Controller
 
     public function save(Request $request)
     {
-        $this->validate($request, ['positions' =>'required', 'photo'  => 'mimes:jpeg,jpg|required|image']);
+        $this->validate($request, ['positions' =>'required', 'photo'  => 'mimes:jpeg,jpg|image']);
         $projectId = EstateProject::getCurrentProjectIdFromSession();
         $projectLocation = ProjectLocation::getByProjectID($projectId);
         $projectLocation->map_data = $request->get('positions', '');

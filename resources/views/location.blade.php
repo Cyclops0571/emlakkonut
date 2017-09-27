@@ -23,22 +23,14 @@
   }
 
   #imgProjeKroki {
-    margin: 0 1.4%;
+    padding: 0 15px;
     width: 100%;
   }
 </style>
 
 @section('content')
-  @if($projectLocation)
-    <p>
-      {{$projectLocation->map_data}}
-    </p>
-    <p>
-      {{ $projectLocation->photo ? $projectLocation->photo->getImageUrl(): ''}}
-    </p>
-  @endif
   <div class="card card-size">
-    <form enctype="multipart/form-data" action="{{URL::route('mapSave')}}" method="post">
+    <form enctype="multipart/form-data" action="{{URL::route('mapSave')}}" method="post" style="margin: 0;">
       {{csrf_field()}}
       <input id="inputPositions" type="hidden" name="positions">
       <div class="card-header">
@@ -59,7 +51,7 @@
           </li>
         </ul>
         <div id="map"></div>
-        <img id="imgProjeKroki">
+        <img id="imgProjeKroki" @if($projectLocation->photo) src="{{$projectLocation->photo->getImageUrl()}}" @endif>
       </div>
     </form>
   </div>
@@ -98,6 +90,29 @@
               }
           });
           drawingManager.setMap(map);
+
+          @if($projectLocation)
+            var triangleCoords = {!!$projectLocation->map_data ? $projectLocation->map_data : json_encode(null); !!};
+
+            if (triangleCoords) {
+              for (var i in triangleCoords) {
+                triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
+                  var items = obj.split(",");
+                  return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
+                });
+              }
+
+              var polygonMap = new google.maps.Polygon({
+                paths: triangleCoords,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 3,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35
+              });
+              polygonMap.setMap(map);
+            }
+          @endif
 
           google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
               var points = [];
