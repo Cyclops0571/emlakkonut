@@ -32,10 +32,8 @@ class KkysDataCommand extends Command {
         $username = config('app.kkysUser');
         $password = config('app.kkysPassword');
 
-        $serviceResponse = ServiceResponse::setUserAttributesFromService($username, $password);
-        dd($serviceResponse);
-        $user = User::setAttributesFromService($serviceResponse->Sonuc);
-        dump($user);
+        $serviceUser = ServiceResponse::getServiceUser($username, $password);
+        $user = User::setAttributesFromService($serviceUser->Sonuc);
         $projectList = $user->setProjectListFromService();
         dump($projectList);
         foreach ($projectList as $project)

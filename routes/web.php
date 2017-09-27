@@ -11,17 +11,17 @@
 |
 */
 
+use App\Model\Setting;
+
 Auth::routes();
 
-Route::get('/', function ()
-{
-    return view('auth/login');
-});
+
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 Route::group(['middleware' => 'auth'], function ()
 {
+    Route::get('/', 'ProjectController@projects');
     Route::get('/projects', 'ProjectController@projects')->name('projects');
     Route::post('/toggleProjectStatus/{project}', 'ProjectController@toggleStatus')
         ->name('toggleProjectStatus');
@@ -48,5 +48,9 @@ Route::group(['middleware' => 'auth'], function ()
 });
 
 
+Route::get('setting', function(Setting $setting){
+    $setting->setSettings();
+    return 'setup is ready';
+});
 
 Route::get('test', 'TTestController@index');

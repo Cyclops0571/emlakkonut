@@ -30,7 +30,8 @@ use Illuminate\Http\UploadedFile;
  * @property int|null $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProject whereStatus($value)
  */
-class EstateProject extends Model {
+class EstateProject extends Model
+{
 
     protected $table = 'estate_project';
 
@@ -42,17 +43,14 @@ class EstateProject extends Model {
     {
         $projectList = [];
         $serviceAttributes = json_decode($serviceAttributesRaw);
-        foreach ($serviceAttributes as $serviceAttribute)
-        {
+        foreach ($serviceAttributes as $serviceAttribute) {
             $estateProject = EstateProject::query()
                 ->where('ProjeID', $serviceAttribute->ProjeID)
                 ->first();
-            if (!$estateProject)
-            {
+            if (!$estateProject) {
                 $estateProject = new self();
             }
-            if (!empty($serviceAttribute->ProjeID))
-            {
+            if (!empty($serviceAttribute->ProjeID)) {
                 $estateProject->ProjeID = $serviceAttribute->ProjeID;
                 $estateProject->ProjeAdi = $serviceAttribute->ProjeAdi;
                 $estateProject->save();
@@ -69,20 +67,24 @@ class EstateProject extends Model {
     {
         \Session::put('projectID', $id);
     }
-    
-    public static function getCurrentProjectIdFromSession() {
+
+    public static function getCurrentProjectIdFromSession()
+    {
         $projectId = \Session::get('projectID');
-        if(!$projectId) {
-            return \Redirect::route('projects')->withErrors('Yapmak istediğiniz işlem için önce bir proje seçmelisiniz');
+        if (!$projectId) {
+            return \Redirect::route('home')->withErrors('Yapmak istediğiniz işlem için önce bir proje seçmelisiniz');
         }
+
         return $projectId;
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection|Model|null|static|static[]
      */
-    public static function getCurrentProjectFromSession() {
+    public static function getCurrentProjectFromSession()
+    {
         $projectID = self::getCurrentProjectIdFromSession();
+
         return self::find($projectID);
     }
 
@@ -91,27 +93,38 @@ class EstateProject extends Model {
         return $this->hasOne(ProjectPhoto::class, 'project_id');
     }
 
-    private function photoDirectory() {
-        return public_path('uploads/project/');
+    private function photoDirectory()
+    {
+        return Setting::PublicPath('uploads/project/');
     }
 
-    public function getPhotoPath() {
+    public function getPhotoPath()
+    {
         return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->name : '';
     }
 
-    public function getThumbnailPath() {
+    public function getThumbnailPath()
+    {
         return $this->projectPhoto ? '/uploads/project/' . $this->projectPhoto->thumbnail : '';
     }
 
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         $path = $this->getPhotoPath();
-        return $path ? \URL::to($path) : '';
+
+        return $path ? Setting::AdminUrl($path) : '';
     }
 
     public function getThumbnailUrl()
     {
         $path = $this->getThumbnailPath();
-        return $path ? \URL::to($path) : \URL::to('/img/upload.png');
+
+        return $path ? Setting::AdminUrl($path) : Setting::AdminUrl('/img/upload.png');
+    }
+
+    public function get352x386Url()
+    {
+        return str_replace('_thumb.jpg', '_461x505.jpg', $this->getThumbnailUrl());
     }
 
     public function EstateProjectInteractivity()
@@ -124,8 +137,9 @@ class EstateProject extends Model {
         return $this->hasOne(ParcelInteractivity::class, 'project_id');
     }
 
-    public function setEstateProjectInteractivity($interactiveJson) {
-        if(!$this->EstateProjectInteractivity) {
+    public function setEstateProjectInteractivity($interactiveJson)
+    {
+        if (!$this->EstateProjectInteractivity) {
             $this->EstateProjectInteractivity = new EstateProjectInteractivity();
         }
 
@@ -136,7 +150,7 @@ class EstateProject extends Model {
 
     public function initEstateProjectInteractivity()
     {
-        if(!$this->EstateProjectInteractivity) {
+        if (!$this->EstateProjectInteractivity) {
             $this->EstateProjectInteractivity = new EstateProjectInteractivity();
         }
 
@@ -153,17 +167,19 @@ class EstateProject extends Model {
         return $this->hasMany(EstateProjectApartment::class, "project_id");
     }
 
-    public function getBlocks() {
+    public function getBlocks()
+    {
         return $this->EstateProjectApartment()->getQuery()->select('BlokNo')->distinct()->get();
     }
 
-    public function Parcels() {
+    public function Parcels()
+    {
         return $this->hasMany(Parcel::class, 'project_id');
     }
 
     public function createPhoto(UploadedFile $file)
     {
-        if(!$this->projectPhoto) {
+        if (!$this->projectPhoto) {
             $this->projectPhoto = new ProjectPhoto();
         }
         $this->projectPhoto->project_id = $this->id;
@@ -177,6 +193,10 @@ class EstateProject extends Model {
         $image->save($this->photoDirectory() . $file->getFilename() . '_thumb.jpg');
 
         $image = \Image::make($file->getRealPath());
+        $image->resize(352, 386);
+        $image->save($this->photoDirectory() . $file->getFilename() . '_461x505.jpg');
+
+        $image = \Image::make($file->getRealPath());
         $image->widen(1280);
         $image->save($this->photoDirectory() . $file->getFilename() . '.jpg');
 
@@ -184,7 +204,7 @@ class EstateProject extends Model {
         $this->projectPhoto->height = $image->height();
         $this->projectPhoto->save();
 
-        if($this->EstateProjectInteractivity) {
+        if ($this->EstateProjectInteractivity) {
             //change the image url in the json data.
             $this->EstateProjectInteractivity->updateImage($this->getImageUrl());
             $this->EstateProjectInteractivity->save();

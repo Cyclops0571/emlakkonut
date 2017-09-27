@@ -41,7 +41,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUnvan($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProject[] $estateProject
  */
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 
     use Notifiable;
 
@@ -51,7 +52,15 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'KullaniciID', 'Ad', 'Soyad', 'AdSoyad', 'Unvan', 'KullaniciTur',
+        'name',
+        'email',
+        'password',
+        'KullaniciID',
+        'Ad',
+        'Soyad',
+        'AdSoyad',
+        'Unvan',
+        'KullaniciTur',
     ];
 
     /**
@@ -68,21 +77,23 @@ class User extends Authenticatable {
     {
         $serviceAttributes = json_decode($serviceAttributesRaw);
         $user = User::where('KullaniciID', $serviceAttributes->KullaniciID)->first();
-        if (!$user)
-        {
-            $user = new self();
 
+        if (!$user) {
+            $user = new self();
         }
+
         $user->KullaniciID = $serviceAttributes->KullaniciID;
         $user->Ad = $serviceAttributes->Ad;
         $user->Soyad = $serviceAttributes->Soyad;
         $user->AdSoyad = $serviceAttributes->AdSoyad;
         $user->Unvan = $serviceAttributes->Unvan;
         $user->KullaniciTur = $serviceAttributes->KullaniciTur;
-        if(!empty($username)) {
+
+        if (!empty($username)) {
             $user->name = $username;
             $user->save();
         }
+
         return $user;
     }
 
@@ -91,6 +102,7 @@ class User extends Authenticatable {
     {
         $projectUrl = "http://192.168.0.186:94/SunumService.svc/KullaniciProjeGetir/{$this->KullaniciID}";
         $service = ServiceResponse::setAttributesFromService($projectUrl);
+
         return EstateProject::setAttributesFromService($service->Sonuc);
     }
 
@@ -101,7 +113,8 @@ class User extends Authenticatable {
         EstateProjectApartment::setAttributesFromService($service->Sonuc);
     }
 
-    public function estateProject() {
-        return $this->belongsToMany(EstateProject::class, 'user_estate_project','user_id', 'project_id');
+    public function estateProject()
+    {
+        return $this->belongsToMany(EstateProject::class, 'user_estate_project', 'user_id', 'project_id');
     }
 }

@@ -62,14 +62,16 @@ class LoginController extends Controller
         $credentials = $this->credentials($request);
         if(app()->isLocal()) {
             $user = User::query()->where('name', $credentials['name'])->first();
-            \Auth::login($user);
-            $this->clearLoginAttempts($request);
-            return $this->sendLoginResponse($request);
+            if($user) {
+                \Auth::login($user);
+                $this->clearLoginAttempts($request);
+                return $this->sendLoginResponse($request);
+            }
         }
 
-        $serviceResponse = ServiceResponse::setUserAttributesFromService($credentials['name'], $credentials['password']);
-        if($serviceResponse && $serviceResponse->Durum == 0) {
-            $user = User::setAttributesFromService($serviceResponse->Sonuc, $credentials['name']);
+        $serviceUser = ServiceResponse::getServiceUser($credentials['name'], $credentials['password']);
+        if($serviceUser && $serviceUser->Durum == 0) {
+            $user = User::setAttributesFromService($serviceUser->Sonuc, $credentials['name']);
             $projectList = $user->setProjectListFromService(); //571571 check this with cron not from service
             $user->estateProject()->sync($projectList->pluck('id'));
             \Auth::login($user);
