@@ -35,7 +35,8 @@
       <input id="inputPositions" type="hidden" name="positions">
       <div class="card-header">
         Proje Konumu
-        <button class="btn btn-success btn-sm rounded-circle" style="float: right"><i class="icon-save"></i></button>
+        <button class="btn btn-success btn-sm rounded-circle" style="float: right;"><i class="icon-save"></i></button>
+        <button id="btnMapDel" type="button" class="btn btn-danger btn-sm rounded-circle" style="float: right; margin-right: 1rem;"><i class="icon-delete"></i></button>
       </div>
       <div class="row">
         <ul class="mapnav nav nav-pills flex-column">
@@ -63,6 +64,18 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI8qNnWc7vcryJwCLs3Q5DWymgNyO3UTM&libraries=drawing&callback=initMap"
       async defer></script>
   <script>
+      var selectedShape;
+
+      function setSelection(shape) {
+        selectedShape = shape;
+      }
+
+      function deleteSelectedShape() {
+        if (selectedShape) {
+          selectedShape.setMap(null);
+        }
+      }
+
       function initMap() {
           var polygonArray = [];
           var map = new google.maps.Map(document.getElementById("map"), {
@@ -74,7 +87,9 @@
           });
           var drawingManager = new google.maps.drawing.DrawingManager({
               drawingMode: google.maps.drawing.OverlayType.POLYGON,
-              drawingControl: true,
+              polygonOptions: {
+                editable: true
+              },
               drawingControlOptions: {
                   style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
                   position: google.maps.ControlPosition.RIGHT_CENTER,
@@ -122,6 +137,19 @@
               polygonArray.push(points);
               $("#inputPositions").attr('value', JSON.stringify(polygonArray));
           });
+
+          google.maps.event.addListener(drawingManager, 'overlaycomplete', function(e) {
+              if (e.type != google.maps.drawing.OverlayType.MARKER) {
+                var newShape = e.overlay;
+                newShape.type = e.type;
+                google.maps.event.addListener(newShape, 'click', function() {
+                  setSelection(newShape);
+                });
+                setSelection(newShape);
+              }
+          });
+
+          google.maps.event.addDomListener(document.getElementById('btnMapDel'), 'click', deleteSelectedShape);
       }
 
       function fileUpload(input) {
