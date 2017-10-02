@@ -95,8 +95,8 @@ class EstateProjectApartment extends Model {
 
         foreach ($projectParts as $projectPart)
         {
-
-            $estateProjectPart = static::where('ProjeID', $projectPart->ProjeID)
+            $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
+            $estateProjectPart = static::where('project_id', $project->id)
                 ->where('Ada', $projectPart->Ada)
                 ->where('Parsel', $projectPart->Parsel)
                 ->where('BlokNo', $projectPart->BlokNo)
