@@ -34,7 +34,9 @@ class DesignerController extends Controller {
             $parcel->initInteractivity();
         }
 
-        return view('designer.parcel', compact('parcel'));
+        $project = EstateProject::getCurrentProjectFromSession();
+
+        return view('designer.parcel', compact('parcel', 'project'));
     }
 
     public function designer()

@@ -11,9 +11,9 @@ class MapController extends Controller
 
     public function location()
     {
-        $projectId = EstateProject::getCurrentProjectIdFromSession();
-        $projectLocation = ProjectLocation::getByProjectID($projectId);
-        return view('location', compact('projectLocation'));
+        $project = EstateProject::getCurrentProjectFromSession();
+        $projectLocation = ProjectLocation::getByProjectID($project->id);
+        return view('location', compact('projectLocation', 'project'));
     }
 
     public function save(Request $request)
@@ -23,7 +23,9 @@ class MapController extends Controller
         $projectLocation = ProjectLocation::getByProjectID($projectId);
         $projectLocation->map_data = $request->get('positions', '');
         $projectLocation->save();
-        $projectLocation->setPhoto($request->file('photo'));
+        if($request->file('photo')) {
+            $projectLocation->setPhoto($request->file('photo'));
+        }
 
         return redirect()->back()->with('success', 'İşleminiz başarıyla kaydedildi.');
     }

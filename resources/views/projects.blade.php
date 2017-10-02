@@ -14,18 +14,18 @@
                onkeyup="filter(this)" autofocus>
       </div>
       <ul id="listProjects" class="list-group list-group-flush">
-        @foreach($projects as $project)
+        @foreach($projects as $myProject)
           <li class="list-group-item list-group-item-action justify-content-between"
-              onclick="return window.location='{{URL::route('postures', $project->id)}}'"
+              onclick="return window.location='{{URL::route('postures', $myProject->id)}}'"
               style="{{$project->status !== 1 ? 'background-color:lightgrey': ''}}">
               <span style="max-width: 95%">
-                <img src="{{$project->getThumbnailUrl()}}" class="list-img"/>
-                {{$project->ProjeAdi}}
+                <img src="{{$myProject->getThumbnailUrl()}}" class="list-img"/>
+                {{$myProject->ProjeAdi}}
               </span>
             <span>
-              <form action="{{URL::route('toggleProjectStatus', $project->id)}}" method="post">
+              <form action="{{URL::route('toggleProjectStatus', $myProject->id)}}" method="post">
                 {{csrf_field()}}
-                @if($project->status !== 1)
+                @if($myProject->status !== 1)
                 <button type="submit" title="Aktifleştir" class="btn btn-success btn-sm rounded-circle">
                   <img src="/img/checked.svg" style="width: 14px; height: 21px;"/>
                 </button>
