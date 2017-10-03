@@ -43,35 +43,33 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'KullaniciID',
-        'Ad',
-        'Soyad',
-        'AdSoyad',
-        'Unvan',
-        'KullaniciTur',
-    ];
-
+    protected $fillable
+        = [
+            'name',
+            'email',
+            'password',
+            'KullaniciID',
+            'Ad',
+            'Soyad',
+            'AdSoyad',
+            'Unvan',
+            'KullaniciTur',
+        ];
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'remember_token',
-    ];
-
+    protected $hidden
+        = [
+            'remember_token',
+        ];
 
     public static function setAttributesFromService($serviceAttributesRaw, $username = "")
     {
@@ -97,7 +95,6 @@ class User extends Authenticatable
         return $user;
     }
 
-
     public function setProjectListFromService()
     {
         $projectUrl = "http://192.168.0.186:94/SunumService.svc/KullaniciProjeGetir/{$this->KullaniciID}";
@@ -108,13 +105,15 @@ class User extends Authenticatable
 
     public function setProjectPartsFromService($projectID)
     {
-        $url = sprintf("http://192.168.0.186:94/SunumService.svc/ProjeBagimsizBolumleriGetir/{$this->KullaniciID}/{$projectID}");
+        $url
+            = sprintf("http://192.168.0.186:94/SunumService.svc/ProjeBagimsizBolumleriGetir/{$this->KullaniciID}/{$projectID}");
         $service = ServiceResponse::setAttributesFromService($url);
         EstateProjectApartment::setAttributesFromService($service->Sonuc);
     }
 
     public function estateProject()
     {
-        return $this->belongsToMany(EstateProject::class, 'user_estate_project', 'user_id', 'project_id');
+        return $this->belongsToMany(EstateProject::class, 'user_estate_project', 'user_id', 'project_id')
+            ->orderBy('ProjeAdi');
     }
 }

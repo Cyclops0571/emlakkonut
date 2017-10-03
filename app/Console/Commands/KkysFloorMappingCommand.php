@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Model\EstateProjectApartment;
+use App\Model\FloorMapping;
 use Illuminate\Console\Command;
 
 class KkysFloorMappingCommand extends Command
@@ -30,7 +31,10 @@ class KkysFloorMappingCommand extends Command
     {
         $apartments = EstateProjectApartment::groupBy('BulunduguKat')->get(['BulunduguKat']);
         foreach($apartments as $apartment) {
-            echo $apartment->BulunduguKat, PHP_EOL;
+            $floorMapping = FloorMapping::where('floor_name', $apartment->BulunduguKat)->first();
+            if(!$floorMapping) {
+                echo $apartment->BulunduguKat, PHP_EOL;
+            }
         }
     }
 }

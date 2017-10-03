@@ -15,7 +15,6 @@ class KkysIslandCommand extends Command
      * @var string
      */
     protected $signature = 'kkys:island';
-
     /**
      * The console command description.
      *
@@ -31,11 +30,9 @@ class KkysIslandCommand extends Command
     public function handle()
     {
         $apartments = EstateProjectApartment::groupBy(['project_id', 'Ada'])->get(['project_id', 'Ada']);
-        foreach ($apartments as $apartment)
-        {
+        foreach ($apartments as $apartment) {
             $island = Island::getFromApartment($apartment);
-            if (!$island)
-            {
+            if (!$island && $apartment->Ada) {
                 $island = new Island();
                 $island->project_id = $apartment->project_id;
                 $island->island_kkys = $apartment->Ada;

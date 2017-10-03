@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Scope\ApartmentScope;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -87,6 +88,11 @@ class EstateProjectApartment extends Model {
 
     protected $table = 'estate_project_apartment';
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new ApartmentScope());
+    }
 
     public static function setAttributesFromService($projectPartsRaw)
     {

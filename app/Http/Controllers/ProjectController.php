@@ -17,7 +17,7 @@ class ProjectController extends Controller
         if(\Session::get('projectID')) {
             $project = EstateProject::getCurrentProjectFromSession();
         } else {
-         $project = EstateProject::first();
+            $project = EstateProject::first();
         }
 
 
