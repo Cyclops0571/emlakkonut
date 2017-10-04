@@ -22,8 +22,8 @@ class Circle
         $this->title = $title;
         $this->x = 5;
         $this->y = 5;
-        $this->width = 6;
-        $this->height = 4;
+        $this->width = 4;
+        $this->height = 6;
         $this->default_style = $this->getColor("#00ffff");
 
         $this->tooltip_content = $this->tooltipContent($content);

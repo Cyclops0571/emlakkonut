@@ -21,7 +21,8 @@ class ProjectController extends Controller
         }
 
 
-        $projects = \Auth::user()->estateProject;
+//        $projects = \Auth::user()->estateProject;
+        $projects = EstateProject::orderBy('ProjeAdi')->get();
         return view('projects', compact('projects', 'project'));
     }
 
