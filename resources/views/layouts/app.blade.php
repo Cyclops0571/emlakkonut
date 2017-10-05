@@ -48,6 +48,7 @@
         <div class="row">
           @include('layouts.sidebar')
           <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <img id="loading" src="/img/loading.gif" style="margin-left: 50%; display: none;"/>
             @if($errors->any())
               <ul class="alert alert-danger">
                 @foreach($errors->all() as $error)
