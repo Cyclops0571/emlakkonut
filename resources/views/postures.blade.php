@@ -50,6 +50,14 @@
               document.getElementById("spanPosture").innerHTML = input.files[0].name;
 
               document.getElementById("photoForm").submit();
+
+              /*$("#photoForm").post({
+                url: "{{URL::route('photo.store')}}",
+                dataType: "multipart/form-data",
+                success: function (response) {
+                    alert("The server says: " + response);
+                }
+              });*/
           }
       }
   </script>

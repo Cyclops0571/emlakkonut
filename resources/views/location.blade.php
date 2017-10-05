@@ -36,7 +36,8 @@
       <div class="card-header">
         Proje Konumu
         <button class="btn btn-success btn-sm rounded-circle" style="float: right;"><i class="icon-save"></i></button>
-        <button id="btnMapDel" type="button" class="btn btn-danger btn-sm rounded-circle" style="float: right; margin-right: 1rem;"><i class="icon-delete"></i></button>
+        <button id="btnMapDel" type="button" class="btn btn-warning btn-sm rounded-circle" style="float: right; margin-right: 1rem;"><i class="icon-delete"></i></button>
+        <button id="btnMapClear" type="button" class="btn btn-danger btn-sm rounded-circle" style="float: right; margin-right: 1rem;" onclick="initMap(true)"><i class="icon-delete"></i></button>
       </div>
       <div class="row">
         <ul class="mapnav nav nav-pills flex-column">
@@ -76,7 +77,7 @@
         }
       }
 
-      function initMap() {
+      function initMap(p) {
           var polygonArray = [];
           var map = new google.maps.Map(document.getElementById("map"), {
               center: {lat: 41.0082, lng: 28.9784},
@@ -106,28 +107,30 @@
           });
           drawingManager.setMap(map);
 
-          @if($projectLocation)
-            var triangleCoords = {!!$projectLocation->map_data ? $projectLocation->map_data : json_encode(null); !!};
+          if (!p) {
+            @if($projectLocation)
+              var triangleCoords = {!!$projectLocation->map_data ? $projectLocation->map_data : json_encode(null); !!};
 
-            if (triangleCoords) {
-              for (var i in triangleCoords) {
-                triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
-                  var items = obj.split(",");
-                  return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
+              if (triangleCoords) {
+                for (var i in triangleCoords) {
+                  triangleCoords[i] = $.map(triangleCoords[i], function(obj) {
+                    var items = obj.split(",");
+                    return {lat: parseFloat(items[0]), lng: parseFloat(items[1])}
+                  });
+                }
+
+                var polygonMap = new google.maps.Polygon({
+                  paths: triangleCoords,
+                  strokeColor: '#FF0000',
+                  strokeOpacity: 0.8,
+                  strokeWeight: 3,
+                  fillColor: '#FF0000',
+                  fillOpacity: 0.35
                 });
+                polygonMap.setMap(map);
               }
-
-              var polygonMap = new google.maps.Polygon({
-                paths: triangleCoords,
-                strokeColor: '#FF0000',
-                strokeOpacity: 0.8,
-                strokeWeight: 3,
-                fillColor: '#FF0000',
-                fillOpacity: 0.35
-              });
-              polygonMap.setMap(map);
-            }
-          @endif
+            @endif
+          }
 
           google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
               var points = [];
