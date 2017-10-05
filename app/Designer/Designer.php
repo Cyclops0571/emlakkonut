@@ -77,13 +77,14 @@ class Designer {
     private function setEditor()
     {
         return [
+            "previewMode" => 1,
             "selected_shape" => "spot-1202",
+            "tool" => "select"
         ];
     }
 
     private function setGeneral($name, $naturalWidth = 768, $naturalHeight = 1024)
     {
-        //        general":{"name":"Demo - Drawing Shapes","width":5245,"height":4428,"image_url":"img/demo_2.jpg"}/
         $this->general = [
             'name'          => $name,
             'naturalWidth'  => $naturalWidth,
