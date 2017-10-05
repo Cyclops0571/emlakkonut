@@ -15,7 +15,7 @@ class Circle
     public $type;
 
 
-    public function __construct($title, $content = '')
+    public function __construct($blokId, $title, $content = '')
     {
         $this->id = uniqid("oval-");
         $this->type = 'oval';
@@ -24,14 +24,22 @@ class Circle
         $this->y = 5;
         $this->width = 4;
         $this->height = 6;
-        $this->default_style = $this->getColor("#00ffff");
+        $this->actions = $this->getAction();
+        $this->default_style = $this->getColor("#ff0000", 1);
 
         $this->tooltip_content = $this->tooltipContent($content);
     }
 
-    public function getColor($color) {
+    public function getAction() {
+        $obj = new \stdClass();
+        $obj->mouseover = 'no-action';
+        return $obj;
+    }
+
+    public function getColor($color, $opacity) {
         $obj = new \stdClass();
         $obj->background_color = $color;
+        $obj->background_opacity = $opacity;
         return $obj;
     }
 

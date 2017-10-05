@@ -27,7 +27,7 @@ class Designer {
             $this->setEditor();
             foreach ($object->getBlocks() as $block)
             {
-                $this->spots[] = new Circle($block->BlokNo, "Blok - " . $block->BlokNo);
+                $this->spots[] = new Circle($block->id ,$block->BlokNo, "Blok - " . $block->BlokNo);
             }
         } elseif ($object instanceof Parcel) {
             $this->id = $object->id;
@@ -77,8 +77,7 @@ class Designer {
     private function setEditor()
     {
         return [
-            "previewMode" => 1,
-            "selected_shape" => "spot-1202",
+            "previewMode" => 0,
             "tool" => "select"
         ];
     }
