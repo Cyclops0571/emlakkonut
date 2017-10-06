@@ -15,6 +15,7 @@ class Designer {
     public $editor;
     public $general;
     public $spots;
+    public $image;
 
     function __construct($object)
     {
@@ -32,8 +33,8 @@ class Designer {
         } elseif ($object instanceof Parcel) {
             $this->id = $object->id;
             $this->editor = $this->setEditor();
-            $this->setGeneral($object->parcel);
             $this->setImage($object->parcelPhoto->getImageUrl());
+            $this->setGeneral($object->parcel);
             $this->setEditor();
             $currentBlock = null;
             $currentDirection = null;

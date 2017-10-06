@@ -484,7 +484,7 @@
 
     var c = {
 
-        name: "Buton",
+        name: "Button",
 
         iconClass: "fa fa-link",
 
@@ -498,7 +498,7 @@
 
                     type: "text",
 
-                    default: "Buton"
+                    default: "Button"
 
                 },
 
