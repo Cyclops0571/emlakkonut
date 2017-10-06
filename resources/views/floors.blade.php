@@ -103,7 +103,7 @@
           dictMaxFilesExceeded: "Bir seferde daha fazla dosya yükleyemezsiniz. Yüklenebilecek maksimum dosya sayısı: @{{maxFiles}}",
           init: function () {
               this.on("queuecomplete", function () {
-                  window.refresh();
+                  window.location.reload();
               })
           }
       }
