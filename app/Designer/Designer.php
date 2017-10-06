@@ -40,17 +40,30 @@ class Designer {
             $elementFactories = [];
             foreach ($object->getApartments() as $apartment)
             {
-                $elementFactories[] = new ElementButtonFactory($apartment->KapiNo, $apartment->url(), $apartment->statusColor());
-
                 //create a spot for every block
-                if($currentBlock != $apartment->BlokNo || $currentDirection != $apartment->Yon){
-                    $currentBlock = $apartment->BlokNo;
-                    $currentDirection = $apartment->Yon;
+                if(
+                    ($currentBlock != null && isset($previousApartment))
+                    && ($currentBlock != $apartment->BlokNo || $currentDirection != $apartment->Yon)
+                ){
                     //create a button for each apertment
-                    $this->spots[] =  Polygon::createWithButtons('Blok:' . $apartment->BlokNo . " Yön:" . $apartment->Yon, $elementFactories);
+                    $this->spots[] =  Polygon::createWithButtons(
+                        'Blok:' . $previousApartment->BlokNo . " Yön:" .
+                        $previousApartment->Yon,
+                        $elementFactories
+                    );
                     //empty the spots
                     $elementFactories = [];
                 }
+                $elementFactories[] = new ElementButtonFactory($apartment);
+                $currentBlock = $apartment->BlokNo;
+                $currentDirection = $apartment->Yon;
+                $previousApartment = $apartment;
+            }
+            if(isset($previousApartment)) {
+                $this->spots[] =  Polygon::createWithButtons(
+                    'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
+                    $elementFactories
+                );
             }
         } elseif($object instanceof Floor) {
             $this->id = $object->id;
@@ -60,7 +73,6 @@ class Designer {
         } else {
             throw new \Exception(sprintf("Unknown object type in file  %s at line %s given object type: %ss", __FILE__, __LINE__, gettype($object)));
         }
-
 
     }
 

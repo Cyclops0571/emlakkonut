@@ -62,13 +62,14 @@ class Polygon
         $self->id = uniqid("rect-");
         $self->title = $title;
         $self->type = 'poly';
-        $self->x = 0;
-        $self->y = 0;
-        $self->width = 20;
-        $self->height = 20;
+        $self->x = 10;
+        $self->y = 10;
+        $self->width = 10;
+        $self->height = 10;
         $self->points = $self->getDefaultPoints();
 
         $self->tooltip_content = $self->tooltipContent($buttonFactories);
+//        dd($self->tooltip_content);
 
         return $self;
     }

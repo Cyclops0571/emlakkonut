@@ -27,9 +27,9 @@ class CreateEstateProjectApartment extends Migration {
             $table->string('BulunduguKat')->nullable();
             $table->string('OdaSayisi')->nullable();
             $table->string('Yon')->nullable();
-            $table->float('NetM2')->nullable();
-            $table->string('AcikNetM2')->nullable();
-            $table->string('BrutM2')->nullable();
+            $table->float('NetM2')->default(0);
+            $table->float('AcikNetM2')->default(0);
+            $table->float('BrutM2')->default(0);
             $table->string('Eklenti1Nitelik')->nullable();
             $table->string('Eklenti1NetM2')->nullable();
             $table->string('Eklenti1BrutM2')->nullable();

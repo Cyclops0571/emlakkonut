@@ -6,7 +6,7 @@ namespace App\Designer;
 
 class HtmlLayout {
 
-    public function __construct($class = 'sq-col-lg-3')
+    public function __construct($class = 'sq-col-lg-1')
     {
         $this->column_span = new \stdClass();
         $this->column_span->lg = new \stdClass();

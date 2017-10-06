@@ -30,6 +30,7 @@ use Illuminate\Http\UploadedFile;
  * @property-read \App\Model\Island $island
  * @property int|null $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Parcel whereStatus($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  */
 class Parcel extends Model {
 
@@ -139,7 +140,9 @@ class Parcel extends Model {
      */
     public function getApartments()
     {
+        $island = Island::find($this->island_id);
         return EstateProjectApartment::where('project_id', $this->project_id)
+            ->where('Ada', $island->island_kkys)
             ->where('Parsel', $this->parcel)
             ->orderBy('BlokNo', 'DESC')
             ->orderBy("Yon", 'ASC')
@@ -157,5 +160,9 @@ class Parcel extends Model {
         $this->parcelInteractivity->parcel_id = $this->id;
         $this->parcelInteractivity->interactiveJson = $interactiveJson;
         $this->parcelInteractivity->save();
+    }
+
+    public function blocks() {
+        return $this->hasMany(Block::class, 'parcel_id');
     }
 }

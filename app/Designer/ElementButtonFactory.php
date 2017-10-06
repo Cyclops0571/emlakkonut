@@ -4,39 +4,35 @@
 namespace App\Designer;
 
 
+use App\Model\EstateProjectApartment;
+
 class ElementButtonFactory {
 
     public $text;
     public $background;
     public $url;
     public $newTab;
+    public $id;
+    public $padding = 3;
+    public $height = 1;
 
-    public function __construct($text, $url, $background, $newTab = 1)
+    public function __construct(EstateProjectApartment $apartment)
     {
+//        $apartment->KapiNo, $apartment->url(), $apartment->statusColor()
+        //        $text, $url, $background, $newTab = 1
 
-        if($text) {
-            $this->text = $text;
-        }
-
-        if ($url) {
-            $this->url = $url;
-        }
-
-        if($background) {
-            $this->background = $background;
-        }
-
-        if ($newTab != null) {
-            $this->newTab = $newTab;
-        }
-
+        $this->id = $apartment->id;
+        $this->text = $apartment->KapiNo;
+        $this->url = $apartment->url();
+        $this->background = $apartment->statusColor();
+        $this->newTab = 1;
     }
     public function create()
     {
         $elementSetting = new ElementSetting();
-        $htmlObject = new HtmlObject($this->text, $this->url, 1, $this->background);
+        $butonObject = new ButonProperty($this);
         $htmlLayout = new HtmlLayout();
-        $elementOption = new ElementOption($htmlObject, $htmlLayout);
+        $elementOption = new ElementOption($butonObject, $htmlLayout);
         return new Element($elementSetting, $elementOption);
     }
 }

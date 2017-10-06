@@ -161,20 +161,20 @@ class EstateProjectApartment extends Model {
 
     public function url()
     {
-        return 'http://emlakkonut.app/apertment/' . $this->id;
+        return 'http://emlakkonut.app/apertment/' . $this->id; //571571
     }
 
     public function statusColor()
     {
         switch ($this->GayrimenkulDurumu) {
             case 'Satıldı':
-                return 'red';
+                return '#ff0000';
             case 'Uygun':
-                return 'green';
+                return '#018701';
             case 'Ön Satış':
-                return 'dark yellow';
+                return '#6d6d6d';
             default:
-                return 'red';
+                return '#ff0000';
         }
     }
 }
