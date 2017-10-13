@@ -1,4 +1,4 @@
-!function (e, t, a, s) {
+! function (e, t, a, s) {
 
     var l = {
 
@@ -434,9 +434,8 @@
 
         content: function () {
 
-            var e = this.controls.youtube.embed_code.getVal()
-
-                , t = "";
+            var e = this.controls.youtube.embed_code.getVal(),
+                t = "";
 
             return t += '<div id="' + this.controls.general.id.getVal() + '" style="' + this.controls.general.css.getVal() + '" class="' + this.controls.general.classes.getVal() + '">',
 
@@ -456,9 +455,8 @@
 
         render: function (e) {
 
-            var t = e.youtube.embed_code
-
-                , a = "";
+            var t = e.youtube.embed_code,
+                a = "";
 
             return a += '<div id="' + e.general.id + '" style="' + e.general.css + '" class="' + e.general.classes + '">',
 
@@ -640,7 +638,11 @@
 
                 t += "padding-left: " + e.button.padding + "px; ",
 
-                t += "padding-right: " + e.button.padding + "px; ";
+                t += "padding-right: " + e.button.padding + "px; ",
+
+                t += "padding-top: " + e.button.padding + "px; ",
+
+                t += "padding-bottom: " + e.button.padding + "px; ";
 
             var a = "";
 
