@@ -1434,11 +1434,11 @@
 		$(document).on('button-choose-icon-clicked', function() {
 			$.wcpEditorPresentModal({
 				name: 'modal-choose-icon',
-				title: 'Choose Icon',
+				title: 'İkon Seç',
 				buttons: [
 					{
 						name: 'cancel',
-						title: 'Cancel',
+						title: 'İptal',
 						class: 'default',
 						id: 'imp-editor-button-cancel-choose-icon'
 					},
