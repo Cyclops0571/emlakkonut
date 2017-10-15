@@ -27,8 +27,8 @@ class Designer
             $this->setImage($object->getImageUrl());
             $this->setEditor();
             $this->spots = [];
-            foreach ($object->getBlocks() as $block) {
-                $this->spots[] = new Circle('block_' . $block->BlokNo, $block->BlokNo, "Blok - " . $block->BlokNo);
+            foreach ($object->blocks as $block) {
+                $this->spots[] = new Circle($block);
             }
         } elseif ($object instanceof Parcel) {
             $id = 'parcel_' . $object->parcel;

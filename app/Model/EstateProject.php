@@ -29,6 +29,7 @@ use Illuminate\Http\UploadedFile;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floor
  * @property int|null $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProject whereStatus($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  */
 class EstateProject extends Model
 {
@@ -158,18 +159,16 @@ class EstateProject extends Model
         $this->EstateProjectInteractivity->project_id = $this->id;
         $this->EstateProjectInteractivity->interactiveJson = $designer->getJson();
         $this->EstateProjectInteractivity->save();
-
     }
-
 
     public function EstateProjectApartment()
     {
         return $this->hasMany(EstateProjectApartment::class, "project_id");
     }
 
-    public function getBlocks()
+    public function blocks()
     {
-        return $this->EstateProjectApartment()->getQuery()->select('BlokNo')->distinct()->get();
+        return $this->hasMany(Block::class, 'project_id');
     }
 
     public function Parcels()

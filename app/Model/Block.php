@@ -50,7 +50,8 @@ class Block extends Model
      * @return null|static
      * @throws \Exception
      */
-    public static function getBlock($islandId, $parcelId, $blockNo) {
+    public static function getBlock($islandId, $parcelId, $blockNo)
+    {
         $projectId = EstateProject::getCurrentProjectIdFromSession();
         $result = static::where('project_id', $projectId)
             ->where('island_id', $islandId)
@@ -63,5 +64,10 @@ class Block extends Model
         }
 
         return $result;
+    }
+
+    public function clientUrl()
+    {
+        return Setting::clientUrl('block/' . $this->id);
     }
 }

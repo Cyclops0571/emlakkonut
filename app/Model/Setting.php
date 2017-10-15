@@ -115,4 +115,17 @@ class Setting extends Model
 
         return self::$instance->getClientUrl() . $urlSection;
     }
+
+    public static function url($url)
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+
+        if (self::$instance->checkProjectIsAdmin()) {
+            return self::adminUrl($url);
+        }
+
+        return self::clientUrl($url);
+    }
 }

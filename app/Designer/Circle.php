@@ -2,6 +2,8 @@
 
 namespace App\Designer;
 
+use App\Model\Block;
+
 class Circle
 {
     public $id;
@@ -13,25 +15,31 @@ class Circle
     public $height;
     public $type;
 
-    public function __construct($id, $title, $content = '')
+    /**
+     * Circle constructor.
+     *
+     * @param Block $block
+     */
+    public function __construct($block)
     {
-        $this->id = $id;
+        $this->id = 'block_' . $block->block_no;
         $this->type = 'oval';
-        $this->title = $title;
+        $this->title = $block->block_no;
         $this->x = 5;
         $this->y = 5;
         $this->width = 4;
         $this->height = 6;
-        $this->actions = $this->getAction();
+        $this->actions = $this->getAction($block->clientUrl());
         $this->default_style = $this->getColor("#ff0000", 1);
-
-        $this->tooltip_content = $this->tooltipContent($content);
+        $this->tooltip_content = $this->tooltipContent("Blok - " .  $block->block_no);
     }
 
-    public function getAction()
+    public function getAction($link)
     {
         $obj = new \stdClass();
         $obj->mouseover = 'no-action';
+        $obj->click = "follow-link";
+        $obj->link = $link;
 
         return $obj;
     }
