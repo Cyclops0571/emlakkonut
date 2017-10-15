@@ -58,10 +58,10 @@ class Polygon
      * @param ElementButtonFactory[] $buttonFactories
      * @return Polygon
      */
-    public static function createWithButtons($id, $title, $buttonFactories)
+    public static function createWithButtons($title, $buttonFactories)
     {
         $self = new self;
-        $self->id = $id;
+        $self->id = $title;
         $self->title = $title;
         $self->type = 'poly';
         $self->x = 10;

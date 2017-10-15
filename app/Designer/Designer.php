@@ -28,7 +28,7 @@ class Designer
             $this->setEditor();
             $this->spots = [];
             foreach ($object->getBlocks() as $block) {
-                $this->spots[] = new Circle('block_' . $block->id, $block->BlokNo, "Blok - " . $block->BlokNo);
+                $this->spots[] = new Circle('block_' . $block->BlokNo, $block->BlokNo, "Blok - " . $block->BlokNo);
             }
         } elseif ($object instanceof Parcel) {
             $id = 'parcel_' . $object->parcel;
@@ -48,7 +48,6 @@ class Designer
                 ) {
                     //create the block
                     $this->spots[] = Polygon::createWithButtons(
-                        'block_' . $previousApartment->BlokNo,
                         'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
                         $elementFactories
                     );
@@ -63,7 +62,6 @@ class Designer
             }
             if (isset($previousApartment)) {
                 $this->spots[] = Polygon::createWithButtons(
-                    'block_' . $previousApartment->BlokNo,
                     'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
                     $elementFactories
                 );
