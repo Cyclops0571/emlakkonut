@@ -5,7 +5,6 @@ namespace App\Model;
 use App\Scope\ApartmentScope;
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
  * App\Model\EstateProjectApartment
  *
@@ -84,8 +83,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereProjectId($value)
  */
-class EstateProjectApartment extends Model {
-
+class EstateProjectApartment extends Model
+{
     protected $table = 'estate_project_apartment';
 
     protected static function boot()
@@ -99,8 +98,7 @@ class EstateProjectApartment extends Model {
         $projectAll = EstateProject::all();
         $projectParts = json_decode($projectPartsRaw);
 
-        foreach ($projectParts as $projectPart)
-        {
+        foreach ($projectParts as $projectPart) {
             $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
             $estateProjectPart = static::where('project_id', $project->id)
                 ->where('Ada', $projectPart->Ada)
@@ -108,10 +106,9 @@ class EstateProjectApartment extends Model {
                 ->where('BlokNo', $projectPart->BlokNo)
                 ->where('KapiNo', $projectPart->KapiNo)
                 ->first();
-            if (!$estateProjectPart)
-            {
-                $estateProjectPart = new static();
 
+            if (!$estateProjectPart) {
+                $estateProjectPart = new static();
             }
 
             $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
@@ -149,10 +146,7 @@ class EstateProjectApartment extends Model {
             $estateProjectPart->SozlesmeNo = $projectPart->SozlesmeNo;
             $estateProjectPart->MusteriAdi = $projectPart->MusteriAdi;
             $estateProjectPart->save();
-
-
         }
-
     }
 
     public static function setFloorPhoto($project, $file)
@@ -161,7 +155,7 @@ class EstateProjectApartment extends Model {
 
     public function url()
     {
-        return 'http://emlakkonut.app/apertment/' . $this->id; //571571
+        return Setting::clientUrl('apartment/' . $this->id);
     }
 
     public function statusColor()

@@ -7,16 +7,14 @@ use App\Model\Floor;
 use App\Model\Parcel;
 use Illuminate\Http\Request;
 
-class DesignerController extends Controller {
-
+class DesignerController extends Controller
+{
     public function project(EstateProject $project)
     {
-        if (!$project->projectPhoto)
-        {
+        if (!$project->projectPhoto) {
             return \Redirect::back()->withErrors('Proje imajını yüklemeden tasarımcıda işlem yapamazsınız.');
         }
-        if (!$project->EstateProjectInteractivity)
-        {
+        if (!$project->EstateProjectInteractivity) {
             $project->initEstateProjectInteractivity();
         }
 
@@ -25,12 +23,10 @@ class DesignerController extends Controller {
 
     public function parcel(Parcel $parcel)
     {
-        if (!$parcel->parcelPhoto)
-        {
+        if (!$parcel->parcelPhoto) {
             return \Redirect::back()->withErrors('Parsel imajını yüklemeden tasarımcıda işlem yapamazsınız.');
         }
-        if (!$parcel->parcelInteractivity)
-        {
+        if (!$parcel->parcelInteractivity) {
             $parcel->initInteractivity();
         }
 
@@ -46,12 +42,10 @@ class DesignerController extends Controller {
 
     public function floor(Floor $floor)
     {
-        if (!$floor->floorPhoto)
-        {
+        if (!$floor->floorPhoto) {
             return \Redirect::back()->withErrors('Kat imajını yüklemeden tasarımcıda işlem yapamazsınız.');
         }
-        if (!$floor->floorInteractivity)
-        {
+        if (!$floor->floorInteractivity) {
             $floor->initInteractivity();
         }
 

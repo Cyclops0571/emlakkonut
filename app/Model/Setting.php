@@ -21,9 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Setting extends Model
 {
-
     private const ADMIN_PUBLIC_PATH = 'AdminPublicPath';
     private const ADMIN_PUBLIC_URL = 'AdminPublicUrl';
+    private const CLIENT_PUBLIC_URL = 'ClientPublicUrl';
+    public $clientUrl = null;
     protected $table = 'setting';
     protected $fillable = ['name', 'value'];
     private $publicPath = null;
@@ -41,20 +42,35 @@ class Setting extends Model
         return $this->publicPath;
     }
 
-    private function getAdminUrl() {
-        if(!$this->url) {
+    private function getAdminUrl()
+    {
+        if (!$this->url) {
             $this->url = self::where('name', self::ADMIN_PUBLIC_URL)->first()->value;
         }
+
         return $this->url;
+    }
+
+    private function getClientUrl()
+    {
+        if (!$this->clientUrl) {
+            $this->clientUrl = self::where('name', self::CLIENT_PUBLIC_URL)->first()->value;
+        }
+
+        return $this->clientUrl;
     }
 
     public function setSettings()
     {
         if ($this->checkProjectIsAdmin()) {
-            $this->updateOrCreate(['name' => self::ADMIN_PUBLIC_PATH],
-                ['name' => self::ADMIN_PUBLIC_PATH, 'value' => public_path()]);
-            $this->updateOrCreate(['name' => self::ADMIN_PUBLIC_URL],
-                ['name' => self::ADMIN_PUBLIC_URL, 'value' => config('app.url')]);
+            $this->updateOrCreate(
+                ['name' => self::ADMIN_PUBLIC_PATH],
+                ['name' => self::ADMIN_PUBLIC_PATH, 'value' => public_path()]
+            );
+            $this->updateOrCreate(
+                ['name' => self::ADMIN_PUBLIC_URL],
+                ['name' => self::ADMIN_PUBLIC_URL, 'value' => config('app.url')]
+            );
         }
     }
 
@@ -63,23 +79,24 @@ class Setting extends Model
         return config('app.name') == 'Emlak Konut Admin';
     }
 
-    public static function PublicPath($pathSection) {
-        if(!self::$instance){
+    public static function PublicPath($pathSection)
+    {
+        if (!self::$instance) {
             self::$instance = new self();
         }
 
         $pathSection = ltrim($pathSection, '/');
 
         return self::$instance->getAdminPublicPath() . '/' . $pathSection;
-
     }
 
-    public static function AdminUrl($url) {
-        if(!self::$instance){
+    public static function adminUrl($url)
+    {
+        if (!self::$instance) {
             self::$instance = new self();
         }
 
-        if(self::$instance->checkProjectIsAdmin()) {
+        if (self::$instance->checkProjectIsAdmin()) {
             return \URL::to($url);
         }
 
@@ -88,4 +105,14 @@ class Setting extends Model
         return self::$instance->getAdminUrl() . $urlSection;
     }
 
+    public static function clientUrl($url)
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+
+        $urlSection = ltrim($url, '/');
+
+        return self::$instance->getClientUrl() . $urlSection;
+    }
 }

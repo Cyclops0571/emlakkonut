@@ -122,7 +122,7 @@
 
     var o = {
 
-        name: "İmaj",
+        name: "image",
 
         iconClass: "fa fa-camera",
 
@@ -132,7 +132,7 @@
 
                 url: {
 
-                    name: "İmaj URL",
+                    name: "image",
 
                     type: "text",
 

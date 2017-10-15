@@ -3499,7 +3499,7 @@
 			}
 		}
 
-		compressed = $.wcpCompress(settings, default_settings);
+		// compressed = $.wcpCompress(settings, default_settings); //do not delete any fucking thing...
 		compressed.spots = compressedSpots;
 
 		return compressed;

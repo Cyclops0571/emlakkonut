@@ -18,10 +18,7 @@ class ElementButtonFactory {
 
     public function __construct(EstateProjectApartment $apartment)
     {
-//        $apartment->KapiNo, $apartment->url(), $apartment->statusColor()
-        //        $text, $url, $background, $newTab = 1
-
-        $this->id = $apartment->id;
+        $this->id = 'apartment_' . $apartment->id;
         $this->text = $apartment->KapiNo;
         $this->url = $apartment->url();
         $this->background = $apartment->statusColor();

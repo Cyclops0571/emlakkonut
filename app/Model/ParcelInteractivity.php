@@ -26,14 +26,13 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Model\ParcelInteractivity whereParcelId($value)
  * @property-read \App\Model\ParcelPhoto $parcelPhoto
  */
-class ParcelInteractivity extends Model {
-
+class ParcelInteractivity extends Model
+{
     protected $table = 'parcel_interactivity';
 
     public function updateImage()
     {
-        if ($this->parcelPhoto)
-        {
+        if ($this->parcelPhoto) {
             $url = $this->parcelPhoto->getImageUrl();
             $jsonData = Designer::updateImage(json_decode($this->interactiveJson), $url);
             $this->interactiveJson = json_encode($jsonData);
@@ -41,7 +40,8 @@ class ParcelInteractivity extends Model {
         }
     }
 
-    public function parcelPhoto() {
+    public function parcelPhoto()
+    {
         return $this->hasOne(ParcelPhoto::class, 'parcel_id', 'parcel_id');
     }
 
@@ -49,6 +49,4 @@ class ParcelInteractivity extends Model {
     {
         return $this->belongsTo(Parcel::class, 'parcel_id');
     }
-
-
 }

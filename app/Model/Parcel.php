@@ -32,8 +32,8 @@ use Illuminate\Http\UploadedFile;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Parcel whereStatus($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  */
-class Parcel extends Model {
-
+class Parcel extends Model
+{
     protected $table = 'parcel';
 
     /**
@@ -66,6 +66,7 @@ class Parcel extends Model {
         if (!$result) {
             throw new \Exception('Aranılan isimde bir parsel bulunamadı');
         }
+
         return $result;
     }
 
@@ -89,11 +90,9 @@ class Parcel extends Model {
         return $this->hasOne(ParcelInteractivity::class, 'parcel_id');
     }
 
-
     public function setParcelPhoto(UploadedFile $file)
     {
-        if (!$this->parcelPhoto)
-        {
+        if (!$this->parcelPhoto) {
             $this->parcelPhoto = new ParcelPhoto();
         }
         $this->parcelPhoto->parcel_id = $this->id;
@@ -114,8 +113,7 @@ class Parcel extends Model {
         $this->parcelPhoto->height = $image->height();
         $this->parcelPhoto->save();
 
-        if ($this->parcelInteractivity)
-        {
+        if ($this->parcelInteractivity) {
             //change the image url in the json data.
             $this->parcelInteractivity->updateImage();
             $this->parcelInteractivity->save();
@@ -124,8 +122,7 @@ class Parcel extends Model {
 
     public function initInteractivity()
     {
-        if (!$this->parcelInteractivity)
-        {
+        if (!$this->parcelInteractivity) {
             $this->parcelInteractivity = new ParcelInteractivity();
         }
 
@@ -141,6 +138,7 @@ class Parcel extends Model {
     public function getApartments()
     {
         $island = Island::find($this->island_id);
+
         return EstateProjectApartment::where('project_id', $this->project_id)
             ->where('Ada', $island->island_kkys)
             ->where('Parsel', $this->parcel)
@@ -148,13 +146,11 @@ class Parcel extends Model {
             ->orderBy("Yon", 'ASC')
             ->orderBy('KapiNo', 'ASC')
             ->get();
-
     }
 
     public function setInteractivity($interactiveJson)
     {
-        if (!$this->parcelInteractivity)
-        {
+        if (!$this->parcelInteractivity) {
             $this->parcelInteractivity = new ParcelInteractivity();
         }
         $this->parcelInteractivity->parcel_id = $this->id;
@@ -162,7 +158,8 @@ class Parcel extends Model {
         $this->parcelInteractivity->save();
     }
 
-    public function blocks() {
+    public function blocks()
+    {
         return $this->hasMany(Block::class, 'parcel_id');
     }
 }

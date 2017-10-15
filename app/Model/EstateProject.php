@@ -112,14 +112,14 @@ class EstateProject extends Model
     {
         $path = $this->getPhotoPath();
 
-        return $path ? Setting::AdminUrl($path) : '';
+        return $path ? Setting::adminUrl($path) : '';
     }
 
     public function getThumbnailUrl()
     {
         $path = $this->getThumbnailPath();
 
-        return $path ? Setting::AdminUrl($path) : Setting::AdminUrl('/img/upload.png');
+        return $path ? Setting::adminUrl($path) : Setting::adminUrl('/img/upload.png');
     }
 
     public function get352x386Url()

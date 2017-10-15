@@ -4,20 +4,18 @@ namespace App\Designer;
 
 class Circle
 {
-
-
     public $id;
     public $title;
-    public $x, $y;
+    public $x;
+    public $y;
     public $tooltip_content;
     public $width;
     public $height;
     public $type;
 
-
-    public function __construct($blokId, $title, $content = '')
+    public function __construct($id, $title, $content = '')
     {
-        $this->id = uniqid("oval-");
+        $this->id = $id;
         $this->type = 'oval';
         $this->title = $title;
         $this->x = 5;
@@ -30,32 +28,36 @@ class Circle
         $this->tooltip_content = $this->tooltipContent($content);
     }
 
-    public function getAction() {
+    public function getAction()
+    {
         $obj = new \stdClass();
         $obj->mouseover = 'no-action';
+
         return $obj;
     }
 
-    public function getColor($color, $opacity) {
+    public function getColor($color, $opacity)
+    {
         $obj = new \stdClass();
         $obj->background_color = $color;
         $obj->background_opacity = $opacity;
+
         return $obj;
     }
 
     private function tooltipContent($content = '')
     {
-        if (is_string($content))
-        {
+        if (is_string($content)) {
             return $this->plainTextContent($content);
-        } else {
-            return new ContentBuilder($content);
         }
+
+        return new ContentBuilder($content);
     }
 
     private function plainTextContent($text)
     {
-        $tooltipContent = '{
+        $tooltipContent
+            = '{
         "plain_text": "PLAIN_TEXT",
         "squares_settings": {
           "containers": [
@@ -78,5 +80,4 @@ class Circle
 
         return json_decode(str_replace('PLAIN_TEXT', $text, $tooltipContent));
     }
-
 }

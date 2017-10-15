@@ -13,9 +13,11 @@ class ParcelController extends Controller
         return view('parcels', compact("project"));
     }
 
-    public function toggleStatus(Parcel $parcel) {
+    public function toggleStatus(Parcel $parcel)
+    {
         $parcel->status = ($parcel->status + 1) % 2;
         $parcel->save();
+
         return \Redirect::back();
     }
 }

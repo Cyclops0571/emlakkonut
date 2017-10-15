@@ -52,14 +52,16 @@ class Polygon
 
     /**
      * Polygon constructor.
+     *
+     * @param $id
      * @param string $title
      * @param ElementButtonFactory[] $buttonFactories
      * @return Polygon
      */
-    public static function createWithButtons($title, $buttonFactories)
+    public static function createWithButtons($id, $title, $buttonFactories)
     {
         $self = new self;
-        $self->id = uniqid("rect-");
+        $self->id = $id;
         $self->title = $title;
         $self->type = 'poly';
         $self->x = 10;
