@@ -23,10 +23,23 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $island_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Block whereIslandId($value)
+ * @property-read \App\Model\Parcel $parcel
  */
 class Block extends Model
 {
     protected $table = 'block';
+
+    /**
+     * @return Model|null|static
+     */
+    public function firstApartment()
+    {
+        return EstateProjectApartment::where('project_id', $this->project_id)
+            ->where('Ada', $this->parcel->island->island_kkys)
+            ->where('Parsel', $this->parcel->parcel)
+            ->where('BlockNo', $this->block_no)
+            ->first();
+    }
 
     /**
      * @param EstateProjectApartment $apartment
@@ -68,6 +81,11 @@ class Block extends Model
 
     public function clientUrl()
     {
-        return Setting::clientUrl('block/' . $this->id);
+        return Setting::clientUrl('block/' . $this->firstApartment()->id);
+    }
+
+    public function parcel()
+    {
+        return $this->belongsTo(Parcel::class, 'parcel_id');
     }
 }
