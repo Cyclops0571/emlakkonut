@@ -71,7 +71,7 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
         Kat Planı
       </a>
     </li>
-    <li class="nav-item" style="display: none">
+    <li class="nav-item">
       <a id="apartments" class="nav-link {{$sidebarApartment}}"
          href="{{URL::route('apartments', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('apartments')"><i class="icon-Houses"></i>
