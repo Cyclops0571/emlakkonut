@@ -7,8 +7,10 @@
     </div>
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
-      <input type="text" id="inputParcel" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1"
-             onkeyup="filter(this)" autofocus>
+      <input type="text" id="inputParcel" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+      <span class="input-group-addon">
+         <button type="button" title="Tasarlayıcıda Aç" class="btn btn-primary btn-sm rounded-circle" onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-plus"></i></button>
+      </span>
     </div>
     <ul id="listParcels" class="list-group list-group-flush">
       @foreach($project->Parcels as $parcel)
