@@ -52,11 +52,7 @@
         </div>
         <div class="modal-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><input type="text"></li>
-                <li class="list-group-item"><input type="text"></li>
-                <li class="list-group-item"><input type="text"></li>
-                <li class="list-group-item"><input type="text"></li>
-                <li class="list-group-item"><input type="text"></li>
+                <li class="list-group-item"><input type="text" class="form-control" placeholder="URL"></li>
             </ul>
         </div>
         <div class="modal-footer">
