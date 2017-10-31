@@ -101,7 +101,7 @@
                       if (li[i].innerHTML.toLocaleUpperCase().indexOf(filter) > -1) {
                           li[i].style.display = "";
                       } else {
-                          li[i].style.display = "none";
+                          li[i].style.cssText += "display: none !important";
                       }
                   }
               }
