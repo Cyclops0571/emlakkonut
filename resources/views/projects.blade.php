@@ -15,7 +15,7 @@
       </div>
       <ul id="listProjects" class="list-group list-group-flush">
         @foreach($projects as $myProject)
-          <li class="list-group-item list-group-item-action justify-content-between"
+          <li class="list-group-item list-group-item-action d-flex justify-content-between"
               onclick="return window.location='{{URL::route('postures', $myProject->id)}}'"
               style="{{$project->status !== 1 ? 'background-color:lightgrey': ''}}">
               <span style="max-width: 95%">
