@@ -10,8 +10,7 @@
             <input type="text" id="inputApartment" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
         </div>
         <ul id="listApartments" class="list-group list-group-flush">
-
-                <li class="list-group-item justify-content-between">
+                <li class="list-group-item d-flex justify-content-between">
                     <form name="" method="post" action="{{URL::route('photo.parcelStore')}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <span>
@@ -34,7 +33,6 @@
                         </span>
                     </form>
                 </li>
-
         </ul>
     </div>
 @endsection

@@ -14,7 +14,7 @@
     </div>
     <ul id="listParcels" class="list-group list-group-flush">
       @foreach($project->Parcels as $parcel)
-        <li class="list-group-item justify-content-between"
+        <li class="list-group-item d-flex justify-content-between"
             style="{{$parcel->status !== 1 ? 'background-color:lightgrey': ''}}">
           <form name="{{$parcel->id}}" method="post" action="{{URL::route('photo.parcelStore')}}"
                 enctype="multipart/form-data">
