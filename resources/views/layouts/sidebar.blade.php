@@ -58,7 +58,7 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
       </a>
     </li>
     <li class="nav-item">
-      <a id="parcels" class="nav-link {{$sidebarParcel}}"
+      <a id="blok360" class="nav-link {{$sidebarParcel}}"
          href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i>
         Blok (360)
