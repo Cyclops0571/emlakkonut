@@ -51,17 +51,17 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
       </a>
     </li>
     <li class="nav-item">
+      <a id="block360" class="nav-link {{$sidebarParcel}}"
+         href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
+        Logo
+      </a>
+    </li>
+    <li class="nav-item">
       <a id="postures" class="nav-link {{$sidebarPosture}}"
          href="{{URL::route('postures', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('postures')"><i class="icon-General"></i>
         Vaziyet Planı
-      </a>
-    </li>
-    <li class="nav-item">
-      <a id="block360" class="nav-link {{$sidebarParcel}}"
-         href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
-         onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
-        Blok (360)
       </a>
     </li>
     <li class="nav-item">
