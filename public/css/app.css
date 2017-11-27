@@ -10298,6 +10298,12 @@ input[type="file"] {
   font-weight: normal;
 }
 
+.wcp-eklediklerim {
+  position: absolute;
+  right: 0;
+  top: 100;
+}
+
 .sq-window-main-nav-button {
   padding-top: 1rem;
 }
