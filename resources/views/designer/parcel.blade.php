@@ -21,7 +21,7 @@
     <div id="wcp-editor"></div>
     <div class="wcp-eklediklerim">
     <div id="wcp-editor-list-title">Eklediklerim</div>
-      <div class="d-flex" style="margin-top: 6rem;">
+      <div class="d-flex" style="margin-top: 5rem;">
       <select>
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
