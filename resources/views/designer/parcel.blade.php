@@ -19,8 +19,8 @@
 @section('content')
     <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
     <div id="wcp-editor"></div>
+    <div id="wcp-editor-list-title">Eklediklerim</div>
     <div class="wcp-eklediklerim">
-      <div id="wcp-editor-list-title">Eklediklerim</div>
       <div class="d-flex">
       <select>
         <option value="volvo">Volvo</option>
