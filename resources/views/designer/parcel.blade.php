@@ -19,6 +19,33 @@
 @section('content')
     <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
     <div id="wcp-editor"></div>
+    <div class="wcp-eklediklerim">
+      <div class="d-flex">
+      <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      <select>
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+      </div>
+      <ul>
+      <li>Arif</li>
+      <li>Arif</li>
+      <li>Arif</li>
+      </ul>
+    </div>
 @endsection
 
 @section('javascript')
