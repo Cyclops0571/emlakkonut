@@ -25,6 +25,9 @@
             </label>
             <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
             <span class="input-group-addon">
+                <img src="/img/virtual_tour.svg" style="width: 32px; margin-right: -12px;" role="button"/>
+            </span>
+            <span class="input-group-addon">
                 <img src="/img/foto.svg" style="width: 32px; margin-right: -12px;" role="button"/>
             </span>
             <span class="input-group-addon">

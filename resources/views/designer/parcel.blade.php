@@ -19,32 +19,32 @@
 @section('content')
     <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
     <div id="wcp-editor"></div>
-    <div class="wcp-eklediklerim">
+    <div class="wcp-eklediklerim" style="background-color: white">
     <div id="wcp-editor-list-title">Eklediklerim</div>
-      <div class="d-flex" style="margin-top: 5rem;">
-      <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-      <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-      <select>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
+      <div class="d-flex" style="margin-top: 4rem;">
+        <select style="height: 3rem;">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        <select style="height: 3rem;">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        <select style="height: 3rem;">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
       </div>
-      <ul>
-      <li>Arif</li>
-      <li>Arif</li>
-      <li>Arif</li>
+      <ul style="list-style: none;">
+        <li>Arif</li>
+        <li>Arif</li>
+        <li>Arif</li>
       </ul>
     </div>
 @endsection
