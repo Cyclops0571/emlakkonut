@@ -15,20 +15,16 @@ use App\Model\Setting;
 
 Auth::routes();
 
-
-
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-Route::group(['middleware' => 'auth'], function ()
-{
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'ProjectController@projects');
     Route::get('/projects', 'ProjectController@projects')->name('projects');
-    Route::post('/toggleProjectStatus/{project}', 'ProjectController@toggleStatus')
-        ->name('toggleProjectStatus');
+    Route::post('/toggleProjectStatus/{project}', 'ProjectController@toggleStatus')->name('toggleProjectStatus');
     Route::get('/postures/{project}', 'HomeController@postures')->name('postures');
     Route::get('/parcels/{project}', 'ParcelController@parcels')->name('parcels');
-    Route::post('/toggleParcelStatus/{parcel}', 'ParcelController@toggleStatus')
-        ->name('toggleParcelStatus');
+    Route::post('/parcels/new/{project}', 'ParcelController@new')->name('newParcel');
+    Route::post('/toggleParcelStatus/{parcel}', 'ParcelController@toggleStatus')->name('toggleParcelStatus');
     Route::get('/floors/{project}', 'FloorController@index')->name('floors');
     Route::get('/apartments/{project}', 'ApartmentController@index')->name('apartments');
     Route::get('/location/{project}', 'MapController@location')->name('location');
@@ -45,11 +41,13 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
     Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
     Route::post('map/save/', 'MapController@save')->name('mapSave');
+    Route::post('ajax/floorsOfBlock', 'AjaxController@floorsOfBlock')->name('ajax.floorsOfBlock');
+    Route::post('numarataj/save', 'ParcelController@save')->name('numaratajSave');
 });
 
-
-Route::get('setting', function(Setting $setting){
+Route::get('setting', function (Setting $setting) {
     $setting->setSettings();
+
     return 'setup is ready';
 });
 

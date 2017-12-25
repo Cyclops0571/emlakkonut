@@ -9,7 +9,12 @@
       <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
       <input type="text" id="inputParcel" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
       <span class="input-group-addon">
-         <button type="button" title="Tasarlayıcıda Aç" class="btn btn-primary btn-sm rounded-circle" onclick="window.location='{{ URL::route('projectDesigner', $project->id) }}'"><i class="icon-plus"></i></button>
+          <form id="newParcel" name="newParcel" method="post" action="{{URL::route('newParcel', $project->id)}}">
+              {{csrf_field()}}
+             <button type="button" title="Yeni Ekle" class="btn btn-primary btn-sm rounded-circle" onclick="document.getElementById('newParcel').submit();">
+                 <i class="icon-plus"></i>
+             </button>
+          </form>
       </span>
     </div>
     <ul id="listParcels" class="list-group list-group-flush">

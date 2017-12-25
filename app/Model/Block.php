@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $island_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Block whereIslandId($value)
  * @property-read \App\Model\Parcel $parcel
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floors
  */
 class Block extends Model
 {
@@ -87,5 +88,10 @@ class Block extends Model
     public function parcel()
     {
         return $this->belongsTo(Parcel::class, 'parcel_id');
+    }
+
+    public function floors()
+    {
+        return $this->hasMany(Floor::class, 'block_id');
     }
 }

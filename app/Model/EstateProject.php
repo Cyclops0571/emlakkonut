@@ -30,10 +30,10 @@ use Illuminate\Http\UploadedFile;
  * @property int|null $status
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProject whereStatus($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $islands
  */
 class EstateProject extends Model
 {
-
     protected $table = 'estate_project';
 
     /**
@@ -57,7 +57,6 @@ class EstateProject extends Model
                 $estateProject->save();
 
                 array_push($projectList, $estateProject);
-
             }
         }
 
@@ -171,6 +170,14 @@ class EstateProject extends Model
         return $this->hasMany(Block::class, 'project_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function islands()
+    {
+        return $this->hasMany(Island::class, 'project_id');
+    }
+
     public function Parcels()
     {
         return $this->hasMany(Parcel::class, 'project_id');
@@ -220,7 +227,6 @@ class EstateProject extends Model
             ->where('parcel', $parcelName)
             ->first();
     }
-
 
     public function floor()
     {

@@ -72,6 +72,11 @@
 
     @section('javascript')
       <script>
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
           function onClickActiveNav(p) {
               $('.nav a.active').removeClass('active');
               $('#' + p).addClass('active');
