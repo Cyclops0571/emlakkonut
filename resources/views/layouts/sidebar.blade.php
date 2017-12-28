@@ -65,9 +65,9 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
       </a>
     </li>
     <li class="nav-item">
-      <a id="parcels" class="nav-link {{$sidebarParcel}}"
-         href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
-         onclick="onClickActiveNav('parcels')"><i class="icon-Plots"></i>
+      <a id="numbering" class="nav-link {{$sidebarParcel}}"
+         href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('numbering')"><i class="icon-Plots"></i>
         Numarataj
       </a>
     </li>

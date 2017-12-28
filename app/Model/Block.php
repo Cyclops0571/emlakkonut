@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Block whereIslandId($value)
  * @property-read \App\Model\Parcel $parcel
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floors
+ * @property-read \App\Model\Island $island
+ * @property-read \App\Model\EstateProject $project
  */
 class Block extends Model
 {
@@ -93,5 +95,22 @@ class Block extends Model
     public function floors()
     {
         return $this->hasMany(Floor::class, 'block_id');
+    }
+
+    public function island()
+    {
+        return $this->belongsTo(Island::class, 'island_id');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(EstateProject::class, 'project_id');
+    }
+
+    public function getApartments()
+    {
+        return $this->parcel->getApartments()->filter(function (EstateProjectApartment $apartment) {
+            return $apartment->BlokNo === $this->block_no;
+        });
     }
 }

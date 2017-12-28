@@ -82,6 +82,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereYon($value)
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereProjectId($value)
+ * @property int $numbering_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereNumberingId($value)
  */
 class EstateProjectApartment extends Model
 {
@@ -100,52 +102,52 @@ class EstateProjectApartment extends Model
 
         foreach ($projectParts as $projectPart) {
             $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
-            $estateProjectPart = static::where('project_id', $project->id)
+            $estateProjectApartment = static::where('project_id', $project->id)
                 ->where('Ada', $projectPart->Ada)
                 ->where('Parsel', $projectPart->Parsel)
                 ->where('BlokNo', $projectPart->BlokNo)
                 ->where('KapiNo', $projectPart->KapiNo)
                 ->first();
 
-            if (!$estateProjectPart) {
-                $estateProjectPart = new static();
+            if (!$estateProjectApartment) {
+                $estateProjectApartment = new static();
             }
 
             $project = $projectAll->where('ProjeID', $projectPart->ProjeID)->first();
-            $estateProjectPart->project_id = $project->id;
-            $estateProjectPart->Il = $projectPart->Il;
-            $estateProjectPart->Ilce = $projectPart->Ilce;
-            $estateProjectPart->Ada = $projectPart->Ada;
-            $estateProjectPart->Parsel = $projectPart->Parsel;
-            $estateProjectPart->BlokNo = $projectPart->BlokNo;
-            $estateProjectPart->KapiNo = $projectPart->KapiNo;
-            $estateProjectPart->KullanilisSekli = $projectPart->KullanilisSekli;
-            $estateProjectPart->BulunduguKat = $projectPart->BulunduguKat;
-            $estateProjectPart->OdaSayisi = $projectPart->OdaSayisi;
-            $estateProjectPart->Yon = $projectPart->Yon;
-            $estateProjectPart->NetM2 = $projectPart->NetM2;
-            $estateProjectPart->AcikNetM2 = $projectPart->AcikNetM2;
-            $estateProjectPart->BrutM2 = $projectPart->BrutM2;
-            $estateProjectPart->Eklenti1Nitelik = $projectPart->Eklenti1Nitelik;
-            $estateProjectPart->Eklenti1NetM2 = $projectPart->Eklenti1NetM2;
-            $estateProjectPart->Eklenti1BrutM2 = $projectPart->Eklenti1BrutM2;
-            $estateProjectPart->Eklenti2Nitelik = $projectPart->Eklenti2Nitelik;
-            $estateProjectPart->Eklenti2NetM2 = $projectPart->Eklenti2NetM2;
-            $estateProjectPart->Eklenti2BrutM2 = $projectPart->Eklenti2BrutM2;
-            $estateProjectPart->Eklenti3Nitelik = $projectPart->Eklenti3Nitelik;
-            $estateProjectPart->Eklenti3NetM2 = $projectPart->Eklenti3NetM2;
-            $estateProjectPart->Eklenti3BrutM2 = $projectPart->Eklenti3BrutM2;
-            $estateProjectPart->Eklenti4Nitelik = $projectPart->Eklenti4Nitelik;
-            $estateProjectPart->Eklenti4NetM2 = $projectPart->Eklenti4NetM2;
-            $estateProjectPart->Eklenti4BrutM2 = $projectPart->Eklenti4BrutM2;
-            $estateProjectPart->Eklenti5Nitelik = $projectPart->Eklenti5Nitelik;
-            $estateProjectPart->Eklenti5NetM2 = $projectPart->Eklenti5NetM2;
-            $estateProjectPart->Eklenti5BrutM2 = $projectPart->Eklenti5BrutM2;
-            $estateProjectPart->GayrimenkulDurumu = $projectPart->GayrimenkulDurumu;
-            $estateProjectPart->SatisDegeri = $projectPart->SatisDegeri;
-            $estateProjectPart->SozlesmeNo = $projectPart->SozlesmeNo;
-            $estateProjectPart->MusteriAdi = $projectPart->MusteriAdi;
-            $estateProjectPart->save();
+            $estateProjectApartment->project_id = $project->id;
+            $estateProjectApartment->Il = $projectPart->Il;
+            $estateProjectApartment->Ilce = $projectPart->Ilce;
+            $estateProjectApartment->Ada = $projectPart->Ada;
+            $estateProjectApartment->Parsel = $projectPart->Parsel;
+            $estateProjectApartment->BlokNo = $projectPart->BlokNo;
+            $estateProjectApartment->KapiNo = $projectPart->KapiNo;
+            $estateProjectApartment->KullanilisSekli = $projectPart->KullanilisSekli;
+            $estateProjectApartment->BulunduguKat = $projectPart->BulunduguKat;
+            $estateProjectApartment->OdaSayisi = $projectPart->OdaSayisi;
+            $estateProjectApartment->Yon = $projectPart->Yon;
+            $estateProjectApartment->NetM2 = $projectPart->NetM2;
+            $estateProjectApartment->AcikNetM2 = $projectPart->AcikNetM2;
+            $estateProjectApartment->BrutM2 = $projectPart->BrutM2;
+            $estateProjectApartment->Eklenti1Nitelik = $projectPart->Eklenti1Nitelik;
+            $estateProjectApartment->Eklenti1NetM2 = $projectPart->Eklenti1NetM2;
+            $estateProjectApartment->Eklenti1BrutM2 = $projectPart->Eklenti1BrutM2;
+            $estateProjectApartment->Eklenti2Nitelik = $projectPart->Eklenti2Nitelik;
+            $estateProjectApartment->Eklenti2NetM2 = $projectPart->Eklenti2NetM2;
+            $estateProjectApartment->Eklenti2BrutM2 = $projectPart->Eklenti2BrutM2;
+            $estateProjectApartment->Eklenti3Nitelik = $projectPart->Eklenti3Nitelik;
+            $estateProjectApartment->Eklenti3NetM2 = $projectPart->Eklenti3NetM2;
+            $estateProjectApartment->Eklenti3BrutM2 = $projectPart->Eklenti3BrutM2;
+            $estateProjectApartment->Eklenti4Nitelik = $projectPart->Eklenti4Nitelik;
+            $estateProjectApartment->Eklenti4NetM2 = $projectPart->Eklenti4NetM2;
+            $estateProjectApartment->Eklenti4BrutM2 = $projectPart->Eklenti4BrutM2;
+            $estateProjectApartment->Eklenti5Nitelik = $projectPart->Eklenti5Nitelik;
+            $estateProjectApartment->Eklenti5NetM2 = $projectPart->Eklenti5NetM2;
+            $estateProjectApartment->Eklenti5BrutM2 = $projectPart->Eklenti5BrutM2;
+            $estateProjectApartment->GayrimenkulDurumu = $projectPart->GayrimenkulDurumu;
+            $estateProjectApartment->SatisDegeri = $projectPart->SatisDegeri;
+            $estateProjectApartment->SozlesmeNo = $projectPart->SozlesmeNo;
+            $estateProjectApartment->MusteriAdi = $projectPart->MusteriAdi;
+            $estateProjectApartment->save();
         }
     }
 

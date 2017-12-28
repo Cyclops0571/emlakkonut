@@ -31,6 +31,7 @@ use Illuminate\Http\UploadedFile;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProject whereStatus($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $islands
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Numbering[] $numberings
  */
 class EstateProject extends Model
 {
@@ -231,5 +232,10 @@ class EstateProject extends Model
     public function floor()
     {
         return $this->hasMany(Floor::class, 'project_id');
+    }
+
+    public function numberings()
+    {
+        return $this->hasMany(Numbering::class, 'project_id');
     }
 }

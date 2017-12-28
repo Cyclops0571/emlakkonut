@@ -42,7 +42,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
     Route::post('map/save/', 'MapController@save')->name('mapSave');
     Route::post('ajax/floorsOfBlock', 'AjaxController@floorsOfBlock')->name('ajax.floorsOfBlock');
-    Route::post('numarataj/save', 'ParcelController@save')->name('numaratajSave');
+
+    Route::get('numarataj/{project}', 'NumberingController@index')->name('numbering.index');
+    Route::get('numarataj/create/{project}', 'NumberingController@create')->name('numbering.create');
+    Route::get('numarataj/edit/{numbering}', 'NumberingController@edit')->name('numbering.edit');
+    Route::post('numarataj/store', 'NumberingController@store')->name('numbering.store');
+    Route::post('photo/numbering', 'PhotoController@numberingStore')->name('photo.numberingStore');
 });
 
 Route::get('setting', function (Setting $setting) {

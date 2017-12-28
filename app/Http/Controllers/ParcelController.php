@@ -22,23 +22,4 @@ class ParcelController extends Controller
 
         return \Redirect::back();
     }
-
-    public function new(EstateProject $project)
-    {
-        $islands = $project->islands;
-        $parcels = $project->Parcels;
-        $blocks = $project->blocks;
-
-        return view('numbering', compact('islands', 'parcels', 'blocks'));
-
-        //        $parcel = new Parcel();
-        //        $parcel->project_id = $project->id;
-        //        $project->get
-        //        $parcel->
-    }
-
-    public function save(Request $request) {
-        dd($request->all());
-    }
-
 }

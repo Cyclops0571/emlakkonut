@@ -40,7 +40,8 @@ class Island extends Model
      * @return null|static
      * @throws \Exception
      */
-    public static function getIslandFromIslandKkys($islandKkys) {
+    public static function getIslandFromIslandKkys($islandKkys)
+    {
         $projectId = EstateProject::getCurrentProjectIdFromSession();
         $result = static::where('project_id', $projectId)
             ->where('island_kkys', $islandKkys)
@@ -50,5 +51,14 @@ class Island extends Model
         }
 
         return $result;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]|EstateProjectApartment[]
+     */
+    public function getApartments()
+    {
+        return EstateProjectApartment::where('project_id', $this->project_id)
+            ->where('Ada', $this->island_kkys)->get();
     }
 }

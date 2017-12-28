@@ -36,6 +36,16 @@ class PhotoController extends Controller {
         return redirect()->back()->with('success', 'Fotoğrafınız Kaydedildi');
     }
 
+    public function numberingStore(Request $request)
+    { //todo 571571
+        $this->validate($request, ['id' => 'exists:parcel', 'photo'  => 'mimes:jpeg,jpg|required|image']);
+
+        $parcel = Parcel::find($request->get('id'));
+        $parcel->setParcelPhoto($request->file('photo'));
+
+        return redirect()->back()->with('success', 'Fotoğrafınız Kaydedildi');
+    }
+
     public function floorStore(Request $request, EstateProject $project)
     {
         $this->validate($request, [
