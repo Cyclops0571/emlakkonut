@@ -14,6 +14,7 @@
             <div>
                 Ada
                 <select name="islandId">
+                    <option>Hepsi</option>
                     @foreach($islands as $island)
                         <option value="{{$island->id}}">Ada: {{$island->island_kkys}}</option>
                     @endforeach
@@ -22,6 +23,7 @@
             <div>
                 Parcel
                 <select name="parcelId">
+                    <option>Hepsi</option>
                     @foreach($parcels as $parcel)
                         <option value="{{$parcel->id}}">Parcel: {{$parcel->parcel}}</option>
                     @endforeach
@@ -30,6 +32,7 @@
             <div>
                 Blok
                 <select name="blockId" id="block">
+                    <option>Hepsi</option>
                     @foreach($blocks as $block)
                         <option value="{{$block->id}}">Block: {{$block->block_no}}</option>
                     @endforeach
@@ -38,6 +41,7 @@
             <div>
                 Kat
                 <select name="floorId" id="floorId">
+                    <option>Hepsi</option>
                 </select>
             </div>
             <input type="submit">
@@ -58,9 +62,9 @@
                     },
                     success: function(floors) {
                         $('#floorId').html('');
+                        $('#floorId').append($(new Option('Hepsi')))
                         floors.forEach(function(floor) {
                             $('#floorId').append($(new Option(floor.floor_numbering, floor.id)))
-                            console.log(floor)
                         });
 
                     }
