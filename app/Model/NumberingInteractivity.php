@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\NumberingInteractivity whereParcelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\NumberingInteractivity whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\NumberingInteractivity whereNumberingId($value)
  */
 class NumberingInteractivity extends Model
 {

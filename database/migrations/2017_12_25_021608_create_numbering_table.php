@@ -17,6 +17,7 @@ class CreateNumberingTable extends Migration
             $table->increments('id');
             $table->integer('project_id');
             $table->string('name')->index();
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

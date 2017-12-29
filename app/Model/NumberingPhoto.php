@@ -30,6 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $thumbnail
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\NumberingPhoto whereThumbnail($value)
+ * @property int|null $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\NumberingPhoto whereStatus($value)
  */
 class NumberingPhoto extends Model
 {

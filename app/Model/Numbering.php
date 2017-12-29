@@ -25,6 +25,8 @@ use Illuminate\Http\UploadedFile;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Numbering whereValue($value)
  * @property-read \App\Model\NumberingPhoto $numberingPhoto
  * @property-read \App\Model\NumberingInteractivity $numberingInteractivity
+ * @property int|null $status
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Numbering whereStatus($value)
  */
 class Numbering extends Model
 {

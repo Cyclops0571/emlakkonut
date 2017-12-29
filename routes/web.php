@@ -49,7 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('numarataj/edit/{numbering}', 'NumberingController@edit')->name('numbering.edit');
     Route::post('numarataj/store', 'NumberingController@store')->name('numbering.store');
     Route::post('photo/numbering', 'PhotoController@numberingStore')->name('photo.numberingStore');
-    Route::get('/toggleNumberingStatus/{numbering}', 'NumberingController@toggleStatus')->name('toggleNumberingStatus');
+    Route::post('/toggleNumberingStatus/{numbering}', 'NumberingController@toggleStatus')
+        ->name('toggleNumberingStatus');
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
     Route::post('/interactivity/numbering', 'InteractiveController@pnumbering')->name('numberingInteractivity');
 });
