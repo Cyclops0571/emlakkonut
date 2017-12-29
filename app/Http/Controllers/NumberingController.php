@@ -14,7 +14,6 @@ class NumberingController extends Controller
 {
     public function index(EstateProject $project)
     {
-//        dd($project->numberings);
         return view('numbering.index', compact('project'));
     }
 
@@ -24,7 +23,7 @@ class NumberingController extends Controller
         $parcels = $project->Parcels;
         $blocks = $project->blocks;
 
-        return view('numbering.create', compact('islands', 'parcels', 'blocks'));
+        return view('numbering.create', compact('project', 'islands', 'parcels', 'blocks'));
     }
 
     public function store(Request $request, \Response $response)
@@ -62,7 +61,7 @@ class NumberingController extends Controller
             $apartment->save();
         }
 
-        return $response::redirectToRoute('numbering.edit', $numbering->id);
+        return $response::redirectToRoute('numbering.index', $numbering->project_id);
     }
 
     public function edit(Numbering $numbering)
@@ -79,6 +78,12 @@ class NumberingController extends Controller
         $numbering->status = ($numbering->status + 1) % 2;
         $numbering->save();
 
+        return \Redirect::back();
+    }
+
+    public function delete(Numbering $numbering)
+    {
+        $numbering->delete();
         return \Redirect::back();
     }
 }

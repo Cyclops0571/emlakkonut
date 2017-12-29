@@ -29,7 +29,7 @@
             </div>
             <div>
                 Blok
-                <select name="blockId">
+                <select name="blockId" id="block">
                     @foreach($blocks as $block)
                         <option value="{{$block->id}}">Block: {{$block->block_no}}</option>
                     @endforeach
@@ -37,7 +37,7 @@
             </div>
             <div>
                 Kat
-                <select name="floorId">
+                <select name="floorId" id="floorId">
                 </select>
             </div>
             <input type="submit">
@@ -47,19 +47,19 @@
 
 @section('javascript')
     <script>
-        $('select[name=block]').on('change', function () {
+        $('#block').on('change', function () {
             $.ajax(
                 {
                     type: 'post',
                     url: "{{URL::route('ajax.floorsOfBlock')}}",
                     data: {
-                        blockId: $('select[name=block] option:selected').val(),
+                        blockId: $('#block').find('option:selected').val(),
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(floors) {
-                        $('select[name=floorId]').html('');
+                        $('#floorId').html('');
                         floors.forEach(function(floor) {
-                            $('select[name=floorId]').append($(new Option(floor.floor_numbering, floor.id)))
+                            $('#floorId').append($(new Option(floor.floor_numbering, floor.id)))
                             console.log(floor)
                         });
 

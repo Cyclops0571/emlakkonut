@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('photo/numbering', 'PhotoController@numberingStore')->name('photo.numberingStore');
     Route::post('/toggleNumberingStatus/{numbering}', 'NumberingController@toggleStatus')
         ->name('toggleNumberingStatus');
+    Route::post('/deleteNumbering/{numbering}', 'NumberingController@delete')
+        ->name('deleteNumbering');
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
     Route::post('/interactivity/numbering', 'InteractiveController@pnumbering')->name('numberingInteractivity');
 });

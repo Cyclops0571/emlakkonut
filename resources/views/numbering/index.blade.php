@@ -46,22 +46,30 @@
                     <form action="{{URL::route('toggleNumberingStatus', $numbering->id)}}" method="post">
                         {{csrf_field()}}
                         <span>
-              <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle"
-                      onclick="window.location='{{ URL::route('numberingDesigner', $numbering->id) }}'">
+
+                                <button type="button" title="Tasarlayıcıda Aç"
+                                        class="btn btn-warning btn-sm rounded-circle"
+                                        onclick="window.location='{{ URL::route('numberingDesigner', $numbering->id) }}'">
                 <i class="icon-designer"></i>
               </button>
-                            @if($numbering->status !== 1)
-                                <button title="Aktifleştir"
-                                        class="btn btn-success btn-sm rounded-circle btn-margin-left">
+                                @if($numbering->status !== 1)
+                                    <button title="Aktifleştir"
+                                            class="btn btn-success btn-sm rounded-circle btn-margin-left">
                     <img src="/img/checked.svg" style="width: 14px; height: 21px;"/>
                   </button>
-                            @else
-                                <button title="Pasifleştir"
-                                        class="btn btn-danger btn-sm rounded-circle btn-margin-left">
+                                @else
+                                    <button title="Pasifleştir"
+                                            class="btn btn-danger btn-sm rounded-circle btn-margin-left">
                     <img src="/img/cancel.svg" style="width: 14px; height: 21px;"/>
                   </button>
-                            @endif
-            </span>
+                                @endif
+                    </span>
+                    </form>
+                    <form action="{{URL::route('deleteNumbering', $numbering->id)}}" method="post">
+                        {{csrf_field()}}
+                        <button title="Sil" class="btn btn-danger btn-sm rounded-circle btn-margin-left">
+                            <i class="icon-delete" style="width: 14px; height: 21px;"></i>
+                        </button>
                     </form>
                 </li>
             @endforeach
