@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParcelInteractivityTable extends Migration
+class CreateNumberingInteractivity extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateParcelInteractivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('parcel_interactivity', function (Blueprint $table) {
+        Schema::create('numbering_interactivity', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('parcel_id');
+            $table->unsignedInteger('numbering_id');
             $table->longText('interactiveJson');
             $table->timestamps();
         });

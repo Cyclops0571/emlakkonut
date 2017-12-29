@@ -3,7 +3,9 @@
 namespace App\Designer;
 
 use App\Model\EstateProject;
+use App\Model\EstateProjectApartment;
 use App\Model\Floor;
+use App\Model\Numbering;
 use App\Model\Parcel;
 
 /**
@@ -19,65 +21,130 @@ class Designer
 
     public function __construct($object)
     {
-        if ($object instanceof EstateProject) {
-            $id = 'project_' . $object->id;
-            $this->id = $id;
-            $this->editor = $this->setEditor();
-            $this->setGeneral($object->ProjeAdi);
-            $this->setImage($object->getImageUrl());
-            $this->setEditor();
-            $this->spots = [];
-            foreach ($object->blocks as $block) {
-                $this->spots[] = new Circle($block);
-            }
-        } elseif ($object instanceof Parcel) {
-            $id = 'parcel_' . $object->parcel;
-            $this->id = $id;
-            $this->editor = $this->setEditor();
-            $this->setGeneral($id);
-            $this->setImage($object->parcelPhoto->getImageUrl());
-            $this->setEditor();
-            $currentBlock = null;
-            $currentDirection = null;
-            $elementFactories = [];
-            $this->spots = [];
-            foreach ($object->getApartments() as $apartment) {
-                //create a spot for every block
-                if (($currentBlock != null && isset($previousApartment))
-                    && ($currentBlock != $apartment->BlokNo || $currentDirection != $apartment->Yon)
-                ) {
-                    //create the block
-                    $this->spots[] = Polygon::createWithButtons(
-                        'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
-                        $elementFactories
-                    );
-                    //empty the spots
-                    $elementFactories = [];
-                }
-                //create a button for each apartment
-                $elementFactories[] = new ElementButtonFactory($apartment);
-                $currentBlock = $apartment->BlokNo;
-                $currentDirection = $apartment->Yon;
-                $previousApartment = $apartment;
-            }
-            if (isset($previousApartment)) {
+        switch (true) {
+            case $object instanceof EstateProject:
+                $this->initProject($object);
+                break;
+            case $object instanceof Parcel:
+                $this->initParcel($object);
+                break;
+            case $object instanceof Floor:
+                $this->initFloor($object);
+                break;
+            case $object instanceof Numbering:
+                $this->initNumbering($object);
+                break;
+            default:
+                throw new \RuntimeException(sprintf(
+                    "Unknown object type in file  %s at line %s given object type: %ss",
+                    __FILE__,
+                    __LINE__,
+                    gettype($object)
+                ));
+        }
+    }
+
+    private function initNumbering(Numbering $numbering)
+    {
+
+        $id = 'numbering_' . $numbering->id;
+        $this->id = $id;
+        $this->editor = $this->setEditor();
+        $this->setGeneral($id);
+        $this->setImage($numbering->numberingPhoto->getImageUrl());
+        $this->setEditor();
+        $currentBlock = null;
+        $currentDirection = null;
+        $elementFactories = [];
+        $this->spots = [];
+        /** @var EstateProjectApartment|null $previousApartment */
+        $previousApartment = null;
+        foreach ($numbering->apartments as $apartment) {
+            //create a spot for every block
+            if (($currentBlock && $previousApartment)
+                && ($currentBlock !== $apartment->BlokNo || $currentDirection !== $apartment->Yon)
+            ) {
+                //create the block
                 $this->spots[] = Polygon::createWithButtons(
                     'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
                     $elementFactories
                 );
+                //empty the spots
+                $elementFactories = [];
             }
-        } elseif ($object instanceof Floor) {
-            $this->id = 'floor_' . $object->id;
-            $this->editor = $this->setEditor();
-            $this->setGeneral($object->floor_numbering);
-            $this->setImage($object->floorPhoto->getImageUrl());
-        } else {
-            throw new \Exception(sprintf(
-                "Unknown object type in file  %s at line %s given object type: %ss",
-                __FILE__,
-                __LINE__,
-                gettype($object)
-            ));
+            //create a button for each apartment
+            $elementFactories[] = new ElementButtonFactory($apartment);
+            $currentBlock = $apartment->BlokNo;
+            $currentDirection = $apartment->Yon;
+            $previousApartment = $apartment;
+        }
+        if ($previousApartment) {
+            $this->spots[] = Polygon::createWithButtons(
+                'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
+                $elementFactories
+            );
+        }
+    }
+
+    private function initFloor(Floor $floor)
+    {
+        $this->id = 'floor_' . $floor->id;
+        $this->editor = $this->setEditor();
+        $this->setGeneral($floor->floor_numbering);
+        $this->setImage($floor->floorPhoto->getImageUrl());
+    }
+
+    private function initParcel(Parcel $parcel)
+    {
+        $id = 'parcel_' . $parcel->parcel;
+        $this->id = $id;
+        $this->editor = $this->setEditor();
+        $this->setGeneral($id);
+        $this->setImage($parcel->parcelPhoto->getImageUrl());
+        $this->setEditor();
+        $currentBlock = null;
+        $currentDirection = null;
+        $elementFactories = [];
+        $this->spots = [];
+        $previousApartment = null;
+        foreach ($parcel->getApartments() as $apartment) {
+            //create a spot for every block
+            if (($currentBlock && $previousApartment)
+                && ($currentBlock != $apartment->BlokNo || $currentDirection != $apartment->Yon)
+            ) {
+                //create the block
+                $this->spots[] = Polygon::createWithButtons(
+                    'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
+                    $elementFactories
+                );
+                //empty the spots
+                $elementFactories = [];
+            }
+            //create a button for each apartment
+            $elementFactories[] = new ElementButtonFactory($apartment);
+            $currentBlock = $apartment->BlokNo;
+            $currentDirection = $apartment->Yon;
+            $previousApartment = $apartment;
+        }
+        if ($previousApartment) {
+            $this->spots[] = Polygon::createWithButtons(
+                'Blok:' . $previousApartment->BlokNo . " Yön:" . $previousApartment->Yon,
+                $elementFactories
+            );
+        }
+    }
+
+    public function initProject(EstateProject $project)
+    {
+        $id = 'project_' . $project->id;
+        $this->id = $id;
+        $this->editor = $this->setEditor();
+        $this->setGeneral($project->ProjeAdi);
+        $this->setImage($project->getImageUrl());
+        $this->setEditor();
+        $this->spots = [];
+        foreach ($project->blocks as $block) {
+            $this->spots[] = new Circle($block);
         }
     }
 

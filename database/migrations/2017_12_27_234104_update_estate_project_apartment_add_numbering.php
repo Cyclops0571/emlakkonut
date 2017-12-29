@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParcelInteractivityTable extends Migration
+class UpdateEstateProjectApartmentAddNumbering extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateParcelInteractivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('parcel_interactivity', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('parcel_id');
-            $table->longText('interactiveJson');
-            $table->timestamps();
+        Schema::table('estate_project_apartment', function ($table) {
+            $table->unsignedInteger('numbering_id')->index()->default(0);
         });
     }
 

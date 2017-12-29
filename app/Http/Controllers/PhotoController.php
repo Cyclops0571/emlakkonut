@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\EstateProject;
 use App\Model\EstateProjectApartment;
 use App\Model\Floor;
+use App\Model\Numbering;
 use App\Model\Parcel;
 use Illuminate\Http\Request;
 use View;
@@ -36,12 +37,12 @@ class PhotoController extends Controller {
         return redirect()->back()->with('success', 'Fotoğrafınız Kaydedildi');
     }
 
-    public function numberingStore(Request $request)
-    { //todo 571571
-        $this->validate($request, ['id' => 'exists:parcel', 'photo'  => 'mimes:jpeg,jpg|required|image']);
+    public function numberingStore(Request $request, Numbering $numbering)
+    {
+        $this->validate($request, ['id' => 'exists:numbering', 'photo'  => 'mimes:jpeg,jpg|required|image']);
 
-        $parcel = Parcel::find($request->get('id'));
-        $parcel->setParcelPhoto($request->file('photo'));
+        $numbering = $numbering->find($request->get('id'));
+        $numbering->setNumberingPhoto($request->file('photo'));
 
         return redirect()->back()->with('success', 'Fotoğrafınız Kaydedildi');
     }

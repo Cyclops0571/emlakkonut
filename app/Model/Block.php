@@ -40,7 +40,7 @@ class Block extends Model
         return EstateProjectApartment::where('project_id', $this->project_id)
             ->where('Ada', $this->parcel->island->island_kkys)
             ->where('Parsel', $this->parcel->parcel)
-            ->where('BlockNo', $this->block_no)
+            ->where('BlokNo', $this->block_no)
             ->first();
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\EstateProject;
 use App\Model\Floor;
+use App\Model\Numbering;
 use App\Model\Parcel;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,20 @@ class DesignerController extends Controller
         $project = EstateProject::getCurrentProjectFromSession();
 
         return view('designer.parcel', compact('parcel', 'project'));
+    }
+
+    public function numbering(Numbering $numbering)
+    {
+        if (!$numbering->numberingPhoto) {
+            return \Redirect::back()->withErrors('Numaratör imajını yüklemeden tasarımcıda işlem yapamazsınız.');
+        }
+        if (!$numbering->numberingInteractivity) {
+            $numbering->initInteractivity();
+        }
+
+        $project = EstateProject::getCurrentProjectFromSession();
+
+        return view('designer.numbering', compact('numbering', 'project'));
     }
 
     public function designer()
