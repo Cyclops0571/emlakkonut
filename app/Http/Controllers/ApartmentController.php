@@ -13,6 +13,6 @@ class ApartmentController extends Controller
     {
         $apartments = EstateProjectApartment::where('project_id', $project->id)->get();
 
-        return view('apartments', compact('apartments'));
+        return view('apartments', compact('apartments', 'project'));
     }
 }

@@ -37,6 +37,7 @@ use Illuminate\Http\UploadedFile;
 class Parcel extends Model
 {
     protected $table = 'parcel';
+    protected $fillable = ['project_id', 'island_id', 'parcel', 'status'];
 
     /**
      * @param EstateProjectApartment $apartment
@@ -108,7 +109,8 @@ class Parcel extends Model
         $image->save($this->parcelPhoto->directory() . $file->getFilename() . '_thumb.jpg');
 
         $image = \Image::make($file->getRealPath());
-        $image->widen(1280);
+        $image->resize(300, 300);
+        //$image->widen(1280);
         $image->save($this->parcelPhoto->directory() . $file->getFilename() . '.jpg');
 
         $this->parcelPhoto->width = $image->width();

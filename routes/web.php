@@ -37,24 +37,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/interactivity/floor', 'InteractiveController@floor')->name('floorInteractivity');
 
     Route::post('photo', 'PhotoController@store')->name('photo.store');
-    Route::post('photo/parcel', 'PhotoController@parcelStore')->name('photo.parcelStore');
+    Route::post('photo/parcel/{project}', 'PhotoController@parcelStore')->name('photo.parcelStore');
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
     Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
     Route::post('map/save/', 'MapController@save')->name('mapSave');
     Route::post('ajax/floorsOfBlock', 'AjaxController@floorsOfBlock')->name('ajax.floorsOfBlock');
 
-    //numbering routes
+    // Save Docs
+    Route::post('uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
+    Route::post('addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
+    
+
     Route::get('numarataj/{project}', 'NumberingController@index')->name('numbering.index');
     Route::get('numarataj/create/{project}', 'NumberingController@create')->name('numbering.create');
     Route::get('numarataj/edit/{numbering}', 'NumberingController@edit')->name('numbering.edit');
     Route::post('numarataj/store', 'NumberingController@store')->name('numbering.store');
     Route::post('photo/numbering', 'PhotoController@numberingStore')->name('photo.numberingStore');
     Route::post('/toggleNumberingStatus/{numbering}', 'NumberingController@toggleStatus')
-        ->name('toggleNumberingStatus');
+    ->name('toggleNumberingStatus');
     Route::post('/deleteNumbering/{numbering}', 'NumberingController@delete')
-        ->name('deleteNumbering');
+    ->name('deleteNumbering');
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
     Route::post('/interactivity/numbering', 'InteractiveController@pnumbering')->name('numberingInteractivity');
+
 });
 
 Route::get('setting', function (Setting $setting) {

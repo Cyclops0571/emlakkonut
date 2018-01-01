@@ -38,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
 class ParcelPhoto extends Model
 {
     protected $table = 'parcel_photo';
+    protected $fillable = ['name', 'size', 'original_name', 'width', 'height', 'thumbnail'];
 
     public function directory()
     {
