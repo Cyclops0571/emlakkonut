@@ -1,12 +1,16 @@
 <?php
     $sidebarProject = '';
     $sidebarPosture = '';
-    $sidebarParcel = '';
+    $sidebarNumbering = '';
     $sidebarFloor = '';
     $sidebarApartment = '';
     $sidebarLocation = '';
+    $logoController = '';
 //    echo Route::currentRouteAction();
 switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) {
+    case 'LogoController@index':
+        $logoController = 'active';
+        break;
     case 'ProjectController@projects':
     case 'ProjectController@toggleStatus':
     case 'DesignerController@project':
@@ -17,12 +21,14 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
     case 'HomeController@postures':
         $sidebarPosture = 'active';
         break;
-    case 'ParcelController@parcels':
-    case 'ParcelController@toggleStatus':
-    case 'DesignerController@parcel':
-    case 'InteractiveController@parcel':
-    case 'PhotoController@parcelStore':
-        $sidebarParcel = 'active';
+    case 'NumberingController@edit':
+    case 'NumberingController@toggleStatus':
+    case 'DesignerController@numbering':
+    case 'InteractiveController@numbering':
+    case 'PhotoController@pnumberingStore':
+    case 'NumberingController@create':
+    case 'NumberingController@index':
+        $sidebarNumbering = 'active';
         break;
     case 'FloorController@index':
     case 'DesignerController@floor':
@@ -51,8 +57,8 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
       </a>
     </li>
     <li class="nav-item">
-      <a id="block360" class="nav-link {{$sidebarParcel}}"
-         href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
+      <a id="block360" class="nav-link {{$logoController}}"
+         href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
         Logo
       </a>
@@ -65,7 +71,7 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
       </a>
     </li>
     <li class="nav-item">
-      <a id="numbering" class="nav-link {{$sidebarParcel}}"
+      <a id="numbering" class="nav-link {{$sidebarNumbering}}"
          href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('numbering')"><i class="icon-Plots"></i>
         Numarataj

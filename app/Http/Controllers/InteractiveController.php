@@ -17,14 +17,6 @@ class InteractiveController extends Controller
         return \Response::json(['success' => true]);
     }
 
-    public function parcel(Request $request)
-    {
-        $this->validate($request, ['id'=>'exists:parcel', 'interactiveJson' => 'required']);
-        $parcel = Parcel::find($request->get('id'));
-        $parcel->setInteractivity($request->get('interactiveJson'));
-        return \Response::json(['success' => true]);
-    }
-
     public function numbering(Request $request)
     {
         $this->validate($request, ['id'=>'exists:numbering', 'interactiveJson' => 'required']);
