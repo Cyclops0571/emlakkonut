@@ -148,9 +148,11 @@
         }
 
         function drag(e) {
+            alert(e);
         }
 
         function drop(e) {
+            alert(e);
         }
     </script>
     {{--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"--}}
