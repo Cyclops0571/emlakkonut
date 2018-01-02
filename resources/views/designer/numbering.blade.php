@@ -89,7 +89,7 @@
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
         $('#apartmant-list ul').on('click', function() {
-           document.querySelectorAll('#apartmant-list li').forEach(function(li){
+           document.querySelectorAll('#apartmant-list ul').forEach(function(li){
                li.classList.remove('background-grey');
            });
            this.classList.add('background-grey');
@@ -98,7 +98,7 @@
 
         
         $('#all-apart-list li').on('click', function() {
-           document.querySelectorAll('#apartmant-list li').forEach(function(li){
+           document.querySelectorAll('#all-apart-list li').forEach(function(li){
                li.classList.remove('background-grey');
            });
            this.classList.add('background-grey');
