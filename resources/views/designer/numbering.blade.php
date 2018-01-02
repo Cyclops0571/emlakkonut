@@ -148,7 +148,6 @@
         }
 
         function drag(e) {
-            alert(e);
         }
 
         function drop(e) {
