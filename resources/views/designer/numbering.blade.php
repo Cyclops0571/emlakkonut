@@ -25,13 +25,13 @@
     <div class="wcp-eklediklerim" style="background-color: white">
         <div id="wcp-editor-list-title">Eklediklerim</div>
         <div class="d-flex" style="margin-top: 4rem;">
-            <select style="height: 3rem; width: 116px;" id="blockSelection">
+            <select style="height: 3rem; width: 110px;" id="blockSelection">
                 <option>Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     <option value="{{$block}}">{{$block}}</option>
                 @endforeach
             </select>
-            <select style="height: 3rem; width: 117px;" id="directionSelection">
+            <select style="height: 3rem; width: 110px;" id="directionSelection">
                 <option>Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     @foreach($numbering->getDirections($block) as $direction)
@@ -39,7 +39,7 @@
                     @endforeach
                 @endforeach
             </select>
-            <select style="height: 3rem; width: 117px;" id="floorSelection">
+            <select style="height: 3rem; width: 110px;" id="floorSelection">
                 <option value="">Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     @foreach($numbering->getDirections($block) as $direction)
