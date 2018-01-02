@@ -151,6 +151,7 @@
         }
 
         function drop(e) {
+            e.preventDefault();
             alert(e);
         }
     </script>
