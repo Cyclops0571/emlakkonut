@@ -43,9 +43,10 @@
                 Numarataj: {{$numbering->name}}
               </span>
                     </form>
+                    <span>
                     <form action="{{URL::route('toggleNumberingStatus', $numbering->id)}}" method="post">
                         {{csrf_field()}}
-                        <span>
+                        
 
                                 <button type="button" title="Tasarlayıcıda Aç"
                                         class="btn btn-warning btn-sm rounded-circle"
@@ -63,14 +64,14 @@
                     <img src="/img/cancel.svg" style="width: 14px; height: 21px;"/>
                   </button>
                                 @endif
-                    </span>
+                    
                     </form>
                     <form action="{{URL::route('deleteNumbering', $numbering->id)}}" method="post">
                         {{csrf_field()}}
                         <button title="Sil" class="btn btn-danger btn-sm rounded-circle btn-margin-left">
                             <i class="icon-delete" style="width: 14px; height: 21px;"></i>
                         </button>
-                    </form>
+                    </form></span>
                 </li>
             @endforeach
         </ul>
