@@ -21,7 +21,7 @@
 
 @section('content')
     <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
-    <div id="wcp-editor" ondrop="drop(event)"></div>
+    <div id="wcp-editor" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     <div class="wcp-eklediklerim" style="background-color: white">
         <div id="wcp-editor-list-title">Eklediklerim</div>
         <div class="d-flex" style="margin-top: 4rem;">
@@ -153,6 +153,10 @@
         function drop(e) {
             e.preventDefault();
             alert(e);
+        }
+
+        function allowDrop(e) {
+            e.preventDefault();
         }
     </script>
     {{--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"--}}
