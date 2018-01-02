@@ -50,11 +50,11 @@
                 @endforeach
             </select>
         </div>
-        <ul style="list-style: none;" id="apartmant-list">
+        <ul style="list-style: none; margin-left: -2rem; width: 350px;" id="apartmant-list">
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
-                    data-floor="{{$apartment->BulunduguKat}}">
+                    data-floor="{{$apartment->BulunduguKat}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
             @endforeach
