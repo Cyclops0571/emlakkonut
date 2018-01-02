@@ -1,12 +1,16 @@
 <?php
     $sidebarProject = '';
     $sidebarPosture = '';
-    $sidebarParcel = '';
+    $sidebarNumbering = '';
     $sidebarFloor = '';
     $sidebarApartment = '';
     $sidebarLocation = '';
+    $logoController = '';
 //    echo Route::currentRouteAction();
 switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) {
+    case 'LogoController@index':
+        $logoController = 'active';
+        break;
     case 'ProjectController@projects':
     case 'ProjectController@toggleStatus':
     case 'DesignerController@project':
@@ -17,12 +21,14 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
     case 'HomeController@postures':
         $sidebarPosture = 'active';
         break;
-    case 'ParcelController@parcels':
-    case 'ParcelController@toggleStatus':
-    case 'DesignerController@parcel':
-    case 'InteractiveController@parcel':
-    case 'PhotoController@parcelStore':
-        $sidebarParcel = 'active';
+    case 'NumberingController@edit':
+    case 'NumberingController@toggleStatus':
+    case 'DesignerController@numbering':
+    case 'InteractiveController@numbering':
+    case 'PhotoController@pnumberingStore':
+    case 'NumberingController@create':
+    case 'NumberingController@index':
+        $sidebarNumbering = 'active';
         break;
     case 'FloorController@index':
     case 'DesignerController@floor':
@@ -50,56 +56,47 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
         <i class="icon-Projects_Icon"></i> Projeler
       </a>
     </li>
-    @if(count(Auth::user()->estateProject))
-      <li class="nav-item">
-        <a id="block360" class="nav-link {{$sidebarParcel}}"
-          href="{{URL::route('parcels', session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
-          Logo
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="postures" class="nav-link {{$sidebarPosture}}"
-          href="{{URL::route('postures', session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('postures')"><i class="icon-General"></i>
-          Vaziyet Planı
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="numbering" class="nav-link {{$sidebarParcel}}"
-          href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('numbering')"><i class="icon-Plots"></i>
-          Numarataj
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="floors" class="nav-link {{$sidebarFloor}}"
-          href="{{URL::route('floors', session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('floors')"><i class="icon-Kat_Plani"></i>
-          Kat Planı
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="apartments" class="nav-link {{$sidebarApartment}}"
-          href="{{URL::route('apartments', session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('apartments')"><i class="icon-Houses"></i>
-          Daireler
-        </a>
-      </li>
-      <li class="nav-item">
-        <a id="location" class="nav-link {{$sidebarLocation}}"
-          href="{{URL::route('location',session('projectID', Auth::user()->estateProject[0]->id))}}"
-          onclick="onClickActiveNav('location')"><i class="icon-Map"></i>
-          Konum
-        </a>
-      </li>
-    @else
-      <li class="nav-item">
-      <a class="nav-link">
-        <i class="icon-Link"></i>
-          No Projects
-        </a>
-      </li>
-    @endif
+    <li class="nav-item">
+      <a id="block360" class="nav-link {{$logoController}}"
+         href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
+        Logo
+      </a>
+    </li>
+    <li class="nav-item">
+      <a id="postures" class="nav-link {{$sidebarPosture}}"
+         href="{{URL::route('postures', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('postures')"><i class="icon-General"></i>
+        Vaziyet Planı
+      </a>
+    </li>
+    <li class="nav-item">
+      <a id="numbering" class="nav-link {{$sidebarNumbering}}"
+         href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('numbering')"><i class="icon-Plots"></i>
+        Numarataj
+      </a>
+    </li>
+    <li class="nav-item">
+      <a id="floors" class="nav-link {{$sidebarFloor}}"
+         href="{{URL::route('floors', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('floors')"><i class="icon-Kat_Plani"></i>
+        Kat Planı
+      </a>
+    </li>
+    <li class="nav-item">
+      <a id="apartments" class="nav-link {{$sidebarApartment}}"
+         href="{{URL::route('apartments', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('apartments')"><i class="icon-Houses"></i>
+        Daireler
+      </a>
+    </li>
+    <li class="nav-item">
+      <a id="location" class="nav-link {{$sidebarLocation}}"
+         href="{{URL::route('location',session('projectID', Auth::user()->estateProject[0]->id))}}"
+         onclick="onClickActiveNav('location')"><i class="icon-Map"></i>
+        Konum
+      </a>
+    </li>
   </ul>
 </nav>

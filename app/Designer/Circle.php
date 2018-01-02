@@ -3,6 +3,7 @@
 namespace App\Designer;
 
 use App\Model\Block;
+use App\Model\EstateProjectApartment;
 
 class Circle
 {
@@ -19,19 +20,25 @@ class Circle
      * Circle constructor.
      *
      * @param Block $block
+     * @throws \RuntimeException
      */
-    public function __construct($block)
+    public function __construct($object)
     {
-        $this->id = 'block_' . $block->block_no;
-        $this->type = 'oval';
-        $this->title = $block->block_no;
-        $this->x = 5;
-        $this->y = 5;
-        $this->width = 4;
-        $this->height = 6;
-        $this->actions = $this->getAction($block->clientUrl());
-        $this->default_style = $this->getColor("#ff0000", 1);
-        $this->tooltip_content = $this->tooltipContent("Blok - " .  $block->block_no);
+        switch (true) {
+            case $object instanceof Block:
+                $this->initBlockCircle($object);
+                break;
+            case $object instanceof EstateProjectApartment:
+                $this->initApartmentCircle($object);
+                break;
+            default:
+                throw new \RuntimeException(sprintf(
+                    'Unknown object type in file  %s at line %s given object type: %ss',
+                    __FILE__,
+                    __LINE__,
+                    gettype($object)
+                ));
+        }
     }
 
     public function getAction($link)
@@ -87,5 +94,34 @@ class Circle
       }';
 
         return json_decode(str_replace('PLAIN_TEXT', $text, $tooltipContent));
+    }
+
+    private function initBlockCircle(Block $block)
+    {
+        $this->id = 'block_' . $block->block_no;
+        $this->type = 'oval';
+        $this->title = $block->block_no;
+        $this->x = 5;
+        $this->y = 5;
+        $this->width = 4;
+        $this->height = 6;
+        $this->actions = $this->getAction($block->clientUrl());
+        $this->default_style = $this->getColor("#ff0000", 1);
+        $this->tooltip_content = $this->tooltipContent("Blok - " . $block->block_no);
+    }
+
+    private function initApartmentCircle(EstateProjectApartment $apartment)
+    {
+        $this->id = 'apartment_' . $apartment->id;
+        $this->type = 'oval';
+        $this->title = $apartment->KapiNo;
+        $this->x = 5;
+        $this->y = 5;
+        $this->width = 2;
+        $this->height = 2;
+        $this->actions = $this->getAction($apartment->url());
+        $this->default_style = $this->getColor("#ff0000", 1);
+        $this->tooltip_content = $this->tooltipContent("Blok: - ". $apartment->BlokNo .
+            " Apartman - " . $apartment->KapiNo);
     }
 }

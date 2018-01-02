@@ -98,4 +98,21 @@ class Numbering extends Model
         $this->numberingInteractivity->interactiveJson = $interactiveJson;
         $this->numberingInteractivity->save();
     }
+
+    public function getBlocks()
+    {
+        return array_unique($this->apartments->pluck('BlokNo')->toArray());
+    }
+
+    public function getDirections($blokNo)
+    {
+        return array_unique($this->apartments->where('BlokNo', $blokNo)->pluck('Yon')->toArray());
+    }
+
+    public function getFloors($blokNo, $direction)
+    {
+        return array_unique($this->apartments->where('BlokNo', $blokNo)
+            ->where('Yon', $direction)->pluck('BulunduguKat')
+            ->toArray());
+    }
 }

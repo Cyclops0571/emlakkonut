@@ -22,25 +22,12 @@ class DesignerController extends Controller
         return view('designer.project', compact('project'));
     }
 
-    public function parcel(Parcel $parcel)
-    {
-        if (!$parcel->parcelPhoto) {
-            return \Redirect::back()->withErrors('Parsel imajını yüklemeden tasarımcıda işlem yapamazsınız.');
-        }
-        if (!$parcel->parcelInteractivity) {
-            $parcel->initInteractivity();
-        }
-
-        $project = EstateProject::getCurrentProjectFromSession();
-
-        return view('designer.parcel', compact('parcel', 'project'));
-    }
-
     public function numbering(Numbering $numbering)
     {
         if (!$numbering->numberingPhoto) {
             return \Redirect::back()->withErrors('Numaratör imajını yüklemeden tasarımcıda işlem yapamazsınız.');
         }
+
         if (!$numbering->numberingInteractivity) {
             $numbering->initInteractivity();
         }
