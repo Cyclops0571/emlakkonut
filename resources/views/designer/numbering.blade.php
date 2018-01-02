@@ -50,7 +50,7 @@
                 @endforeach
             </select>
         </div>
-        <ul style="list-style: none; padding-left: 10px; width: 330px;" id="apartmant-list">
+        <ul style="list-style: none; padding: 10px; width: 330px;" id="apartmant-list">
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
@@ -60,7 +60,7 @@
             @endforeach
         </ul>
         <hr/>
-        <ul style="list-style: none; padding-left: 10px; width: 330px;" id="all-apart-list">
+        <ul style="list-style: none; padding: 10px; width: 330px;" id="all-apart-list">
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
