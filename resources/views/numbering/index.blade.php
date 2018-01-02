@@ -43,7 +43,7 @@
                 Numarataj: {{$numbering->name}}
               </span>
                     </form>
-                    <span>
+                    <span style="display: inherit;">
                     <form action="{{URL::route('toggleNumberingStatus', $numbering->id)}}" method="post">
                         {{csrf_field()}}
                         
