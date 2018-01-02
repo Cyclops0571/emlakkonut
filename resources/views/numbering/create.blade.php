@@ -5,15 +5,15 @@
         <div class="card-header">
             Yeni Numarataj
         </div>
-        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}">
+        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}" class="form-group">
             {{csrf_field()}}
             <div>
                 Numarataj İsmi
-                <input type="text" name="name">
+                <input type="text" name="name" class="form-control">
             </div>
             <div>
                 Ada
-                <select name="islandId">
+                <select name="islandId" class="form-control">
                     <option>Hepsi</option>
                     @foreach($islands as $island)
                         <option value="{{$island->id}}">Ada: {{$island->island_kkys}}</option>
@@ -22,7 +22,7 @@
             </div>
             <div>
                 Parcel
-                <select name="parcelId">
+                <select name="parcelId" class="form-control">
                     <option>Hepsi</option>
                     @foreach($parcels as $parcel)
                         <option value="{{$parcel->id}}">Parcel: {{$parcel->parcel}}</option>
@@ -31,7 +31,7 @@
             </div>
             <div>
                 Blok
-                <select name="blockId" id="block">
+                <select name="blockId" id="block" class="form-control">
                     <option>Hepsi</option>
                     @foreach($blocks as $block)
                         <option value="{{$block->id}}">Block: {{$block->block_no}}</option>
@@ -40,11 +40,11 @@
             </div>
             <div>
                 Kat
-                <select name="floorId" id="floorId">
+                <select name="floorId" id="floorId" class="form-control">
                     <option>Hepsi</option>
                 </select>
             </div>
-            <input type="submit">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
         </form>
     </div>
 @endsection
