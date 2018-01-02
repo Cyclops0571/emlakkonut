@@ -59,6 +59,16 @@
                 </li>
             @endforeach
         </ul>
+        <hr/>
+        <ul style="list-style: none; margin-left: -2rem; width: 350px;">
+            @foreach($numbering->apartments as $apartment)
+                <li
+                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                    data-floor="{{$apartment->BulunduguKat}}" style="">
+                    {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
+                </li>
+            @endforeach
+        </ul>
     </div>
 @endsection
 
