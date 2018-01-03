@@ -21,17 +21,17 @@
 
 @section('content')
     <h4 class="editor-title">Tasarlayıcı / Numarataj Planı</h4>
-    <div id="wcp-editor"></div>
+    <div id="wcp-editor" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     <div class="wcp-eklediklerim" style="background-color: white">
         <div id="wcp-editor-list-title">Eklediklerim</div>
         <div class="d-flex" style="margin-top: 4rem;">
-            <select style="height: 3rem;" id="blockSelection">
+            <select style="height: 3rem; width: 110px;" id="blockSelection">
                 <option>Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     <option value="{{$block}}">{{$block}}</option>
                 @endforeach
             </select>
-            <select style="height: 3rem;" id="directionSelection">
+            <select style="height: 3rem; width: 110px;" id="directionSelection">
                 <option>Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     @foreach($numbering->getDirections($block) as $direction)
@@ -39,7 +39,7 @@
                     @endforeach
                 @endforeach
             </select>
-            <select style="height: 3rem;" id="floorSelection">
+            <select style="height: 3rem; width: 110px;" id="floorSelection">
                 <option value="">Seç</option>
                 @foreach($numbering->getBlocks() as $block)
                     @foreach($numbering->getDirections($block) as $direction)
@@ -50,11 +50,21 @@
                 @endforeach
             </select>
         </div>
-        <ul style="list-style: none;" id="apartmant-list">
+        <ul style="list-style: none; padding: 10px; width: 330px;" id="apartmant-list" draggable="true" ondragstart="drag(event)">
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
-                    data-floor="{{$apartment->BulunduguKat}}">
+                    data-floor="{{$apartment->BulunduguKat}}" style="">
+                    {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
+                </li>
+            @endforeach
+        </ul>
+        <hr/>
+        <ul style="list-style: none; padding: 10px; width: 330px;" id="all-apart-list" draggable="true" ondragstart="drag(event)">
+            @foreach($numbering->apartments as $apartment)
+                <li
+                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                    data-floor="{{$apartment->BulunduguKat}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
             @endforeach
@@ -78,8 +88,17 @@
         var floorValue = '';
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
-        $('#apartmant-list li').on('click', function() {
-           document.querySelectorAll('#apartmant-list li').forEach(function(li){
+        $('#apartmant-list ul').on('click', function() {
+           document.querySelectorAll('#apartmant-list ul').forEach(function(li){
+               li.classList.remove('background-grey');
+           });
+           this.classList.add('background-grey');
+
+        });
+
+        
+        $('#all-apart-list li').on('click', function() {
+           document.querySelectorAll('#all-apart-list li').forEach(function(li){
                li.classList.remove('background-grey');
            });
            this.classList.add('background-grey');
@@ -128,6 +147,17 @@
             });
         }
 
+        function drag(e) {
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            alert(e);
+        }
+
+        function allowDrop(e) {
+            e.preventDefault();
+        }
     </script>
     {{--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"--}}
     {{--integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"--}}
