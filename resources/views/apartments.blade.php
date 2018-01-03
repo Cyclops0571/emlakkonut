@@ -11,7 +11,7 @@
         </div>
         <ul id="listApartments" class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between">
-                    <form name="" method="post" action="{{URL::route('photo.parcelStore')}}" enctype="multipart/form-data">
+                    <form name="" method="post" action="{{URL::route('photo.parcelStore', $project->id)}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <span>
                             <label class="custom-file">
@@ -21,7 +21,7 @@
                             Tip 1
                         </span>
                     </form>
-                    <form name="" method="post" action="{{URL::route('photo.parcelStore')}}" enctype="multipart/form-data">
+                    <form name="" method="post" action="{{URL::route('photo.parcelStore', $project->id)}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <input type="hidden" name="id" value="">
                         <span>
