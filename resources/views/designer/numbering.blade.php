@@ -50,7 +50,7 @@
                 @endforeach
             </select>
         </div>
-        <ul style="list-style: none; padding: 10px; width: 330px; max-height: 210px; overflow-y: auto;" id="apartmant-list" draggable="true" ondragstart="drag(event)">
+        <ul style="list-style: none; padding: 10px; width: 330px; max-height: 200px; overflow-y: auto;" id="apartmant-list" draggable="true" ondragstart="drag(event)">
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
@@ -60,8 +60,8 @@
             @endforeach
         </ul>
         <hr/>
-        <ul style="list-style: none; padding: 10px; width: 330px; max-height: 210px; overflow-y: auto;" id="all-apart-list" draggable="true" ondragstart="drag(event)">
-            <li>Tümü</li>
+        <ul style="list-style: none; padding: 10px; width: 330px; max-height: 200px; overflow-y: auto;" id="all-apart-list" draggable="true" ondragstart="drag(event)">
+            <h5>Tümü</h5>
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
