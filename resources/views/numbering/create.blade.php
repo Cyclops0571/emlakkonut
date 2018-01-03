@@ -2,10 +2,10 @@
 
 <style>
     .form-control {
-        margin: 0.375rem;
-        padding: 0.375rem 0.75rem;
-        border: 1px solid #ced4da;
-        border-radius: 0.25rem;
+        margin: 0.375rem !important;
+        padding: 0.375rem 0.75rem !important;
+        border: 1px solid #ced4da !important;
+        border-radius: 0.25rem !important;
     }
 </style>
 
