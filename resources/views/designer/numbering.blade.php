@@ -51,6 +51,7 @@
             </select>
         </div>
         <ul style="list-style: none; padding: 10px; width: 300px; max-height: 200px; overflow-y: auto;" id="apartmant-list" draggable="true" ondragstart="drag(event)">
+            <h5>Seçilenler</h5>
             @foreach($numbering->apartments as $apartment)
                 <li
                     data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
