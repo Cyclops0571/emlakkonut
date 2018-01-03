@@ -94,9 +94,9 @@ class EstateProject extends Model
         return $this->hasOne(ProjectPhoto::class, 'project_id');
     }
 
-    private function photoDirectory()
+    public function photoDirectory()
     {
-        return Setting::PublicPath('uploads/project/');
+        return public_path('uploads/project/');
     }
 
     public function getPhotoPath()
@@ -237,5 +237,25 @@ class EstateProject extends Model
     public function numberings()
     {
         return $this->hasMany(Numbering::class, 'project_id');
+    }
+
+
+    public function getFolderFilesUrl($folder){
+        $res = [];
+        $dir = $this->photoDirectory() . $folder . '/' . $this->id;
+
+        // Open a directory, and read its contents
+        if (is_dir($dir)){
+            if ($dh = opendir($dir)){
+                while (($file = readdir($dh)) !== false){
+                    if($file != '.' && $file != '..')
+                        array_push($res, '/uploads/project/'. $folder .'/' . $this->id . '/' . $file);
+                    
+                }
+                closedir($dh);
+            }
+        }
+
+        return $res;
     }
 }
