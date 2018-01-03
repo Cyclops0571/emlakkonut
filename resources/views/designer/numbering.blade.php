@@ -59,7 +59,7 @@
                 </li>
             @endforeach
         </ul>
-        <hr/>
+        <hr style="margin: 0"/>
         <ul style="list-style: none; padding: 10px; width: 330px; max-height: 200px; overflow-y: auto;" id="all-apart-list" draggable="true" ondragstart="drag(event)">
             <h5>Tümü</h5>
             @foreach($numbering->apartments as $apartment)
