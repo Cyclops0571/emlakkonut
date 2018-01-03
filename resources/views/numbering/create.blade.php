@@ -13,13 +13,13 @@
         <div class="card-header">
             Yeni Numarataj
         </div>
-        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}" class="form-row">
+        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}" class="form-row" style="padding: 1rem 4rem">
             {{csrf_field()}}
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
                 <label for="idNumName">Numarataj İsmi</label>
                 <input id="idNumName" type="text" name="name" class="form-control">
             </div>
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
                 <label for="idIsland">Ada</label>
                 <select id="idIsland" name="islandId" class="form-control">
                     <option>Hepsi</option>
@@ -28,7 +28,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
                 <label for="idParcel">Parcel</label>
                 <select id="idParcel" name="parcelId" class="form-control">
                     <option>Hepsi</option>
@@ -37,7 +37,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
                 <label for="block">Blok</label>
                 <select name="blockId" id="block" class="form-control">
                     <option>Hepsi</option>
@@ -46,7 +46,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
                 <label for="floorId">Kat</label>
                 <select name="floorId" id="floorId" class="form-control">
                     <option>Hepsi</option>
