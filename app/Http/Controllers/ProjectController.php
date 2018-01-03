@@ -59,10 +59,10 @@ class ProjectController extends Controller
     }
 
     public function addVideosUrl(Request $request, EstateProject $project){
-        $url1 = $request->url1;
-        $url2 = $request->url2;
-        $url3 = $request->url3;
-        $url4 = $request->url4;
+        $url1 = $request->url1 ? $request->url1 : '';
+        $url2 = $request->url2 ? $request->url2 : '';
+        $url3 = $request->url3 ? $request->url3 : '';
+        $url4 = $request->url4 ? $request->url4 : '';
 
         $allUrls = ProjectVideosUrl::where('project_id', $project->id)->get();
 
