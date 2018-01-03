@@ -36,6 +36,24 @@ class ProjectController extends Controller
         return \Redirect::back();
     }
 
+    public function logos(EstateProject $project){
+        return view('logos', compact('project'));
+    }
+
+    public function uploadLogo(Request $request, EstateProject $project){
+        $this->validate($request, ['logo'  => 'required|mimes:png|image']);
+
+        $file = $request->file('logo');
+
+        $path = $project->photoDirectory() . 'logos' . "/";
+        \File::makeDirectory($path, $mode = 0777, true, true);
+
+        $name = str_replace($file->getFilename(),"", $project->getLogoNameFormat());
+        $file->move($path, $name);
+
+        return redirect()->route('logos', $project->id)->with('success', 'Logo Kaydedildi');
+    }
+
     public function uploadFiles(Request $request, EstateProject $project){
         $folder = $request->folder;
         if (Input::hasFile($folder))

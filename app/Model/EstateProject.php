@@ -258,4 +258,15 @@ class EstateProject extends Model
 
         return $res;
     }
+
+    public function getLogoNameFormat(){
+        return 'PRJ_' . $this->id . '_LOGO.png';
+    }
+    public function getLogoUrl(){
+        $logoPath = $this->photoDirectory() . 'logos' . "/" . $this->getLogoNameFormat();
+        if(file_exists($logoPath)){
+            return '/uploads/project/logos' . "/" . $this->getLogoNameFormat();
+        }
+        return "";
+    }
 }

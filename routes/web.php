@@ -37,7 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('map/save/', 'MapController@save')->name('mapSave');
     Route::post('ajax/floorsOfBlock', 'AjaxController@floorsOfBlock')->name('ajax.floorsOfBlock');
 
-    // Save Docs
+    Route::get('logos/{project}', 'ProjectController@logos')->name('logos');
+    Route::post('uploadLogo/{project}', 'ProjectController@uploadLogo')->name('uploadLogo');
+    
     Route::post('uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
     Route::post('addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
     Route::post('add360Url/{project}', 'ProjectController@add360Url')->name('add360Url');
