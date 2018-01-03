@@ -13,7 +13,7 @@
         <div class="card-header">
             Yeni Numarataj
         </div>
-        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}" class="form-group">
+        <form name="numbering" method="post" action="{{URL::route('numbering.store')}}" class="form-row">
             {{csrf_field()}}
             <div class="form-group col-md-6">
                 <label for="idNumName">Numarataj İsmi</label>
