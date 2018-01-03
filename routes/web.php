@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Save Docs
     Route::post('uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
     Route::post('addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
+    Route::post('add360Url/{project}', 'ProjectController@add360Url')->name('add360Url');
     
 
     Route::get('numarataj/{project}', 'NumberingController@index')->name('numbering.index');

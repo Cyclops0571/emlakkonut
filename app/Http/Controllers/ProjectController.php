@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\EstateProject;
 use App\Model\ProjectVideosUrl;
+use App\Model\Project360Url;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Input;
@@ -56,6 +57,23 @@ class ProjectController extends Controller
         }
 
         return redirect()->route('postures', $project->id)->with('success', 'Docs Kaydedildi');
+    }
+
+    public function add360Url(Request $request, EstateProject $project){
+        $url1 = $request->url1 ? $request->url1 : '';
+
+        $v360Urls = Project360Url::where('project_id', $project->id)->get();
+
+        foreach($v360Urls as $url){
+            $url->delete();
+        }
+
+        Project360Url::create([
+            'project_id' => $project->id,
+            'url' => $url1,
+        ]);
+
+        return redirect()->route('postures', $project->id)->with('success', '360 Url Kaydedildi');
     }
 
     public function addVideosUrl(Request $request, EstateProject $project){
