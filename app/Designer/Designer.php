@@ -77,7 +77,7 @@ class Designer
         $this->setEditor();
         $this->spots = [];
         foreach ($project->blocks as $block) {
-            $this->spots[] = new Circle($block);
+            $this->spots[] = Polygon::createWithPlainText($block->block_no, $block->block_no);
         }
     }
 

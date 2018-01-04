@@ -8,11 +8,22 @@ use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-
     public function index(EstateProject $project)
     {
-        $apartments = EstateProjectApartment::where('project_id', $project->id)->get();
+        /** @var EstateProjectApartment[] $apartments */
+        $apartments = $project->apartments->sortBy(function ($apartment) {
+            return $apartment->BlokNo . '_' . strlen($apartment->KapiNo) . '_' .  $apartment->KapiNo;
+        });
+        $apartmentsWithImage = [];
+        $apartmentsWithoutImage = [];
+        foreach ($apartments as $apartment) {
+            if ($apartment->photo) {
+                $apartmentsWithImage[] = $apartment;
+            } else {
+                $apartmentsWithoutImage[] = $apartment;
+            }
+        }
 
-        return view('apartments', compact('apartments', 'project'));
+        return view('apartments', compact('project', 'apartmentsWithImage', 'apartmentsWithoutImage'));
     }
 }

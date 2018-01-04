@@ -4,6 +4,8 @@ namespace App\Model;
 
 use App\Scope\ApartmentScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 /**
  * App\Model\EstateProjectApartment
@@ -84,6 +86,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereProjectId($value)
  * @property int $numbering_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\EstateProjectApartment whereNumberingId($value)
+ * @property-read \App\Model\ApartmentPhoto $photo
  */
 class EstateProjectApartment extends Model
 {
@@ -151,8 +154,113 @@ class EstateProjectApartment extends Model
         }
     }
 
-    public static function setFloorPhoto($project, $file)
+    /**
+     * @param string $filename
+     * @return mixed
+     * @throws \Exception
+     */
+    private static function parseFileName($filename = "")
     {
+        //        $filename = "1358_3_{D-(A GİRİŞ)_D-(B GİRİŞ)_D}_0_1_2_3_4_5_6_7_8_9_10";
+        //        $filename = "1358_3_D-(A GİRİŞ)_0_1_2_3_4_5_6_7_8_9_10";
+        $fileStructure = explode('_', $filename);
+
+        if (count($fileStructure) < 4) {
+            throw new \Exception("Geçersiz imaj ismi");
+        }
+
+        $i = 2;
+        $block = [];
+        $kapiNo = [];
+        $result['islandKkys'] = $fileStructure[0];
+        $result['parcelKkysId'] = $fileStructure[1];
+        if (Str::startsWith($fileStructure[2], '{')) {
+            for ($iMax = count($fileStructure); $i < $iMax; $i++) {
+                $block[] = trim($fileStructure[$i], '\t\n\r {} ');
+                if (Str::endsWith($fileStructure[$i], '}')) {
+                    $i++;
+                    break;
+                }
+            }
+            for ($iMax = count($fileStructure); $i < $iMax; $i++) {
+                $kapiNo[] = trim($fileStructure[$i]);
+            }
+        } else {
+            $block[] = trim($fileStructure[2]);
+            for ($i = 3, $iMax = count($fileStructure); $i < $iMax; $i++) {
+                $kapiNo[] = (int)trim($fileStructure[$i]);
+            }
+        }
+
+        $result['blocks'] = $block;
+        $result['kapiNo'] = $kapiNo;
+
+        return $result;
+    }
+
+    /**
+     * @param $filename
+     * @return EstateProjectApartment[]
+     * @throws \Exception
+     */
+    private static function findFApartmentsFromFileName($filename)
+    {
+        $parsedInfo = self::parseFileName($filename);
+        $projectId = EstateProject::getCurrentProjectIdFromSession();
+        $island = Island::getIslandFromIslandKkys($parsedInfo['islandKkys']);
+        $parcel = Parcel::getParcel($island->id, $parsedInfo['parcelKkysId']);
+        /** @var Block[] $blocks */
+        $blocks = [];
+        $apartments = [];
+        foreach ($parsedInfo['blocks'] as $blockKkysName) {
+            $blocks[] = Block::getBlock($island->id, $parcel->id, $blockKkysName);
+        }
+
+        foreach ($blocks as $block) {
+            foreach ($parsedInfo['kapiNo'] as $kapiNo) {
+                $apartment = EstateProjectApartment::where('project_id', $projectId)
+                    ->where('Ada', $island->island_kkys)
+                    ->where('Parsel', $parcel->parcel)
+                    ->where('BlokNo', $block->block_no)
+                    ->where('KapiNo', $kapiNo)
+                    ->first();
+
+                if ($apartment) {
+                    $apartments[] = $apartment;
+                }
+            }
+        }
+
+        return $apartments;
+    }
+
+    public function photo()
+    {
+        return $this->hasOne(ApartmentPhoto::class, 'apartment_id');
+    }
+
+    public static function setApartmentPhoto(EstateProject $project, UploadedFile $photo)
+    {
+        //proje - ada-parcel-block-kapi diye bakilmali...
+        // 1- parse the name ok
+        // 2- find the floor ok
+        // 3- check if photo is exits ??
+        // 4- save the new photo
+        // 5- move it to the place
+        // 6- change the photoUrl to new url
+
+        //name formula...
+
+        $filename = $photo->getClientOriginalName();
+        try {
+            $apartments = self::findFApartmentsFromFileName($filename);
+
+            foreach ($apartments as $apartment) {
+                $apartment->setPhoto($photo);
+            }
+        } catch (\Exception $exception) {
+            return \Redirect::back()->withErrors($exception->getMessage());
+        }
     }
 
     public function url()
@@ -172,5 +280,29 @@ class EstateProjectApartment extends Model
             default:
                 return '#ff0000';
         }
+    }
+
+    private function setPhoto(UploadedFile $file)
+    {
+        if (!$this->photo) {
+            $this->photo = new ApartmentPhoto();
+        }
+        $this->photo->apartment_id = $this->id;
+        $this->photo->name = $file->getFilename() . '.jpg';
+        $this->photo->thumbnail = $file->getFilename() . '_thumb.jpg';
+        $this->photo->size = $file->getSize();
+        $this->photo->original_name = $file->getClientOriginalName();
+
+        $image = \Image::make($file->getRealPath());
+        $image->widen(50);
+        $image->save(ApartmentPhoto::directory() . $file->getFilename() . '_thumb.jpg');
+
+        $image = \Image::make($file->getRealPath());
+        $image->widen(1280);
+        $image->save(ApartmentPhoto::directory() . $file->getFilename() . '.jpg');
+
+        $this->photo->width = $image->width();
+        $this->photo->height = $image->height();
+        $this->photo->save();
     }
 }

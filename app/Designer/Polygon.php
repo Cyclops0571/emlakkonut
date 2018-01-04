@@ -1,13 +1,9 @@
 <?php
 
-
 namespace App\Designer;
-
 
 class Polygon
 {
-
-
     public $id;
     public $title;
     public $x, $y;
@@ -19,16 +15,14 @@ class Polygon
 
     /**
      * Polygon constructor.
-     * @param static $title
-     * @param ElementButtonFactory[] $buttonFactories
      */
     private function __construct()
     {
-
     }
 
     /**
      * Polygon constructor.
+     *
      * @param string $title
      * @param string $text
      * @return Polygon
@@ -71,7 +65,8 @@ class Polygon
         $self->points = $self->getDefaultPoints();
 
         $self->tooltip_content = $self->tooltipContent($buttonFactories);
-//        dd($self->tooltip_content);
+
+        //        dd($self->tooltip_content);
 
         return $self;
     }
@@ -105,7 +100,8 @@ class Polygon
 
     private function plainTextContent($text)
     {
-        $tooltipContent = '{
+        $tooltipContent
+            = '{
         "plain_text": "PLAIN_TEXT",
         "squares_settings": {
           "containers": [
@@ -128,5 +124,4 @@ class Polygon
 
         return json_decode(str_replace('PLAIN_TEXT', $text, $tooltipContent));
     }
-
 }
