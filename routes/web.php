@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/deleteNumbering/{numbering}', 'NumberingController@delete')
     ->name('deleteNumbering');
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
-    Route::post('/interactivity/numbering', 'InteractiveController@pnumbering')->name('numberingInteractivity');
+    Route::post('/interactivity/numbering', 'InteractiveController@numbering')->name('numberingInteractivity');
 
 });
 

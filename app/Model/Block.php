@@ -107,6 +107,9 @@ class Block extends Model
         return $this->belongsTo(EstateProject::class, 'project_id');
     }
 
+    /**
+     * @return EstateProjectApartment[]
+     */
     public function getApartments()
     {
         return $this->parcel->getApartments()->filter(function (EstateProjectApartment $apartment) {
