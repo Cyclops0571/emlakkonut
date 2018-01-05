@@ -96,9 +96,16 @@ class ProjectController extends Controller
 
     public function addVideosUrl(Request $request, EstateProject $project){
         $url1 = $request->url1 ? $request->url1 : '';
+        $url1Name = $request->url1Name ? $request->url1Name : '';
+
         $url2 = $request->url2 ? $request->url2 : '';
+        $url2Name = $request->url2Name ? $request->url2Name : '';
+
         $url3 = $request->url3 ? $request->url3 : '';
+        $url3Name = $request->url3Name ? $request->url3Name : '';
+        
         $url4 = $request->url4 ? $request->url4 : '';
+        $url4Name = $request->url4Name ? $request->url4Name : '';
 
         $allUrls = ProjectVideosUrl::where('project_id', $project->id)->get();
 
@@ -109,21 +116,25 @@ class ProjectController extends Controller
         ProjectVideosUrl::create([
             'project_id' => $project->id,
             'url' => $url1,
+            'name' => $url1Name,
         ]);
 
         ProjectVideosUrl::create([
             'project_id' => $project->id,
             'url' => $url2,
+            'name' => $url2Name,
         ]);
 
         ProjectVideosUrl::create([
             'project_id' => $project->id,
             'url' => $url3,
+            'name' => $url3Name,
         ]);
 
         ProjectVideosUrl::create([
             'project_id' => $project->id,
             'url' => $url4,
+            'name' => $url4Name,
         ]);
 
         return redirect()->route('postures', $project->id)->with('success', 'Video Ekle Kaydedildi');

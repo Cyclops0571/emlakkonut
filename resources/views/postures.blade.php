@@ -29,17 +29,25 @@
                     
                         {{csrf_field()}}
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="text" name="url1" class="form-control" placeholder="Put URL 1" value="{{ count($allUrls) > 0 ? $allUrls[0]->url : '' }}">
+                            <li class="list-group-item">                            
+                                <span id="spanPosture">Video 1</span>
+                                <input type="text" name="url1Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 0 ? $allUrls[0]->name : '' }}">
+                                <input type="text" name="url1" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 0 ? $allUrls[0]->url : '' }}">
                             </li>
                             <li class="list-group-item">
-                                <input type="text" name="url2" class="form-control" placeholder="Put URL 2" value="{{ count($allUrls) > 1 ? $allUrls[1]->url : '' }}">
+                                <span id="spanPosture">Video 2</span>
+                                <input type="text" name="url2Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 1 ? $allUrls[1]->name : '' }}">
+                                <input type="text" name="url2" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 1 ? $allUrls[1]->url : '' }}">
                             </li>
                             <li class="list-group-item">
-                                <input type="text" name="url3" class="form-control" placeholder="Put URL 3" value="{{ count($allUrls) > 2 ? $allUrls[2]->url : '' }}">
+                                <span id="spanPosture">Video 3</span>
+                                <input type="text" name="url3Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 2 ? $allUrls[2]->name : '' }}">
+                                <input type="text" name="url3" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 2 ? $allUrls[2]->url : '' }}">
                             </li>
                             <li class="list-group-item">
-                                <input type="text" name="url4" class="form-control" placeholder="Put URL 4" value="{{ count($allUrls) > 3 ? $allUrls[3]->url : '' }}">
+                                <span id="spanPosture">Video 4</span>
+                                <input type="text" name="url4Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 3 ? $allUrls[3]->name : '' }}">
+                                <input type="text" name="url4" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 3 ? $allUrls[3]->url : '' }}">
                             </li>
                         </ul>
                         

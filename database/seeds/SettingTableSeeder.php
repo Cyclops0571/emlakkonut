@@ -13,15 +13,15 @@ class SettingTableSeeder extends Seeder
     {
         App\Model\Setting::create([
             'name' => 'AdminPublicPath',
-            'value' => ' ',
+            'value' => 'C:\XAMPP\htdocs\online\emlakkonut',
         ]);
         App\Model\Setting::create([
             'name' => 'AdminPublicUrl',
-            'value' => ' ',
+            'value' => 'http://127.0.0.1:8001/',
         ]);
         App\Model\Setting::create([
             'name' => 'ClientPublicUrl',
-            'value' => ' ',
+            'value' => 'http://127.0.0.1:8000/',
         ]);
     }
 }
