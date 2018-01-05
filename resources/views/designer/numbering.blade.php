@@ -4,7 +4,8 @@
     body {
         padding-bottom: 0 !important;
     }
-    .background-grey{
+
+    .background-grey {
         background-color: #ababab;
     }
 </style>
@@ -44,28 +45,29 @@
                 @foreach($numbering->getBlocks() as $block)
                     @foreach($numbering->getDirections($block) as $direction)
                         @foreach($numbering->getFloors($block, $direction) as $floor)
-                            <option data-block="{{$block}}" data-direction="{{$direction}}" value="{{$floor}}">{{$floor}}</option>
+                            <option data-block="{{$block}}" data-direction="{{$direction}}"
+                                    value="{{$floor}}">{{$floor}}</option>
                         @endforeach
                     @endforeach
                 @endforeach
             </select>
         </div>
-        <ul style="list-style: none; padding: 10px; width: 300px; max-height: 200px; overflow-y: auto;" id="apartmant-list" draggable="true" ondragstart="drag(event)">
+        <ul style="list-style: none; padding: 10px; width: 300px; max-height: 200px; overflow-y: auto;"
+            id="apartmant-list" draggable="true" ondragstart="drag(event)">
             <h5>Seçilenler</h5>
-            @foreach($numbering->apartments as $apartment)
-                <li
-                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
-                    data-floor="{{$apartment->BulunduguKat}}" style="">
+            @foreach($apartments as $apartment)
+                <li data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                    data-floor="{{$apartment->BulunduguKat}}" data-apartment_id="{{$apartment->id}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
             @endforeach
         </ul>
         <hr style="margin: 0"/>
-        <ul style="list-style: none; padding: 10px; width: 300px; max-height: 200px; overflow-y: auto;" id="all-apart-list" draggable="true" ondragstart="drag(event)">
+        <ul style="list-style: none; padding: 10px; width: 300px; max-height: 200px; overflow-y: auto;"
+            id="all-apart-list" draggable="true" ondragstart="drag(event)">
             <h5>Tümü</h5>
-            @foreach($numbering->apartments as $apartment)
-                <li
-                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+            @foreach($apartments as $apartment)
+                <li data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
                     data-floor="{{$apartment->BulunduguKat}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
@@ -77,33 +79,97 @@
 @section('javascript')
     @parent
     <script>
-        function addObjectToDesigner() {
-            x = 10;
-            y = 10;
-            html = '<div id="imp-poly-tooltip" style="left: '+ x +'px; top: '+ y +'px;">Click the first point or press ENTER to finish <i class="fa fa-times" aria-hidden="true" id="imp-poly-tooltip-close-button"></i></div>';
-
-            $('#imp-editor-shapes-container').append(html);
-        }
-
         var blockValue = '';
         var directionValue = '';
         var floorValue = '';
+        var allApartments =
+            {!! json_encode($apartments->toArray()); !!}
+        var selectedApartments = allApartments;
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
-        $('#apartmant-list ul').on('click', function() {
-           document.querySelectorAll('#apartmant-list ul').forEach(function(li){
-               li.classList.remove('background-grey');
-           });
-           this.classList.add('background-grey');
+
+        function screenToCanvasSpace(x, y, canvas) {
+            return {
+                x: Math.round((x - canvas.offset().left) * 1000) / 1000,
+                y: Math.round((y - canvas.offset().top) * 1000) / 1000
+            }
+        }
+
+        function getColor(apartment) {
+            switch (apartment.GayrimenkulDurumu) {
+                case 'Satıldı':
+                    return '#ff0000';
+                case 'Uygun':
+                    return '#018701';
+                case 'Ön Satış':
+                    return '#6d6d6d';
+                default:
+                    return '#ff0000';
+            }
+        }
+
+        function addObjectToDesigner(e) {
+            var point = screenToCanvasSpace(e.pageX, e.pageY, editor.canvas);
+            var isEventInsideCanvas = false;
+            if (point.x > 0 && point.x < editor.canvasWidth * editor.zoom && point.y > 0 && point.y < editor.canvasHeight * editor.zoom) {
+                isEventInsideCanvas = true;
+            }
+
+            if (!isEventInsideCanvas) {
+                return;
+            }
+
+            var xPadding = 0;
+            var yPadding = 0;
+            console.log(point);
+            var paddingSize = 10;
+            var columnCount = 10;
+            selectedApartments.forEach(function (apartment) {
+                s = editor.createOval();
+                // s.id = 'apartment-' + apartment.id;
+                // s.title = 'apartment-' + apartment.id;
+                // s.x = point.x + xPadding;
+                // s.y = point.y + yPadding;
+
+                s.x = ((point.x - 3 + xPadding) / editor.canvasWidth) * 100;
+                s.y = ((point.y - 3 + yPadding) / editor.canvasHeight) * 100;
+                xPadding += paddingSize;
+                if (xPadding >= paddingSize * columnCount) {
+                    xPadding = 0;
+                    yPadding += paddingSize;
+                }
+                s.width = 1;
+                s.height = 1;
+                s.default_style.background_color = getColor(apartment);
+                s.tooltip_content.plain_text = apartment.KapiNo;
+
+            });
+            // redraw once
+            editor.redraw();
+        }
+
+        $('#apartmant-list ul').on('click', function () {
+            document.querySelectorAll('#apartmant-list ul').forEach(function (li) {
+                li.classList.remove('background-grey');
+            });
+            this.classList.add('background-grey');
 
         });
 
-        
-        $('#all-apart-list li').on('click', function() {
-           document.querySelectorAll('#all-apart-list li').forEach(function(li){
-               li.classList.remove('background-grey');
-           });
-           this.classList.add('background-grey');
+        function getApartmentById(id) {
+            for (var i = 0, apartmentsLength = allApartments.length; i < apartmentsLength; i++) {
+                if (id == allApartments[i].id) {
+                    return allApartments[i];
+                }
+            }
+            return null;
+        }
+
+        $('#all-apart-list li').on('click', function () {
+            document.querySelectorAll('#all-apart-list li').forEach(function (li) {
+                li.classList.remove('background-grey');
+            });
+            this.classList.add('background-grey');
 
         });
 
@@ -128,6 +194,7 @@
         }
 
         function numberingFilter() {
+            selectedApartments = [];
             const apartmentList = document.querySelectorAll('#apartmant-list li');
             if (!isSet(blockValue) && !isSet(directionValue) && !isSet(floorValue)) {
                 apartmentList.forEach(function (apartmentLi) {
@@ -138,11 +205,14 @@
 
             document.querySelectorAll('#apartmant-list li').forEach(function (apartmentLi) {
                 apartmentLi.style.display = 'none';
-
                 if (!isSet(floorValue) || apartmentLi.dataset.floor === floorValue) {
                     if (!isSet(directionValue) || apartmentLi.dataset.direction === directionValue) {
                         if (!isSet(blockValue) || apartmentLi.dataset.block === blockValue) {
                             apartmentLi.style.display = 'block';
+                            var apartment = getApartmentById(apartmentLi.dataset.apartment_id);
+                            if (apartment) {
+                                selectedApartments.push(apartment);
+                            }
                         }
                     }
                 }
@@ -154,7 +224,7 @@
 
         function drop(e) {
             e.preventDefault();
-            alert(e);
+            addObjectToDesigner(e);
         }
 
         function allowDrop(e) {

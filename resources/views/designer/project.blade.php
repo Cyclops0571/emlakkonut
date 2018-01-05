@@ -47,6 +47,10 @@
       var postUrl = {!! json_encode(URL::route('projectInteractivity')) !!};
       (function ($, window, document, undefined) {
           imageMapInitiate({{$project->id}}, objectJson, imagePath, imageWidth, imageHeight, postUrl);
+          setInterval(function () {
+              $('#wcp-editor-right').css('visibility', 'visible');
+          }, 500);
+
       })(jQuery, window, document);
   </script>
   <script src="/js/image-map-pro-editor.js"></script>

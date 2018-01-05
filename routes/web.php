@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('photo', 'PhotoController@store')->name('photo.store');
     Route::post('photo/floor/{project}', 'PhotoController@floorStore')->name('photo.floorStore');
-    Route::post('photo/apartment', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
+    Route::post('photo/apartment/{project}', 'PhotoController@apartmentStore')->name('photo.apartmentStore');
     Route::post('map/save/', 'MapController@save')->name('mapSave');
     Route::post('ajax/floorsOfBlock', 'AjaxController@floorsOfBlock')->name('ajax.floorsOfBlock');
 
@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/deleteNumbering/{numbering}', 'NumberingController@delete')
     ->name('deleteNumbering');
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
-    Route::post('/interactivity/numbering', 'InteractiveController@pnumbering')->name('numberingInteractivity');
+    Route::post('/interactivity/numbering', 'InteractiveController@numbering')->name('numberingInteractivity');
 
 });
 
