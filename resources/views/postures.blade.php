@@ -159,8 +159,8 @@
             @foreach( $project->getFolderFilesUrl('gallery') as $photo)
                 <div class="col-md-3">
                     <span style="position: absolute; left: 34%; top: 24%;">
-                        <img src="img/reup.png" width="32px" onclick="upGalImg()">
-                        <img src="img/del.png" width="32px" onclick="delGalImg()">
+                        <img src="/img/reup.png" width="32px" onclick="upGalImg()">
+                        <img src="/img/del.png" width="32px" onclick="delGalImg()">
                     </span>
                     <img id="imgPosture" src="{{ asset( $photo ) }}"/>
                 </div>
