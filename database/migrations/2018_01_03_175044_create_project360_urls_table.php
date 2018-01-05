@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectVideosUrlsTable extends Migration
+class CreateProject360UrlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProjectVideosUrlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_videos_urls', function (Blueprint $table) {
+        Schema::create('project360_urls', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('project_id');
             $table->string('url');
-            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateProjectVideosUrlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_videos_urls');
+        Schema::dropIfExists('project360_urls');
     }
 }

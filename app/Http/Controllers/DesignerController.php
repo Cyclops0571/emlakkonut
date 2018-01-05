@@ -33,8 +33,11 @@ class DesignerController extends Controller
         }
 
         $project = EstateProject::getCurrentProjectFromSession();
+        $apartments = $numbering->apartments->sortBy(function ($apartment) {
+            return $apartment->BlokNo . '_' . strlen($apartment->KapiNo) . '_' . $apartment->KapiNo;
+        });
 
-        return view('designer.numbering', compact('numbering', 'project'));
+        return view('designer.numbering', compact('numbering', 'project', 'apartments'));
     }
 
     public function designer()

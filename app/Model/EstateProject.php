@@ -23,7 +23,6 @@ use Illuminate\Http\UploadedFile;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\ProjectPhoto $projectPhoto
  * @property-read \App\Model\EstateProjectInteractivity $EstateProjectInteractivity
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProjectApartment[] $EstateProjectApartment
  * @property-read \App\Model\ParcelInteractivity $ParcelInteractivity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $Parcels
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floor
@@ -32,6 +31,7 @@ use Illuminate\Http\UploadedFile;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Parcel[] $islands
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Numbering[] $numberings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\EstateProjectApartment[] $apartments
  */
 class EstateProject extends Model
 {
@@ -161,7 +161,10 @@ class EstateProject extends Model
         $this->EstateProjectInteractivity->save();
     }
 
-    public function EstateProjectApartment()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function apartments()
     {
         return $this->hasMany(EstateProjectApartment::class, "project_id");
     }
@@ -239,23 +242,38 @@ class EstateProject extends Model
         return $this->hasMany(Numbering::class, 'project_id');
     }
 
-
-    public function getFolderFilesUrl($folder){
+    public function getFolderFilesUrl($folder)
+    {
         $res = [];
         $dir = $this->photoDirectory() . $folder . '/' . $this->id;
 
         // Open a directory, and read its contents
-        if (is_dir($dir)){
-            if ($dh = opendir($dir)){
-                while (($file = readdir($dh)) !== false){
-                    if($file != '.' && $file != '..')
-                        array_push($res, '/uploads/project/'. $folder .'/' . $this->id . '/' . $file);
-                    
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if ($file != '.' && $file != '..') {
+                        array_push($res, '/uploads/project/' . $folder . '/' . $this->id . '/' . $file);
+                    }
                 }
                 closedir($dh);
             }
         }
 
         return $res;
+    }
+
+    public function getLogoNameFormat()
+    {
+        return 'PRJ_' . $this->id . '_LOGO.png';
+    }
+
+    public function getLogoUrl()
+    {
+        $logoPath = $this->photoDirectory() . 'logos' . "/" . $this->getLogoNameFormat();
+        if (file_exists($logoPath)) {
+            return '/uploads/project/logos' . "/" . $this->getLogoNameFormat();
+        }
+
+        return "";
     }
 }

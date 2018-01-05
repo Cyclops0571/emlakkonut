@@ -35,7 +35,8 @@ class FloorPhoto extends Model
     protected $table = 'floor_photo';
     protected static $directory = 'uploads/floor/';
 
-    public static function directory() {
+    public static function directory()
+    {
         return public_path(static::$directory);
     }
 
@@ -44,16 +45,20 @@ class FloorPhoto extends Model
         return $this->belongsTo(Floor::class, 'floor_id');
     }
 
-    public function getImagePath() {
+    public function getImagePath()
+    {
         return static::$directory . $this->name;
     }
 
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         $path = $this->getImagePath();
+
         return $path ? \URL::to($path) : '';
     }
 
-    public function getThumbnailUrl() {
+    public function getThumbnailUrl()
+    {
         return \URL::to(static::$directory . $this->thumbnail);
     }
 }

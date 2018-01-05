@@ -1,38 +1,112 @@
 @extends('layouts.app')
 
+@section('css')
+    @parent
+    <link href="/css/dropzone.css" rel="stylesheet">
+    <style>
+        .dropzone {
+            border: 2px dashed rgba(0, 0, 0, 0.3) !important;
+            margin: auto;
+            width: 60%;
+        }
+
+        .dropzone .dz-message {
+            margin: 4rem 2rem 2rem 2rem;
+            color: #aaa;
+        }
+
+        .img-up {
+            width: 3rem;
+            position: absolute;
+            left: 48%;
+            top: 2.5rem;
+        }
+    </style>
+@endsection
+
 @section('content')
+    <img src="/img/DRAG_DROP.svg" class="img-up"/>
+    <form id="addPhotosForm" action="{{URL::route('photo.apartmentStore', $project->id)}}" method="post" class="dropzone">
+        {{csrf_field()}}
+    </form>
+
+    @if ($apartmentsWithoutImage)
+        <div class="card card-size">
+            <div class="card-header">
+                İmajı Yüklenmemiş Katlar
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
+                <input type="text" id="inputFloor" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1"
+                       onkeyup="filter(this)" autofocus>
+            </div>
+            <ul id="listFloors" class="list-group list-group-flush">
+                @foreach($apartmentsWithoutImage as $apartment)
+                    <li class="list-group-item justify-content-between">
+                        {{$apartment->BlokNo}}_{{$apartment->KapiNo}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="card card-size">
         <div class="card-header">
-            Daireler
+            İmajı Yüklenmiş Katlar
         </div>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1"><i class="icon-Search" style="font-size: 1.25rem;"></i></span>
-            <input type="text" id="inputApartment" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1" onkeyup="filter(this)" autofocus>
+            <input type="text" id="inputOK" class="form-control" placeholder="Ara..." aria-describedby="basic-addon1"
+                   onkeyup="filter(this)" autofocus>
         </div>
-        <ul id="listApartments" class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between">
-                    <form name="" method="post" action="{{URL::route('photo.parcelStore', $project->id)}}" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <span>
-                            <label class="custom-file">
-                                <i title="Resim Ekle" class="btn btn-primary btn-sm rounded-circle"><i class="icon-plus"></i></i>
-                                <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
-                            </label>
-                            Tip 1
-                        </span>
-                    </form>
-                    <form name="" method="post" action="{{URL::route('photo.parcelStore', $project->id)}}" enctype="multipart/form-data">
-                        {{csrf_field()}}
-                        <input type="hidden" name="id" value="">
-                        <span>
-                            <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle">
-                                <i class="icon-designer"></i>
-                            </button>
-                            <button type="button" title="Aktifleştir" class="btn btn-success btn-sm rounded-circle btn-margin-left"><img src="/img/checked.svg" style="width: 14px; height: 21px;"/></button>
-                            <button type="button" title="Pasifleştir" class="btn btn-danger btn-sm rounded-circle btn-margin-left"><img src="/img/cancel.svg" style="width: 14px; height: 21px;"/></button>
-                        </span>
-                    </form>
+        <ul id="listOKs" class="list-group list-group-flush">
+            @foreach($apartmentsWithImage as $apartment)
+                <li class="list-group-item justify-content-between">
+          <span>
+            <label class="custom-file">
+              <img src="{{$apartment->photo->getThumbnailUrl()}}" class="list-img"/>
+              <input type="file" class="form-control" aria-describedby="basic-addon1" onchange="fileUpload(this)">
+            </label>
+              {{$apartment->BlokNo}}_{{$apartment->KapiNo}}
+          </span>
+                    <span>
+            {{--<button class="btn btn-primary btn-sm rounded-circle"><i class="icon-update"></i></button>--}}
+                        {{--<button class="btn btn-success btn-sm rounded-circle btn-margin-left"--}}
+                        {{--onclick="window.location='{{ URL::route('floorDesigner', $floor->id) }}'">--}}
+                        {{--<i class="icon-designer"></i>--}}
+                        {{--</button>--}}
+                        {{--<button class="btn btn-danger btn-sm rounded-circle btn-margin-left"><i class="icon-delete"></i></button>--}}
+                        {{--<button class="btn btn-success btn-sm rounded-circle btn-margin-left"><i class="icon-settings"></i></button>--}}
+          </span>
                 </li>
+            @endforeach
         </ul>
     </div>
+@endsection
+
+@section('javascript')
+    @parent
+    <script src="/js/dropzone.js"></script>
+    <script>
+        Dropzone.options.addPhotosForm = {
+            paramName: 'photo',
+            acceptedFiles: '.jpg, .jpeg',
+            maxFiles: 1000,
+            dictDefaultMessage: "Yüklemek istediğiniz fotoğraflarınızı buraya sürükleyip bırakınız.",
+            dictFallbackMessage: 'Kullandığınız internet tarayıcısı sürükle bırak özelliğini desteklememektedir',
+            dictFileTooBig: 'Yüklemek istediğiniz dosyanın boyutu (@{{filesize}}MiB) çok büyük. Maksimum dosya boyutu @{{maxFilesize}}MiB olabilir.',
+            dictInvalidFileType: "Bu tipde bir dosya yükleyemesiniz. Yanlızca '.jpg veya .jpeg uzantılı dosyalar yükleyebilirsiniz",
+            dictResponseError: "Server @{{statusCode}} hatası döndü",
+            dictCancelUpload: "Yüklemeyi iptal et",
+            dictCancelUploadConfirmation: "Yüklemeyi iptal etmek istediğinize emin misiniz?",
+            dictRemoveFile: "Dosyayı sil",
+            dictMaxFilesExceeded: "Bir seferde daha fazla dosya yükleyemezsiniz. Yüklenebilecek maksimum dosya sayısı: @{{maxFiles}}",
+            init: function () {
+                this.on("queuecomplete", function () {
+                    window.location.reload();
+                })
+            }
+        }
+
+    </script>
 @endsection

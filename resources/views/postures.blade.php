@@ -8,19 +8,71 @@
 #imgPosture {
   width: 100%;
 }
-.myModal{
+.myVideosModal, .v360Modal{
     display:none;
 }
 </style>
 
 @section('content')
-    <div class="myModal">
+    <!-- Videos Modal -->
+    <div class="myVideosModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form method="post" action="{{URL::route('addVideosUrl', $project->id)}}" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Video Ekle</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('.myModal').slideToggle('slow');">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('.myVideosModal').slideToggle('slow');">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        {{csrf_field()}}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">                            
+                                <span id="spanPosture">Video 1</span>
+                                <input type="text" name="url1Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 0 ? $allUrls[0]->name : '' }}">
+                                <br>
+                                <input type="text" name="url1" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 0 ? $allUrls[0]->url : '' }}">
+                            </li>
+                            <li class="list-group-item">
+                                <span id="spanPosture">Video 2</span>
+                                <input type="text" name="url2Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 1 ? $allUrls[1]->name : '' }}">
+                                <br>
+                                <input type="text" name="url2" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 1 ? $allUrls[1]->url : '' }}">
+                            </li>
+                            <li class="list-group-item">
+                                <span id="spanPosture">Video 3</span>
+                                <input type="text" name="url3Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 2 ? $allUrls[2]->name : '' }}">
+                                <br>
+                                <input type="text" name="url3" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 2 ? $allUrls[2]->url : '' }}">
+                            </li>
+                            <li class="list-group-item">
+                                <span id="spanPosture">Video 4</span>
+                                <input type="text" name="url4Name" class="form-control" placeholder="Put name" value="{{ count($allUrls) > 3 ? $allUrls[3]->name : '' }}">
+                                <br>
+                                <input type="text" name="url4" class="form-control" placeholder="Video Id: u29jYUU1L1M" value="{{ count($allUrls) > 3 ? $allUrls[3]->url : '' }}">
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('.myVideosModal').slideToggle('slow');">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 360 Modal -->
+    <div class="v360Modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="{{URL::route('add360Url', $project->id)}}" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">360 Url</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('.v360Modal').slideToggle('slow');">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -29,22 +81,13 @@
                         {{csrf_field()}}
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <input type="text" name="url1" class="form-control" placeholder="Put URL 1" value="{{ count($allUrls) > 1 ? $allUrls[0]->url : '' }}">
-                            </li>
-                            <li class="list-group-item">
-                                <input type="text" name="url2" class="form-control" placeholder="Put URL 2" value="{{ count($allUrls) > 2 ? $allUrls[1]->url : '' }}">
-                            </li>
-                            <li class="list-group-item">
-                                <input type="text" name="url3" class="form-control" placeholder="Put URL 3" value="{{ count($allUrls) > 3 ? $allUrls[2]->url : '' }}">
-                            </li>
-                            <li class="list-group-item">
-                                <input type="text" name="url4" class="form-control" placeholder="Put URL 4" value="{{ count($allUrls) >= 4 ? $allUrls[3]->url : '' }}">
+                                <input type="text" name="url1" class="form-control" placeholder="360 URL" value="{{ count($v360Urls) > 0 ? $v360Urls[0]->url : '' }}">
                             </li>
                         </ul>
                         
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('.myModal').slideToggle('slow');">Kapat</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('.v360Modal').slideToggle('slow');">Kapat</button>
                         <button type="submit" class="btn btn-primary">Kaydet</button>
                     </div>
                 </form>
@@ -69,8 +112,8 @@
             <span id="spanPosture">{{$project->projectPhoto ? $project->projectPhoto->original_name : "Plan resmini yükleyiniz..." }}</span>
             <form>
                 <label class="input-group-addon" style="cursor: pointer;">
-                    <a href="http://argevim.com" target="_blank">
-                        <img src="{{ asset('img/virtual_tour.svg')}}" style="width: 32px; margin-right: -12px;" role="button"/>
+                    <a data-toggle="modal" data-target="#v360Modal" style="width: 32px; margin-right: -12px;" onclick="$('.v360Modal').slideToggle('slow');">
+                        <img src="{{ asset('img/virtual_tour.svg')}}" />
                     </a>
                 </label>
             </form>
@@ -94,7 +137,7 @@
             
             <form>
                 <label class="input-group-addon" style="cursor: pointer;">
-                    <a data-toggle="modal" data-target="#videoModal" style="width: 32px; margin-right: -12px;" onclick="$('.myModal').slideToggle('slow');">
+                    <a data-toggle="modal" data-target="#videoModal" style="width: 32px; margin-right: -12px;" onclick="$('.myVideosModal').slideToggle('slow');">
                         <img id="addVideo" src="{{ asset('img/video.svg')}}" />
                     </a>
                 </label>
@@ -132,7 +175,11 @@
             @foreach( $project->getFolderFilesUrl('docs') as $doc)
                 <div class="col-md-3">
                     <a href="{{ asset( $doc ) }}" target="_blank">
-                        <label class="input-group-addon"  style="cursor: pointer;"> Doc - {{ $i++ }} </label>
+                        @php
+                            $ext = pathinfo($doc, PATHINFO_EXTENSION);
+                            $fileName = basename($doc, ".".$ext);
+                        @endphp
+                        <label class="input-group-addon"  style="cursor: pointer;"> {{ $fileName }} </label>
                     </a>
                 </div>
             @endforeach

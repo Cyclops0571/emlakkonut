@@ -1,25 +1,22 @@
 <?php
 
-
 namespace App\Designer;
 
-
-class ContentBuilder {
-
+class ContentBuilder
+{
     public $content_type = "content-builder";
     public $plain_text = "";
 
     /**
      * ContentBuilder constructor.
+     *
      * @param ElementButtonFactory[] $elementFactories
      */
     public function __construct($elementFactories)
     {
         $elements = [];
-        foreach ($elementFactories as $elementFactory)
-        {
-            if (!$elementFactory instanceof ElementButtonFactory)
-            {
+        foreach ($elementFactories as $elementFactory) {
+            if (!$elementFactory instanceof ElementButtonFactory) {
                 continue;
             }
             $elements[] = $elementFactory->create();
@@ -31,6 +28,5 @@ class ContentBuilder {
         $containers = [];
         array_push($containers, $container);
         $this->squares_settings->containers = $containers;
-        return $this;
     }
 }

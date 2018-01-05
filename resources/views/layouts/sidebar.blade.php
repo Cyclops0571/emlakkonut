@@ -8,7 +8,7 @@
     $logoController = '';
 //    echo Route::currentRouteAction();
 switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) {
-    case 'LogoController@index':
+    case 'ProjectController@logos':
         $logoController = 'active';
         break;
     case 'ProjectController@projects':
@@ -58,7 +58,7 @@ switch (str_replace('App\Http\Controllers\\', '', Route::currentRouteAction())) 
     </li>
     <li class="nav-item">
       <a id="block360" class="nav-link {{$logoController}}"
-         href="{{URL::route('numbering.index', session('projectID', Auth::user()->estateProject[0]->id))}}"
+         href="{{URL::route('logos', session('projectID', Auth::user()->estateProject[0]->id))}}"
          onclick="onClickActiveNav('block360')"><i class="icon-Plots"></i>
         Logo
       </a>

@@ -40,6 +40,7 @@ class NumberingController extends Controller
         $numbering = new Numbering();
         $numbering->name = $request->get('name');
         $numbering->project_id = EstateProject::getCurrentProjectIdFromSession();
+        $numbering->status = 1;
         $numbering->save();
         $apartments = [];
         $selectBoxAll = 'Hepsi';

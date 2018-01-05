@@ -13,12 +13,13 @@ class FloorController extends Controller
         $floorsWithoutImage = [];
         $floorsWithImage = [];
         foreach ($floors as $floor) {
-            if($floor->floorPhoto) {
+            if ($floor->floorPhoto) {
                 $floorsWithImage[] = $floor;
             } else {
                 $floorsWithoutImage[] = $floor;
             }
         }
-        return view('floors', compact('project','floorsWithoutImage', 'floorsWithImage'));
+
+        return view('floors', compact('project', 'floorsWithoutImage', 'floorsWithImage'));
     }
 }

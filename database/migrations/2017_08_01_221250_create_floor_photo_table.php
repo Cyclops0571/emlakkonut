@@ -14,7 +14,7 @@ class CreateFloorPhotoTable extends Migration
     public function up()
     {
         Schema::create('floor_photo', function (Blueprint $table) {
-           $table->increments('id');
+            $table->increments('id');
             $table->string('floor_id');
             $table->string('name');
             $table->string('thumbnail');
