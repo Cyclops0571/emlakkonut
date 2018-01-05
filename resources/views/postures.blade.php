@@ -172,7 +172,11 @@
             @foreach( $project->getFolderFilesUrl('docs') as $doc)
                 <div class="col-md-3">
                     <a href="{{ asset( $doc ) }}" target="_blank">
-                        <label class="input-group-addon"  style="cursor: pointer;"> Doc - {{ $i++ }} </label>
+                        @php
+                            $ext = pathinfo($doc, PATHINFO_EXTENSION);
+                            $fileName = basename($doc, ".".$ext);
+                        @endphp
+                        <label class="input-group-addon"  style="cursor: pointer;"> {{ $fileName }} </label>
                     </a>
                 </div>
             @endforeach

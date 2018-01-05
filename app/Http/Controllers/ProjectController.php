@@ -67,11 +67,9 @@ class ProjectController extends Controller
             $path = $project->photoDirectory() . $folder . "/";
             $path = $path . $project->id;
             \File::makeDirectory($path, $mode = 0777, true, true);
-
+            $i=0;
             foreach ($files as $file) {
-                $name = str_replace(".tmp", "", $file->getFilename());
-                $name = str_replace("php", "", $name);
-                $name = $name . '.' . $file->getClientOriginalExtension();
+                $name = $request->docs[$i++]->getClientOriginalName();
                 $file->move($path, $name);
             }
         }

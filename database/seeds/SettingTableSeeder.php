@@ -13,7 +13,7 @@ class SettingTableSeeder extends Seeder
     {
         App\Model\Setting::create([
             'name' => 'AdminPublicPath',
-            'value' => 'C:\XAMPP\htdocs\online\emlakkonut',
+            'value' => 'C:\XAMPP\htdocs\online\emlakkonut\public',
         ]);
         App\Model\Setting::create([
             'name' => 'AdminPublicUrl',
