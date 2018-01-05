@@ -69,12 +69,29 @@ class ProjectController extends Controller
             \File::makeDirectory($path, $mode = 0777, true, true);
             $i=0;
             foreach ($files as $file) {
-                $name = $request->docs[$i++]->getClientOriginalName();
+                $name = $request[$folder][$i++]->getClientOriginalName();
                 $file->move($path, $name);
             }
         }
 
         return redirect()->route('postures', $project->id)->with('success', 'Docs Kaydedildi');
+    }
+
+    public function deleteFile(Request $request, EstateProject $project)
+    {
+        $folder = $request->folder;
+        $deleteFileName = $request->deleteFileName;
+
+        $path = $project->photoDirectory() . $folder . "/";
+        $path = $path . $project->id . '/' . $deleteFileName;
+
+
+        if(unlink($path))
+        {
+            return redirect()->route('postures', $project->id)->with('success', 'File Deleted');
+        }
+
+        return redirect()->route('postures', $project->id)->with('error', 'File Not Deleted');
     }
 
     public function add360Url(Request $request, EstateProject $project)
