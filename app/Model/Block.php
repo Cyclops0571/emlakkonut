@@ -111,6 +111,8 @@ class Block extends Model
     {
         return $this->parcel->getApartments()->filter(function (EstateProjectApartment $apartment) {
             return $apartment->BlokNo === $this->block_no;
+        })->sortBy(function ($apartment) {
+            return strlen($apartment->KapiNo) . "_" . $apartment->KapiNo;
         });
     }
 }

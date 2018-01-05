@@ -53,10 +53,6 @@ class Designer
         $currentBlock = null;
         $currentDirection = null;
         $this->spots = [];
-//        /** @var EstateProjectApartment|null $previousApartment */
-//        foreach ($numbering->apartments as $apartment) {
-//            $this->spots[] = new Circle($apartment);
-//        }
     }
 
     private function initFloor(Floor $floor)
@@ -77,7 +73,7 @@ class Designer
         $this->setEditor();
         $this->spots = [];
         foreach ($project->blocks as $block) {
-            $this->spots[] = Polygon::createWithPlainText($block->block_no, $block->block_no);
+            $this->spots[] = Rectangle::initBlockRectangle($block);
         }
     }
 

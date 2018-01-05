@@ -2,7 +2,9 @@
 
 namespace App\Designer;
 
-class Polygon
+use App\Model\Block;
+
+class Rectangle
 {
     public $id;
     public $title;
@@ -23,25 +25,51 @@ class Polygon
     /**
      * Polygon constructor.
      *
-     * @param string $title
-     * @param string $text
-     * @return Polygon
+     * @param Block $block
+     * @return Rectangle
      */
-    public static function createWithPlainText($title, $text)
+    public static function initBlockRectangle(Block $block)
     {
         $self = new self;
-        $self->id = uniqid("rect-");
-        $self->title = $title;
-        $self->type = 'poly';
-        $self->x = 0;
-        $self->y = 0;
-        $self->width = 3;
-        $self->height = 3;
-        $self->points = $self->getDefaultPoints();
+        $self->id = 'block_' . $block->block_no;
+        $self->title = $block->block_no;
+        $self->type = 'rect';
+        $self->x = 5;
+        $self->y = 5;
+        $self->width = 6;
+        $self->height = 4;
+        $self->actions = $self->getAction($block->clientUrl());
+        $self->mouseover_style = $self->getMouseOverStyle();
+        $self->default_style = $self->getColor("#ff0000", 1);
 
-        $self->tooltip_content = $self->plainTextContent($text);
+        $buttonFactories = [];
+        foreach ($block->getApartments() as $apartment) {
+            $buttonFactories[] = new ElementButtonFactory($apartment);
+        }
+
+        $self->tooltip_content = $self->tooltipContent($buttonFactories);
+
 
         return $self;
+    }
+
+    public function getColor($color, $opacity)
+    {
+        $obj = new \stdClass();
+        $obj->background_color = $color;
+        $obj->background_opacity = $opacity;
+        $obj->border_radius = 0;
+
+        return $obj;
+    }
+
+    public function getAction($link)
+    {
+        $obj = new \stdClass();
+        $obj->click = "follow-link";
+        $obj->link = $link;
+
+        return $obj;
     }
 
     /**
@@ -57,11 +85,11 @@ class Polygon
         $self = new self;
         $self->id = $title;
         $self->title = $title;
-        $self->type = 'poly';
+        $self->type = 'rect';
         $self->x = 10;
         $self->y = 10;
-        $self->width = 10;
-        $self->height = 10;
+        $self->width = 3;
+        $self->height = 3;
         $self->points = $self->getDefaultPoints();
 
         $self->tooltip_content = $self->tooltipContent($buttonFactories);
@@ -90,12 +118,16 @@ class Polygon
     }
 
     /**
-     * @param ElementButtonFactory[] $buttonFactories
+     * @param ElementButtonFactory[]|string $buttonFactories
      * @return ContentBuilder
      */
-    private function tooltipContent($buttonFactories)
+    private function tooltipContent($content = '')
     {
-        return new ContentBuilder($buttonFactories);
+        if (is_string($content)) {
+            return $this->plainTextContent($content);
+        }
+
+        return new ContentBuilder($content);
     }
 
     private function plainTextContent($text)
@@ -123,5 +155,12 @@ class Polygon
       }';
 
         return json_decode(str_replace('PLAIN_TEXT', $text, $tooltipContent));
+    }
+
+    private function getMouseOverStyle()
+    {
+        $obj = new \stdClass();
+        $obj->border_radius = 0;
+        return $obj;
     }
 }
