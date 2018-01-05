@@ -21,5 +21,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProjectVideosUrl extends Model
 {
-    protected $fillable = ['project_id', 'url'];
+    protected $fillable = ['project_id', 'url', 'name'];
 }
