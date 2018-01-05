@@ -176,7 +176,7 @@
         <img id="imgPosture" @if($project->projectPhoto) src="{{ asset( trim( $project->getImageUrl() ) )}}" @endif>
 
         <div class="card-header">
-            Gallery
+            Galeri
         </div>
         <div class="row">
             @foreach( $project->getFolderFilesUrl('gallery') as $photo)
@@ -199,9 +199,8 @@
             @endforeach
         </div>
 
-
         <div class="card-header">
-            Docs
+            Dokümanlar
         </div>
         <div class="row">
             @php($i = 0)
@@ -274,6 +273,14 @@
           if (input.files && input.files[0]) {
               document.getElementById("galleryForm").submit();
           }
+      }
+
+      function upGalImg(input) {
+          
+      }
+
+      function delGalImg(input) {
+          
       }
   </script>
 @endsection
