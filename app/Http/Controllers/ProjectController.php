@@ -128,34 +128,43 @@ class ProjectController extends Controller
 
         $allUrls = ProjectVideosUrl::where('project_id', $project->id)->get();
 
-        foreach ($allUrls as $url) {
-            $url->delete();
+        if($allUrls){
+            foreach ($allUrls as $url) {
+                $url->delete();
+            }
         }
 
-        ProjectVideosUrl::create([
-            'project_id' => $project->id,
-            'url' => $url1,
-            'name' => $url1Name,
-        ]);
+        if($url1){
+            ProjectVideosUrl::create([
+                'project_id' => $project->id,
+                'url' => $url1,
+                'name' => $url1Name,
+            ]);
+        }
 
-        ProjectVideosUrl::create([
-            'project_id' => $project->id,
-            'url' => $url2,
-            'name' => $url2Name,
-        ]);
+        if($url2){
+            ProjectVideosUrl::create([
+                'project_id' => $project->id,
+                'url' => $url2,
+                'name' => $url2Name,
+            ]);
+        }
 
-        ProjectVideosUrl::create([
-            'project_id' => $project->id,
-            'url' => $url3,
-            'name' => $url3Name,
-        ]);
+        if($url3){
+            ProjectVideosUrl::create([
+                'project_id' => $project->id,
+                'url' => $url3,
+                'name' => $url3Name,
+            ]);
+        }
 
-        ProjectVideosUrl::create([
-            'project_id' => $project->id,
-            'url' => $url4,
-            'name' => $url4Name,
-        ]);
-
+        if($url4){
+            ProjectVideosUrl::create([
+                'project_id' => $project->id,
+                'url' => $url4,
+                'name' => $url4Name,
+            ]);
+        }
         return redirect()->route('postures', $project->id)->with('success', 'Video Ekle Kaydedildi');
     }
 }
