@@ -105,7 +105,7 @@
                 style += 'border-radius: ' + s.default_style.border_radius + 'px;';
 
 
-                var emlakKonutSpan = (typeof s.title != 'undefined' && s.title.length) ? '<span class="ShapeTextStyle">'+s.title+'</span>' : '';
+                var emlakKonutSpan = (typeof s.title != 'undefined' && s.title.length) ? '<div class="ShapeTextStyle"><span>'+s.title+'</span></div>' : '';
 
                 html += '<div class="imp-editor-shape imp-editor-rect" data-id="'+ s.id +'" data-editor-object-type="3" style="'+ style +'">';
                 html += emlakKonutSpan;
