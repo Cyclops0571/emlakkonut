@@ -434,7 +434,7 @@
                         style += 'opacity: ' + s.default_style.opacity + ';';
                     }
 
-                    html += '<div class="imp-shape imp-shape-rect" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'></div>';
+                    html += '<div class="imp-shape imp-shape-rect" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'>'+ '<span class="ShapeTextStyle">'+s.title+'</span></div>';
                 }
                 if (s.type == 'oval') {
                     var style = '';

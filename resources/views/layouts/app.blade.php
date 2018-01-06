@@ -15,6 +15,16 @@
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
       <link rel="icon" type="image/png" href="/img/fav.png" />
     @show
+
+    <style>
+     .ShapeTextStyle {
+          color: white;
+          font-weight: bold;
+          position: absolute;
+          top: 0px;
+          left: 25px;
+      }
+    </style>
   </head>
 
   <body>
