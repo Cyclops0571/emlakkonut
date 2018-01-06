@@ -21,8 +21,11 @@
           color: white;
           font-weight: bold;
           position: absolute;
-          top: 0px;
-          left: 25px;
+          top: 0;
+          left: 1px;
+      }
+      .imp-shape:hover .ShapeTextStyle {
+        color:grey;
       }
     </style>
   </head>
