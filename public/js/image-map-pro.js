@@ -434,7 +434,7 @@
                         style += 'opacity: ' + s.default_style.opacity + ';';
                     }
 
-                    var emlakKonutSpan = (typeof s.title != 'undefined' && s.title.length) ? '<span class="ShapeTextStyle">'+s.title+'</span>' : '';
+                    var emlakKonutSpan = (typeof s.title != 'undefined' && s.title.length) ? '<div class="ShapeTextStyle"><span>'+s.title+'</span></div>' : '';
                     html += '<div class="imp-shape imp-shape-rect" id="'+ s.id +'" data-shape-title="'+ s.title +'" style="'+ style +'" data-index='+ i +'>'+
                         emlakKonutSpan +
                         '</div>';

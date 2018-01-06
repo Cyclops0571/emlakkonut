@@ -18,12 +18,19 @@
 
     <style>
      .ShapeTextStyle {
-          color: white;
-          font-weight: bold;
-          position: absolute;
-          top: 0;
-          left: 1px;
+        color: white;
+        font-weight: bold;
+        height: 100%;
+        width: 100%;
+        display: table;
       }
+
+      .ShapeTextStyle span{
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
       .imp-shape:hover .ShapeTextStyle {
         color:grey;
       }
