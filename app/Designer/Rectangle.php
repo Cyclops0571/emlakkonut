@@ -31,7 +31,7 @@ class Rectangle
     public static function initBlockRectangle(Block $block)
     {
         $self = new self;
-        $self->id = 'block_' . $block->block_no;
+        $self->id = 'rect-' . $block->id;
         $self->title = $block->block_no;
         $self->type = 'rect';
         $self->x = 5;
@@ -41,7 +41,7 @@ class Rectangle
         $self->actions = $self->getAction($block->clientUrl());
         $self->mouseover_style = $self->getMouseOverStyle();
         $self->default_style = $self->getColor("#ff0000", 1);
-
+        $self->points = [];
         $buttonFactories = [];
         foreach ($block->getApartments() as $apartment) {
             $buttonFactories[] = new ElementButtonFactory($apartment);
