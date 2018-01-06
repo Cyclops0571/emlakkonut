@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('uploadLogo/{project}', 'ProjectController@uploadLogo')->name('uploadLogo');
     
     Route::post('uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
+    Route::post('deleteFile/{project}', 'ProjectController@deleteFile')->name('deleteFile');
     Route::post('addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
     Route::post('add360Url/{project}', 'ProjectController@add360Url')->name('add360Url');
     

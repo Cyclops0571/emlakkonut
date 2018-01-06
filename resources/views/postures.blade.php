@@ -11,6 +11,29 @@
 .myVideosModal, .v360Modal{
     display:none;
 }
+
+.deleteThis{
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    display:none;
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+}
+
+.col-md-12:hover .deleteThis{
+    display:block;
+}
+
+.docsDeleteBtn{
+    background: transparent;
+    border: 0px;
+    cursor: pointer;
+}
+.docsDeleteBtn img{
+    width: 58px;
+}
 </style>
 
 @section('content')
@@ -158,11 +181,20 @@
         <div class="row">
             @foreach( $project->getFolderFilesUrl('gallery') as $photo)
                 <div class="col-md-3">
-                    <span style="position: absolute; left: 34%; top: 24%;">
-                        <img src="/img/reup.png" width="32px" onclick="upGalImg()">
-                        <img src="/img/del.png" width="32px" onclick="delGalImg()">
-                    </span>
-                    <img id="imgPosture" src="{{ asset( $photo ) }}"/>
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 25px;">
+                            <img id="imgPosture" src="{{ asset( $photo ) }}">
+                            <form method="post" action="{{URL::route('deleteFile', $project->id)}}">
+                                {{csrf_field()}}
+                                @php
+                                    $fileName = basename($photo);
+                                @endphp
+                                <input type="hidden" name="folder" value="gallery">
+                                <input type="hidden" name="deleteFileName" value="{{$fileName}}"/>
+                                <button class="deleteThis" onclick="$(this).hide();"> <img src="{{ asset( 'img/delete.png' ) }}"></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -173,15 +205,32 @@
         <div class="row">
             @php($i = 0)
             @foreach( $project->getFolderFilesUrl('docs') as $doc)
-                <div class="col-md-3">
-                    <a href="{{ asset( $doc ) }}" target="_blank">
-                        @php
-                            $ext = pathinfo($doc, PATHINFO_EXTENSION);
-                            $fileName = basename($doc, ".".$ext);
-                        @endphp
-                        <label class="input-group-addon"  style="cursor: pointer;"> {{ $fileName }} </label>
-                    </a>
-                </div>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <table style="border: 1px solid #ccc; width: 100%;">
+                    <tr>
+                        <td style="border-right: 1px solid #ccc; width: 58px;">
+                            <form style="margin: 0;" method="post" action="{{URL::route('deleteFile', $project->id)}}">
+                                {{csrf_field()}}
+                                @php
+                                    $fileName = basename($doc);
+                                @endphp
+                                <input type="hidden" name="folder" value="docs">
+                                <input type="hidden" name="deleteFileName" value="{{$fileName}}"/>
+                                <button class="docsDeleteBtn" onclick="$(this).hide();"> <img src="{{ asset( 'img/delete.png' ) }}"></button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="{{ asset( $doc ) }}" target="_blank">
+                                @php
+                                    $ext = pathinfo($doc, PATHINFO_EXTENSION);
+                                    $fileName = basename($doc, ".".$ext);
+                                @endphp
+                                <label class="input-group-addon"  style="cursor: pointer;"> {{ $fileName }} </label>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             @endforeach
         </div>
     </div>

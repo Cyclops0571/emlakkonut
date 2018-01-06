@@ -104,7 +104,11 @@
                 style += 'border-style: ' + s.default_style.border_style + ';';
                 style += 'border-radius: ' + s.default_style.border_radius + 'px;';
 
+
+                var emlakKonutSpan = (typeof s.title != 'undefined' && s.title.length) ? '<span class="ShapeTextStyle">'+s.title+'</span>' : '';
+
                 html += '<div class="imp-editor-shape imp-editor-rect" data-id="'+ s.id +'" data-editor-object-type="3" style="'+ style +'">';
+                html += emlakKonutSpan;
                 html += '   <div class="imp-selection" style="border-radius: '+ s.default_style.border_radius +'px;">';
                 html += '       <div class="imp-selection-translate-boxes">';
                 html += '           <div class="imp-selection-translate-box imp-selection-translate-box-1" data-transform-direction="1" data-editor-object-type="5"></div>';
