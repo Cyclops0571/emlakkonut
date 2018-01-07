@@ -14,6 +14,7 @@ class ApartmentController extends Controller
         $apartments = $project->apartments->sortBy(function ($apartment) {
             return $apartment->BlokNo . '_' . strlen($apartment->KapiNo) . '_' .  $apartment->KapiNo;
         });
+        $apartments[0]->getInteractiveButton();
         $apartmentsWithImage = [];
         $apartmentsWithoutImage = [];
         foreach ($apartments as $apartment) {

@@ -67,7 +67,8 @@
             id="all-apart-list" draggable="true" ondragstart="drag(event)">
             <h5>Tümü</h5>
             @foreach($apartments as $apartment)
-                <li data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                <li id="{{$apartment->id}}"
+                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
                     data-floor="{{$apartment->BulunduguKat}}" data-apartment_id="{{$apartment->id}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
@@ -83,6 +84,7 @@
         var directionValue = '';
         var floorValue = '';
         var allApartments = {!! json_encode($apartments->toArray()); !!};
+        var interactiveContents = {!! json_encode($interactiveContents) !!}
         var selectedApartments = allApartments;
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
@@ -124,11 +126,6 @@
             var columnCount = 10;
             selectedApartments.forEach(function (apartment) {
                 s = editor.createOval();
-                // s.id = 'apartment-' + apartment.id;
-                // s.title = 'apartment-' + apartment.id;
-                // s.x = point.x + xPadding;
-                // s.y = point.y + yPadding;
-
                 s.x = ((point.x - 3 + xPadding) / editor.canvasWidth) * 100;
                 s.y = ((point.y - 3 + yPadding) / editor.canvasHeight) * 100;
                 xPadding += paddingSize * editor.zoom;
@@ -139,8 +136,7 @@
                 s.width = 1;
                 s.height = 1;
                 s.default_style.background_color = getColor(apartment);
-                s.tooltip_content.plain_text = apartment.KapiNo;
-
+                s.tooltip_content = JSON.parse(interactiveContents[apartment.id]);
             });
             // redraw once
             editor.redraw();
@@ -203,7 +199,7 @@
         }
 
         function numberingFilter() {
-            selectedApartments = allApartments;
+            selectedApartments = [];
             const apartmentList = document.querySelectorAll('#apartmant-list li');
             if (!isSet(blockValue) && !isSet(directionValue) && !isSet(floorValue)) {
                 apartmentList.forEach(function (apartmentLi) {
