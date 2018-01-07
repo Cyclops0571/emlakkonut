@@ -1307,7 +1307,7 @@
 
 		self.canvasWidth = size.w * self.zoom;
 		self.canvasHeight = size.h * self.zoom;
-
+		
 		// Set the size of the canvas
 		$('#wcp-editor-canvas').css({
 			width: self.canvasWidth,
@@ -1370,10 +1370,10 @@
 		var size = { w: 0, h: 0 };
 
 		// Calculate canvas dimentions
-		var canvasBackgroundWidth = $('#wcp-editor-center').width() - 80;
-		var canvasBackgroundHeight = $('#wcp-editor-center').height() - 80;
+		var canvasBackgroundWidth = $('#wcp-editor-center').width();// - 80;
+		var canvasBackgroundHeight = $('#wcp-editor-center').height();// - 80;
 
-		if (settings.general.width > canvasBackgroundWidth || settings.general.height > canvasBackgroundHeight) {
+		if (settings.general.width > canvasBackgroundWidth && settings.general.height > canvasBackgroundHeight) {
 			// Canvas needs to be resized to fit the editor's background
 			var imageRatio = settings.general.width / settings.general.height;
 			var backgroundRatio = canvasBackgroundWidth / canvasBackgroundHeight;
@@ -1389,8 +1389,8 @@
 			}
 		} else {
 			// Canvas does not need to be resized
-			size.w = settings.general.width;
-			size.h = settings.general.height;
+			size.w = canvasBackgroundWidth; //settings.general.width;
+			size.h = canvasBackgroundHeight; //settings.general.height;
 		}
 
 		return size;
