@@ -67,8 +67,7 @@
             id="all-apart-list" draggable="true" ondragstart="drag(event)">
             <h5>Tümü</h5>
             @foreach($apartments as $apartment)
-                <li id="{{$apartment->id}}"
-                    data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                <li id="{{$apartment->id}}" data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
                     data-floor="{{$apartment->BulunduguKat}}" data-apartment_id="{{$apartment->id}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
@@ -84,7 +83,7 @@
         var directionValue = '';
         var floorValue = '';
         var allApartments = {!! json_encode($apartments->toArray()); !!};
-        var interactiveContents = {!! json_encode($interactiveContents) !!}
+        var apartmentUrls = {!! json_encode($apartmentUrls) !!}
         var selectedApartments = allApartments;
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
@@ -122,8 +121,8 @@
 
             var xPadding = 0;
             var yPadding = 0;
-            var paddingSize = 10;
-            var columnCount = 10;
+            var paddingSize = 13;
+            var columnCount = 13;
             selectedApartments.forEach(function (apartment) {
                 s = editor.createOval();
                 s.x = ((point.x - 3 + xPadding) / editor.canvasWidth) * 100;
@@ -133,22 +132,42 @@
                     xPadding = 0;
                     yPadding += paddingSize * editor.zoom;
                 }
-                s.width = 1;
-                s.height = 1;
+                s.width = 2;
+                s.height = 2;
                 s.default_style.background_color = getColor(apartment);
-                s.tooltip_content = JSON.parse(interactiveContents[apartment.id]);
+                s.title = apartment.KapiNo;
+                s.actions = {"mouseover": "no-action"};
+                s.tooltip_content = {
+                    "squares_settings": {
+                        "containers": [
+                            {
+                                "id": "sq-container-" + apartment.id,
+                                "settings": {
+                                    "elements": [
+                                        {
+                                            "settings": {
+                                                "name": "Paragraph",
+                                                "iconClass": "fa fa-paragraph"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                };
+
+                s.contentHtml = '<div class="ovalShapeTextStyle"><span><a href="' + apartmentUrls[apartment.id] + '">' + apartment.KapiNo +'</a></span></div>'
             });
             // redraw once
             editor.redraw();
         }
 
-
-
-        $('#apartmant-list').on('mousedown', function() {
+        $('#apartmant-list').on('mousedown', function () {
             numberingFilter();
         });
 
-        $('#all-apart-list li').on('mousedown', function() {
+        $('#all-apart-list li').on('mousedown', function () {
             selectedApartments = [];
             selectedApartments.push(getApartmentById($(this).data('apartment_id')));
         });
@@ -202,6 +221,7 @@
             selectedApartments = [];
             const apartmentList = document.querySelectorAll('#apartmant-list li');
             if (!isSet(blockValue) && !isSet(directionValue) && !isSet(floorValue)) {
+                selectedApartments = allApartments;
                 apartmentList.forEach(function (apartmentLi) {
                     apartmentLi.style.display = 'block';
                 });

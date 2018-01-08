@@ -3484,8 +3484,12 @@
 	Editor.prototype.getCompressedSettings = function() {
 		var compressed = $.extend(true, {}, settings);
 		var compressedSpots = [];
-
+        var contentHtml = '';
 		for (var i=0; i<compressed.spots.length; i++) {
+            contentHtml = '';
+		    if(compressed.spots[i].contentHtml) {
+                contentHtml = compressed.spots[i].contentHtml;
+            }
 			compressedSpots[i] = $.wcpCompress(compressed.spots[i], default_spot_settings);
 
 			compressedSpots[i].x = Math.round(compressedSpots[i].x * 1000) / 1000;
@@ -3497,11 +3501,14 @@
 			if (compressedSpots[i].height) {
 				compressedSpots[i].height = Math.round(compressedSpots[i].height * 1000) / 1000;
 			}
+
+			if(contentHtml) {
+                compressedSpots[i].contentHtml = contentHtml;
+            }
 		}
 
 		// compressed = $.wcpCompress(settings, default_settings); //do not delete any fucking thing...
 		compressed.spots = compressedSpots;
-
 		return compressed;
 	}
 

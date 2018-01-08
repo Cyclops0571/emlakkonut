@@ -37,12 +37,12 @@ class DesignerController extends Controller
             return $apartment->BlokNo . '_' . strlen($apartment->KapiNo) . '_' . $apartment->KapiNo;
         });
 
-        $interactiveContents = [];
+        $apartmentUrls = [];
         foreach ($apartments as $apartment) {
-            $interactiveContents[$apartment->id] = $apartment->getInteractiveContent();
+            $apartmentUrls[$apartment->id] = $apartment->url();
         }
 
-        return view('designer.numbering', compact('numbering', 'project', 'apartments', 'interactiveContents'));
+        return view('designer.numbering', compact('numbering', 'project', 'apartments', 'apartmentUrls'));
     }
 
     public function designer()
