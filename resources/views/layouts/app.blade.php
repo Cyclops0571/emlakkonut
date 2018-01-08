@@ -34,6 +34,21 @@
       .imp-shape:hover .ShapeTextStyle {
         color:grey;
       }
+
+      .ovalShapeTextStyle {
+        color: white;
+        font-weight: bold;
+        height: 100%;
+        width: 100%;
+        display: table;
+        font-size: xx-small;
+      }
+
+     .ovalShapeTextStyle span{
+       display: table-cell;
+       text-align: center;
+       vertical-align: middle;
+     }
     </style>
   </head>
 

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Designer\ContentBuilder;
+use App\Designer\ElementButtonFactory;
 use App\Scope\ApartmentScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -304,5 +306,16 @@ class EstateProjectApartment extends Model
         $this->photo->width = $image->width();
         $this->photo->height = $image->height();
         $this->photo->save();
+    }
+
+    /**
+     * @return string
+     */
+    public function getInteractiveContent()
+    {
+        $buttonFactories = [];
+        $buttonFactories[] = new ElementButtonFactory($this);
+
+        return json_encode(new ContentBuilder($buttonFactories));
     }
 }

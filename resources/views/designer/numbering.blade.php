@@ -67,8 +67,8 @@
             id="all-apart-list" draggable="true" ondragstart="drag(event)">
             <h5>Tümü</h5>
             @foreach($apartments as $apartment)
-                <li data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
-                    data-floor="{{$apartment->BulunduguKat}}" style="">
+                <li id="{{$apartment->id}}" data-block="{{$apartment->BlokNo}}" data-direction="{{$apartment->Yon}}"
+                    data-floor="{{$apartment->BulunduguKat}}" data-apartment_id="{{$apartment->id}}" style="">
                     {{$apartment->BlokNo . ' - ' . $apartment->Yon . ' - ' . $apartment->BulunduguKat . ' - Kapı No:' .  $apartment->KapiNo}}
                 </li>
             @endforeach
@@ -82,8 +82,8 @@
         var blockValue = '';
         var directionValue = '';
         var floorValue = '';
-        var allApartments =
-            {!! json_encode($apartments->toArray()); !!}
+        var allApartments = {!! json_encode($apartments->toArray()); !!};
+        var apartmentUrls = {!! json_encode($apartmentUrls) !!}
         var selectedApartments = allApartments;
         const directionOptions = document.getElementById('directionSelection').options;
         const floorOptions = document.getElementById('floorSelection').options;
@@ -121,32 +121,56 @@
 
             var xPadding = 0;
             var yPadding = 0;
-            console.log(point);
-            var paddingSize = 10;
-            var columnCount = 10;
+            var paddingSize = 15;
+            var columnCount = 4;
             selectedApartments.forEach(function (apartment) {
                 s = editor.createOval();
-                // s.id = 'apartment-' + apartment.id;
-                // s.title = 'apartment-' + apartment.id;
-                // s.x = point.x + xPadding;
-                // s.y = point.y + yPadding;
-
                 s.x = ((point.x - 3 + xPadding) / editor.canvasWidth) * 100;
                 s.y = ((point.y - 3 + yPadding) / editor.canvasHeight) * 100;
-                xPadding += paddingSize;
-                if (xPadding >= paddingSize * columnCount) {
+                xPadding += paddingSize * editor.zoom;
+                if (xPadding >= paddingSize * columnCount * editor.zoom) {
                     xPadding = 0;
-                    yPadding += paddingSize;
+                    yPadding += paddingSize * editor.zoom;
                 }
-                s.width = 1;
-                s.height = 1;
+                s.width = 2;
+                s.height = 2;
                 s.default_style.background_color = getColor(apartment);
-                s.tooltip_content.plain_text = apartment.KapiNo;
+                s.title = apartment.KapiNo;
+                s.actions = {"mouseover": "no-action"};
+                s.tooltip_content = {
+                    "squares_settings": {
+                        "containers": [
+                            {
+                                "id": "sq-container-" + apartment.id,
+                                "settings": {
+                                    "elements": [
+                                        {
+                                            "settings": {
+                                                "name": "Paragraph",
+                                                "iconClass": "fa fa-paragraph"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                };
 
+                s.contentHtml = '<div class="ovalShapeTextStyle"><span><a href="' + apartmentUrls[apartment.id] + '">' + apartment.KapiNo +'</a></span></div>'
             });
             // redraw once
             editor.redraw();
         }
+
+        $('#apartmant-list').on('mousedown', function () {
+            numberingFilter();
+        });
+
+        $('#all-apart-list li').on('mousedown', function () {
+            selectedApartments = [];
+            selectedApartments.push(getApartmentById($(this).data('apartment_id')));
+        });
 
         $('#apartmant-list ul').on('click', function () {
             document.querySelectorAll('#apartmant-list ul').forEach(function (li) {
@@ -197,6 +221,7 @@
             selectedApartments = [];
             const apartmentList = document.querySelectorAll('#apartmant-list li');
             if (!isSet(blockValue) && !isSet(directionValue) && !isSet(floorValue)) {
+                selectedApartments = allApartments;
                 apartmentList.forEach(function (apartmentLi) {
                     apartmentLi.style.display = 'block';
                 });
