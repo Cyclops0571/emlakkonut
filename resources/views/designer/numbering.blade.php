@@ -121,8 +121,8 @@
 
             var xPadding = 0;
             var yPadding = 0;
-            var paddingSize = 13;
-            var columnCount = 13;
+            var paddingSize = 15;
+            var columnCount = 4;
             selectedApartments.forEach(function (apartment) {
                 s = editor.createOval();
                 s.x = ((point.x - 3 + xPadding) / editor.canvasWidth) * 100;
