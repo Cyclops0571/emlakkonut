@@ -45,7 +45,9 @@ class NumberingController extends Controller
         $apartments = [];
         $selectBoxAll = 'Hepsi';
 
-        if ($floorId !== $selectBoxAll) {
+        if($floorId !== $selectBoxAll && $blockId === $selectBoxAll && $parcelId !== $selectBoxAll) {
+            $apartments = Parcel::find($parcelId)->getApartments()->where('BulunduguKat', $floorId);
+        } elseif ($floorId !== $selectBoxAll) {
             // save all of the aprtments to numbering
             $apartments = Floor::find($floorId)->getApartments();
         } elseif ($blockId !== $selectBoxAll) {
@@ -65,7 +67,6 @@ class NumberingController extends Controller
             $apartment->numbering_id = $numbering->id;
             $apartment->save();
         }
-
         return $response::redirectToRoute('numbering.index', $numbering->project_id);
     }
 

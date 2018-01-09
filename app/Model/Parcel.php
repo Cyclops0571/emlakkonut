@@ -33,6 +33,7 @@ use Illuminate\Http\UploadedFile;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Block[] $blocks
  * @property int $manual_add
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\Parcel whereManualAdd($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Model\Floor[] $floors
  */
 class Parcel extends Model
 {
@@ -165,5 +166,10 @@ class Parcel extends Model
     public function blocks()
     {
         return $this->hasMany(Block::class, 'parcel_id');
+    }
+
+    public function floors()
+    {
+        return $this->hasMany(Floor::class, 'parcel_id');
     }
 }

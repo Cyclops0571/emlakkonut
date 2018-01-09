@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectVideosUrl whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectVideosUrl whereUrl($value)
  * @mixin \Eloquent
+ * @property string|null $name
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Model\ProjectVideosUrl whereName($value)
  */
 class ProjectVideosUrl extends Model
 {
