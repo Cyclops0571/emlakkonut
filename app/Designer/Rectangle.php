@@ -40,7 +40,7 @@ class Rectangle
         $self->height = 4;
         $self->actions = $self->getAction($block->clientUrl());
         $self->mouseover_style = $self->getMouseOverStyle();
-        $self->default_style = $self->getColor("#ff0000", 1);
+        $self->default_style = $self->getColor("#208837", 1);
         $self->points = [];
         $buttonFactories = [];
         foreach ($block->getApartments() as $apartment) {
