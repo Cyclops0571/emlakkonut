@@ -206,7 +206,7 @@
             @php($i = 0)
             @foreach( $project->getFolderFilesUrl('docs') as $doc)
             <div class="col-sm-12 col-md-12 col-lg-6">
-                <table style="border: 1px solid #ccc; width: 100%;">
+                <table style="border: 1px solid #ccc; width: 100%; margin-bottom: 1rem;">
                     <tr>
                         <td style="border-right: 1px solid #ccc; width: 58px;">
                             <form style="margin: 0;" method="post" action="{{URL::route('deleteFile', $project->id)}}">
@@ -225,7 +225,7 @@
                                     $ext = pathinfo($doc, PATHINFO_EXTENSION);
                                     $fileName = basename($doc, ".".$ext);
                                 @endphp
-                                <label class="input-group-addon"  style="cursor: pointer;"> {{ $fileName }} </label>
+                                <label class="input-group-addon" style="cursor: pointer; font-size: .8rem;"> {{ $fileName }} </label>
                             </a>
                         </td>
                     </tr>
