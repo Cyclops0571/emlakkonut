@@ -59,6 +59,26 @@
 
 @section('javascript')
     <script>
+        $('#idParcel').on('change', function () {
+            $.ajax(
+                {
+                    type: 'post',
+                    url: "{{URL::route('ajax.floorsOfParcel')}}",
+                    data: {
+                        parcelId: $('#idParcel').find('option:selected').val(),
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(floorNumberings) {
+                        $('#floorId').html('');
+                        $('#floorId').append($(new Option('Hepsi')))
+                        floorNumberings.forEach(function(floorNumbering) {
+                            $('#floorId').append($(new Option(floorNumbering, floorNumbering)))
+                        });
+
+                    }
+                });
+        });
+
         $('#block').on('change', function () {
             $.ajax(
                 {
@@ -78,6 +98,6 @@
                     }
 
                 });
-        })
+        });
     </script>
 @endsection
