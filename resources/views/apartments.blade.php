@@ -21,6 +21,33 @@
             left: 48%;
             top: 2.5rem;
         }
+
+        .myVideosModal, .v360Modal{
+            display:none;
+        }
+
+        .deleteThis{
+            position: absolute;
+            top: 25%;
+            left: 35%;
+            display:none;
+            background: transparent;
+            border: 0px;
+            cursor: pointer;
+        }
+
+        .col-md-12:hover .deleteThis{
+            display:block;
+        }
+
+        .docsDeleteBtn{
+            background: transparent;
+            border: 0px;
+            cursor: pointer;
+        }
+        .docsDeleteBtn img{
+            width: 58px;
+        }
     </style>
 @endsection
 
@@ -43,7 +70,18 @@
             <ul id="listFloors" class="list-group list-group-flush">
                 @foreach($apartmentsWithoutImage as $apartment)
                     <li class="list-group-item justify-content-between">
-                        {{$apartment->BlokNo}}_{{$apartment->KapiNo}}
+                        <div class="row">
+                            <div class="col-md-9">
+                                {{$apartment->BlokNo}}_{{$apartment->KapiNo}}
+                            </div>
+
+                            <div class="col-md-3 text-right">
+                                <button type="button" title="Tasarlayıcıda Aç" class="btn btn-warning btn-sm rounded-circle" style="cursor: pointer;"
+                                onclick="window.location='{{ URL::route('showApartment', $apartment->id) }}'"><i class="icon-designer"></i></button>
+                            </div>
+
+                        </div>
+                    
                     </li>
                 @endforeach
             </ul>

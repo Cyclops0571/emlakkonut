@@ -40,10 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logos/{project}', 'ProjectController@logos')->name('logos');
     Route::post('uploadLogo/{project}', 'ProjectController@uploadLogo')->name('uploadLogo');
     
-    Route::post('uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
-    Route::post('deleteFile/{project}', 'ProjectController@deleteFile')->name('deleteFile');
-    Route::post('addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
-    Route::post('add360Url/{project}', 'ProjectController@add360Url')->name('add360Url');
+    Route::post('project/uploadFiles/{project}', 'ProjectController@uploadFiles')->name('uploadFiles');
+    Route::post('project/deleteFile/{project}', 'ProjectController@deleteFile')->name('deleteFile');
+    Route::post('project/addVideosUrl/{project}', 'ProjectController@addVideosUrl')->name('addVideosUrl');
+    Route::post('project/add360Url/{project}', 'ProjectController@add360Url')->name('add360Url');
     
 
     Route::get('numarataj/{project}', 'NumberingController@index')->name('numbering.index');
@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/numberingDesigner/{numbering}', 'DesignerController@numbering')->name('numberingDesigner');
     Route::post('/interactivity/numbering', 'InteractiveController@numbering')->name('numberingInteractivity');
 
+    Route::get('apartment/{apartment}', 'ApartmentController@show')->name('showApartment');
+    Route::post('apartment/uploadFiles/{apartment}', 'ApartmentController@uploadFiles')->name('apartmentUploadFiles');
+    Route::post('apartment/deleteFile/{apartment}', 'ApartmentController@deleteFile')->name('apartmentDeleteFile');
+    Route::post('apartment/addVideosUrl/{apartment}', 'ApartmentController@addVideosUrl')->name('apartmentAddVideosUrl');
 });
 
 Route::get('setting', function (Setting $setting) {

@@ -93,7 +93,7 @@ use Illuminate\Support\Str;
 class EstateProjectApartment extends Model
 {
     protected $table = 'estate_project_apartment';
-
+    protected $fillable = ['id'];
     protected static function boot()
     {
         parent::boot();
@@ -317,5 +317,35 @@ class EstateProjectApartment extends Model
         $buttonFactories[] = new ElementButtonFactory($this);
 
         return json_encode(new ContentBuilder($buttonFactories));
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(EstateProject::class, 'project_id');
+    }
+
+    public function photoDirectory()
+    {
+        return public_path('uploads/apartment/');
+    }
+
+    public function getFolderFilesUrl($folder)
+    {
+        $res = [];
+        $dir = $this->photoDirectory() . $folder . '/' . $this->id;
+
+        // Open a directory, and read its contents
+        if (is_dir($dir)) {
+            if ($dh = opendir($dir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if ($file != '.' && $file != '..') {
+                        array_push($res, '/uploads/apartment/' . $folder . '/' . $this->id . '/' . $file);
+                    }
+                }
+                closedir($dh);
+            }
+        }
+
+        return $res;
     }
 }
